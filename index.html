@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — Cheatsheet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 11px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+  }
+
+  header h1 {
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  header h1 em {
+    font-style: normal;
+    font-weight: 300;
+    color: var(--text-3);
+  }
+
+  .header-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 14px;
+    padding: 3px;
+    background: var(--border-faint);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+  }
+
+  .header-controls button {
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.18s;
+    background: transparent;
+    color: var(--text-2);
+    letter-spacing: 0.1px;
+    white-space: nowrap;
+  }
+
+  .header-controls button.active {
+    background: var(--text);
+    color: var(--bg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  .ctrl-sep {
+    width: 1px;
+    height: 14px;
+    background: var(--border);
+    margin: 0 2px;
+    flex-shrink: 0;
+  }
+
+  .header-desc {
+    font-size: 11px;
+    color: var(--text-2);
+    font-weight: 400;
+    max-width: 560px;
+    margin: 10px auto 0;
+    line-height: 1.55;
+    letter-spacing: 0.05px;
+  }
+
+  .header-meta {
+    font-size: 9px;
+    color: var(--text-3);
+    margin-top: 8px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── Layout ──────────────────────────────────── */
+  main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 0 16px 22px;
+  }
+
+  /* ── Section cards ───────────────────────────── */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+  }
+
+  .section-title {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--border-faint);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    letter-spacing: -0.1px;
+  }
+
+  .icon { font-size: 13px; line-height: 1; opacity: 0.85; }
+
+  .subsection {
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--text-3);
+    margin: 9px 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .subsection:first-of-type { margin-top: 2px; }
+
+  /* ── Rows ────────────────────────────────────── */
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.8px 0;
+    gap: 6px;
+  }
+
+  .key {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    color: var(--text);
+    padding: 1.5px 5px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1.6;
+  }
+
+  .desc {
+    font-size: 9.5px;
+    color: var(--text-2);
+    text-align: right;
+    font-weight: 400;
+    flex-shrink: 1;
+    line-height: 1.4;
+  }
+
+  /* ── Grid spans ──────────────────────────────── */
+  .span2 { grid-row: span 2; }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    background: var(--text);
+    color: #C8BCB2;
+    padding: 12px 22px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 28px;
+    font-size: 9px;
+    line-height: 1.7;
+  }
+
+  .footer-group { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  .footer-label { font-weight: 600; color: #EDE4DA; margin-right: 2px; }
+
+  footer code {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 8px;
+  }
+
+  /* ── Platform visibility ─────────────────────── */
+  .win-only { display: none; }
+  .mac-only { display: inline; }
+  body.os-win .win-only { display: inline; }
+  body.os-win .mac-only { display: none; }
+
+  /* ── Responsive ──────────────────────────────── */
+  @media print {
+    body { font-size: 9px; background: #fff; }
+    .section { box-shadow: none; border: 1px solid #ddd; }
+    main { gap: 6px; padding: 0 8px 12px; }
+    header { padding: 16px 12px 12px; }
+    footer { font-size: 7.5px; padding: 6px 12px; }
+  }
+
+  @media (max-width: 900px) {
+    main { grid-template-columns: repeat(2, 1fr); }
+    .span2 { grid-row: span 1; }
+  }
+
+  @media (max-width: 520px) {
+    main { grid-template-columns: 1fr; }
+    .header-controls { flex-wrap: wrap; justify-content: center; border-radius: 12px; }
+    .ctrl-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Claude Code<em data-i18n="h1-sub">: Commands Cheatsheet</em></h1>
+  <p class="header-desc" data-i18n="header-desc">A compact quick-reference for every Claude Code command, shortcut, and flag — covering keyboard shortcuts, slash commands, MCP servers, memory management, workflows, configuration, skills, and agents.</p>
+  <div class="header-controls">
+    <button id="btn-mac" class="active" onclick="setOS('mac')" data-i18n="btn-mac">Mac</button>
+    <button id="btn-win" onclick="setOS('win')" data-i18n="btn-win">Windows</button>
+    <div class="ctrl-sep"></div>
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-ru" onclick="setLang('ru')">RU</button>
+    <button id="btn-zh" onclick="setLang('zh')">中文</button>
+    <button id="btn-ja" onclick="setLang('ja')">日本語</button>
+    <button id="btn-es" onclick="setLang('es')">ES</button>
+  </div>
+  <div class="header-meta" data-i18n="updated">Updated March 24, 2026</div>
+</header>
+
+<main>
+
+  <!-- Keyboard Shortcuts -->
+  <section class="section">
+    <div class="section-title"><span class="icon">⌨</span><span data-i18n="sec-keyboard">Keyboard Shortcuts</span></div>
+
+    <div class="subsection" data-i18n="sub-core">Core</div>
+    <div class="row"><span class="key"><span class="mac-only">⌃C</span><span class="win-only">Ctrl+C</span></span><span class="desc" data-i18n="d-cancel">Cancel input / generation</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃D</span><span class="win-only">Ctrl+D</span></span><span class="desc" data-i18n="d-exit">Exit session</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃L</span><span class="win-only">Ctrl+L</span></span><span class="desc" data-i18n="d-clear-screen">Clear screen</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃O</span><span class="win-only">Ctrl+O</span></span><span class="desc" data-i18n="d-verbose">Toggle verbose output</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃R</span><span class="win-only">Ctrl+R</span></span><span class="desc" data-i18n="d-history">Reverse history search</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃G</span><span class="win-only">Ctrl+G</span></span><span class="desc" data-i18n="d-editor">Open prompt in editor</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃B</span><span class="win-only">Ctrl+B</span></span><span class="desc" data-i18n="d-bg-task">Background task</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃T</span><span class="win-only">Ctrl+T</span></span><span class="desc" data-i18n="d-task-list">Toggle task list</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌘V</span><span class="win-only">Ctrl+V</span></span><span class="desc" data-i18n="d-paste-img">Paste image</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃F ×2</span><span class="win-only">Ctrl+F ×2</span></span><span class="desc" data-i18n="d-finish-agents">Finish background agents</span></div>
+    <div class="row"><span class="key">Esc Esc</span><span class="desc" data-i18n="d-undo">Undo / revert</span></div>
+
+    <div class="subsection" data-i18n="sub-mode">Mode Switching</div>
+    <div class="row"><span class="key">⇧Tab</span><span class="desc" data-i18n="d-cycle-perm">Cycle permission modes</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌥P</span><span class="win-only">Alt+P</span></span><span class="desc" data-i18n="d-switch-model">Switch model</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌥T</span><span class="win-only">Alt+T</span></span><span class="desc" data-i18n="d-toggle-think">Toggle thinking</span></div>
+
+    <div class="subsection" data-i18n="sub-input">Input</div>
+    <div class="row"><span class="key"><span class="mac-only">⌥Enter</span><span class="win-only">\+Enter</span></span><span class="desc" data-i18n="d-newline-q">New line (quick)</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃J</span><span class="win-only">Ctrl+J</span></span><span class="desc" data-i18n="d-newline-c">New line (control seq)</span></div>
+
+    <div class="subsection" data-i18n="sub-prefixes">Prefixes</div>
+    <div class="row"><span class="key">/</span><span class="desc" data-i18n="d-slash">Slash command</span></div>
+    <div class="row"><span class="key">!</span><span class="desc" data-i18n="d-bash">Direct bash command</span></div>
+    <div class="row"><span class="key">@</span><span class="desc" data-i18n="d-at">File mention + autocomplete</span></div>
+  </section>
+
+  <!-- MCP Servers -->
+  <section class="section">
+    <div class="section-title"><span class="icon">⬡</span><span data-i18n="sec-mcp">MCP Servers</span></div>
+
+    <div class="subsection" data-i18n="sub-transports">Transports</div>
+    <div class="row"><span class="key">--transport http</span><span class="desc" data-i18n="d-http">Remote HTTP (recommended)</span></div>
+    <div class="row"><span class="key">--transport stdio</span><span class="desc" data-i18n="d-stdio">Local process</span></div>
+    <div class="row"><span class="key">--transport sse</span><span class="desc" data-i18n="d-sse">Remote SSE</span></div>
+
+    <div class="subsection" data-i18n="sub-scopes">Scopes</div>
+    <div class="row"><span class="key">Local</span><span class="desc" data-i18n="d-scope-local">.claude.json (project)</span></div>
+    <div class="row"><span class="key">Project</span><span class="desc" data-i18n="d-scope-proj">.mcp.json (shared / VCS)</span></div>
+    <div class="row"><span class="key">User</span><span class="desc" data-i18n="d-scope-user">~/.claude.json (global)</span></div>
+
+    <div class="subsection" data-i18n="sub-mgmt">Management</div>
+    <div class="row"><span class="key">/mcp</span><span class="desc" data-i18n="d-mcp-ui">Interactive UI</span></div>
+    <div class="row"><span class="key">claude mcp list</span><span class="desc" data-i18n="d-mcp-list">List all servers</span></div>
+    <div class="row"><span class="key">claude mcp serve</span><span class="desc" data-i18n="d-mcp-serve">Run CC as MCP server</span></div>
+  </section>
+
+  <!-- Slash Commands -->
+  <section class="section span2">
+    <div class="section-title"><span class="icon">⚡</span><span data-i18n="sec-slash">Slash Commands</span></div>
+
+    <div class="subsection" data-i18n="sub-session">Session</div>
+    <div class="row"><span class="key">/clear</span><span class="desc" data-i18n="d-clear-conv">Clear conversation</span></div>
+    <div class="row"><span class="key">/compact [focus]</span><span class="desc" data-i18n="d-compact">Compress context</span></div>
+    <div class="row"><span class="key">/resume</span><span class="desc" data-i18n="d-resume-sess">Resume / switch session</span></div>
+    <div class="row"><span class="key">/rename [name]</span><span class="desc" data-i18n="d-rename">Name current session</span></div>
+    <div class="row"><span class="key">/branch [name]</span><span class="desc" data-i18n="d-branch">Fork conversation (alias /fork)</span></div>
+    <div class="row"><span class="key">/cost</span><span class="desc" data-i18n="d-cost">Token usage stats</span></div>
+    <div class="row"><span class="key">/context</span><span class="desc" data-i18n="d-context-viz">Context usage visualizer</span></div>
+    <div class="row"><span class="key">/diff</span><span class="desc" data-i18n="d-diff">Interactive diff viewer</span></div>
+    <div class="row"><span class="key">/copy</span><span class="desc" data-i18n="d-copy">Copy last response</span></div>
+    <div class="row"><span class="key">/export</span><span class="desc" data-i18n="d-export">Export conversation</span></div>
+
+    <div class="subsection" data-i18n="sub-settings">Settings</div>
+    <div class="row"><span class="key">/config</span><span class="desc" data-i18n="d-config">Open settings</span></div>
+    <div class="row"><span class="key">/model [model]</span><span class="desc" data-i18n="d-model-arrow">Switch model (←→ effort)</span></div>
+    <div class="row"><span class="key">/fast [on|off]</span><span class="desc" data-i18n="d-fast">Toggle fast mode</span></div>
+    <div class="row"><span class="key">/vim</span><span class="desc" data-i18n="d-vim">Toggle vim mode</span></div>
+    <div class="row"><span class="key">/theme</span><span class="desc" data-i18n="d-theme">Change color theme</span></div>
+    <div class="row"><span class="key">/permissions</span><span class="desc" data-i18n="d-perms">View / update permissions</span></div>
+    <div class="row"><span class="key">/effort [level]</span><span class="desc" data-i18n="d-effort-set">Set effort (low / med / high)</span></div>
+    <div class="row"><span class="key">/color [color]</span><span class="desc" data-i18n="d-color">Prompt line color</span></div>
+    <div class="row"><span class="key">/keybindings</span><span class="desc" data-i18n="d-keybindings">Customize keybindings</span></div>
+    <div class="row"><span class="key">/terminal-setup</span><span class="desc" data-i18n="d-terminal-setup">Configure terminal keys</span></div>
+
+    <div class="subsection" data-i18n="sub-tools">Tools</div>
+    <div class="row"><span class="key">/init</span><span class="desc" data-i18n="d-init">Create CLAUDE.md</span></div>
+    <div class="row"><span class="key">/memory</span><span class="desc" data-i18n="d-memory-edit">Edit CLAUDE.md</span></div>
+    <div class="row"><span class="key">/mcp</span><span class="desc" data-i18n="d-manage-mcp">Manage MCP servers</span></div>
+    <div class="row"><span class="key">/hooks</span><span class="desc" data-i18n="d-hooks">Manage hooks</span></div>
+    <div class="row"><span class="key">/skills</span><span class="desc" data-i18n="d-list-skills">List available skills</span></div>
+    <div class="row"><span class="key">/agents</span><span class="desc" data-i18n="d-manage-agents">Manage agents</span></div>
+    <div class="row"><span class="key">/add-dir &lt;path&gt;</span><span class="desc" data-i18n="d-add-dir">Add working directory</span></div>
+    <div class="row"><span class="key">/reload-plugins</span><span class="desc" data-i18n="d-reload">Hot-reload plugins</span></div>
+
+    <div class="subsection" data-i18n="sub-special">Special</div>
+    <div class="row"><span class="key">/btw &lt;question&gt;</span><span class="desc" data-i18n="d-btw">Side question (no context cost)</span></div>
+    <div class="row"><span class="key">/plan [desc]</span><span class="desc" data-i18n="d-plan-cmd">Plan mode (+ auto-start)</span></div>
+    <div class="row"><span class="key">/loop [interval]</span><span class="desc" data-i18n="d-loop">Schedule recurring task</span></div>
+    <div class="row"><span class="key">/voice</span><span class="desc" data-i18n="d-voice-input">Voice input (20 languages)</span></div>
+    <div class="row"><span class="key">/doctor</span><span class="desc" data-i18n="d-doctor">Diagnose installation</span></div>
+    <div class="row"><span class="key">/pr-comments [PR]</span><span class="desc" data-i18n="d-pr">GitHub PR comments</span></div>
+    <div class="row"><span class="key">/remote-control</span><span class="desc" data-i18n="d-remote">Bridge to claude.ai/code</span></div>
+    <div class="row"><span class="key">/usage</span><span class="desc" data-i18n="d-usage">Plan limits &amp; status</span></div>
+    <div class="row"><span class="key">/schedule</span><span class="desc" data-i18n="d-schedule">Cloud scheduled tasks</span></div>
+    <div class="row"><span class="key">/security-review</span><span class="desc" data-i18n="d-security">Security analysis</span></div>
+    <div class="row"><span class="key">/help</span><span class="desc" data-i18n="d-help">Help + commands</span></div>
+    <div class="row"><span class="key">/feedback</span><span class="desc" data-i18n="d-feedback">Send feedback (alias: /bug)</span></div>
+  </section>
+
+  <!-- Memory & Files -->
+  <section class="section">
+    <div class="section-title"><span class="icon">◎</span><span data-i18n="sec-memory">Memory &amp; Files</span></div>
+
+    <div class="subsection" data-i18n="sub-claude-md">CLAUDE.md Locations</div>
+    <div class="row"><span class="key">./CLAUDE.md</span><span class="desc" data-i18n="d-proj-shared">Project (team-shared)</span></div>
+    <div class="row"><span class="key">~/.claude/CLAUDE.md</span><span class="desc" data-i18n="d-personal">Personal (all projects)</span></div>
+    <div class="row"><span class="key">/etc/claude-code/</span><span class="desc" data-i18n="d-managed">Managed (org-wide)</span></div>
+
+    <div class="subsection" data-i18n="sub-rules">Rules &amp; Imports</div>
+    <div class="row"><span class="key">.claude/rules/*.md</span><span class="desc" data-i18n="d-proj-rules">Project rules</span></div>
+    <div class="row"><span class="key">~/.claude/rules/*.md</span><span class="desc" data-i18n="d-user-rules">User rules</span></div>
+    <div class="row"><span class="key">paths: frontmatter</span><span class="desc" data-i18n="d-path-rules">Path-specific rules</span></div>
+    <div class="row"><span class="key">@path/to/file</span><span class="desc" data-i18n="d-import">Import in CLAUDE.md</span></div>
+
+    <div class="subsection" data-i18n="sub-auto-mem">Auto Memory</div>
+    <div class="row"><span class="key">~/.claude/projects/&lt;proj&gt;/memory/</span><span class="desc" data-i18n="d-auto-mem">MEMORY.md + topic files, auto-loaded</span></div>
+  </section>
+
+  <!-- Workflows & Tips -->
+  <section class="section span2">
+    <div class="section-title"><span class="icon">◇</span><span data-i18n="sec-workflows">Workflows &amp; Tips</span></div>
+
+    <div class="subsection" data-i18n="sub-thinking">Thinking &amp; Effort</div>
+    <div class="row"><span class="key"><span class="mac-only">⌥T</span><span class="win-only">Alt+T</span></span><span class="desc" data-i18n="d-toggle-think">Toggle thinking</span></div>
+    <div class="row"><span class="key">"ultrathink"</span><span class="desc" data-i18n="d-ultrathink">Max effort for one turn</span></div>
+    <div class="row"><span class="key"><span class="mac-only">⌃O</span><span class="win-only">Ctrl+O</span></span><span class="desc" data-i18n="d-view-think">View thinking (verbose)</span></div>
+    <div class="row"><span class="key">/effort</span><span class="desc" data-i18n="d-effort-levels">○ low &nbsp;·&nbsp; ◐ med &nbsp;·&nbsp; ● high</span></div>
+
+    <div class="subsection" data-i18n="sub-plan-mode">Plan Mode</div>
+    <div class="row"><span class="key">⇧Tab</span><span class="desc" data-i18n="d-tab-cycle">Normal → Auto-accept → Plan</span></div>
+    <div class="row"><span class="key">--permission-mode plan</span><span class="desc" data-i18n="d-launch-plan">Launch in plan mode</span></div>
+
+    <div class="subsection" data-i18n="sub-worktrees">Git Worktrees</div>
+    <div class="row"><span class="key">--worktree name</span><span class="desc" data-i18n="d-isolated">Isolated branch for feature</span></div>
+    <div class="row"><span class="key">isolation: worktree</span><span class="desc" data-i18n="d-agent-wt">Agent in own worktree</span></div>
+    <div class="row"><span class="key">sparsePaths</span><span class="desc" data-i18n="d-sparse">Checkout only needed folders</span></div>
+    <div class="row"><span class="key">/batch</span><span class="desc" data-i18n="d-batch">Auto-create worktrees</span></div>
+
+    <div class="subsection" data-i18n="sub-ctx-mgmt">Context Management</div>
+    <div class="row"><span class="key">/context</span><span class="desc" data-i18n="d-ctx-tips">Usage + optimization tips</span></div>
+    <div class="row"><span class="key">/compact [focus]</span><span class="desc" data-i18n="d-compact-focus">Compress with focus</span></div>
+    <div class="row"><span class="key">Auto-compact</span><span class="desc" data-i18n="d-auto-compact">~95% capacity</span></div>
+    <div class="row"><span class="key">1M context</span><span class="desc" data-i18n="d-1m">Opus 4.6 (Max / Team / Ent)</span></div>
+    <div class="row"><span class="key">CLAUDE.md</span><span class="desc" data-i18n="d-survives">Survives compaction</span></div>
+
+    <div class="subsection" data-i18n="sub-sess-tips">Session Tips</div>
+    <div class="row"><span class="key">claude -c</span><span class="desc" data-i18n="d-continue-last">Continue last conversation</span></div>
+    <div class="row"><span class="key">claude -r "name"</span><span class="desc" data-i18n="d-resume-name">Resume by name</span></div>
+    <div class="row"><span class="key">/btw question</span><span class="desc" data-i18n="d-btw-tip">Side question, no context cost</span></div>
+
+    <div class="subsection" data-i18n="sub-sdk">SDK / Headless</div>
+    <div class="row"><span class="key">claude -p "prompt"</span><span class="desc" data-i18n="d-non-interactive">Non-interactive mode</span></div>
+    <div class="row"><span class="key">--output-format json</span><span class="desc" data-i18n="d-structured">Structured output</span></div>
+    <div class="row"><span class="key">--max-budget-usd 5</span><span class="desc" data-i18n="d-cost-limit">Cost limit</span></div>
+    <div class="row"><span class="key">cat file | claude -p</span><span class="desc" data-i18n="d-pipe">Pipe input</span></div>
+
+    <div class="subsection" data-i18n="sub-voice">Voice Mode</div>
+    <div class="row"><span class="key">/voice</span><span class="desc" data-i18n="d-push-to-talk">Enable push-to-talk</span></div>
+    <div class="row"><span class="key">Space (hold)</span><span class="desc" data-i18n="d-record">Record; release = send</span></div>
+    <div class="row"><span class="key">20 languages</span><span class="desc" data-i18n="d-20-langs">EN, ES, FR, DE, CZ, PL…</span></div>
+  </section>
+
+  <!-- Config & Environment -->
+  <section class="section">
+    <div class="section-title"><span class="icon">⚙</span><span data-i18n="sec-config">Config &amp; Environment</span></div>
+
+    <div class="subsection" data-i18n="sub-cfg-files">Config Files</div>
+    <div class="row"><span class="key">~/.claude/settings.json</span><span class="desc" data-i18n="d-user-cfg">User settings</span></div>
+    <div class="row"><span class="key">.claude/settings.json</span><span class="desc" data-i18n="d-proj-cfg">Project (shared)</span></div>
+    <div class="row"><span class="key">.claude/settings.local.json</span><span class="desc" data-i18n="d-local-cfg">Local only</span></div>
+    <div class="row"><span class="key">~/.claude.json</span><span class="desc" data-i18n="d-oauth">OAuth, MCP, state</span></div>
+    <div class="row"><span class="key">.mcp.json</span><span class="desc" data-i18n="d-proj-mcp">Project MCP servers</span></div>
+
+    <div class="subsection" data-i18n="sub-key-settings">Key Settings</div>
+    <div class="row"><span class="key">modelOverrides</span><span class="desc" data-i18n="d-model-map">Map model selection → ID</span></div>
+    <div class="row"><span class="key">autoMemoryDirectory</span><span class="desc" data-i18n="d-custom-mem">Custom memory directory</span></div>
+    <div class="row"><span class="key">worktree.sparsePaths</span><span class="desc" data-i18n="d-sparse-cfg">Sparse checkout folders</span></div>
+
+    <div class="subsection" data-i18n="sub-env-vars">Environment Variables</div>
+    <div class="row"><span class="key">ANTHROPIC_API_KEY</span><span class="desc"></span></div>
+    <div class="row"><span class="key">ANTHROPIC_MODEL</span><span class="desc"></span></div>
+    <div class="row"><span class="key">CLAUDE_CODE_EFFORT_LEVEL</span><span class="desc" data-i18n="d-effort-env">low / med / high</span></div>
+    <div class="row"><span class="key">MAX_THINKING_TOKENS</span><span class="desc" data-i18n="d-think-tokens">0 = off</span></div>
+    <div class="row"><span class="key">CLAUDE_CODE_MAX_OUTPUT_TOKENS</span><span class="desc" data-i18n="d-output-tokens">default 32K</span></div>
+    <div class="row"><span class="key">CLAUDE_CODE_DISABLE_CRON</span><span class="desc" data-i18n="d-disable-cron">Disable scheduled tasks</span></div>
+  </section>
+
+  <!-- Skills & Agents -->
+  <section class="section">
+    <div class="section-title"><span class="icon">✦</span><span data-i18n="sec-skills">Skills &amp; Agents</span></div>
+
+    <div class="subsection" data-i18n="sub-builtin-skills">Built-in Skills</div>
+    <div class="row"><span class="key">/simplify</span><span class="desc" data-i18n="d-simplify">Code review (3 parallel agents)</span></div>
+    <div class="row"><span class="key">/batch</span><span class="desc" data-i18n="d-bulk">Bulk changes (5–30 worktrees)</span></div>
+    <div class="row"><span class="key">/debug [desc]</span><span class="desc" data-i18n="d-debug">Debug from log</span></div>
+    <div class="row"><span class="key">/loop [interval]</span><span class="desc" data-i18n="d-recurring">Recurring scheduled task</span></div>
+    <div class="row"><span class="key">/claude-api</span><span class="desc" data-i18n="d-api-ref">Load API + SDK reference</span></div>
+
+    <div class="subsection" data-i18n="sub-skill-locs">Custom Skill Locations</div>
+    <div class="row"><span class="key">.claude/skills/&lt;name&gt;/</span><span class="desc" data-i18n="d-proj-skills">Project skills</span></div>
+    <div class="row"><span class="key">~/.claude/skills/&lt;name&gt;/</span><span class="desc" data-i18n="d-personal-skills">Personal skills</span></div>
+
+    <div class="subsection" data-i18n="sub-skill-fm">Skill Frontmatter</div>
+    <div class="row"><span class="key">description</span><span class="desc" data-i18n="d-auto-invoke">Auto-invoke trigger</span></div>
+    <div class="row"><span class="key">allowed-tools</span><span class="desc" data-i18n="d-skip-perms">Skip permission prompts</span></div>
+    <div class="row"><span class="key">model</span><span class="desc" data-i18n="d-override-model">Override model for skill</span></div>
+    <div class="row"><span class="key">effort</span><span class="desc" data-i18n="d-override-effort">Override effort level</span></div>
+    <div class="row"><span class="key">context: fork</span><span class="desc" data-i18n="d-fork-sub">Run in subagent</span></div>
+    <div class="row"><span class="key">$ARGUMENTS</span><span class="desc" data-i18n="d-args">User input placeholder</span></div>
+    <div class="row"><span class="key">${CLAUDE_SKILL_DIR}</span><span class="desc" data-i18n="d-skill-dir">Skill directory</span></div>
+    <div class="row"><span class="key">!`cmd`</span><span class="desc" data-i18n="d-dyn-ctx">Dynamic context injection</span></div>
+
+    <div class="subsection" data-i18n="sub-builtin-agents">Built-in Agents</div>
+    <div class="row"><span class="key">Explore</span><span class="desc" data-i18n="d-explore">Fast read-only (Haiku)</span></div>
+    <div class="row"><span class="key">Plan</span><span class="desc" data-i18n="d-plan-agent">Research for plan mode</span></div>
+    <div class="row"><span class="key">General</span><span class="desc" data-i18n="d-general">All tools, complex tasks</span></div>
+    <div class="row"><span class="key">Bash</span><span class="desc" data-i18n="d-bash-agent">Terminal, separate context</span></div>
+
+    <div class="subsection" data-i18n="sub-agent-fm">Agent Frontmatter</div>
+    <div class="row"><span class="key">permissionMode</span><span class="desc" data-i18n="d-perm-mode">default/acceptEdits/plan/dontAsk/bypass</span></div>
+    <div class="row"><span class="key">isolation: worktree</span><span class="desc" data-i18n="d-iso-wt">Run in git worktree</span></div>
+    <div class="row"><span class="key">memory: user|project</span><span class="desc" data-i18n="d-persist-mem">Persistent memory</span></div>
+    <div class="row"><span class="key">background: true</span><span class="desc" data-i18n="d-bg-task">Background task</span></div>
+    <div class="row"><span class="key">maxTurns</span><span class="desc" data-i18n="d-max-turns">Limit agent turns</span></div>
+    <div class="row"><span class="key">SendMessage</span><span class="desc" data-i18n="d-send-msg">Resume stopped agents</span></div>
+  </section>
+
+  <!-- CLI & Flags -->
+  <section class="section">
+    <div class="section-title"><span class="icon">▸</span><span data-i18n="sec-cli">CLI &amp; Flags</span></div>
+
+    <div class="subsection" data-i18n="sub-core-cmds">Core Commands</div>
+    <div class="row"><span class="key">claude</span><span class="desc" data-i18n="d-interactive">Interactive mode</span></div>
+    <div class="row"><span class="key">claude "prompt"</span><span class="desc" data-i18n="d-with-prompt">With prompt</span></div>
+    <div class="row"><span class="key">claude -p "prompt"</span><span class="desc">Headless</span></div>
+    <div class="row"><span class="key">claude -c</span><span class="desc" data-i18n="d-cont-last">Continue last</span></div>
+    <div class="row"><span class="key">claude -r "name"</span><span class="desc" data-i18n="d-resume-short">Resume by name</span></div>
+    <div class="row"><span class="key">claude update</span><span class="desc" data-i18n="d-update">Update</span></div>
+
+    <div class="subsection" data-i18n="sub-key-flags">Key Flags</div>
+    <div class="row"><span class="key">--model</span><span class="desc" data-i18n="d-set-model">Set model</span></div>
+    <div class="row"><span class="key">-w</span><span class="desc">Git worktree</span></div>
+    <div class="row"><span class="key">-n / --name</span><span class="desc" data-i18n="d-sess-name">Session name</span></div>
+    <div class="row"><span class="key">--add-dir</span><span class="desc" data-i18n="d-add-dir-flag">Add directory</span></div>
+    <div class="row"><span class="key">--agent</span><span class="desc" data-i18n="d-use-agent">Use an agent</span></div>
+    <div class="row"><span class="key">--allowedTools</span><span class="desc" data-i18n="d-preapprove">Pre-approve tools</span></div>
+    <div class="row"><span class="key">--output-format</span><span class="desc">json / stream</span></div>
+    <div class="row"><span class="key">--json-schema</span><span class="desc" data-i18n="d-structured">Structured output</span></div>
+    <div class="row"><span class="key">--max-turns</span><span class="desc" data-i18n="d-limit-turns">Limit turns</span></div>
+    <div class="row"><span class="key">--max-budget-usd</span><span class="desc" data-i18n="d-cost-limit">Cost limit</span></div>
+    <div class="row"><span class="key">--console</span><span class="desc" data-i18n="d-console-auth">Auth via Anthropic Console</span></div>
+    <div class="row"><span class="key">--verbose</span><span class="desc" data-i18n="d-verbose-out">Verbose output</span></div>
+    <div class="row"><span class="key">--bare</span><span class="desc" data-i18n="d-bare">Minimal headless (no hooks/LSP)</span></div>
+    <div class="row"><span class="key">--channels</span><span class="desc" data-i18n="d-channels">Permission relay / MCP push</span></div>
+    <div class="row"><span class="key">--remote</span><span class="desc" data-i18n="d-web-sess">Web session</span></div>
+    <div class="row"><span class="key">--effort</span><span class="desc" data-i18n="d-effort-flag">low / med / high / max</span></div>
+    <div class="row"><span class="key">--permission-mode</span><span class="desc">plan / default / …</span></div>
+    <div class="row"><span class="key">--dangerously-skip-permissions</span><span class="desc" data-i18n="d-skip-all">Skip all prompts ⚠</span></div>
+  </section>
+
+</main>
+
+<footer id="footer">
+  <div class="footer-group">
+    <span class="footer-label">Permission Modes:</span>
+    <code>default</code> prompts &middot;
+    <code>acceptEdits</code> auto-accept edits &middot;
+    <code>plan</code> read-only &middot;
+    <code>dontAsk</code> deny if not allowed &middot;
+    <code>bypassPermissions</code> skip all &middot;
+    CLI: <code>--dangerously-skip-permissions</code>
+  </div>
+  <div class="footer-group">
+    <span class="footer-label">Env Vars:</span>
+    <code>ANTHROPIC_API_KEY</code>
+    <code>ANTHROPIC_MODEL</code>
+    <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high)
+    <code>MAX_THINKING_TOKENS</code> (0=off)
+    <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (default 32K)
+    <code>CLAUDE_CODE_DISABLE_CRON</code>
+  </div>
+</footer>
+
+<script>
+// ── Translations ────────────────────────────────────────────────────────────
+const T = {
+  'header-desc':    { en:'A compact quick-reference for every Claude Code command, shortcut, and flag — covering keyboard shortcuts, slash commands, MCP servers, memory management, workflows, configuration, skills, and agents.', ru:'Компактный справочник по всем командам, горячим клавишам и флагам Claude Code — горячие клавиши, слэш-команды, MCP-серверы, память, рабочие процессы, конфигурация, скиллы и агенты.', zh:'Claude Code 命令、快捷键和参数的紧凑速查手册——涵盖键盘快捷键、斜杠命令、MCP 服务器、记忆管理、工作流、配置、技能与智能体。', ja:'Claude Code のすべてのコマンド、ショートカット、フラグのクイックリファレンス — キーボードショートカット、スラッシュコマンド、MCPサーバー、メモリ、ワークフロー、設定、スキル、エージェントを網羅。', es:'Referencia rápida de todos los comandos, atajos y flags de Claude Code — atajos de teclado, comandos de barra, servidores MCP, memoria, flujos de trabajo, configuración, skills y agentes.' },
+  'h1-sub':         { en:'<em>: Commands Cheatsheet</em>', ru:'<em>: Шпаргалка по командам</em>', zh:'<em>：命令速查表</em>', ja:'<em>：コマンドチートシート</em>', es:'<em>: Referencia de Comandos</em>' },
+  'updated':        { en:'Updated March 24, 2026', ru:'Обновлено 24 марта 2026', zh:'更新于 2026年3月24日', ja:'更新日：2026年3月24日', es:'Actualizado el 24 de marzo de 2026' },
+  'btn-mac':        { en:'Mac', ru:'Mac', zh:'Mac', ja:'Mac', es:'Mac' },
+  'btn-win':        { en:'Windows', ru:'Windows', zh:'Windows', ja:'Windows', es:'Windows' },
+
+  // Section titles
+  'sec-keyboard':   { en:'Keyboard Shortcuts', ru:'Горячие клавиши', zh:'键盘快捷键', ja:'キーボードショートカット', es:'Atajos de Teclado' },
+  'sec-mcp':        { en:'MCP Servers', ru:'MCP-серверы', zh:'MCP 服务器', ja:'MCPサーバー', es:'Servidores MCP' },
+  'sec-slash':      { en:'Slash Commands', ru:'Слэш-команды', zh:'斜杠命令', ja:'スラッシュコマンド', es:'Comandos de Barra' },
+  'sec-memory':     { en:'Memory & Files', ru:'Память и файлы', zh:'记忆与文件', ja:'メモリとファイル', es:'Memoria y Archivos' },
+  'sec-workflows':  { en:'Workflows & Tips', ru:'Рабочие процессы', zh:'工作流与技巧', ja:'ワークフローとヒント', es:'Flujos y Consejos' },
+  'sec-config':     { en:'Config & Environment', ru:'Конфигурация', zh:'配置与环境', ja:'設定と環境', es:'Config. y Entorno' },
+  'sec-skills':     { en:'Skills & Agents', ru:'Скиллы и агенты', zh:'技能与智能体', ja:'スキルとエージェント', es:'Skills y Agentes' },
+  'sec-cli':        { en:'CLI & Flags', ru:'CLI и флаги', zh:'命令行与参数', ja:'CLIとフラグ', es:'CLI y Flags' },
+
+  // Subsections
+  'sub-core':       { en:'Core', ru:'Основное', zh:'核心', ja:'コア', es:'Principal' },
+  'sub-mode':       { en:'Mode Switching', ru:'Режимы', zh:'模式切换', ja:'モード切り替え', es:'Cambio de Modo' },
+  'sub-input':      { en:'Input', ru:'Ввод', zh:'输入', ja:'入力', es:'Entrada' },
+  'sub-prefixes':   { en:'Prefixes', ru:'Префиксы', zh:'前缀', ja:'プレフィックス', es:'Prefijos' },
+  'sub-transports': { en:'Transports', ru:'Транспорт', zh:'传输方式', ja:'トランスポート', es:'Transportes' },
+  'sub-scopes':     { en:'Scopes', ru:'Области', zh:'作用域', ja:'スコープ', es:'Alcances' },
+  'sub-mgmt':       { en:'Management', ru:'Управление', zh:'管理', ja:'管理', es:'Gestión' },
+  'sub-session':    { en:'Session', ru:'Сессия', zh:'会话', ja:'セッション', es:'Sesión' },
+  'sub-settings':   { en:'Settings', ru:'Настройки', zh:'设置', ja:'設定', es:'Ajustes' },
+  'sub-tools':      { en:'Tools', ru:'Инструменты', zh:'工具', ja:'ツール', es:'Herramientas' },
+  'sub-special':    { en:'Special', ru:'Специальные', zh:'特殊', ja:'特殊', es:'Especiales' },
+  'sub-claude-md':  { en:'CLAUDE.md Locations', ru:'Расположение CLAUDE.md', zh:'CLAUDE.md 位置', ja:'CLAUDE.mdの場所', es:'Ubicaciones CLAUDE.md' },
+  'sub-rules':      { en:'Rules & Imports', ru:'Правила и импорт', zh:'规则与导入', ja:'ルールとインポート', es:'Reglas e Importaciones' },
+  'sub-auto-mem':   { en:'Auto Memory', ru:'Авто-память', zh:'自动记忆', ja:'自動メモリ', es:'Memoria Automática' },
+  'sub-thinking':   { en:'Thinking & Effort', ru:'Мышление и усилие', zh:'思考与强度', ja:'思考と強度', es:'Razonamiento y Esfuerzo' },
+  'sub-plan-mode':  { en:'Plan Mode', ru:'Режим плана', zh:'计划模式', ja:'プランモード', es:'Modo Plan' },
+  'sub-worktrees':  { en:'Git Worktrees', ru:'Git Worktrees', zh:'Git 工作树', ja:'Gitワークツリー', es:'Git Worktrees' },
+  'sub-ctx-mgmt':   { en:'Context Management', ru:'Управление контекстом', zh:'上下文管理', ja:'コンテキスト管理', es:'Gestión de Contexto' },
+  'sub-sess-tips':  { en:'Session Tips', ru:'Приёмы для сессий', zh:'会话技巧', ja:'セッションのヒント', es:'Consejos de Sesión' },
+  'sub-sdk':        { en:'SDK / Headless', ru:'SDK / Headless', zh:'SDK / 无头模式', ja:'SDK / ヘッドレス', es:'SDK / Sin Interfaz' },
+  'sub-voice':      { en:'Voice Mode', ru:'Голосовой режим', zh:'语音模式', ja:'音声モード', es:'Modo Voz' },
+  'sub-cfg-files':  { en:'Config Files', ru:'Файлы конфигурации', zh:'配置文件', ja:'設定ファイル', es:'Archivos de Config.' },
+  'sub-key-settings':{ en:'Key Settings', ru:'Ключевые настройки', zh:'关键设置', ja:'主要設定', es:'Ajustes Clave' },
+  'sub-env-vars':   { en:'Environment Variables', ru:'Переменные окружения', zh:'环境变量', ja:'環境変数', es:'Variables de Entorno' },
+  'sub-builtin-skills':{ en:'Built-in Skills', ru:'Встроенные скиллы', zh:'内置技能', ja:'組み込みスキル', es:'Skills Integrados' },
+  'sub-skill-locs': { en:'Custom Skill Locations', ru:'Расположение скиллов', zh:'自定义技能位置', ja:'カスタムスキルの場所', es:'Ubicaciones de Skills' },
+  'sub-skill-fm':   { en:'Skill Frontmatter', ru:'Frontmatter скиллов', zh:'技能前置配置', ja:'スキルフロントマター', es:'Frontmatter de Skill' },
+  'sub-builtin-agents':{ en:'Built-in Agents', ru:'Встроенные агенты', zh:'内置智能体', ja:'組み込みエージェント', es:'Agentes Integrados' },
+  'sub-agent-fm':   { en:'Agent Frontmatter', ru:'Frontmatter агентов', zh:'智能体前置配置', ja:'エージェントフロントマター', es:'Frontmatter de Agente' },
+  'sub-core-cmds':  { en:'Core Commands', ru:'Основные команды', zh:'核心命令', ja:'コアコマンド', es:'Comandos Principales' },
+  'sub-key-flags':  { en:'Key Flags', ru:'Ключевые флаги', zh:'关键参数', ja:'主要フラグ', es:'Flags Principales' },
+
+  // Descriptions — Keyboard
+  'd-cancel':       { en:'Cancel input / generation', ru:'Отменить ввод/генерацию', zh:'取消输入/生成', ja:'入力/生成をキャンセル', es:'Cancelar entrada / generación' },
+  'd-exit':         { en:'Exit session', ru:'Выйти из сессии', zh:'退出会话', ja:'セッションを終了', es:'Salir de sesión' },
+  'd-clear-screen': { en:'Clear screen', ru:'Очистить экран', zh:'清屏', ja:'画面をクリア', es:'Limpiar pantalla' },
+  'd-verbose':      { en:'Toggle verbose output', ru:'Подробный вывод вкл/выкл', zh:'切换详细输出', ja:'詳細出力の切り替え', es:'Alternar salida detallada' },
+  'd-history':      { en:'Reverse history search', ru:'Обратный поиск по истории', zh:'历史反向搜索', ja:'履歴の逆検索', es:'Búsqueda inversa en historial' },
+  'd-editor':       { en:'Open prompt in editor', ru:'Открыть промпт в редакторе', zh:'在编辑器中打开提示', ja:'エディタでプロンプトを開く', es:'Abrir prompt en editor' },
+  'd-bg-task':      { en:'Background task', ru:'Фоновая задача', zh:'后台任务', ja:'バックグラウンドタスク', es:'Tarea en segundo plano' },
+  'd-task-list':    { en:'Toggle task list', ru:'Список задач вкл/выкл', zh:'切换任务列表', ja:'タスクリストの切り替え', es:'Alternar lista de tareas' },
+  'd-paste-img':    { en:'Paste image', ru:'Вставить изображение', zh:'粘贴图像', ja:'画像を貼り付け', es:'Pegar imagen' },
+  'd-finish-agents':{ en:'Finish background agents', ru:'Завершить фоновых агентов', zh:'完成后台智能体', ja:'バックグラウンドエージェントを終了', es:'Finalizar agentes en segundo plano' },
+  'd-undo':         { en:'Undo / revert', ru:'Откатить / отменить', zh:'撤销/还原', ja:'元に戻す/リバート', es:'Deshacer / revertir' },
+  'd-cycle-perm':   { en:'Cycle permission modes', ru:'Цикл режимов разрешений', zh:'切换权限模式', ja:'権限モードを循環', es:'Ciclar modos de permiso' },
+  'd-switch-model': { en:'Switch model', ru:'Сменить модель', zh:'切换模型', ja:'モデルを切り替え', es:'Cambiar modelo' },
+  'd-toggle-think': { en:'Toggle thinking', ru:'Мышление вкл/выкл', zh:'切换思考模式', ja:'思考の切り替え', es:'Alternar razonamiento' },
+  'd-newline-q':    { en:'New line (quick)', ru:'Новая строка (быстро)', zh:'新行（快速）', ja:'改行（クイック）', es:'Nueva línea (rápida)' },
+  'd-newline-c':    { en:'New line (control seq)', ru:'Новая строка (упр. посл.)', zh:'新行（控制序列）', ja:'改行（制御シーケンス）', es:'Nueva línea (secuencia ctrl)' },
+  'd-slash':        { en:'Slash command', ru:'Слэш-команда', zh:'斜杠命令', ja:'スラッシュコマンド', es:'Comando de barra' },
+  'd-bash':         { en:'Direct bash command', ru:'Прямая bash-команда', zh:'直接执行bash命令', ja:'bashコマンドを直接実行', es:'Comando bash directo' },
+  'd-at':           { en:'File mention + autocomplete', ru:'Упоминание файла + автодополнение', zh:'文件提及 + 自动补全', ja:'ファイル参照 + 自動補完', es:'Mención de archivo + autocompletado' },
+
+  // Descriptions — MCP
+  'd-http':         { en:'Remote HTTP (recommended)', ru:'Удалённый HTTP (рекомендуется)', zh:'远程 HTTP（推荐）', ja:'リモートHTTP（推奨）', es:'HTTP remoto (recomendado)' },
+  'd-stdio':        { en:'Local process', ru:'Локальный процесс', zh:'本地进程', ja:'ローカルプロセス', es:'Proceso local' },
+  'd-sse':          { en:'Remote SSE', ru:'Удалённый SSE', zh:'远程 SSE', ja:'リモートSSE', es:'SSE remoto' },
+  'd-scope-local':  { en:'.claude.json (project)', ru:'.claude.json (для проекта)', zh:'.claude.json（项目）', ja:'.claude.json（プロジェクト）', es:'.claude.json (proyecto)' },
+  'd-scope-proj':   { en:'.mcp.json (shared / VCS)', ru:'.mcp.json (общий/VCS)', zh:'.mcp.json（共享/VCS）', ja:'.mcp.json（共有/VCS）', es:'.mcp.json (compartido/VCS)' },
+  'd-scope-user':   { en:'~/.claude.json (global)', ru:'~/.claude.json (глобальный)', zh:'~/.claude.json（全局）', ja:'~/.claude.json（グローバル）', es:'~/.claude.json (global)' },
+  'd-mcp-ui':       { en:'Interactive UI', ru:'Интерактивный интерфейс', zh:'交互界面', ja:'インタラクティブUI', es:'Interfaz interactiva' },
+  'd-mcp-list':     { en:'List all servers', ru:'Список всех серверов', zh:'列出所有服务器', ja:'全サーバーを一覧表示', es:'Listar todos los servidores' },
+  'd-mcp-serve':    { en:'Run CC as MCP server', ru:'CC как MCP-сервер', zh:'将 CC 作为 MCP 服务器运行', ja:'CCをMCPサーバーとして実行', es:'Ejecutar CC como servidor MCP' },
+
+  // Descriptions — Slash/Session
+  'd-clear-conv':   { en:'Clear conversation', ru:'Очистить разговор', zh:'清除对话', ja:'会話をクリア', es:'Limpiar conversación' },
+  'd-compact':      { en:'Compress context', ru:'Сжать контекст', zh:'压缩上下文', ja:'コンテキストを圧縮', es:'Comprimir contexto' },
+  'd-resume-sess':  { en:'Resume / switch session', ru:'Возобновить/переключить сессию', zh:'恢复/切换会话', ja:'セッションを再開/切り替え', es:'Reanudar / cambiar sesión' },
+  'd-rename':       { en:'Name current session', ru:'Назвать текущую сессию', zh:'命名当前会话', ja:'現在のセッションに名前を付ける', es:'Nombrar sesión actual' },
+  'd-branch':       { en:'Fork conversation (alias /fork)', ru:'Ветвь разговора (алиас /fork)', zh:'分叉对话（别名 /fork）', ja:'会話を分岐（/forkのエイリアス）', es:'Bifurcar conversación (alias /fork)' },
+  'd-cost':         { en:'Token usage stats', ru:'Статистика токенов', zh:'Token 使用统计', ja:'トークン使用統計', es:'Estadísticas de tokens' },
+  'd-context-viz':  { en:'Context usage visualizer', ru:'Визуализация контекста', zh:'上下文使用可视化', ja:'コンテキスト使用状況の可視化', es:'Visualizador de contexto' },
+  'd-diff':         { en:'Interactive diff viewer', ru:'Интерактивный просмотр diff', zh:'交互式差异查看器', ja:'インタラクティブdiffビューア', es:'Visor de diff interactivo' },
+  'd-copy':         { en:'Copy last response', ru:'Скопировать последний ответ', zh:'复制最后回复', ja:'最後の返答をコピー', es:'Copiar última respuesta' },
+  'd-export':       { en:'Export conversation', ru:'Экспорт разговора', zh:'导出对话', ja:'会話をエクスポート', es:'Exportar conversación' },
+
+  // Slash/Settings
+  'd-config':       { en:'Open settings', ru:'Открыть настройки', zh:'打开设置', ja:'設定を開く', es:'Abrir configuración' },
+  'd-model-arrow':  { en:'Switch model (←→ effort)', ru:'Сменить модель (←→ усилие)', zh:'切换模型（←→ 思考强度）', ja:'モデルを切り替え（←→ 思考強度）', es:'Cambiar modelo (←→ esfuerzo)' },
+  'd-fast':         { en:'Toggle fast mode', ru:'Быстрый режим вкл/выкл', zh:'切换快速模式', ja:'高速モードの切り替え', es:'Alternar modo rápido' },
+  'd-vim':          { en:'Toggle vim mode', ru:'Режим vim вкл/выкл', zh:'切换 vim 模式', ja:'vimモードの切り替え', es:'Alternar modo vim' },
+  'd-theme':        { en:'Change color theme', ru:'Сменить цветовую тему', zh:'更改颜色主题', ja:'カラーテーマを変更', es:'Cambiar tema de colores' },
+  'd-perms':        { en:'View / update permissions', ru:'Просмотр/обновление разрешений', zh:'查看/更新权限', ja:'権限を表示/更新', es:'Ver / actualizar permisos' },
+  'd-effort-set':   { en:'Set effort (low / med / high)', ru:'Усилие (low/med/high)', zh:'设置强度（低/中/高）', ja:'思考強度を設定（低/中/高）', es:'Establecer esfuerzo (bajo/medio/alto)' },
+  'd-color':        { en:'Prompt line color', ru:'Цвет строки промпта', zh:'提示行颜色', ja:'プロンプト行の色', es:'Color de línea de prompt' },
+  'd-keybindings':  { en:'Customize keybindings', ru:'Настроить горячие клавиши', zh:'自定义快捷键', ja:'キーバインドをカスタマイズ', es:'Personalizar atajos de teclado' },
+  'd-terminal-setup':{ en:'Configure terminal keys', ru:'Настроить клавиши терминала', zh:'配置终端按键', ja:'ターミナルキーを設定', es:'Configurar teclas del terminal' },
+
+  // Slash/Tools
+  'd-init':         { en:'Create CLAUDE.md', ru:'Создать CLAUDE.md', zh:'创建 CLAUDE.md', ja:'CLAUDE.mdを作成', es:'Crear CLAUDE.md' },
+  'd-memory-edit':  { en:'Edit CLAUDE.md', ru:'Редактировать CLAUDE.md', zh:'编辑 CLAUDE.md', ja:'CLAUDE.mdを編集', es:'Editar CLAUDE.md' },
+  'd-manage-mcp':   { en:'Manage MCP servers', ru:'Управление MCP серверами', zh:'管理 MCP 服务器', ja:'MCPサーバーを管理', es:'Gestionar servidores MCP' },
+  'd-hooks':        { en:'Manage hooks', ru:'Управление хуками', zh:'管理钩子', ja:'フックを管理', es:'Gestionar hooks' },
+  'd-list-skills':  { en:'List available skills', ru:'Список доступных скиллов', zh:'列出可用技能', ja:'利用可能なスキルを一覧表示', es:'Listar skills disponibles' },
+  'd-manage-agents':{ en:'Manage agents', ru:'Управление агентами', zh:'管理智能体', ja:'エージェントを管理', es:'Gestionar agentes' },
+  'd-add-dir':      { en:'Add working directory', ru:'Добавить рабочую директорию', zh:'添加工作目录', ja:'作業ディレクトリを追加', es:'Agregar directorio de trabajo' },
+  'd-reload':       { en:'Hot-reload plugins', ru:'Горячая перезагрузка плагинов', zh:'热重载插件', ja:'プラグインのホットリロード', es:'Recarga en caliente de plugins' },
+
+  // Slash/Special
+  'd-btw':          { en:'Side question (no context cost)', ru:'Побочный вопрос (без контекста)', zh:'额外问题（不消耗上下文）', ja:'補足質問（コンテキスト消費なし）', es:'Pregunta lateral (sin costo de contexto)' },
+  'd-plan-cmd':     { en:'Plan mode (+ auto-start)', ru:'Режим планирования (+ автостарт)', zh:'计划模式（+ 自动启动）', ja:'プランモード（+ 自動開始）', es:'Modo plan (+ inicio automático)' },
+  'd-loop':         { en:'Schedule recurring task', ru:'Запланировать повторяющуюся задачу', zh:'计划定期任务', ja:'定期タスクをスケジュール', es:'Programar tarea recurrente' },
+  'd-voice-input':  { en:'Voice input (20 languages)', ru:'Голосовой ввод (20 языков)', zh:'语音输入（20种语言）', ja:'音声入力（20言語）', es:'Entrada de voz (20 idiomas)' },
+  'd-doctor':       { en:'Diagnose installation', ru:'Диагностика установки', zh:'诊断安装', ja:'インストールを診断', es:'Diagnosticar instalación' },
+  'd-pr':           { en:'GitHub PR comments', ru:'Комментарии GitHub PR', zh:'GitHub PR 评论', ja:'GitHub PRコメント', es:'Comentarios de PR en GitHub' },
+  'd-remote':       { en:'Bridge to claude.ai/code', ru:'Мост к claude.ai/code', zh:'连接到 claude.ai/code', ja:'claude.ai/codeへのブリッジ', es:'Puente a claude.ai/code' },
+  'd-usage':        { en:'Plan limits & status', ru:'Лимиты плана и статус', zh:'套餐限制与状态', ja:'プランの制限と状態', es:'Límites del plan y estado' },
+  'd-schedule':     { en:'Cloud scheduled tasks', ru:'Облачные задачи по расписанию', zh:'云端定时任务', ja:'クラウドスケジュールタスク', es:'Tareas programadas en la nube' },
+  'd-security':     { en:'Security analysis', ru:'Анализ безопасности', zh:'安全分析', ja:'セキュリティ分析', es:'Análisis de seguridad' },
+  'd-help':         { en:'Help + commands', ru:'Справка + команды', zh:'帮助 + 命令', ja:'ヘルプ + コマンド', es:'Ayuda + comandos' },
+  'd-feedback':     { en:'Send feedback (alias: /bug)', ru:'Отправить отзыв (алиас: /bug)', zh:'发送反馈（别名：/bug）', ja:'フィードバックを送信（別名: /bug）', es:'Enviar feedback (alias: /bug)' },
+
+  // Memory
+  'd-proj-shared':  { en:'Project (team-shared)', ru:'Проект (общий для команды)', zh:'项目（团队共享）', ja:'プロジェクト（チーム共有）', es:'Proyecto (compartido en equipo)' },
+  'd-personal':     { en:'Personal (all projects)', ru:'Личный (для всех проектов)', zh:'个人（所有项目）', ja:'個人（全プロジェクト）', es:'Personal (todos los proyectos)' },
+  'd-managed':      { en:'Managed (org-wide)', ru:'Управляемый (для организации)', zh:'托管（组织全局）', ja:'管理対象（組織全体）', es:'Gestionado (toda la organización)' },
+  'd-proj-rules':   { en:'Project rules', ru:'Правила проекта', zh:'项目规则', ja:'プロジェクトルール', es:'Reglas del proyecto' },
+  'd-user-rules':   { en:'User rules', ru:'Пользовательские правила', zh:'用户规则', ja:'ユーザールール', es:'Reglas del usuario' },
+  'd-path-rules':   { en:'Path-specific rules', ru:'Правила для конкретных путей', zh:'路径特定规则', ja:'パス固有のルール', es:'Reglas por ruta' },
+  'd-import':       { en:'Import in CLAUDE.md', ru:'Импорт в CLAUDE.md', zh:'在 CLAUDE.md 中导入', ja:'CLAUDE.mdにインポート', es:'Importar en CLAUDE.md' },
+  'd-auto-mem':     { en:'MEMORY.md + topic files, auto-loaded', ru:'MEMORY.md + файлы по темам, автозагрузка', zh:'MEMORY.md + 主题文件，自动加载', ja:'MEMORY.md + トピックファイル、自動読み込み', es:'MEMORY.md + archivos por tema, carga automática' },
+
+  // Workflows
+  'd-ultrathink':   { en:'Max effort for one turn', ru:'Макс. усилие для хода', zh:'单次最大思考强度', ja:'1ターンの最大思考強度', es:'Máximo esfuerzo por turno' },
+  'd-view-think':   { en:'View thinking (verbose)', ru:'Просмотр мышления (подробно)', zh:'查看思考（详细）', ja:'思考を表示（詳細）', es:'Ver razonamiento (detallado)' },
+  'd-effort-levels':{ en:'○ low \u00a0·\u00a0 ◐ med \u00a0·\u00a0 ● high', ru:'○ низко \u00a0·\u00a0 ◐ средне \u00a0·\u00a0 ● высоко', zh:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', ja:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', es:'○ bajo \u00a0·\u00a0 ◐ medio \u00a0·\u00a0 ● alto' },
+  'd-tab-cycle':    { en:'Normal → Auto-accept → Plan', ru:'Обычный → Авто-принятие → План', zh:'普通 → 自动接受 → 计划', ja:'通常 → 自動承認 → プラン', es:'Normal → Auto-aceptar → Plan' },
+  'd-launch-plan':  { en:'Launch in plan mode', ru:'Запуск в режиме плана', zh:'以计划模式启动', ja:'プランモードで起動', es:'Iniciar en modo plan' },
+  'd-isolated':     { en:'Isolated branch for feature', ru:'Изолированная ветка для фичи', zh:'功能的隔离分支', ja:'機能の隔離ブランチ', es:'Rama aislada para feature' },
+  'd-agent-wt':     { en:'Agent in own worktree', ru:'Агент в своём worktree', zh:'智能体在独立工作树', ja:'専用ワークツリーのエージェント', es:'Agente en su propio worktree' },
+  'd-sparse':       { en:'Checkout only needed folders', ru:'Checkout только нужных папок', zh:'仅检出所需文件夹', ja:'必要なフォルダのみチェックアウト', es:'Checkout solo carpetas necesarias' },
+  'd-batch':        { en:'Auto-create worktrees', ru:'Авто-создание worktrees', zh:'自动创建工作树', ja:'ワークツリーを自動作成', es:'Crear worktrees automáticamente' },
+  'd-ctx-tips':     { en:'Usage + optimization tips', ru:'Использование + советы по оптимизации', zh:'使用量 + 优化建议', ja:'使用量 + 最適化のヒント', es:'Uso + consejos de optimización' },
+  'd-compact-focus':{ en:'Compress with focus', ru:'Сжать с фокусом', zh:'聚焦压缩', ja:'フォーカス付きで圧縮', es:'Comprimir con enfoque' },
+  'd-auto-compact': { en:'~95% capacity', ru:'~95% ёмкости', zh:'~95% 容量', ja:'~95% の容量', es:'~95% de capacidad' },
+  'd-1m':           { en:'Opus 4.6 (Max / Team / Ent)', ru:'Opus 4.6 (Max/Team/Ent)', zh:'Opus 4.6（Max/Team/Ent）', ja:'Opus 4.6（Max/Team/Ent）', es:'Opus 4.6 (Max / Team / Ent)' },
+  'd-survives':     { en:'Survives compaction', ru:'Выживает при сжатии', zh:'压缩后保留', ja:'圧縮後も保持', es:'Sobrevive la compresión' },
+  'd-continue-last':{ en:'Continue last conversation', ru:'Продолжить последний разговор', zh:'继续上次对话', ja:'最後の会話を継続', es:'Continuar última conversación' },
+  'd-resume-name':  { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre' },
+  'd-btw-tip':      { en:'Side question, no context cost', ru:'Побочный вопрос, без затрат контекста', zh:'额外问题，不消耗上下文', ja:'補足質問、コンテキスト消費なし', es:'Pregunta lateral, sin costo de contexto' },
+  'd-non-interactive':{ en:'Non-interactive mode', ru:'Неинтерактивный режим', zh:'非交互模式', ja:'非インタラクティブモード', es:'Modo no interactivo' },
+  'd-structured':   { en:'Structured output', ru:'Структурированный вывод', zh:'结构化输出', ja:'構造化出力', es:'Salida estructurada' },
+  'd-cost-limit':   { en:'Cost limit', ru:'Лимит затрат', zh:'费用限制', ja:'コスト制限', es:'Límite de costo' },
+  'd-pipe':         { en:'Pipe input', ru:'Передача через pipe', zh:'管道输入', ja:'パイプ入力', es:'Entrada por pipe' },
+  'd-push-to-talk': { en:'Enable push-to-talk', ru:'Включить push-to-talk', zh:'启用按键说话', ja:'プッシュトゥトークを有効化', es:'Activar push-to-talk' },
+  'd-record':       { en:'Record; release = send', ru:'Запись, отпустить = отправить', zh:'录音；松开 = 发送', ja:'録音；離すと送信', es:'Grabar; soltar = enviar' },
+  'd-20-langs':     { en:'EN, ES, FR, DE, CZ, PL…', ru:'EN, ES, FR, DE, CZ, PL…', zh:'EN, ES, FR, DE, CZ, PL…', ja:'EN, ES, FR, DE, CZ, PL…', es:'EN, ES, FR, DE, CZ, PL…' },
+
+  // Config
+  'd-user-cfg':     { en:'User settings', ru:'Настройки пользователя', zh:'用户设置', ja:'ユーザー設定', es:'Configuración del usuario' },
+  'd-proj-cfg':     { en:'Project (shared)', ru:'Проект (общий)', zh:'项目（共享）', ja:'プロジェクト（共有）', es:'Proyecto (compartido)' },
+  'd-local-cfg':    { en:'Local only', ru:'Только локально', zh:'仅本地', ja:'ローカルのみ', es:'Solo local' },
+  'd-oauth':        { en:'OAuth, MCP, state', ru:'OAuth, MCP, состояние', zh:'OAuth、MCP、状态', ja:'OAuth、MCP、状態', es:'OAuth, MCP, estado' },
+  'd-proj-mcp':     { en:'Project MCP servers', ru:'MCP-серверы проекта', zh:'项目 MCP 服务器', ja:'プロジェクトMCPサーバー', es:'Servidores MCP del proyecto' },
+  'd-model-map':    { en:'Map model selection → ID', ru:'Привязка выбора модели → ID', zh:'模型选择映射 → ID', ja:'モデル選択をIDにマップ', es:'Mapear selección de modelo → ID' },
+  'd-custom-mem':   { en:'Custom memory directory', ru:'Своя директория памяти', zh:'自定义记忆目录', ja:'カスタムメモリディレクトリ', es:'Directorio de memoria personalizado' },
+  'd-sparse-cfg':   { en:'Sparse checkout folders', ru:'Sparse checkout папок', zh:'稀疏检出文件夹', ja:'スパースチェックアウトフォルダ', es:'Carpetas de sparse checkout' },
+  'd-effort-env':   { en:'low / med / high', ru:'low/med/high', zh:'低/中/高', ja:'低/中/高', es:'bajo / medio / alto' },
+  'd-think-tokens': { en:'0 = off', ru:'0 = выкл', zh:'0 = 关闭', ja:'0 = オフ', es:'0 = desactivado' },
+  'd-output-tokens':{ en:'default 32K', ru:'по умолч. 32K', zh:'默认 32K', ja:'デフォルト32K', es:'por defecto 32K' },
+  'd-disable-cron': { en:'Disable scheduled tasks', ru:'Отключить задачи по расписанию', zh:'禁用定时任务', ja:'スケジュールタスクを無効化', es:'Deshabilitar tareas programadas' },
+
+  // Skills
+  'd-simplify':     { en:'Code review (3 parallel agents)', ru:'Код-ревью (3 параллельных агента)', zh:'代码审查（3个并行智能体）', ja:'コードレビュー（3並列エージェント）', es:'Revisión de código (3 agentes paralelos)' },
+  'd-bulk':         { en:'Bulk changes (5–30 worktrees)', ru:'Массовые изменения (5–30 worktrees)', zh:'批量更改（5–30个工作树）', ja:'一括変更（5〜30ワークツリー）', es:'Cambios masivos (5–30 worktrees)' },
+  'd-debug':        { en:'Debug from log', ru:'Отладка по логу', zh:'从日志调试', ja:'ログからデバッグ', es:'Depurar desde log' },
+  'd-recurring':    { en:'Recurring scheduled task', ru:'Повторяющаяся задача по расписанию', zh:'定期计划任务', ja:'定期スケジュールタスク', es:'Tarea recurrente programada' },
+  'd-api-ref':      { en:'Load API + SDK reference', ru:'Загрузить справочник API + SDK', zh:'加载 API + SDK 参考', ja:'API + SDKリファレンスを読み込む', es:'Cargar referencia API + SDK' },
+  'd-proj-skills':  { en:'Project skills', ru:'Скиллы проекта', zh:'项目技能', ja:'プロジェクトスキル', es:'Skills del proyecto' },
+  'd-personal-skills':{ en:'Personal skills', ru:'Личные скиллы', zh:'个人技能', ja:'個人スキル', es:'Skills personales' },
+  'd-auto-invoke':  { en:'Auto-invoke trigger', ru:'Триггер автовызова', zh:'自动调用触发器', ja:'自動呼び出しトリガー', es:'Disparador de invocación automática' },
+  'd-skip-perms':   { en:'Skip permission prompts', ru:'Пропуск запросов разрешений', zh:'跳过权限提示', ja:'権限プロンプトをスキップ', es:'Omitir solicitudes de permiso' },
+  'd-override-model':{ en:'Override model for skill', ru:'Переопределение модели для скилла', zh:'覆盖技能模型', ja:'スキルのモデルを上書き', es:'Sobrescribir modelo para skill' },
+  'd-override-effort':{ en:'Override effort level', ru:'Переопределение уровня усилия', zh:'覆盖思考强度', ja:'思考強度を上書き', es:'Sobrescribir nivel de esfuerzo' },
+  'd-fork-sub':     { en:'Run in subagent', ru:'Запуск в субагенте', zh:'在子智能体中运行', ja:'サブエージェントで実行', es:'Ejecutar en subagente' },
+  'd-args':         { en:'User input placeholder', ru:'Плейсхолдер ввода пользователя', zh:'用户输入占位符', ja:'ユーザー入力プレースホルダー', es:'Placeholder de entrada del usuario' },
+  'd-skill-dir':    { en:'Skill directory', ru:'Директория скилла', zh:'技能目录', ja:'スキルディレクトリ', es:'Directorio del skill' },
+  'd-dyn-ctx':      { en:'Dynamic context injection', ru:'Динамическая инъекция контекста', zh:'动态上下文注入', ja:'動的コンテキスト注入', es:'Inyección dinámica de contexto' },
+  'd-explore':      { en:'Fast read-only (Haiku)', ru:'Быстрый read-only (Haiku)', zh:'快速只读（Haiku）', ja:'高速読み取り専用（Haiku）', es:'Solo lectura rápida (Haiku)' },
+  'd-plan-agent':   { en:'Research for plan mode', ru:'Исследование для режима плана', zh:'计划模式调研', ja:'プランモードのリサーチ', es:'Investigación para modo plan' },
+  'd-general':      { en:'All tools, complex tasks', ru:'Все инструменты, сложные задачи', zh:'所有工具，复杂任务', ja:'全ツール、複雑なタスク', es:'Todas las herramientas, tareas complejas' },
+  'd-bash-agent':   { en:'Terminal, separate context', ru:'Терминал, отдельный контекст', zh:'终端，独立上下文', ja:'ターミナル、独立コンテキスト', es:'Terminal, contexto separado' },
+  'd-perm-mode':    { en:'default/acceptEdits/plan/dontAsk/bypass', ru:'default/acceptEdits/plan/dontAsk/bypass', zh:'default/acceptEdits/plan/dontAsk/bypass', ja:'default/acceptEdits/plan/dontAsk/bypass', es:'default/acceptEdits/plan/dontAsk/bypass' },
+  'd-iso-wt':       { en:'Run in git worktree', ru:'Запуск в git worktree', zh:'在 git 工作树中运行', ja:'gitワークツリーで実行', es:'Ejecutar en git worktree' },
+  'd-persist-mem':  { en:'Persistent memory', ru:'Постоянная память', zh:'持久记忆', ja:'永続メモリ', es:'Memoria persistente' },
+  'd-max-turns':    { en:'Limit agent turns', ru:'Лимит агентских ходов', zh:'限制智能体轮次', ja:'エージェントターンを制限', es:'Limitar turnos del agente' },
+  'd-send-msg':     { en:'Resume stopped agents', ru:'Возобновление агентов', zh:'恢复已停止的智能体', ja:'停止したエージェントを再開', es:'Reanudar agentes detenidos' },
+
+  // CLI
+  'd-interactive':  { en:'Interactive mode', ru:'Интерактивный режим', zh:'交互模式', ja:'インタラクティブモード', es:'Modo interactivo' },
+  'd-with-prompt':  { en:'With prompt', ru:'С промптом', zh:'带提示词', ja:'プロンプト付き', es:'Con prompt' },
+  'd-cont-last':    { en:'Continue last', ru:'Продолжить последний', zh:'继续上次', ja:'最後から継続', es:'Continuar último' },
+  'd-resume-short': { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre' },
+  'd-update':       { en:'Update', ru:'Обновить', zh:'更新', ja:'アップデート', es:'Actualizar' },
+  'd-set-model':    { en:'Set model', ru:'Задать модель', zh:'设置模型', ja:'モデルを設定', es:'Establecer modelo' },
+  'd-sess-name':    { en:'Session name', ru:'Имя сессии', zh:'会话名称', ja:'セッション名', es:'Nombre de sesión' },
+  'd-add-dir-flag': { en:'Add directory', ru:'Добавить директорию', zh:'添加目录', ja:'ディレクトリを追加', es:'Agregar directorio' },
+  'd-use-agent':    { en:'Use an agent', ru:'Использовать агента', zh:'使用智能体', ja:'エージェントを使用', es:'Usar un agente' },
+  'd-preapprove':   { en:'Pre-approve tools', ru:'Предварительно одобрить', zh:'预批准工具', ja:'ツールを事前承認', es:'Pre-aprobar herramientas' },
+  'd-limit-turns':  { en:'Limit turns', ru:'Лимит ходов', zh:'限制轮次', ja:'ターンを制限', es:'Limitar turnos' },
+  'd-console-auth': { en:'Auth via Anthropic Console', ru:'Авторизация через Anthropic Console', zh:'通过 Anthropic Console 认证', ja:'Anthropic Consoleで認証', es:'Autenticar vía Anthropic Console' },
+  'd-verbose-out':  { en:'Verbose output', ru:'Подробный вывод', zh:'详细输出', ja:'詳細出力', es:'Salida detallada' },
+  'd-bare':         { en:'Minimal headless (no hooks/LSP)', ru:'Минимальный headless (без хуков/LSP)', zh:'最小无头模式（无钩子/LSP）', ja:'最小ヘッドレス（フック/LSPなし）', es:'Headless mínimo (sin hooks/LSP)' },
+  'd-channels':     { en:'Permission relay / MCP push', ru:'Ретрансляция разрешений / MCP push', zh:'权限中继 / MCP 推送', ja:'権限リレー / MCPプッシュ', es:'Retransmisión de permisos / MCP push' },
+  'd-web-sess':     { en:'Web session', ru:'Веб-сессия', zh:'网页会话', ja:'ウェブセッション', es:'Sesión web' },
+  'd-effort-flag':  { en:'low / med / high / max', ru:'low/med/high/max', zh:'低/中/高/最大', ja:'低/中/高/最大', es:'bajo / medio / alto / máx' },
+  'd-skip-all':     { en:'Skip all prompts ⚠', ru:'Пропустить все запросы ⚠', zh:'跳过所有提示 ⚠', ja:'全プロンプトをスキップ ⚠', es:'Omitir todas las solicitudes ⚠' }
+};
+
+// Footer HTML per language
+const FOOTER = {
+  en: `<div class="footer-group"><span class="footer-label">Permission Modes:</span><code>default</code> prompts &middot; <code>acceptEdits</code> auto-accept edits &middot; <code>plan</code> read-only &middot; <code>dontAsk</code> deny if not allowed &middot; <code>bypassPermissions</code> skip all &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Env Vars:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=off) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (default 32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
+  ru: `<div class="footer-group"><span class="footer-label">Режимы разрешений:</span><code>default</code> запросы &middot; <code>acceptEdits</code> авто-принятие &middot; <code>plan</code> только чтение &middot; <code>dontAsk</code> запрет &middot; <code>bypassPermissions</code> пропуск всех &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Переменные окружения:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=выкл) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
+  zh: `<div class="footer-group"><span class="footer-label">权限模式：</span><code>default</code> 提示 &middot; <code>acceptEdits</code> 自动接受 &middot; <code>plan</code> 只读 &middot; <code>dontAsk</code> 拒绝 &middot; <code>bypassPermissions</code> 全部跳过 &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">环境变量：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=关）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（默认32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
+  ja: `<div class="footer-group"><span class="footer-label">権限モード：</span><code>default</code> 確認 &middot; <code>acceptEdits</code> 自動承認 &middot; <code>plan</code> 読取専用 &middot; <code>dontAsk</code> 拒否 &middot; <code>bypassPermissions</code> 全スキップ &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">環境変数：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=オフ）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（デフォルト32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
+  es: `<div class="footer-group"><span class="footer-label">Modos de Permiso:</span><code>default</code> solicitudes &middot; <code>acceptEdits</code> auto-aceptar &middot; <code>plan</code> solo lectura &middot; <code>dontAsk</code> denegar &middot; <code>bypassPermissions</code> omitir todo &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Variables de Entorno:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (bajo/medio/alto) <code>MAX_THINKING_TOKENS</code> (0=desact.) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K por defecto) <code>CLAUDE_CODE_DISABLE_CRON</code></div>`
+};
+
+// ── State ───────────────────────────────────────────────────────────────────
+let currentLang = 'en';
+
+// ── setLang ─────────────────────────────────────────────────────────────────
+function setLang(lang) {
+  currentLang = lang;
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const entry = T[key];
+    if (!entry) return;
+    const val = entry[lang] || entry.en;
+    // h1-sub uses innerHTML (contains <em>)
+    if (key === 'h1-sub') { el.innerHTML = val; }
+    else { el.textContent = val; }
+  });
+
+  // Update footer
+  document.getElementById('footer').innerHTML = FOOTER[lang] || FOOTER.en;
+
+  // Update lang button states
+  ['en','ru','zh','ja','es'].forEach(l => {
+    const btn = document.getElementById('btn-' + l);
+    if (btn) btn.className = (l === lang) ? 'active' : '';
+  });
+
+  // Update html lang attribute
+  const langMap = { en:'en', ru:'ru', zh:'zh-Hans', ja:'ja', es:'es' };
+  document.documentElement.lang = langMap[lang] || 'en';
+}
+
+// ── setOS ────────────────────────────────────────────────────────────────────
+function setOS(os) {
+  if (os === 'win') {
+    document.body.classList.add('os-win');
+    document.getElementById('btn-win').className = 'active';
+    document.getElementById('btn-mac').className = '';
+  } else {
+    document.body.classList.remove('os-win');
+    document.getElementById('btn-mac').className = 'active';
+    document.getElementById('btn-win').className = '';
+  }
+}
+
+// Auto-detect OS
+if (navigator.platform && !navigator.platform.startsWith('Mac')) setOS('win');
+</script>
+
+</body>
+</html>
