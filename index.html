@@ -26,7 +26,7 @@
     font-family: Inter, -apple-system, system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -204,6 +204,53 @@
   .footer-group { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   .footer-label { font-weight: 600; color: #EDE4DA; margin-right: 2px; }
 
+  /* ── Resources ────────────────────────────────── */
+  .resources {
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+  }
+
+  .resource-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 160px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--surface);
+    transition: all 0.18s;
+    text-align: center;
+  }
+
+  .resource-tile:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .resource-tile-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .resource-tile-title {
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .resource-tile-subtitle {
+    font-size: 10px;
+    color: var(--text-2);
+  }
+
   footer code {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.1);
@@ -253,10 +300,10 @@
     <button id="btn-win" onclick="setOS('win')" data-i18n="btn-win">Windows</button>
     <div class="ctrl-sep"></div>
     <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-es" onclick="setLang('es')">ES</button>
     <button id="btn-ru" onclick="setLang('ru')">RU</button>
     <button id="btn-zh" onclick="setLang('zh')">中文</button>
     <button id="btn-ja" onclick="setLang('ja')">日本語</button>
-    <button id="btn-es" onclick="setLang('es')">ES</button>
   </div>
   <div class="header-meta" data-i18n="updated">Updated March 24, 2026</div>
 </header>
@@ -530,6 +577,19 @@
   </section>
 
 </main>
+
+<section class="resources">
+  <a href="https://github.com/paullarionov/claude-certified-architect" target="_blank" rel="noopener" class="resource-tile">
+    <div class="resource-tile-icon">🏛️</div>
+    <div class="resource-tile-title">Claude Certified Architect</div>
+    <div class="resource-tile-subtitle">GitHub Repository</div>
+  </a>
+  <a href="https://x.com/paullarionov/status/2038254131849134220?s=46&t=VTc-R7S1Res65NRI7BWTTg" target="_blank" rel="noopener" class="resource-tile">
+    <div class="resource-tile-icon">𝕏</div>
+    <div class="resource-tile-title">Paul Larionov</div>
+    <div class="resource-tile-subtitle">Follow on X</div>
+  </a>
+</section>
 
 <footer id="footer">
   <div class="footer-group">
