@@ -80,7 +80,7 @@
     font-family: Inter, -apple-system, system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -258,6 +258,53 @@
   .footer-group { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   .footer-label { font-weight: 600; color: #EDE4DA; margin-right: 2px; }
 
+  /* ── Resources ────────────────────────────────── */
+  .resources {
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+  }
+
+  .resource-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 160px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--surface);
+    transition: all 0.18s;
+    text-align: center;
+  }
+
+  .resource-tile:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .resource-tile-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .resource-tile-title {
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .resource-tile-subtitle {
+    font-size: 10px;
+    color: var(--text-2);
+  }
+
   footer code {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.1);
@@ -266,6 +313,9 @@
     font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
     font-size: 8px;
   }
+
+  footer a { color: #EDE4DA; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
 
   /* ── Platform visibility ─────────────────────── */
   .win-only { display: none; }
@@ -304,10 +354,10 @@
     <button id="btn-win" onclick="setOS('win')" data-i18n="btn-win">Windows</button>
     <div class="ctrl-sep"></div>
     <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-es" onclick="setLang('es')">ES</button>
     <button id="btn-ru" onclick="setLang('ru')">RU</button>
     <button id="btn-zh" onclick="setLang('zh')">中文</button>
     <button id="btn-ja" onclick="setLang('ja')">日本語</button>
-    <button id="btn-es" onclick="setLang('es')">ES</button>
   </div>
   <div class="header-meta" data-i18n="updated">Updated March 24, 2026</div>
 </header>
@@ -582,6 +632,29 @@
 
 </main>
 
+<section class="resources">
+  <a href="best-practices.html" class="resource-tile">
+    <div class="resource-tile-icon">📖</div>
+    <div class="resource-tile-title">Best Practices</div>
+    <div class="resource-tile-subtitle">Complete Guide</div>
+  </a>
+  <a href="hidden-features.html" class="resource-tile">
+    <div class="resource-tile-icon">✨</div>
+    <div class="resource-tile-title">Hidden Features</div>
+    <div class="resource-tile-subtitle">Advanced Techniques</div>
+  </a>
+  <a href="https://github.com/paullarionov/claude-certified-architect" target="_blank" rel="noopener" class="resource-tile">
+    <div class="resource-tile-icon">🏛️</div>
+    <div class="resource-tile-title">Claude Certified Architect</div>
+    <div class="resource-tile-subtitle">GitHub Repository</div>
+  </a>
+  <a href="https://x.com/paullarionov/status/2038254131849134220?s=46&t=VTc-R7S1Res65NRI7BWTTg" target="_blank" rel="noopener" class="resource-tile">
+    <div class="resource-tile-icon">𝕏</div>
+    <div class="resource-tile-title">Paul Larionov</div>
+    <div class="resource-tile-subtitle">Top 80 Claude Skills, Agents & GitHub Repos for AI</div>
+  </a>
+</section>
+
 <footer id="footer">
   <div class="footer-group">
     <span class="footer-label">Permission Modes:</span>
@@ -600,6 +673,11 @@
     <code>MAX_THINKING_TOKENS</code> (0=off)
     <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (default 32K)
     <code>CLAUDE_CODE_DISABLE_CRON</code>
+  </div>
+  <div class="footer-group">
+    <span class="footer-label">Credits:</span>
+    <a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot;
+    <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a>
   </div>
 </footer>
 
@@ -834,11 +912,11 @@ const T = {
 
 // Footer HTML per language
 const FOOTER = {
-  en: `<div class="footer-group"><span class="footer-label">Permission Modes:</span><code>default</code> prompts &middot; <code>acceptEdits</code> auto-accept edits &middot; <code>plan</code> read-only &middot; <code>dontAsk</code> deny if not allowed &middot; <code>bypassPermissions</code> skip all &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Env Vars:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=off) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (default 32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
-  ru: `<div class="footer-group"><span class="footer-label">Режимы разрешений:</span><code>default</code> запросы &middot; <code>acceptEdits</code> авто-принятие &middot; <code>plan</code> только чтение &middot; <code>dontAsk</code> запрет &middot; <code>bypassPermissions</code> пропуск всех &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Переменные окружения:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=выкл) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
-  zh: `<div class="footer-group"><span class="footer-label">权限模式：</span><code>default</code> 提示 &middot; <code>acceptEdits</code> 自动接受 &middot; <code>plan</code> 只读 &middot; <code>dontAsk</code> 拒绝 &middot; <code>bypassPermissions</code> 全部跳过 &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">环境变量：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=关）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（默认32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
-  ja: `<div class="footer-group"><span class="footer-label">権限モード：</span><code>default</code> 確認 &middot; <code>acceptEdits</code> 自動承認 &middot; <code>plan</code> 読取専用 &middot; <code>dontAsk</code> 拒否 &middot; <code>bypassPermissions</code> 全スキップ &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">環境変数：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=オフ）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（デフォルト32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div>`,
-  es: `<div class="footer-group"><span class="footer-label">Modos de Permiso:</span><code>default</code> solicitudes &middot; <code>acceptEdits</code> auto-aceptar &middot; <code>plan</code> solo lectura &middot; <code>dontAsk</code> denegar &middot; <code>bypassPermissions</code> omitir todo &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Variables de Entorno:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (bajo/medio/alto) <code>MAX_THINKING_TOKENS</code> (0=desact.) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K por defecto) <code>CLAUDE_CODE_DISABLE_CRON</code></div>`
+  en: `<div class="footer-group"><span class="footer-label">Permission Modes:</span><code>default</code> prompts &middot; <code>acceptEdits</code> auto-accept edits &middot; <code>plan</code> read-only &middot; <code>dontAsk</code> deny if not allowed &middot; <code>bypassPermissions</code> skip all &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Env Vars:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=off) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (default 32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">Credits:</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
+  ru: `<div class="footer-group"><span class="footer-label">Режимы разрешений:</span><code>default</code> запросы &middot; <code>acceptEdits</code> авто-принятие &middot; <code>plan</code> только чтение &middot; <code>dontAsk</code> запрет &middot; <code>bypassPermissions</code> пропуск всех &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Переменные окружения:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=выкл) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">Авторы:</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
+  zh: `<div class="footer-group"><span class="footer-label">权限模式：</span><code>default</code> 提示 &middot; <code>acceptEdits</code> 自动接受 &middot; <code>plan</code> 只读 &middot; <code>dontAsk</code> 拒绝 &middot; <code>bypassPermissions</code> 全部跳过 &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">环境变量：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=关）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（默认32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">制作：</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
+  ja: `<div class="footer-group"><span class="footer-label">権限モード：</span><code>default</code> 確認 &middot; <code>acceptEdits</code> 自動承認 &middot; <code>plan</code> 読取専用 &middot; <code>dontAsk</code> 拒否 &middot; <code>bypassPermissions</code> 全スキップ &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">環境変数：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=オフ）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（デフォルト32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">クレジット：</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
+  es: `<div class="footer-group"><span class="footer-label">Modos de Permiso:</span><code>default</code> solicitudes &middot; <code>acceptEdits</code> auto-aceptar &middot; <code>plan</code> solo lectura &middot; <code>dontAsk</code> denegar &middot; <code>bypassPermissions</code> omitir todo &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Variables de Entorno:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (bajo/medio/alto) <code>MAX_THINKING_TOKENS</code> (0=desact.) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K por defecto) <code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">Créditos:</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`
 };
 
 // ── State ───────────────────────────────────────────────────────────────────

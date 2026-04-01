@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn best practices for using Claude Code efficiently. Master workflows, keyboard shortcuts, agents, and optimization techniques for maximum productivity.">
+<meta name="keywords" content="Claude Code, best practices, productivity, AI development, workflow optimization, keyboard shortcuts">
+<meta name="author" content="Paul Larionov">
+<meta property="og:title" content="Best Practices for Using Claude Code">
+<meta property="og:description" content="Master Claude Code with expert tips on workflows, agents, memory management, and productivity optimization.">
+<meta property="og:type" content="article">
+<title>Best Practices for Using Claude Code — Complete Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong {
+    color: var(--accent);
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Best Practices for Using Claude Code</h1>
+  <p>Master the Claude Code CLI with expert strategies to boost productivity, streamline workflows, and leverage advanced features effectively.</p>
+</header>
+
+<main>
+<article>
+
+<h2>1. Master Keyboard Shortcuts for Speed</h2>
+<p>Learning keyboard shortcuts is the fastest way to boost your productivity in Claude Code. Instead of typing full commands, use these essential shortcuts:</p>
+<ul>
+  <li><code>Ctrl+C</code> (Mac: <code>⌃C</code>) — Cancel input or generation instantly</li>
+  <li><code>Ctrl+G</code> (Mac: <code>⌃G</code>) — Open your prompt in an external editor for complex queries</li>
+  <li><code>Ctrl+L</code> (Mac: <code>⌃L</code>) — Clear the screen to reduce visual clutter</li>
+  <li><code>Alt+P</code> (Mac: <code>⌥P</code>) — Switch between AI models without restarting</li>
+  <li><code>Ctrl+F ×2</code> (Mac: <code>⌃F ×2</code>) — Finish all background agents at once</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Memorize the shortcuts you use most frequently. Even 3-4 shortcuts can dramatically reduce typing and improve workflow speed.</div>
+
+<h2>2. Use Plan Mode for Complex Projects</h2>
+<p>When tackling multi-step tasks or architectural decisions, use plan mode to get a structured approach before diving into implementation:</p>
+<ul>
+  <li>Launch with <code>/launch-plan</code> to get a detailed implementation strategy</li>
+  <li>Plan mode is read-only, so you can review the approach without committing to changes</li>
+  <li>Perfect for understanding project structure before making large refactors</li>
+  <li>Great for breaking down ambiguous requirements into clear action items</li>
+</ul>
+
+<h2>3. Leverage Agents for Parallel Work</h2>
+<p>Instead of handling everything sequentially, delegate to agents to work in parallel:</p>
+<ul>
+  <li>Use <code>/general</code> agent for complex multi-tool tasks</li>
+  <li>Use <code>/explore</code> agent for fast codebase exploration (Haiku-based, quick read-only)</li>
+  <li>Use <code>/plan</code> agent for research in plan mode without committing changes</li>
+  <li>Set maximum turns with <code>--max-agent-turns</code> to keep agents focused</li>
+  <li>Run in isolated worktrees with <code>--agent-worktree</code> for safe experimentation</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Use agents for parallel tasks like searching documentation while exploring code. This saves time by avoiding sequential bottlenecks.</div>
+
+<h2>4. Optimize Memory Management</h2>
+<p>Context window is precious. Use these strategies to keep your context window clean and efficient:</p>
+<ul>
+  <li><code>/remember</code> — Save important context that persists across sessions</li>
+  <li><code>/memory</code> — View and manage your persistent memory</li>
+  <li>Use <code>CLAUDE_CODE_EFFORT_LEVEL=med</code> for balanced thinking depth vs. speed</li>
+  <li>Auto-compact at ~95% capacity to prevent context overflow</li>
+  <li>Use <code>MAX_THINKING_TOKENS=0</code> to disable extended thinking if not needed</li>
+  <li>Archive old conversations to keep working context fresh</li>
+</ul>
+
+<h2>5. Master Slash Commands for Workflow Control</h2>
+<p>Slash commands are shortcuts to common workflows. Key ones to master:</p>
+<ul>
+  <li><code>/review</code> — Request code review with multiple agents in parallel</li>
+  <li><code>/debug</code> — Debug issues directly from error logs</li>
+  <li><code>/commit</code> — Create a git commit with your changes</li>
+  <li><code>/help</code> — Get help on Claude Code features</li>
+  <li><code>/fast</code> — Toggle fast mode for quicker responses</li>
+  <li><code>/memory</code> — Manage persistent memory across sessions</li>
+</ul>
+
+<h2>6. Use Permission Modes Strategically</h2>
+<p>Different permission modes suit different workflows. Choose wisely:</p>
+<ul>
+  <li><code>default</code> — Prompts for each action (safe, good for learning)</li>
+  <li><code>acceptEdits</code> — Auto-accept file edits without prompting</li>
+  <li><code>plan</code> — Read-only mode, perfect for exploration</li>
+  <li><code>dontAsk</code> — Denies actions if not pre-approved</li>
+  <li><code>bypassPermissions</code> — Maximum autonomy (use with caution)</li>
+</ul>
+<div class="tip"><strong>⚠️ Security Note:</strong> Use <code>bypassPermissions</code> only in trusted, isolated environments. For production code, prefer <code>default</code> or <code>acceptEdits</code>.</div>
+
+<h2>7. Configure Environment Variables for Your Workflow</h2>
+<p>Customize Claude Code behavior with environment variables:</p>
+<ul>
+  <li><code>ANTHROPIC_API_KEY</code> — Set your API key securely</li>
+  <li><code>ANTHROPIC_MODEL</code> — Default model (e.g., <code>claude-opus-4-6</code>)</li>
+  <li><code>CLAUDE_CODE_EFFORT_LEVEL</code> — Thinking effort (low/med/high)</li>
+  <li><code>MAX_THINKING_TOKENS</code> — Extended thinking budget (0=off, 1M=max)</li>
+  <li><code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> — Response length (default 32K)</li>
+</ul>
+
+<h2>8. Use MCP Servers for Extended Capabilities</h2>
+<p>MCP (Model Context Protocol) servers extend Claude Code with custom tools:</p>
+<ul>
+  <li>Configure MCP servers in your project or user settings</li>
+  <li>Popular MCPs: filesystem access, database tools, API integrations</li>
+  <li>Use <code>@</code> mentions to reference files and data efficiently</li>
+  <li>Combine multiple MCPs for complex workflows (e.g., git + database)</li>
+</ul>
+
+<h2>9. Effective Prompt Engineering for Claude Code</h2>
+<p>Better prompts lead to better results. Use these techniques:</p>
+<ul>
+  <li><strong>Be specific:</strong> "Add pagination to the user list component" beats "improve the component"</li>
+  <li><strong>Provide context:</strong> Include relevant file paths, error messages, or requirements</li>
+  <li><strong>Use multi-line mode:</strong> Press <code>Alt+Enter</code> (Mac: <code>⌥Enter</code>) to write longer prompts</li>
+  <li><strong>Reference files:</strong> Use <code>@filename</code> to include file context automatically</li>
+  <li><strong>Ask for the format:</strong> Specify JSON, markdown, or code format for structured responses</li>
+</ul>
+
+<h2>10. Git Integration and Version Control</h2>
+<p>Claude Code integrates seamlessly with git for safe development:</p>
+<ul>
+  <li>Use <code>/commit</code> to create semantic commits with clear messages</li>
+  <li>Claude Code respects your <code>.gitignore</code> — sensitive files are protected</li>
+  <li>Use worktrees (<code>--agent-worktree</code>) to sandbox experimental changes</li>
+  <li>Create feature branches before starting major work</li>
+  <li>Use git hooks to enforce code quality standards</li>
+</ul>
+
+<h2>11. Performance Optimization Tips</h2>
+<p>Keep Claude Code running smoothly:</p>
+<ul>
+  <li>Close unused windows and reduce background processes</li>
+  <li>Use <code>--bare</code> flag for minimal headless mode (no hooks/LSP)</li>
+  <li>Limit agent turns with <code>--max-agent-turns 3</code> to avoid endless loops</li>
+  <li>Use the <code>/explore</code> agent instead of <code>/general</code> for faster codebase searches</li>
+  <li>Cache frequently accessed data in persistent memory with <code>/remember</code></li>
+</ul>
+
+<h2>12. Continuous Learning and Community</h2>
+<p>Stay updated with Claude Code features and best practices:</p>
+<ul>
+  <li>Check the <a href="index.html">Claude Code Cheatsheet</a> regularly for new commands</li>
+  <li>Follow Claude Code updates on <a href="https://x.com/paullarionov">Paul Larionov's X (Twitter)</a></li>
+  <li>Explore <a href="https://github.com/paullarionov/claude-certified-architect">Claude Certified Architect</a> for advanced patterns</li>
+  <li>Experiment with different agents and permission modes in your workflows</li>
+  <li>Share your workflows and tips with the community</li>
+</ul>
+
+<h2>Common Pitfalls to Avoid</h2>
+<ul>
+  <li><strong>Not using keyboard shortcuts:</strong> Typing full commands wastes time every single day</li>
+  <li><strong>Ignoring plan mode:</strong> For complex tasks, planning saves debugging time later</li>
+  <li><strong>Overloading context:</strong> Keep conversations focused; archive old ones</li>
+  <li><strong>Not reading error messages:</strong> Claude Code provides clear error context — use it</li>
+  <li><strong>Using manual approvals for every change:</strong> Once you're comfortable, use <code>acceptEdits</code> mode</li>
+  <li><strong>Forgetting to commit:</strong> Make frequent, small commits instead of massive ones</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Claude Code is a powerful tool that rewards mastery. Start with keyboard shortcuts and plan mode, then gradually explore agents, memory management, and advanced configurations. The more you practice, the faster and more efficient your development workflow becomes.</p>
+<p>Remember: <strong>the best practices are the ones you actually use consistently</strong>. Pick 2-3 techniques that resonate with your workflow, master them, then gradually add more to your toolkit.</p>
+
+</article>
+</main>
+
+<footer>
+  <p><strong>Last updated:</strong> March 30, 2026</p>
+  <p><a href="index.html">← Back to Claude Code Cheatsheet</a></p>
+</footer>
+
+</body>
+</html>

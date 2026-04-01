@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover hidden and underused features in Claude Code. Learn advanced capabilities like session handoff, automation loops, hooks, and parallel execution from Anthropic expert Boris Cherny.">
+<meta name="keywords" content="Claude Code, hidden features, underused features, automation, session handoff, /loop, /schedule, hooks, worktrees, batch processing">
+<meta name="author" content="Boris Cherny, Anthropic">
+<meta property="og:title" content="Hidden and Underused Features in Claude Code">
+<meta property="og:description" content="Unlock the full potential of Claude Code with 15 powerful but underrated features most people don't know about.">
+<meta property="og:type" content="article">
+<title>Hidden and Underused Features in Claude Code — Advanced Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .byline {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 12px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 28px;
+    margin-bottom: 14px;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 14px 0 14px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 8px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .divider {
+    text-align: center;
+    color: var(--text-3);
+    margin: 24px 0;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .feature-block {
+    margin: 20px 0;
+  }
+
+  .feature-block strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .intro {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: rgba(201, 100, 66, 0.04);
+    border-radius: 4px;
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 16px; }
+    header h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Hidden and Underused Features in Claude Code</h1>
+  <p>Discover the powerful capabilities most people don't know about. Learn how to unlock Claude Code's full potential as an autonomous engineer.</p>
+  <div class="byline">By Boris Cherny, Anthropic</div>
+</header>
+
+<main>
+<article>
+
+<div class="intro">
+<strong>Most people use Claude Code as a simple coding assistant.</strong> But under the surface, it has a set of powerful features that can completely change how you work, especially if you treat it like an autonomous engineer rather than a chatbot. Here are some of the most useful and underrated capabilities.
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>1. Mobile App for Coding Anywhere</h2>
+<p>Claude Code is not limited to desktop.</p>
+<p>You can write and modify code directly from the iOS or Android app. This is surprisingly practical for quick fixes, reviewing changes, or iterating on ideas without opening your laptop.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>2. Seamless Session Handoff Across Devices</h2>
+<p>You can move sessions between mobile, web, desktop, and terminal.</p>
+<ul>
+  <li><code>claude --teleport</code> or <code>/teleport</code> — Continue a cloud session locally</li>
+  <li><code>/remote-control</code> — Control a local session from your phone or browser</li>
+</ul>
+<p>This turns Claude into a continuous workspace rather than a device-bound tool.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>3. Automation with /loop and /schedule</h2>
+<p>Two of the most powerful features:</p>
+<ul>
+  <li><code>/loop</code> — Let Claude run tasks repeatedly</li>
+  <li><code>/schedule</code> — Execute at intervals for up to a week</li>
+</ul>
+<p><strong>Example use cases:</strong></p>
+<ul>
+  <li>Auto-fixing code issues every 5 minutes</li>
+  <li>Running continuous code review</li>
+  <li>Keeping branches rebased</li>
+</ul>
+<p>This is where Claude starts behaving like an autonomous agent.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>4. Hooks for Deterministic Workflows</h2>
+<p>Hooks let you inject logic into the agent lifecycle.</p>
+<p>You can:</p>
+<ul>
+  <li>Load context automatically on session start</li>
+  <li>Log every command Claude runs</li>
+  <li>Route permission requests to external tools like WhatsApp</li>
+</ul>
+<p>This gives you fine-grained control over behavior and observability.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>5. Cowork Dispatch for Remote Execution</h2>
+<p>Dispatch allows you to control your Claude Desktop environment remotely.</p>
+<p>You can:</p>
+<ul>
+  <li>Manage files</li>
+  <li>Handle Slack and email</li>
+  <li>Execute tasks from your phone</li>
+</ul>
+<p>It effectively turns Claude into a remote operating layer for your machine.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>6. Chrome Extension for Frontend Work</h2>
+<p>Claude can connect directly to your browser.</p>
+<p>This enables:</p>
+<ul>
+  <li>Debugging with console logs</li>
+  <li>Testing UI changes</li>
+  <li>Automating browser workflows</li>
+</ul>
+<p>The key insight is simple: give Claude a way to verify its output, and it will iterate until the result is correct.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>7. Auto Running and Testing Web Servers</h2>
+<p>Claude Desktop can automatically:</p>
+<ul>
+  <li>Start your web server</li>
+  <li>Test it in a built-in browser</li>
+</ul>
+<p>This removes a lot of manual steps in development loops.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>8. Forking Sessions</h2>
+<p>You can branch your work like Git.</p>
+<p><strong>Two ways:</strong></p>
+<ol>
+  <li><code>/branch</code> inside a session</li>
+  <li><code>claude --resume &lt;session-id&gt; --fork-session</code> from CLI</li>
+</ol>
+<p>This is extremely useful for exploring different approaches without losing progress.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>9. /btw for Side Queries</h2>
+<p>Use <code>/btw</code> to ask quick questions while your main task is running.</p>
+<p><strong>Example:</strong></p>
+<ul>
+  <li>Clarify syntax</li>
+  <li>Check definitions</li>
+  <li>Ask unrelated questions</li>
+</ul>
+<p>This keeps your workflow uninterrupted.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>10. Git Worktrees for Parallel Work</h2>
+<p>Claude has deep support for git worktrees.</p>
+<p>This allows:</p>
+<ul>
+  <li>Multiple parallel environments</li>
+  <li>Running many agents on the same repo</li>
+  <li>True parallel development</li>
+</ul>
+<p>Essential if you are scaling agent-based workflows.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>11. /batch for Massive Parallel Changes</h2>
+<p><code>/batch</code> lets Claude distribute work across many agents.</p>
+<p>It:</p>
+<ul>
+  <li>Interviews you about the task</li>
+  <li>Splits work into multiple worktrees</li>
+  <li>Executes in parallel across dozens or hundreds of agents</li>
+</ul>
+<p>Perfect for migrations and large-scale refactoring.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>12. --bare for Faster SDK Execution</h2>
+<p>By default, Claude loads local configs, MCPs, and settings.</p>
+<p>With <code>--bare</code>, you:</p>
+<ul>
+  <li>Skip unnecessary loading</li>
+  <li>Speed up execution</li>
+  <li>Gain more control in scripted workflows</li>
+</ul>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>13. --add-dir for Multi-Repo Context</h2>
+<p>When working across repositories:</p>
+<p>Use <code>--add-dir</code> to give Claude access to additional folders.</p>
+<p>This allows:</p>
+<ul>
+  <li>Cross-repo understanding</li>
+  <li>Shared context</li>
+  <li>Safer multi-project operations</li>
+</ul>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>14. Custom Agents with --agent</h2>
+<p>You can define your own agents with custom prompts and tools.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+  <li>Create an agent in <code>.claude/agents</code></li>
+  <li>Run with <code>claude --agent=&lt;name&gt;</code></li>
+</ol>
+<p>This turns Claude into a system of specialized agents rather than a single general model.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<div class="feature-block">
+<h2>15. Voice Input for Coding</h2>
+<p>You can code by speaking.</p>
+<p>Use:</p>
+<ul>
+  <li><code>/voice</code> in CLI</li>
+  <li>Voice button in Desktop</li>
+  <li>iOS dictation</li>
+</ul>
+<p>Speaking often leads to more detailed instructions than typing, which improves output quality.</p>
+</div>
+
+<div class="divider">⸻</div>
+
+<h2>Why These Matter</h2>
+<p>The most successful Claude Code users treat it as an autonomous system rather than a chatbot. They automate repetitive work with <code>/loop</code> and <code>/schedule</code>, scale work across multiple agents with <code>/batch</code>, and use hooks to build deterministic workflows.</p>
+
+<p>The features listed above aren't flashy, but they're what separates casual users from power users. Start with session handoff and git worktrees, then gradually unlock automation and parallel execution as your workflows become more complex.</p>
+
+</article>
+</main>
+
+<footer>
+  <p><strong>Last updated:</strong> March 30, 2026</p>
+  <p><a href="index.html">← Back to Claude Code Cheatsheet</a></p>
+</footer>
+
+</body>
+</html>
