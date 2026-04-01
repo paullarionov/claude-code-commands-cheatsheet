@@ -12,4 +12,18 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://claude-guides.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://claude-guides.com/"/>
   </url>
+  <url>
+    <loc>https://claude-guides.com/hidden-features.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/hidden-features.html"/>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/best-practices.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/best-practices.html"/>
+  </url>
 </urlset>
