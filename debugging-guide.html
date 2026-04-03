@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Complete debugging guide for Claude Code. Learn techniques to debug code, fix errors, resolve issues, and troubleshoot problems with AI-assisted development.">
+<meta name="keywords" content="Claude Code, debugging, troubleshooting, error handling, bug fixing, debugging techniques, code debugging">
+<meta name="author" content="Claude Guides">
+<meta property="og:title" content="Debugging and Troubleshooting Guide for Claude Code">
+<meta property="og:description" content="Master debugging techniques in Claude Code. Learn how to identify, diagnose, and fix issues efficiently with AI assistance.">
+<meta property="og:type" content="article">
+<title>Debugging and Troubleshooting Guide for Claude Code</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong {
+    color: var(--accent);
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* ── Navigation ──────────────────────────────── */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 24px;
+    width: 24px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    min-width: 200px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--text);
+  }
+
+  .dropdown-menu li a:hover {
+    background: rgba(201, 100, 66, 0.1);
+    color: var(--accent);
+  }
+
+  /* Adjust body padding for fixed navbar */
+  main, [role="main"] {
+    padding-top: 50px;
+  }
+  body > header, body > section {
+    padding-top: 50px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .nav-menu {
+      gap: 15px;
+    }
+
+    .logo {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+
+    .nav-container {
+      padding: 10px 16px;
+    }
+
+    .dropdown-menu {
+      min-width: 150px;
+    }
+
+    .dropdown-menu li a {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  }
+
+  /* Focus visible styles for accessibility */
+  .nav-menu a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .dropdown-menu li a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><img src="favicon.svg" alt="Claude Code logo" class="logo-img">Claude Code Cheatsheet</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Main</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
+          <ul class="dropdown-menu" id="articles-menu">
+            <li><a href="best-practices.html">Best Practices</a></li>
+            <li><a href="hidden-features.html">Hidden Features</a></li>
+            <li><a href="token-usage.html">Reduce Token Usage</a></li>
+            <li><a href="prompt-engineering.html">Prompt Engineering</a></li>
+            <li><a href="debugging-guide.html">Debugging Guide</a></li>
+            <li><a href="memory-management.html">Memory Management</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Debugging and Troubleshooting Guide for Claude Code</h1>
+  <p>Master effective debugging techniques to identify, diagnose, and fix issues quickly with Claude Code's AI assistance.</p>
+</header>
+
+<main>
+<article>
+
+<h2>1. Share Error Messages and Stack Traces</h2>
+<p>When something breaks, the full error message is your best friend. Always share complete error output with Claude Code.</p>
+<ul>
+  <li>Copy the entire error stack trace, not just the error message</li>
+  <li>Include the context of what you were doing when the error occurred</li>
+  <li>Provide file names, line numbers, and the surrounding code</li>
+  <li>Include the command/input that triggered the error</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Use <code>Ctrl+G</code> (Mac: <code>⌃G</code>) to open your error in an editor for easier formatting and context.</div>
+
+<h2>2. Minimize the Problem Space</h2>
+<p>Help Claude Code narrow down the issue by providing minimal reproducible examples:</p>
+<ul>
+  <li>Create the smallest possible test case that reproduces the bug</li>
+  <li>Remove unrelated code and dependencies</li>
+  <li>Focus on the specific function or module causing the issue</li>
+  <li>Provide sample input/output that demonstrates the problem</li>
+</ul>
+
+<h2>3. Describe Expected vs. Actual Behavior</h2>
+<p>Be specific about what should happen and what's actually happening:</p>
+<ul>
+  <li><strong>Expected:</strong> "Function should return an array of 10 items"</li>
+  <li><strong>Actual:</strong> "Returns an array of 5 items, missing duplicates"</li>
+  <li><strong>Expected:</strong> "Should execute in under 1 second"</li>
+  <li><strong>Actual:</strong> "Takes 5+ seconds with large datasets"</li>
+</ul>
+
+<h2>4. Use Logging and Debug Output</h2>
+<p>Before asking Claude Code for help, gather debug information:</p>
+<ul>
+  <li>Add <code>console.log()</code> statements to track variable values</li>
+  <li>Check log files for error patterns or warnings</li>
+  <li>Monitor memory and CPU usage for performance issues</li>
+  <li>Use debuggers built into your IDE for deeper inspection</li>
+</ul>
+
+<h2>5. Check Configuration and Environment</h2>
+<p>Many issues stem from configuration problems. Provide context about your setup:</p>
+<ul>
+  <li>Node.js / Python version you're using</li>
+  <li>Operating system (Mac, Windows, Linux)</li>
+  <li>Environment variables and configuration files</li>
+  <li>Dependencies and their versions</li>
+</ul>
+
+<h2>6. Test Hypotheses Systematically</h2>
+<p>When debugging, test one thing at a time:</p>
+<ul>
+  <li>Ask Claude Code "Could this be caused by [specific issue]?"</li>
+  <li>Try the suggested fix and report the result</li>
+  <li>If it doesn't work, ask for the next hypothesis</li>
+  <li>Document what you've already tried to avoid retesting</li>
+</ul>
+
+<h2>7. Leverage Agents for Complex Issues</h2>
+<p>For bugs that span multiple files or require investigation:</p>
+<ul>
+  <li>Use <code>/launch-agent</code> to let Claude explore your codebase</li>
+  <li>Agents can search through related files for the root cause</li>
+  <li>Great for understanding how different components interact</li>
+  <li>Perfect for identifying integration issues</li>
+</ul>
+
+<h2>8. Know When to Start Fresh</h2>
+<p>Sometimes the best debugging approach is simplification:</p>
+<ul>
+  <li>Comment out recent changes to identify which broke things</li>
+  <li>Use version control to test previous working versions</li>
+  <li>Ask Claude Code to refactor the problematic section</li>
+  <li>Consider if redesigning the approach would be faster</li>
+</ul>
+
+<h2>9. Test Edge Cases</h2>
+<p>Bugs often hide in edge cases. When debugging, ask about:</p>
+<ul>
+  <li>Empty or null inputs</li>
+  <li>Very large data sets</li>
+  <li>Concurrent operations and race conditions</li>
+  <li>Boundary conditions and off-by-one errors</li>
+  <li>Special characters and encoding issues</li>
+</ul>
+
+<h2>10. Document the Solution</h2>
+<p>Once fixed, document the issue for future reference:</p>
+<ul>
+  <li>Note what caused the bug</li>
+  <li>Document the fix and why it works</li>
+  <li>Add test cases to prevent regression</li>
+  <li>Share the solution if it might help others</li>
+</ul>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2025 Claude Guides. <a href="index.html">Back to Cheatsheet</a></p>
+</footer>
+
+</body>
+</html>

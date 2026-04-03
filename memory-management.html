@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Advanced memory management techniques for Claude Code. Learn to manage context windows, optimize token usage, and maximize productivity in long conversations.">
+<meta name="keywords" content="Claude Code, memory management, context window, token usage, memory optimization, session management, AI memory">
+<meta name="author" content="Claude Guides">
+<meta property="og:title" content="Advanced Memory Management Techniques for Claude Code">
+<meta property="og:description" content="Master memory management in Claude Code. Learn context optimization, token reduction, and session management strategies.">
+<meta property="og:type" content="article">
+<title>Advanced Memory Management for Claude Code — Optimization Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong {
+    color: var(--accent);
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* ── Navigation ──────────────────────────────── */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 24px;
+    width: 24px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    min-width: 200px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--text);
+  }
+
+  .dropdown-menu li a:hover {
+    background: rgba(201, 100, 66, 0.1);
+    color: var(--accent);
+  }
+
+  /* Adjust body padding for fixed navbar */
+  main, [role="main"] {
+    padding-top: 50px;
+  }
+  body > header, body > section {
+    padding-top: 50px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .nav-menu {
+      gap: 15px;
+    }
+
+    .logo {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+
+    .nav-container {
+      padding: 10px 16px;
+    }
+
+    .dropdown-menu {
+      min-width: 150px;
+    }
+
+    .dropdown-menu li a {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  }
+
+  /* Focus visible styles for accessibility */
+  .nav-menu a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .dropdown-menu li a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><img src="favicon.svg" alt="Claude Code logo" class="logo-img">Claude Code Cheatsheet</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Main</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
+          <ul class="dropdown-menu" id="articles-menu">
+            <li><a href="best-practices.html">Best Practices</a></li>
+            <li><a href="hidden-features.html">Hidden Features</a></li>
+            <li><a href="token-usage.html">Reduce Token Usage</a></li>
+            <li><a href="prompt-engineering.html">Prompt Engineering</a></li>
+            <li><a href="debugging-guide.html">Debugging Guide</a></li>
+            <li><a href="memory-management.html">Memory Management</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Advanced Memory Management for Claude Code</h1>
+  <p>Optimize your Claude Code experience by mastering context windows, session management, and memory strategies for long, productive conversations.</p>
+</header>
+
+<main>
+<article>
+
+<h2>1. Understand the Context Window Limits</h2>
+<p>Claude Code has a context window that limits how much information can be processed in a single conversation. Understanding this is key to working efficiently.</p>
+<ul>
+  <li>Context window includes all previous messages in the conversation</li>
+  <li>Large files and lengthy outputs consume significant tokens</li>
+  <li>When context gets full, older messages are compressed to make room</li>
+  <li>Monitor your conversation length for performance</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Start fresh conversations when tackling new projects to have a full context window for that specific task.</div>
+
+<h2>2. Use Session Memory Effectively</h2>
+<p>Claude Code can save information across conversations for easier recall:</p>
+<ul>
+  <li>Store project summaries in session memory for context</li>
+  <li>Save important decisions and architecture notes</li>
+  <li>Document naming conventions and project patterns</li>
+  <li>Keep track of important URLs, IDs, and credentials (securely)</li>
+</ul>
+
+<h2>3. Prune Old Conversations</h2>
+<p>Regular maintenance keeps your memory clean and efficient:</p>
+<ul>
+  <li>Delete completed conversations that you won't need again</li>
+  <li>Archive important learnings in documentation</li>
+  <li>Keep working conversations focused on current tasks</li>
+  <li>Use descriptive conversation titles for easy retrieval</li>
+</ul>
+
+<h2>4. Break Up Large Tasks Into Smaller Conversations</h2>
+<p>Instead of trying to do everything in one conversation:</p>
+<ul>
+  <li><strong>Phase 1:</strong> Plan and design (separate conversation)</li>
+  <li><strong>Phase 2:</strong> Core implementation (separate conversation)</li>
+  <li><strong>Phase 3:</strong> Testing and refinement (separate conversation)</li>
+  <li><strong>Phase 4:</strong> Documentation and deployment (separate conversation)</li>
+</ul>
+
+<h2>5. Use Agents for Memory-Heavy Tasks</h2>
+<p>Agents have their own context separate from your main conversation:</p>
+<ul>
+  <li>Launch agents for code exploration and research</li>
+  <li>Agents can read large files without filling your context</li>
+  <li>Perfect for understanding complex codebases</li>
+  <li>Results are summarized back to you efficiently</li>
+</ul>
+
+<h2>6. Reference Files Instead of Pasting Them</h2>
+<p>When working with code, reference files strategically:</p>
+<ul>
+  <li>Paste specific functions, not entire files</li>
+  <li>Use <code>Ctrl+G</code> (Mac: <code>⌃G</code>) to edit in external editor for large prompts</li>
+  <li>Reference file paths instead of full content when possible</li>
+  <li>Ask Claude Code to read files directly from your project</li>
+</ul>
+
+<h2>7. Implement Memory Saving Hooks</h2>
+<p>Use Claude Code's hook system to save important information automatically:</p>
+<ul>
+  <li>Create hooks that save key decisions to memory</li>
+  <li>Auto-save architecture diagrams or design docs</li>
+  <li>Log important patterns discovered during development</li>
+  <li>Capture and store solutions to common problems</li>
+</ul>
+
+<h2>8. Use Plan Mode Strategically</h2>
+<p>Plan mode helps you save tokens on certain tasks:</p>
+<ul>
+  <li>Launch plan mode to get structured approach before implementation</li>
+  <li>Read the plan without executing to save context</li>
+  <li>Ask targeted follow-up questions about specific aspects</li>
+  <li>Implement based on the plan with fresh context</li>
+</ul>
+
+<h2>9. Summarize and Archive Completed Work</h2>
+<p>At the end of each conversation, create a summary:</p>
+<ul>
+  <li>Document what was accomplished</li>
+  <li>Save key decisions and trade-offs made</li>
+  <li>Note any outstanding issues or follow-ups</li>
+  <li>Store for reference in future conversations</li>
+</ul>
+
+<h2>10. Manage Memory for Long-Running Projects</h2>
+<p>For multi-week or multi-month projects:</p>
+<ul>
+  <li>Maintain a "project bible" document with overview and key info</li>
+  <li>Create weekly summaries of progress and decisions</li>
+  <li>Reference the summary at the start of new sessions</li>
+  <li>Keep technical decisions documented in code comments</li>
+</ul>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2025 Claude Guides. <a href="index.html">Back to Cheatsheet</a></p>
+</footer>
+
+</body>
+</html>
