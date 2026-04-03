@@ -369,6 +369,14 @@
     color: var(--text);
     text-decoration: none;
     margin-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 24px;
+    width: 24px;
   }
 
   .nav-menu {
@@ -474,7 +482,7 @@
 
   <nav class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo">Claude Code Cheatsheet</a>
+      <a href="index.html" class="logo"><img src="favicon.svg" alt="Claude Code logo" class="logo-img">Claude Code Cheatsheet</a>
       <ul class="nav-menu">
         <li><a href="index.html">Main</a></li>
         <li class="dropdown">
