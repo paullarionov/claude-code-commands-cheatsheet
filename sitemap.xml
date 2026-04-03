@@ -26,4 +26,10 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/best-practices.html"/>
   </url>
+  <url>
+    <loc>https://claude-guides.com/token-usage.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>
