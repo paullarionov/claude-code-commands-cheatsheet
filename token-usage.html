@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn strategies to optimize and reduce token usage in Claude Code. Master context management, token counting, prompt engineering, and cost optimization techniques.">
+<meta name="keywords" content="Claude Code, token usage, optimization, cost reduction, context management, token counting, prompt engineering">
+<meta name="author" content="Paul Larionov">
+<meta property="og:title" content="Reduce Token Usage and Optimize Costs in Claude Code">
+<meta property="og:description" content="Master token optimization in Claude Code. Learn cost-saving strategies, context management, and techniques to reduce token consumption while maintaining quality.">
+<meta property="og:type" content="article">
+<title>Reduce Token Usage and Optimize Costs — Claude Code Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong {
+    color: var(--accent);
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* ── Navigation ──────────────────────────────── */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-right: 40px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    min-width: 200px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--text);
+  }
+
+  .dropdown-menu li a:hover {
+    background: rgba(201, 100, 66, 0.1);
+    color: var(--accent);
+  }
+
+  /* Adjust body padding for fixed navbar */
+  main, [role="main"] {
+    padding-top: 50px;
+  }
+  body > header, body > section {
+    padding-top: 50px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .nav-menu {
+      gap: 15px;
+    }
+
+    .logo {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+
+    .nav-container {
+      padding: 10px 16px;
+    }
+
+    .dropdown-menu {
+      min-width: 150px;
+    }
+
+    .dropdown-menu li a {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  }
+
+  /* Focus visible styles for accessibility */
+  .nav-menu a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .dropdown-menu li a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Claude Code Cheatsheet</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Main</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
+          <ul class="dropdown-menu" id="articles-menu">
+            <li><a href="best-practices.html">Best Practices</a></li>
+            <li><a href="hidden-features.html">Hidden Features</a></li>
+            <li><a href="token-usage.html">Reduce Token Usage</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Reduce Token Usage and Optimize Costs in Claude Code</h1>
+  <p>Learn effective strategies to minimize token consumption, manage context efficiently, and reduce costs while maintaining code quality and AI assistant effectiveness.</p>
+</header>
+
+<main>
+<article>
+
+<h2>1. Understand Token Counting and Pricing</h2>
+<p>Before optimizing, understand how tokens work and impact your costs:</p>
+<ul>
+  <li><strong>Input tokens:</strong> Every character in your prompt and context counts</li>
+  <li><strong>Output tokens:</strong> Every character Claude generates costs tokens</li>
+  <li><strong>Pricing varies by model:</strong> Opus is more expensive than Sonnet, which is more expensive than Haiku</li>
+  <li>Use <code>claude --count-tokens</code> to estimate token usage before running tasks</li>
+  <li>Check your API dashboard regularly to track spending and identify patterns</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Run an analysis weekly to see which workflows consume the most tokens. You may discover quick wins for optimization.</div>
+
+<h2>2. Choose the Right Model for the Task</h2>
+<p>Not every task requires your most powerful model. Match model to complexity:</p>
+<ul>
+  <li><code>claude-haiku</code> — Fast, cheap, perfect for simple tasks like formatting, linting, basic edits</li>
+  <li><code>claude-sonnet</code> — Balanced speed and cost, ideal for most coding tasks</li>
+  <li><code>claude-opus</code> — Most capable but most expensive, reserve for complex reasoning and architecture</li>
+  <li>Use <code>Alt+P</code> to quickly switch models without restarting</li>
+  <li>Set your default model in <code>ANTHROPIC_MODEL</code> environment variable</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Try Haiku first. If it fails, upgrade to Sonnet. Most coding work completes with Haiku or Sonnet, saving 80%+ on costs.</div>
+
+<h2>3. Optimize Context with Strategic Truncation</h2>
+<p>Large files and full codebase context drive token costs up. Be selective:</p>
+<ul>
+  <li><strong>Read only relevant files:</strong> Don't load entire repositories unless necessary</li>
+  <li><strong>Use grep/search:</strong> Find specific patterns instead of reading full files</li>
+  <li><strong>Summarize context:</strong> Ask Claude to summarize a large file into key points</li>
+  <li><strong>Archive old conversations:</strong> Long conversations consume massive token counts</li>
+  <li><strong>Use file references:</strong> Instead of pasting entire files, use <code>@filename</code> syntax and let Claude fetch only what it needs</li>
+</ul>
+<div class="tip"><strong>⚠️ Warning:</strong> Including a 50KB file in context can cost as much as 10-20 shorter prompts. Be selective.</div>
+
+<h2>4. Leverage the /memory Command for Persistent Context</h2>
+<p>Store important context once, reuse it forever without re-sending tokens:</p>
+<ul>
+  <li>Use <code>/remember [key] [value]</code> to save important project context</li>
+  <li>Save architecture decisions, patterns, coding standards</li>
+  <li>Save frequently used code snippets and templates</li>
+  <li>View saved memory with <code>/memory</code></li>
+  <li>Update memory between sessions instead of re-explaining context each time</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Set up project memory once (5 minutes), then save thousands of tokens across all future sessions on that project.</div>
+
+<h2>5. Use Agents to Parallelize and Reduce Iterations</h2>
+<p>Running agents in parallel can actually save tokens by reducing back-and-forth:</p>
+<ul>
+  <li>Use <code>/general</code> agent to delegate complex tasks instead of doing everything yourself</li>
+  <li>Use <code>/explore</code> agent (Haiku-based) for fast codebase searches — saves tokens vs. manual exploration</li>
+  <li>Parallel agents finish work faster, reducing total iterations and token overhead</li>
+  <li>Set <code>--max-agent-turns 3</code> to limit agent exploration and prevent waste</li>
+</ul>
+
+<h2>6. Master Prompt Engineering for Efficiency</h2>
+<p>Precise prompts require fewer tokens and iterations:</p>
+<ul>
+  <li><strong>Be specific:</strong> "Add pagination to the users list" beats vague requests that require clarification</li>
+  <li><strong>Provide examples:</strong> Show input/output format instead of lengthy descriptions</li>
+  <li><strong>Set constraints:</strong> "Keep response under 100 lines" prevents verbose outputs</li>
+  <li><strong>Use structured formats:</strong> Ask for JSON or markdown instead of prose</li>
+  <li><strong>Front-load context:</strong> Include relevant context in the initial prompt instead of follow-up messages</li>
+</ul>
+
+<h2>7. Disable Extended Thinking When Not Needed</h2>
+<p>Extended thinking uses up to 10x more tokens for deep reasoning. Only enable when necessary:</p>
+<ul>
+  <li>Set <code>MAX_THINKING_TOKENS=0</code> to disable extended thinking by default</li>
+  <li>Enable only for complex architectural decisions or debugging</li>
+  <li>Use <code>--effort=low</code> for quick, simple tasks</li>
+  <li>Reserve high effort for truly complex problems</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Disable thinking by default. Enable it explicitly for specific tasks where you need deeper reasoning.</div>
+
+<h2>8. Reduce Output Verbosity</h2>
+<p>Longer outputs cost more tokens. Limit Claude's response length:</p>
+<ul>
+  <li>Set <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS=8000</code> for compact responses</li>
+  <li>Ask Claude to "be concise" or "summarize key changes"</li>
+  <li>Request code-only responses instead of explanations when you don't need them</li>
+  <li>Use <code>--raw</code> flag to get only the essential output</li>
+</ul>
+
+<h2>9. Batch Similar Tasks Together</h2>
+<p>Grouping tasks reduces per-task overhead and context setup:</p>
+<ul>
+  <li>Format 5 files at once instead of one at a time</li>
+  <li>Fix multiple related bugs in a single session instead of separate ones</li>
+  <li>Process multiple files with the same transformation together</li>
+  <li>Use <code>/batch</code> for massive parallel work across many agents</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Grouping 5 tasks can reduce overall token usage by 30-40% compared to doing them separately.</div>
+
+<h2>10. Use the --bare Flag for Scripted Workflows</h2>
+<p>The <code>--bare</code> flag skips loading unnecessary configs and MCPs:</p>
+<ul>
+  <li>Eliminates overhead of loading local config files</li>
+  <li>Skips LSP (Language Server Protocol) initialization</li>
+  <li>Reduces startup tokens for quick one-off tasks</li>
+  <li>Perfect for CI/CD pipelines and automated workflows</li>
+</ul>
+
+<h2>11. Cache Responses with Smart Session Management</h2>
+<p>Reuse prior session results instead of re-running expensive operations:</p>
+<ul>
+  <li>Save session results with <code>/save-session</code> to resume later</li>
+  <li>Use <code>claude --resume &lt;session-id&gt;</code> to continue without re-processing</li>
+  <li>Archive sessions with their context to avoid rebuilding</li>
+  <li>Keep your most-used project sessions active to reuse context</li>
+</ul>
+
+<h2>12. Monitor Spending and Set Alerts</h2>
+<p>Track costs regularly and set up monitoring:</p>
+<ul>
+  <li>Check your API billing dashboard weekly</li>
+  <li>Identify which models and tasks consume the most tokens</li>
+  <li>Set up alerts if spending exceeds expected levels</li>
+  <li>A/B test different approaches to measure token efficiency</li>
+</ul>
+
+<h2>13. Progressive Enhancement: Start Simple, Upgrade on Failure</h2>
+<p>The most effective cost optimization strategy:</p>
+<ol>
+  <li><strong>Start with Haiku:</strong> Try the cheapest model first</li>
+  <li><strong>Measure success:</strong> Did it work? Great, you're done</li>
+  <li><strong>Upgrade on failure:</strong> If Haiku fails, retry with Sonnet</li>
+  <li><strong>Reserve Opus:</strong> Only use Opus for tasks that require its reasoning capability</li>
+</ol>
+<p>This approach saves 80%+ on token costs because most coding tasks complete with cheaper models.</p>
+
+<h2>Real-World Token Optimization Example</h2>
+<p><strong>Scenario:</strong> Refactor a large codebase with 50 files.</p>
+<ul>
+  <li><strong>Naive approach:</strong> Paste all 50 files + full context + use Opus = 50,000+ tokens per task × 10 iterations = 500K tokens</li>
+  <li><strong>Optimized approach:</strong>
+    <ul>
+      <li>Use grep to identify only files that need changes (5 files)</li>
+      <li>Use Haiku for simple refactoring patterns</li>
+      <li>Batch similar changes together</li>
+      <li>Disable extended thinking</li>
+      <li>Result: 2,000 tokens × 3 iterations = 6K tokens (98% savings)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Token optimization isn't about being cheap — it's about being smart. The strategies in this guide will save you thousands of dollars annually while actually improving your workflow speed and code quality.</p>
+<p>Start with the three highest-impact strategies: (1) choose the right model, (2) optimize context, (3) use /memory for reusable context. These alone will cut your token usage in half.</p>
+
+</article>
+</main>
+
+<footer>
+  <p><strong>Last updated:</strong> April 3, 2026</p>
+  <p><a href="index.html">← Back to Claude Code Cheatsheet</a></p>
+</footer>
+
+</body>
+</html>
