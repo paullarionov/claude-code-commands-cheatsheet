@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Master prompt engineering for Claude Code. Learn techniques to write better prompts, get higher quality responses, and optimize AI-assisted development workflows.">
+<meta name="keywords" content="Claude Code, prompt engineering, AI prompts, prompt optimization, better prompts, Claude prompts, AI development">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://claude-guides.com/prompt-engineering.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/prompt-engineering.html">
+<meta property="og:title" content="Prompt Engineering Guide for Claude Code — Best Techniques">
+<meta property="og:description" content="Master prompt engineering techniques to write better prompts and get the best results from Claude Code. Learn advanced strategies for AI-assisted development.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/prompt-engineering.html">
+<meta name="twitter:title" content="Prompt Engineering Guide for Claude Code — Best Techniques">
+<meta name="twitter:description" content="Master prompt engineering to write better prompts and maximize AI-assisted development with Claude Code.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Prompt Engineering Guide for Claude Code">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2025-03-10T00:00:00Z">
+<meta property="article:modified_time" content="2025-04-03T00:00:00Z">
+<meta property="article:section" content="Guide">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Prompt Engineering">
+<meta property="article:tag" content="AI Development">
+
+<title>Prompt Engineering Guide for Claude Code — Best Techniques</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong {
+    color: var(--accent);
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* ── Navigation ──────────────────────────────── */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 24px;
+    width: 24px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    min-width: 200px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--text);
+  }
+
+  .dropdown-menu li a:hover {
+    background: rgba(201, 100, 66, 0.1);
+    color: var(--accent);
+  }
+
+  /* Adjust body padding for fixed navbar */
+  main, [role="main"] {
+    padding-top: 50px;
+  }
+  body > header, body > section {
+    padding-top: 50px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .nav-menu {
+      gap: 15px;
+    }
+
+    .logo {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+
+    .nav-container {
+      padding: 10px 16px;
+    }
+
+    .dropdown-menu {
+      min-width: 150px;
+    }
+
+    .dropdown-menu li a {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  }
+
+  /* Focus visible styles for accessibility */
+  .nav-menu a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .dropdown-menu li a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><img src="favicon.svg" alt="Claude Code logo" class="logo-img">Claude Code Cheatsheet</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Main</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
+          <ul class="dropdown-menu" id="articles-menu">
+            <li><a href="best-practices.html">Best Practices</a></li>
+            <li><a href="hidden-features.html">Hidden Features</a></li>
+            <li><a href="token-usage.html">Reduce Token Usage</a></li>
+            <li><a href="prompt-engineering.html">Prompt Engineering</a></li>
+            <li><a href="debugging-guide.html">Debugging Guide</a></li>
+            <li><a href="memory-management.html">Memory Management</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Prompt Engineering Guide for Claude Code</h1>
+  <p>Master the art of writing effective prompts to get better results from Claude Code and maximize your AI-assisted development productivity.</p>
+</header>
+
+<main>
+<article>
+
+<h2>1. Write Clear, Specific Prompts</h2>
+<p>The quality of your output directly depends on the clarity of your input. Vague prompts lead to generic responses, while specific prompts yield precise, actionable code.</p>
+<h3>Examples:</h3>
+<ul>
+  <li><strong>❌ Bad:</strong> "Write a function to process data"</li>
+  <li><strong>✅ Good:</strong> "Write a JavaScript function that validates email addresses using regex, handles edge cases like '+' in local part, and returns both validation status and error messages"</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Include context about your use case, expected input/output format, and any constraints or requirements upfront.</div>
+
+<h2>2. Provide Context and Examples</h2>
+<p>Claude Code performs better when you supply relevant context. Show examples of what you want, existing code structures, or related implementations.</p>
+<ul>
+  <li>Share relevant code snippets or file structures</li>
+  <li>Include examples of desired output format</li>
+  <li>Mention project constraints (performance, compatibility, style guides)</li>
+  <li>Reference existing patterns in your codebase</li>
+</ul>
+
+<h2>3. Use the Right Level of Detail</h2>
+<p>Balance is key—too much detail overwhelms Claude, too little creates ambiguity.</p>
+<ul>
+  <li>For simple tasks: Brief, direct prompts work best</li>
+  <li>For complex tasks: Break down into smaller sub-tasks</li>
+  <li>For code review: Specify what aspects to focus on (performance, security, readability)</li>
+  <li>For refactoring: Explain the goal, not just "make it better"</li>
+</ul>
+
+<h2>4. Leverage Plan Mode for Complex Tasks</h2>
+<p>Use <code>/launch-plan</code> before tackling complex problems. This gives you a structured approach before committing to changes:</p>
+<ul>
+  <li>Get a detailed breakdown of the implementation strategy</li>
+  <li>Review architectural decisions upfront</li>
+  <li>Identify potential issues before starting</li>
+  <li>Plan out the order of changes</li>
+</ul>
+
+<h2>5. Ask for Explanations and Documentation</h2>
+<p>Don't just ask for code—ask Claude Code to explain its reasoning:</p>
+<ul>
+  <li>Request comments for complex logic</li>
+  <li>Ask why certain approaches were chosen over alternatives</li>
+  <li>Request documentation for new functions or modules</li>
+  <li>Ask for potential gotchas or edge cases to watch for</li>
+</ul>
+
+<h2>6. Iterate and Refine</h2>
+<p>Great prompts aren't written once—they're refined through iteration:</p>
+<ul>
+  <li>Start with a general prompt, then narrow based on results</li>
+  <li>Ask follow-up questions to improve specific aspects</li>
+  <li>Use feedback from generated code to refine your next prompt</li>
+  <li>Save good prompt patterns for future reuse</li>
+</ul>
+
+<h2>7. Use Specific, Measurable Criteria</h2>
+<p>When asking for improvements, be specific about what "better" means:</p>
+<ul>
+  <li><strong>Performance:</strong> "Reduce execution time by at least 50%" or "Handle 100,000 items in under 1 second"</li>
+  <li><strong>Readability:</strong> "Follow Google Python style guide" or "Make variable names self-documenting"</li>
+  <li><strong>Security:</strong> "No SQL injection vulnerabilities" or "Sanitize all user inputs"</li>
+  <li><strong>Coverage:</strong> "Write tests that achieve 90% code coverage"</li>
+</ul>
+
+<h2>8. Leverage Agents for Research-Heavy Tasks</h2>
+<p>For tasks that require investigation or research, use agents with <code>/launch-agent</code>:</p>
+<ul>
+  <li>Let agents explore your codebase independently</li>
+  <li>Perfect for understanding existing implementations before making changes</li>
+  <li>Great for complex refactoring across multiple files</li>
+  <li>Ideal when you need investigation before implementation</li>
+</ul>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2025 Claude Guides. <a href="index.html">Back to Cheatsheet</a></p>
+</footer>
+
+</body>
+</html>
