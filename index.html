@@ -429,7 +429,10 @@
   }
 
   /* Adjust body padding for fixed navbar */
-  body {
+  main, [role="main"] {
+    padding-top: 50px;
+  }
+  body > header, body > section {
     padding-top: 50px;
   }
 
@@ -457,6 +460,17 @@
       font-size: 14px;
     }
   }
+
+  /* Focus visible styles for accessibility */
+  .nav-menu a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .dropdown-menu li a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 </style>
 </head>
 <body>
@@ -467,14 +481,14 @@
       <ul class="nav-menu">
         <li><a href="index.html">Main</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle">Articles</a>
-          <ul class="dropdown-menu">
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
+          <ul class="dropdown-menu" id="articles-menu">
             <li><a href="best-practices.html">Best Practices</a></li>
             <li><a href="hidden-features.html">Hidden Features</a></li>
             <li><a href="token-usage.html">Reduce Token Usage</a></li>
           </ul>
         </li>
-        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank">Contact</a></li>
+        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -1099,6 +1113,32 @@ function setOS(os) {
 
 // Auto-detect OS
 if (navigator.platform && !navigator.platform.startsWith('Mac')) setOS('win');
+</script>
+
+<script>
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+
+  if (dropdownToggle && dropdownMenu) {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+      dropdownToggle.setAttribute('aria-expanded', !isExpanded);
+      dropdownMenu.setAttribute('aria-hidden', isExpanded);
+    });
+
+    dropdownToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+        dropdownToggle.setAttribute('aria-expanded', !isExpanded);
+        dropdownMenu.setAttribute('aria-hidden', isExpanded);
+      } else if (e.key === 'Escape') {
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+        dropdownMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
 </script>
 
 </body>
