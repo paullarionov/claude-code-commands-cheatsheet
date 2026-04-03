@@ -412,7 +412,7 @@
     border: 1px solid var(--accent);
     border-radius: 4px;
     list-style: none;
-    margin: 8px 0 0 0;
+    margin: 0;
     padding: 8px 0;
     min-width: 200px;
   }
@@ -823,8 +823,8 @@
   </div>
   <div class="footer-group">
     <span class="footer-label">Credits:</span>
-    <a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot;
-    <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a>
+    <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a> &middot;
+    <a href="https://t.me/prompt_design" target="_blank" rel="noopener">Silikonoviy Meshok</a> 
   </div>
 </footer>
 
@@ -1117,8 +1117,11 @@ if (navigator.platform && !navigator.platform.startsWith('Mac')) setOS('win');
 <script>
   const dropdownToggle = document.querySelector('.dropdown-toggle');
   const dropdownMenu = document.querySelector('.dropdown-menu');
+  const dropdown = document.querySelector('.dropdown');
+  let hideTimeout;
 
-  if (dropdownToggle && dropdownMenu) {
+  if (dropdownToggle && dropdownMenu && dropdown) {
+    // Show menu on click
     dropdownToggle.addEventListener('click', (e) => {
       e.preventDefault();
       const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
@@ -1126,6 +1129,22 @@ if (navigator.platform && !navigator.platform.startsWith('Mac')) setOS('win');
       dropdownMenu.setAttribute('aria-hidden', isExpanded);
     });
 
+    // Show menu on hover
+    dropdown.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimeout);
+      dropdownToggle.setAttribute('aria-expanded', 'true');
+      dropdownMenu.setAttribute('aria-hidden', 'false');
+    });
+
+    // Hide menu on mouse leave with small delay
+    dropdown.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+        dropdownMenu.setAttribute('aria-hidden', 'true');
+      }, 150);
+    });
+
+    // Keyboard navigation
     dropdownToggle.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
