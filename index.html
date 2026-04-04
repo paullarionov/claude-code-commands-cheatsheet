@@ -524,6 +524,78 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
+
+  /* ── Toolbar with Outline Icons ──────────────── */
+  .icon-toolbar {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 999;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s ease;
+    color: var(--text-2);
+    font-size: 16px;
+  }
+
+  .icon-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(201, 100, 66, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .icon-btn:active {
+    transform: translateY(0);
+  }
+
+  .icon-btn.hidden {
+    display: none;
+  }
+
+  /* SVG Outline Icons */
+  .icon-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .icon-toolbar {
+      top: 50px;
+      right: 10px;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
+
+    .icon-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -550,6 +622,37 @@
       </ul>
     </div>
   </nav>
+
+  <!-- Icon Toolbar -->
+  <div class="icon-toolbar">
+    <button id="toolbar-theme" class="icon-btn" onclick="toggleNightTheme()" title="Toggle theme" aria-label="Toggle dark/light theme">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <button id="toolbar-share" class="icon-btn" onclick="shareCurrentPage()" title="Share page" aria-label="Share this page">
+      <svg viewBox="0 0 24 24">
+        <circle cx="18" cy="5" r="3"/>
+        <circle cx="6" cy="12" r="3"/>
+        <circle cx="18" cy="19" r="3"/>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+      </svg>
+    </button>
+    <button id="toolbar-bookmark" class="icon-btn" onclick="bookmarkPage()" title="Bookmark page" aria-label="Bookmark this page">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+      </svg>
+    </button>
+  </div>
 
 <header>
   <h1>Claude Code<em data-i18n="h1-sub">: Commands Cheatsheet</em></h1>
@@ -1213,6 +1316,11 @@ function bookmarkPage() {
   const url = window.location.href;
   const title = document.title;
 
+  // Check if bookmark API is supported
+  if (!isBookmarkSupported()) {
+    return;
+  }
+
   // Try native bookmark method
   if (window.sidebar && window.sidebar.addPanel) {
     // Firefox
@@ -1226,6 +1334,20 @@ function bookmarkPage() {
   }
 }
 
+// ── isBookmarkSupported ──────────────────────────────────────────────────────
+function isBookmarkSupported() {
+  const ua = navigator.userAgent.toLowerCase();
+
+  // Hide bookmark for mobile Safari (can't add bookmarks via API)
+  const isMobileSafari = /iphone|ipad|ipod/.test(ua) && /safari/.test(ua) && !/crios|fxios|opera/.test(ua);
+
+  if (isMobileSafari) {
+    return false;
+  }
+
+  return true;
+}
+
 // ── Load night theme preference on page load ────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
   const nightThemePreference = localStorage.getItem('nightTheme');
@@ -1233,6 +1355,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('night-theme');
     const btn = document.getElementById('btn-night');
     if (btn) btn.classList.add('active');
+  }
+
+  // Hide bookmark button if not supported
+  const bookmarkBtn = document.getElementById('toolbar-bookmark');
+  if (bookmarkBtn && !isBookmarkSupported()) {
+    bookmarkBtn.classList.add('hidden');
+  }
+
+  // Also hide bookmark button in old header controls if it exists
+  const oldBookmarkBtn = document.getElementById('btn-bookmark');
+  if (oldBookmarkBtn && !isBookmarkSupported()) {
+    oldBookmarkBtn.classList.add('hidden');
   }
 });
 </script>
