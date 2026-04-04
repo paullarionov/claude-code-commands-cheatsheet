@@ -91,6 +91,19 @@
     --key-border:   #E3D6C8;
   }
 
+  body.night-theme {
+    --bg:           #1A1A1A;
+    --surface:      #252525;
+    --border:       #3A3A3A;
+    --border-faint: #2A2A2A;
+    --text:         #E5E5E5;
+    --text-2:       #B8B8B8;
+    --text-3:       #808080;
+    --accent:       #E8956D;
+    --key-bg:       #333333;
+    --key-border:   #4A4A4A;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -155,6 +168,23 @@
     background: var(--text);
     color: var(--bg);
     box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  #btn-night, #btn-share, #btn-bookmark {
+    padding: 4px 10px;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  #btn-night.active {
+    background: var(--accent);
+    color: var(--surface);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  #btn-share:hover, #btn-bookmark:hover {
+    background: var(--border-faint);
+    color: var(--text);
   }
 
   .ctrl-sep {
@@ -512,6 +542,8 @@
             <li><a href="prompt-engineering.html">Prompt Engineering</a></li>
             <li><a href="debugging-guide.html">Debugging Guide</a></li>
             <li><a href="memory-management.html">Memory Management</a></li>
+            <li><a href="performance-optimization.html">Performance Optimization</a></li>
+            <li><a href="advanced-workflows.html">Advanced Workflows</a></li>
           </ul>
         </li>
         <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
@@ -525,6 +557,10 @@
   <div class="header-controls">
     <button id="btn-mac" class="active" onclick="setOS('mac')" data-i18n="btn-mac">Mac</button>
     <button id="btn-win" onclick="setOS('win')" data-i18n="btn-win">Windows</button>
+    <div class="ctrl-sep"></div>
+    <button id="btn-night" onclick="toggleNightTheme()" title="Toggle night theme" aria-label="Toggle night theme">🌙</button>
+    <button id="btn-share" onclick="shareCurrentPage()" title="Share this page" aria-label="Share this page">📤</button>
+    <button id="btn-bookmark" onclick="bookmarkPage()" title="Bookmark this page" aria-label="Bookmark this page">⭐</button>
     <div class="ctrl-sep"></div>
     <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
     <button id="btn-es" onclick="setLang('es')">ES</button>
@@ -1137,6 +1173,68 @@ function setOS(os) {
 
 // Default to Mac OS selection
 // Auto-detection disabled - Mac is default selection
+
+// ── toggleNightTheme ────────────────────────────────────────────────────────
+function toggleNightTheme() {
+  const isNightTheme = document.body.classList.toggle('night-theme');
+  const btn = document.getElementById('btn-night');
+
+  // Save preference to localStorage
+  localStorage.setItem('nightTheme', isNightTheme ? 'enabled' : 'disabled');
+
+  // Update button appearance
+  btn.classList.toggle('active', isNightTheme);
+}
+
+// ── shareCurrentPage ────────────────────────────────────────────────────────
+function shareCurrentPage() {
+  const url = window.location.href;
+  const title = document.title;
+
+  // Use native Share API if available
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      url: url
+    }).catch(err => console.log('Error sharing:', err));
+  } else {
+    // Fallback: Copy to clipboard
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Link copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+      alert('Failed to copy link');
+    });
+  }
+}
+
+// ── bookmarkPage ────────────────────────────────────────────────────────────
+function bookmarkPage() {
+  const url = window.location.href;
+  const title = document.title;
+
+  // Try native bookmark method
+  if (window.sidebar && window.sidebar.addPanel) {
+    // Firefox
+    window.sidebar.addPanel(title, url, '');
+  } else if (window.external && window.external.AddFavorite) {
+    // IE
+    window.external.AddFavorite(url, title);
+  } else {
+    // Fallback for other browsers
+    alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') > -1 ? 'Cmd+D' : 'Ctrl+D') + ' to bookmark this page');
+  }
+}
+
+// ── Load night theme preference on page load ────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  const nightThemePreference = localStorage.getItem('nightTheme');
+  if (nightThemePreference === 'enabled') {
+    document.body.classList.add('night-theme');
+    const btn = document.getElementById('btn-night');
+    if (btn) btn.classList.add('active');
+  }
+});
 </script>
 
 <script>

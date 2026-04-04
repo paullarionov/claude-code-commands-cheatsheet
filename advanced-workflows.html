@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Master advanced Claude Code workflows with agents, automation, background tasks, hooks, and scheduling. Build powerful development pipelines and automate repetitive tasks.">
+<meta name="keywords" content="Claude Code, advanced workflows, automation, agents, hooks, scheduling, background tasks, batch processing, MCP servers, worktrees">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://claude-guides.com/advanced-workflows.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/advanced-workflows.html">
+<meta property="og:title" content="Advanced Claude Code Workflows — Automation & Agents Guide">
+<meta property="og:description" content="Build powerful automation workflows in Claude Code. Learn agents, hooks, scheduling, background tasks, and advanced MCP configurations.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/advanced-workflows.html">
+<meta name="twitter:title" content="Advanced Claude Code Workflows — Automation & Agents Guide">
+<meta name="twitter:description" content="Master advanced workflows in Claude Code. Learn agents, hooks, scheduling, and background task automation.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Advanced Claude Code Workflows">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2025-04-04T00:00:00Z">
+<meta property="article:modified_time" content="2025-04-04T00:00:00Z">
+<meta property="article:section" content="Guide">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Workflows">
+<meta property="article:tag" content="Automation">
+
+<title>Advanced Claude Code Workflows — Automation & Agents Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  body.night-theme {
+    --bg:           #1A1A1A;
+    --surface:      #252525;
+    --border:       #3A3A3A;
+    --border-faint: #2A2A2A;
+    --text:         #E5E5E5;
+    --text-2:       #B8B8B8;
+    --text-3:       #808080;
+    --accent:       #E8956D;
+    --key-bg:       #333333;
+    --key-border:   #4A4A4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    color: var(--text);
+  }
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    color: var(--accent);
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.1);
+    border-left: 3px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.18s;
+  }
+
+  a:hover {
+    color: var(--text);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    font-size: 11px;
+    color: var(--text-3);
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* ── Navigation ──────────────────────────────── */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 24px;
+    width: 24px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    min-width: 200px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--text);
+  }
+
+  .dropdown-menu li a:hover {
+    background: rgba(201, 100, 66, 0.1);
+    color: var(--accent);
+  }
+
+  header {
+    margin-top: 60px;
+  }
+
+  @media (max-width: 640px) {
+    .nav-menu { gap: 20px; }
+    .logo { margin-right: 20px; }
+    .dropdown-menu { min-width: 150px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><img src="favicon.svg" alt="Claude Code logo" class="logo-img">Claude Code Cheatsheet</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Main</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
+          <ul class="dropdown-menu" id="articles-menu">
+            <li><a href="best-practices.html">Best Practices</a></li>
+            <li><a href="hidden-features.html">Hidden Features</a></li>
+            <li><a href="token-usage.html">Reduce Token Usage</a></li>
+            <li><a href="prompt-engineering.html">Prompt Engineering</a></li>
+            <li><a href="debugging-guide.html">Debugging Guide</a></li>
+            <li><a href="memory-management.html">Memory Management</a></li>
+            <li><a href="performance-optimization.html">Performance Optimization</a></li>
+            <li><a href="advanced-workflows.html">Advanced Workflows</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Advanced Claude Code Workflows</h1>
+  <p>Build powerful automation pipelines using agents, hooks, scheduling, and background task orchestration in Claude Code.</p>
+</header>
+
+<main>
+<article>
+
+<h2>1. Harness the Power of Agents</h2>
+<p>Agents are one of Claude Code's most powerful features. They allow Claude to autonomously handle complex, multi-step tasks. Understanding how to work with agents can dramatically improve your productivity.</p>
+<h3>What Agents Do</h3>
+<ul>
+  <li><strong>Autonomous execution:</strong> Agents can work on your behalf without constant input, handling complex workflows</li>
+  <li><strong>Tool integration:</strong> Agents have access to your file system, bash commands, git operations, and more</li>
+  <li><strong>Planning capability:</strong> Plan mode agents create detailed implementation strategies before making changes</li>
+  <li><strong>Error recovery:</strong> Agents can diagnose and fix errors without your intervention</li>
+</ul>
+<h3>Using Agents Effectively</h3>
+<ul>
+  <li><strong>Create agents for complex tasks:</strong> Use agents when a task requires multiple decision points or iterative refinement</li>
+  <li><strong>Monitor background agents:</strong> Launch agents with <code>⌃B</code> to run them in the background while you continue work</li>
+  <li><strong>Use the Agent tool:</strong> Deploy specialized agents (Explore, Plan, general-purpose) for different task types</li>
+  <li><strong>Leverage agent expertise:</strong> Agents like the "Explore" agent excel at searching codebases; let them handle these tasks</li>
+  <li><strong>Parallel agents:</strong> Run multiple agents in parallel for independent research or development tasks</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Use the Plan agent for architectural decisions and the Explore agent for codebase analysis. They're specialized and work faster than general-purpose agents on these tasks.</div>
+
+<h2>2. Configure Automation Hooks</h2>
+<p>Hooks are automated actions that run in response to events. They eliminate repetitive manual work by automating standard workflows.</p>
+<h3>Setting Up Hooks</h3>
+<ul>
+  <li>Edit your <code>settings.json</code> file to define hooks</li>
+  <li>Hooks execute before or after specific events (before git push, after tests fail, etc.)</li>
+  <li>Common hook events: <code>pre-commit</code>, <code>post-test</code>, <code>pre-push</code>, <code>on-error</code></li>
+</ul>
+<h3>Practical Hook Examples</h3>
+<ul>
+  <li><strong>Auto-lint on save:</strong> Run linters automatically after you save files</li>
+  <li><strong>Pre-push validation:</strong> Ensure tests pass before allowing git push</li>
+  <li><strong>Auto-format code:</strong> Format code using your project's standard automatically</li>
+  <li><strong>Generate documentation:</strong> Update API docs whenever you modify function signatures</li>
+  <li><strong>Security scanning:</strong> Run security checks automatically on modified files</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Keep hooks lightweight and fast. Heavy hooks slow down your workflow. For expensive operations, trigger them manually or use scheduled tasks instead.</div>
+
+<h2>3. Schedule Recurring Tasks</h2>
+<p>Automation isn't just about events—it's also about scheduling. Use Claude Code's scheduling capabilities to run tasks on a consistent cadence.</p>
+<h3>Scheduling Tasks</h3>
+<ul>
+  <li><strong>Use the /schedule command:</strong> Set up recurring tasks that run automatically</li>
+  <li><strong>Monitor scheduled tasks:</strong> Check the task list with <code>⌃T</code> to see what's scheduled</li>
+  <li><strong>Common scheduled tasks:</strong> Daily backups, weekly code reviews, periodic security audits, regular dependency updates</li>
+</ul>
+<h3>Scheduling Best Practices</h3>
+<ul>
+  <li><strong>Off-peak scheduling:</strong> Schedule heavy operations during off-hours to avoid impacting development</li>
+  <li><strong>Notifications:</strong> Configure alerts for failed scheduled tasks</li>
+  <li><strong>Batch operations:</strong> Group related tasks into a single schedule for efficiency</li>
+  <li><strong>Documentation:</strong> Document your scheduled tasks so your team knows what's running when</li>
+</ul>
+
+<h2>4. Master Background Task Execution</h2>
+<p>Run long-running operations without blocking your interactive workflow. Background tasks are essential for maintaining productivity.</p>
+<h3>Background Task Workflow</h3>
+<ul>
+  <li><strong>Launch tasks:</strong> Press <code>⌃B</code> to run operations in the background</li>
+  <li><strong>Continue working:</strong> You can keep coding while tests run, builds compile, or data processes</li>
+  <li><strong>Monitor progress:</strong> Check status anytime with <code>⌃T</code> to view the task list</li>
+  <li><strong>Finish all agents:</strong> Use <code>⌃F ×2</code> to wait for all background tasks to complete</li>
+</ul>
+<h3>Ideal Background Tasks</h3>
+<ul>
+  <li>Running test suites</li>
+  <li>Building projects</li>
+  <li>Deploying applications</li>
+  <li>Processing large files</li>
+  <li>Data analysis and reporting</li>
+  <li>Parallel code generation</li>
+</ul>
+
+<h2>5. Advanced MCP Configuration</h2>
+<p>Model Context Protocol (MCP) servers extend Claude Code's capabilities. Advanced MCP configuration enables powerful integrations.</p>
+<h3>MCP Setup Levels</h3>
+<ul>
+  <li><strong>Local scope:</strong> <code>.claude.json</code> in project root for project-specific MCP servers</li>
+  <li><strong>Project scope:</strong> <code>.mcp.json</code> for shared team configurations</li>
+  <li><strong>User scope:</strong> <code>~/.claude.json</code> for global, personal MCP servers</li>
+</ul>
+<h3>Advanced MCP Patterns</h3>
+<ul>
+  <li><strong>Database servers:</strong> Connect to SQL, NoSQL, or data warehouses directly</li>
+  <li><strong>API gateways:</strong> Provide Claude with access to internal APIs and services</li>
+  <li><strong>Git integration:</strong> Use specialized git MCP servers for advanced version control</li>
+  <li><strong>Code analysis tools:</strong> Integrate linters, type checkers, and analysis tools as MCP servers</li>
+  <li><strong>Documentation APIs:</strong> Connect to your documentation and knowledge bases</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Create project-specific MCP servers for common integrations (database, API, CI/CD). This makes onboarding new developers faster and ensures consistency.</div>
+
+<h2>6. Worktree Isolation for Parallel Development</h2>
+<p>Work on multiple features simultaneously without branch conflicts using git worktrees.</p>
+<h3>Worktree Advantages</h3>
+<ul>
+  <li><strong>Isolation:</strong> Each worktree is a separate working directory for different branches</li>
+  <li><strong>Parallel work:</strong> Work on multiple branches at the same time without switching</li>
+  <li><strong>Clean separation:</strong> Dependencies and build artifacts don't conflict between worktrees</li>
+  <li><strong>Agent support:</strong> Agents can work in isolated worktrees for experiments and testing</li>
+</ul>
+<h3>Using Worktrees Effectively</h3>
+<ul>
+  <li><strong>Experimental work:</strong> Use worktrees when Claude is making exploratory changes</li>
+  <li><strong>Safe testing:</strong> Test major refactors in a worktree before committing to main branch</li>
+  <li><strong>Parallel reviews:</strong> Review and fix multiple PRs simultaneously without blocking each other</li>
+</ul>
+
+<h2>7. Building a Complete Automation Workflow</h2>
+<p>Combine these techniques to create a complete, automated development experience:</p>
+<h3>Example Workflow: Continuous Code Quality</h3>
+<ol>
+  <li>Push code with <code>git push</code></li>
+  <li>Pre-push hook runs automated linting and tests</li>
+  <li>If tests fail, hook triggers automated debugging agent</li>
+  <li>Agent fixes issues and commits changes</li>
+  <li>Tests pass, code is merged automatically</li>
+  <li>Post-merge hook runs security scanning in background</li>
+  <li>Documentation is auto-generated from code</li>
+  <li>Deployment is triggered automatically</li>
+</ol>
+<h3>Example Workflow: Parallel Development with Agents</h3>
+<ol>
+  <li>Launch Explore agent in background to analyze codebase</li>
+  <li>Start Plan agent to design new feature in parallel</li>
+  <li>While agents work, you continue with manual refactoring</li>
+  <li>Review agent results and make decisions</li>
+  <li>Implement the planned feature while background tests run</li>
+  <li>All tasks complete in fraction of linear time</li>
+</ol>
+
+<h2>8. Automation Checklist</h2>
+<ul>
+  <li>✅ Configure project-specific MCP servers in <code>.claude.json</code></li>
+  <li>✅ Set up hooks for common validation tasks in <code>settings.json</code></li>
+  <li>✅ Use agents for complex, multi-step tasks</li>
+  <li>✅ Run tests and builds in background with <code>⌃B</code></li>
+  <li>✅ Schedule routine maintenance tasks with <code>/schedule</code></li>
+  <li>✅ Monitor tasks with <code>⌃T</code> (task list toggle)</li>
+  <li>✅ Use worktrees for parallel development when agents explore</li>
+  <li>✅ Document your automation setup for team consistency</li>
+  <li>✅ Periodically review and optimize hooks to keep them fast</li>
+  <li>✅ Leverage specialized agents (Plan, Explore) over general agents</li>
+</ul>
+
+</article>
+</main>
+
+<footer id="footer">
+© 2025 Claude Guides. Built with ❤️ for developers using Claude Code.
+</footer>
+
+<script>
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+  const dropdown = document.querySelector('.dropdown');
+  let hideTimeout;
+
+  if (dropdownToggle && dropdownMenu && dropdown) {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+      dropdownToggle.setAttribute('aria-expanded', !isExpanded);
+      dropdownMenu.style.display = isExpanded ? 'none' : 'block';
+    });
+
+    dropdown.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        dropdownMenu.style.display = 'none';
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }, 200);
+    });
+
+    dropdown.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+  }
+
+  // Load night theme preference on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const nightThemePreference = localStorage.getItem('nightTheme');
+    if (nightThemePreference === 'enabled') {
+      document.body.classList.add('night-theme');
+    }
+  });
+</script>
+
+</body>
+</html>

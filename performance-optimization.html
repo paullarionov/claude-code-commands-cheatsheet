@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Optimize Claude Code performance with caching strategies, model selection, token efficiency, and fast mode. Learn how to reduce latency and costs while maximizing output quality.">
+<meta name="keywords" content="Claude Code, performance optimization, caching, token efficiency, fast mode, model selection, latency reduction, API optimization">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://claude-guides.com/performance-optimization.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/performance-optimization.html">
+<meta property="og:title" content="Claude Code Performance Optimization — Speed & Cost Guide">
+<meta property="og:description" content="Master performance optimization in Claude Code. Learn caching, token efficiency, fast mode, and model selection to reduce latency and costs.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/performance-optimization.html">
+<meta name="twitter:title" content="Claude Code Performance Optimization — Speed & Cost Guide">
+<meta name="twitter:description" content="Optimize Claude Code for speed and cost. Master caching, token efficiency, and model selection strategies.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Claude Code Performance Optimization">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2025-04-04T00:00:00Z">
+<meta property="article:modified_time" content="2025-04-04T00:00:00Z">
+<meta property="article:section" content="Guide">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Performance">
+<meta property="article:tag" content="Optimization">
+
+<title>Claude Code Performance Optimization — Speed & Cost Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  body.night-theme {
+    --bg:           #1A1A1A;
+    --surface:      #252525;
+    --border:       #3A3A3A;
+    --border-faint: #2A2A2A;
+    --text:         #E5E5E5;
+    --text-2:       #B8B8B8;
+    --text-3:       #808080;
+    --accent:       #E8956D;
+    --key-bg:       #333333;
+    --key-border:   #4A4A4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    color: var(--text);
+  }
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    color: var(--accent);
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.1);
+    border-left: 3px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.18s;
+  }
+
+  a:hover {
+    color: var(--text);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    font-size: 11px;
+    color: var(--text-3);
+  }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* ── Navigation ──────────────────────────────── */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 24px;
+    width: 24px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    min-width: 200px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--text);
+  }
+
+  .dropdown-menu li a:hover {
+    background: rgba(201, 100, 66, 0.1);
+    color: var(--accent);
+  }
+
+  header {
+    margin-top: 60px;
+  }
+
+  @media (max-width: 640px) {
+    .nav-menu { gap: 20px; }
+    .logo { margin-right: 20px; }
+    .dropdown-menu { min-width: 150px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><img src="favicon.svg" alt="Claude Code logo" class="logo-img">Claude Code Cheatsheet</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Main</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
+          <ul class="dropdown-menu" id="articles-menu">
+            <li><a href="best-practices.html">Best Practices</a></li>
+            <li><a href="hidden-features.html">Hidden Features</a></li>
+            <li><a href="token-usage.html">Reduce Token Usage</a></li>
+            <li><a href="prompt-engineering.html">Prompt Engineering</a></li>
+            <li><a href="debugging-guide.html">Debugging Guide</a></li>
+            <li><a href="memory-management.html">Memory Management</a></li>
+            <li><a href="performance-optimization.html">Performance Optimization</a></li>
+            <li><a href="advanced-workflows.html">Advanced Workflows</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+<header>
+  <h1>Claude Code Performance Optimization</h1>
+  <p>Reduce latency, minimize costs, and maximize efficiency with proven performance optimization techniques for Claude Code.</p>
+</header>
+
+<main>
+<article>
+
+<h2>1. Leverage Prompt Caching for Repeated Tasks</h2>
+<p>Prompt caching is one of the most effective ways to reduce costs and latency. When you send the same context repeatedly, Claude caches it and processes only the new parts, significantly reducing token usage.</p>
+<ul>
+  <li><strong>Reuse large context:</strong> If you frequently analyze the same codebase or document, keep it in your context instead of re-submitting it</li>
+  <li><strong>Session continuity:</strong> Use <code>/resume</code> to pick up previous sessions without losing cached context</li>
+  <li><strong>Batch similar tasks:</strong> Group similar questions to maximize cache hits and minimize redundant processing</li>
+  <li><strong>MCP servers:</strong> Configure persistent MCP servers to maintain context across multiple prompts</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Caching is automatic in Claude Code sessions. The longer you stay in a session, the more efficient your interactions become as context accumulates in the cache.</div>
+
+<h2>2. Choose the Right Model for Your Task</h2>
+<p>Claude Code gives you multiple model options, each optimized for different use cases. Selecting the right model directly impacts both speed and cost:</p>
+<h3>Fast Mode (⚡ Recommended for Quick Tasks)</h3>
+<ul>
+  <li>Enable with <code>/fast on</code></li>
+  <li>Uses faster inference with optimized latency</li>
+  <li>Perfect for simple code generation, formatting, and quick questions</li>
+  <li>Reduces response time by 40-60% for straightforward tasks</li>
+</ul>
+<h3>Balanced Mode (Default)</h3>
+<ul>
+  <li>Best for general development tasks</li>
+  <li>Good balance between speed and output quality</li>
+  <li>Use for code reviews, debugging, and architecture decisions</li>
+</ul>
+<h3>High Effort (For Complex Work)</h3>
+<ul>
+  <li>Use for deep analysis, complex refactoring, or critical decisions</li>
+  <li>Slower response but superior output quality</li>
+  <li>Worth the wait for important architectural changes</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Switch models mid-session with <code>/effort</code> based on task complexity. Start with fast mode for exploration, then switch to high effort for final implementation.</div>
+
+<h2>3. Optimize Token Usage</h2>
+<p>Tokens directly affect both speed and cost. Minimizing unnecessary tokens improves performance across the board:</p>
+<ul>
+  <li><strong>Clear context strategically:</strong> Use <code>/clear</code> when you're starting a new task to avoid processing irrelevant conversation history</li>
+  <li><strong>Use compact mode:</strong> Run <code>/compact [focus]</code> to compress your conversation while keeping relevant context</li>
+  <li><strong>Provide precise instructions:</strong> Clear, concise prompts require fewer tokens to process than vague or rambling requests</li>
+  <li><strong>Avoid unnecessary file includes:</strong> Only mention files you actually need in your conversation</li>
+  <li><strong>Use file mentions efficiently:</strong> Reference files with <code>@file</code> syntax instead of pasting entire contents when possible</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Check token usage with verbose output (<code>⌃O</code>) to identify where tokens are being consumed. This helps you refine your workflow for efficiency.</div>
+
+<h2>4. Parallel Execution and Background Tasks</h2>
+<p>Don't let lengthy operations block your workflow. Claude Code supports parallel execution to maximize efficiency:</p>
+<ul>
+  <li><strong>Background tasks:</strong> Use <code>⌃B</code> to run time-consuming operations in the background while you continue working</li>
+  <li><strong>Finish all agents:</strong> Press <code>⌃F ×2</code> to complete all background agents at once instead of waiting for individual completions</li>
+  <li><strong>Task list:</strong> Toggle <code>⌃T</code> to view all running tasks and their status</li>
+  <li><strong>Scheduling:</strong> Use <code>/schedule</code> to run tasks on a recurring basis automatically</li>
+</ul>
+<div class="tip"><strong>💡 Pro Tip:</strong> Launch tests, builds, and analysis in the background while you continue coding. This keeps your workflow flowing without waiting for long-running processes.</div>
+
+<h2>5. Optimize for Network Latency</h2>
+<p>While you can't control network speed, you can optimize how you interact with Claude Code:</p>
+<ul>
+  <li><strong>Batch requests:</strong> Group multiple questions into single prompts to reduce API calls</li>
+  <li><strong>Use fast mode for connectivity issues:</strong> If you have unstable internet, fast mode has better resilience</li>
+  <li><strong>Work offline when possible:</strong> Many Claude Code operations (file editing, local bash commands) don't require network access</li>
+  <li><strong>Cache aggressively:</strong> Stay in long sessions to maximize cached context and reduce round-trip times</li>
+</ul>
+
+<h2>6. Monitor and Debug Performance</h2>
+<p>Understanding where time is spent helps you optimize effectively:</p>
+<ul>
+  <li><strong>Verbose output:</strong> Toggle <code>⌃O</code> (Mac) or <code>Ctrl+O</code> (Windows) to see detailed timing information</li>
+  <li><strong>Check session info:</strong> Use <code>/info</code> to see current model, memory usage, and session statistics</li>
+  <li><strong>Monitor agent performance:</strong> Track background agent timing to identify bottlenecks</li>
+  <li><strong>Review cache metrics:</strong> Pay attention to how much context is being cached vs. re-processed</li>
+</ul>
+
+<h2>7. Best Practices Checklist</h2>
+<ul>
+  <li>✅ Stay in sessions longer to maximize caching benefits</li>
+  <li>✅ Use fast mode (<code>/fast on</code>) for simple, routine tasks</li>
+  <li>✅ Batch related questions into single prompts</li>
+  <li>✅ Use <code>/compact</code> before starting new major sections of work</li>
+  <li>✅ Run tests and builds in background with <code>⌃B</code></li>
+  <li>✅ Clear conversation history when switching contexts with <code>/clear</code></li>
+  <li>✅ Monitor performance with verbose output <code>⌃O</code></li>
+  <li>✅ Choose the right effort level for each task</li>
+</ul>
+
+</article>
+</main>
+
+<footer id="footer">
+© 2025 Claude Guides. Built with ❤️ for developers using Claude Code.
+</footer>
+
+<script>
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+  const dropdown = document.querySelector('.dropdown');
+  let hideTimeout;
+
+  if (dropdownToggle && dropdownMenu && dropdown) {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+      dropdownToggle.setAttribute('aria-expanded', !isExpanded);
+      dropdownMenu.style.display = isExpanded ? 'none' : 'block';
+    });
+
+    dropdown.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        dropdownMenu.style.display = 'none';
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }, 200);
+    });
+
+    dropdown.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+  }
+
+  // Load night theme preference on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const nightThemePreference = localStorage.getItem('nightTheme');
+    if (nightThemePreference === 'enabled') {
+      document.body.classList.add('night-theme');
+    }
+  });
+</script>
+
+</body>
+</html>
