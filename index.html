@@ -170,22 +170,6 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12);
   }
 
-  #btn-night, #btn-share, #btn-bookmark {
-    padding: 4px 10px;
-    font-size: 14px;
-    letter-spacing: 0;
-  }
-
-  #btn-night.active {
-    background: var(--accent);
-    color: var(--surface);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-  }
-
-  #btn-share:hover, #btn-bookmark:hover {
-    background: var(--border-faint);
-    color: var(--text);
-  }
 
   .ctrl-sep {
     width: 1px;
@@ -660,10 +644,6 @@
   <div class="header-controls">
     <button id="btn-mac" class="active" onclick="setOS('mac')" data-i18n="btn-mac">Mac</button>
     <button id="btn-win" onclick="setOS('win')" data-i18n="btn-win">Windows</button>
-    <div class="ctrl-sep"></div>
-    <button id="btn-night" onclick="toggleNightTheme()" title="Toggle night theme" aria-label="Toggle night theme">🌙</button>
-    <button id="btn-share" onclick="shareCurrentPage()" title="Share this page" aria-label="Share this page">📤</button>
-    <button id="btn-bookmark" onclick="bookmarkPage()" title="Bookmark this page" aria-label="Bookmark this page">⭐</button>
     <div class="ctrl-sep"></div>
     <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
     <button id="btn-es" onclick="setLang('es')">ES</button>
