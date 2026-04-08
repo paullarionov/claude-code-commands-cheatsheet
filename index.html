@@ -462,9 +462,14 @@
     min-width: 200px;
   }
 
-  /* Multi-column layout for wider screens */
+  /* Show menu when aria-expanded is true */
+  .dropdown-menu[aria-hidden="false"] {
+    display: block;
+  }
+
+  /* Multi-column layout for wider screens when visible */
   @media (min-width: 1024px) {
-    .dropdown-menu {
+    .dropdown-menu[aria-hidden="false"] {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 0;
@@ -626,7 +631,7 @@
         <li><a href="cheatsheet-landing-page.html">Features</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" aria-controls="articles-menu">Articles</a>
-          <ul class="dropdown-menu" id="articles-menu">
+          <ul class="dropdown-menu" id="articles-menu" aria-hidden="true">
             <li><a href="best-practices.html">Best Practices</a></li>
             <li><a href="hidden-features.html">Hidden Features</a></li>
             <li><a href="token-usage.html">Reduce Token Usage</a></li>
