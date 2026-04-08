@@ -458,18 +458,40 @@
     border-radius: 4px;
     list-style: none;
     margin: 0;
-    padding: 8px 0;
+    padding: 8px;
     min-width: 200px;
+  }
+
+  /* Multi-column layout for wider screens */
+  @media (min-width: 1024px) {
+    .dropdown-menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      min-width: 400px;
+      padding: 8px;
+    }
   }
 
   .dropdown:hover .dropdown-menu {
     display: block;
   }
 
+  @media (min-width: 1024px) {
+    .dropdown:hover .dropdown-menu {
+      display: grid;
+    }
+  }
+
+  .dropdown-menu li {
+    margin: 0;
+  }
+
   .dropdown-menu li a {
     display: block;
     padding: 8px 16px;
     color: var(--text);
+    white-space: nowrap;
   }
 
   .dropdown-menu li a:hover {
@@ -499,11 +521,14 @@
 
     .dropdown-menu {
       min-width: 150px;
+      display: block !important;
+      grid-template-columns: none;
     }
 
     .dropdown-menu li a {
       padding: 6px 12px;
       font-size: 14px;
+      white-space: normal;
     }
   }
 
