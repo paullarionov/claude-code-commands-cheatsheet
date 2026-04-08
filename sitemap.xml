@@ -32,4 +32,46 @@
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://claude-guides.com/cheatsheet-landing-page.html</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/cheatsheet-landing-page.html"/>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/prompt-engineering.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/prompt-engineering.html"/>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/debugging-guide.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/debugging-guide.html"/>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/memory-management.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/memory-management.html"/>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/performance-optimization.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/performance-optimization.html"/>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/advanced-workflows.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/advanced-workflows.html"/>
+  </url>
 </urlset>
