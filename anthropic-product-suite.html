@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Anthropic Product Suite 2026 comparison guide. Understand the differences between Claude AI, Claude Code, and Claude Cowork.">
+<meta name="keywords" content="Claude AI, Claude Code, Claude Cowork, Anthropic, product comparison, guide">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://claude-guides.com/anthropic-product-suite.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://claude-guides.com/anthropic-product-suite.html">
+<meta property="og:title" content="Anthropic Product Suite 2026 Guide — Claude AI vs Code vs Cowork">
+<meta property="og:description" content="Complete guide to Anthropic's product suite. Compare Claude AI, Claude Code, and Claude Cowork to find the right tool for your needs.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:title" content="Anthropic Product Suite 2026 Guide">
+<meta name="twitter:description" content="Compare Claude AI, Claude Code, and Claude Cowork.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+
+<title>Anthropic Product Suite 2026 Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --accent-light: #F4E4DA;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  body.night-theme {
+    --bg:           #1A1A1A;
+    --surface:      #252525;
+    --border:       #3A3A3A;
+    --border-faint: #2A2A2A;
+    --text:         #E5E5E5;
+    --text-2:       #B8B8B8;
+    --text-3:       #808080;
+    --accent:       #E8956B;
+    --accent-light: #3D2818;
+    --key-bg:       #3A3A3A;
+    --key-border:   #4A4A4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Navbar ─────────────────────────────────── */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  body.night-theme .navbar {
+    background-color: rgba(37, 37, 37, 0.95);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.18s;
+  }
+
+  .logo:hover {
+    color: var(--accent);
+  }
+
+  .logo-img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.18s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    list-style: none;
+    min-width: 200px;
+    padding: 8px 0;
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.18s;
+  }
+
+  .dropdown-menu li a:hover {
+    background: var(--border-faint);
+    color: var(--accent);
+  }
+
+  /* ── Icon Toolbar ────────────────────────────── */
+  .icon-toolbar {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 999;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+    color: var(--text);
+  }
+
+  .icon-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .icon-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  header {
+    text-align: center;
+    padding: 48px 24px 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  header p {
+    font-size: 15px;
+    color: var(--text-2);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── Main Content ────────────────────────────── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+
+  /* ── Product Comparison Grid ────────────────── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.22s ease;
+  }
+
+  .product-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(201, 100, 66, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .product-header {
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--border-faint);
+    text-align: center;
+  }
+
+  .product-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+    font-size: 32px;
+  }
+
+  .product-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .product-subtitle {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .product-content {
+    padding: 24px;
+  }
+
+  .section {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .section-content {
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin: 0;
+  }
+
+  .feature-list li {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+    color: var(--text-2);
+    font-size: 12px;
+  }
+
+  .feature-list li:before {
+    content: "•";
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .pricing-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border-faint);
+  }
+
+  .pricing-row:last-child {
+    border-bottom: none;
+  }
+
+  .pricing-label {
+    color: var(--text-2);
+  }
+
+  .pricing-value {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── Pro Tip Section ────────────────────────── */
+  .pro-tip {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 12px;
+  }
+
+  .pro-tip-title {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .pro-tip-content {
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* ── Comparison Table ────────────────────────– */
+  .comparison-section {
+    margin: 48px 0;
+  }
+
+  .comparison-section h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+
+  .comparison-table {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  thead {
+    background: var(--border-faint);
+  }
+
+  th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-faint);
+    color: var(--text-2);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Responsive ──────────────────────────────– */
+  @media (max-width: 768px) {
+    header h1 { font-size: 28px; }
+    header p { font-size: 13px; }
+    .nav-menu { gap: 16px; }
+    .icon-toolbar { display: none; }
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card { padding: 0; }
+    .comparison-table { font-size: 11px; }
+    td, th { padding: 10px 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+
+  <!-- Icon Toolbar -->
+  <div class="icon-toolbar">
+    <button id="toolbar-theme" class="icon-btn" onclick="toggleNightTheme()" title="Toggle theme" aria-label="Toggle dark/light theme">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <button id="toolbar-share" class="icon-btn" onclick="shareCurrentPage()" title="Share page" aria-label="Share this page">
+      <svg viewBox="0 0 24 24">
+        <circle cx="18" cy="5" r="3"/>
+        <circle cx="6" cy="12" r="3"/>
+        <circle cx="18" cy="19" r="3"/>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+      </svg>
+    </button>
+    <button id="toolbar-bookmark" class="icon-btn" onclick="bookmarkPage()" title="Bookmark page" aria-label="Bookmark this page">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+      </svg>
+    </button>
+  </div>
+
+<header>
+  <h1>Anthropic Product Suite 2026 Guide</h1>
+  <p>Understand the differences between Claude AI, Claude Code, and Claude Cowork to choose the right tool for your needs.</p>
+</header>
+
+<main>
+
+  <!-- Product Comparison Cards -->
+  <div class="products-grid">
+
+    <!-- Claude AI Card -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-icon">🧠</div>
+        <div class="product-name">Claude AI</div>
+        <div class="product-subtitle">The Thinking Partner</div>
+      </div>
+      <div class="product-content">
+
+        <div class="section">
+          <div class="section-title">What it is</div>
+          <div class="section-content">A conversational AI assistant for reasoning, writing, research, and knowledge — via web, mobile, or desktop chat.</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Superpower</div>
+          <div class="section-content">Deep reasoning, long-form writing, nuanced analysis, and creative output with context memory.</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Use Cases</div>
+          <ul class="feature-list">
+            <li>Draft blog posts, newsletters & LinkedIn content</li>
+            <li>Brainstorm ideas & positioning</li>
+            <li>Summarize complex documents & research</li>
+            <li>Build prompts, rewrite copy, create templates</li>
+            <li>Ask questions, get detailed answers</li>
+            <li>Create slides via Gamma connector</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Not For</div>
+          <ul class="feature-list">
+            <li>Direct codebase edits or file system access</li>
+            <li>Bulk file processing across your OS</li>
+            <li>Bulk file processing across your OS</li>
+          </ul>
+        </div>
+
+        <div class="pro-tip">
+          <div class="pro-tip-title">Pro Tip</div>
+          <div class="pro-tip-content">Upload your writing style as a .md file to a Project. Start every chat: "Read my files first, then ask clarifying questions." Claude writes in your voice, not AI's.</div>
+        </div>
+
+        <div class="section" style="margin-top: 20px;">
+          <div class="section-title">Key Features</div>
+          <ul class="feature-list">
+            <li>Projects — persistent memory across all chats in a workspace</li>
+            <li>50+ Connectors — Slack, Google Drive, Notion, Figma & more</li>
+            <li>Extended Thinking — forces deeper reasoning on hard tasks</li>
+            <li>Plugins — role-specific specialists: sales, legal, finance, etc.</li>
+            <li>Artifacts — builds interactive HTML tools inside chat</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Pricing</div>
+          <div class="pricing-row">
+            <span class="pricing-label">Free</span>
+            <span class="pricing-value">Limited - claude.ai</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Pro</span>
+            <span class="pricing-value">$20/mo - Full access</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Max</span>
+            <span class="pricing-value">$100-$200/mo - Heavy usage</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Team</span>
+            <span class="pricing-value">$30/user/mo - Shared workspaces</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Claude Code Card -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-icon">⚙️</div>
+        <div class="product-name">Claude Code</div>
+        <div class="product-subtitle">The Engineering Agent</div>
+      </div>
+      <div class="product-content">
+
+        <div class="section">
+          <div class="section-title">What it is</div>
+          <div class="section-content">An autonomous CLI coding agent that reads, edits, and executes directly on your local codebase and dev environment.</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Superpower</div>
+          <div class="section-content">Understands multi-file codebases with full context, executes terminal commands, runs tests, and ships working code-end-to-end.</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Use Cases</div>
+          <ul class="feature-list">
+            <li>Debug, fix, and refactor across large repos</li>
+            <li>Implement new features from a spec</li>
+            <li>Write and run test suites automatically</li>
+            <li>Code review & explain legacy code</li>
+            <li>Set up CI/CD, configs & build scripts</li>
+            <li>Prototype & scaffold entire projects</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Not For</div>
+          <ul class="feature-list">
+            <li>High-level strategy or ideation work</li>
+            <li>Managing content or narrative writing</li>
+            <li>Non-technical operational workflows</li>
+          </ul>
+        </div>
+
+        <div class="pro-tip">
+          <div class="pro-tip-title">Pro Tip</div>
+          <div class="pro-tip-content">Add a claude.md file to your repo root. Claude reads it every session — include your architecture decisions, code conventions, and what NOT to touch.</div>
+        </div>
+
+        <div class="section" style="margin-top: 20px;">
+          <div class="section-title">Key Features</div>
+          <ul class="feature-list">
+            <li>Full codebase access — reads every file, understands context</li>
+            <li>Terminal execution — runs shell commands, tests & build tools</li>
+            <li>Computer use — clicks, types, opens dev tools on your screen</li>
+            <li>Dispatch — assign tasks from your phone, get results on desktop</li>
+            <li>MCP — integrates with GitHub, Jira, connectors & Linear & more</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Pricing</div>
+          <div class="pricing-row">
+            <span class="pricing-label">Pro</span>
+            <span class="pricing-value">$20/mo - Included (limited)</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Max</span>
+            <span class="pricing-value">$100-$200/mo - Extended usage</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">API</span>
+            <span class="pricing-value">Usage-based - claude.ai/code</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Enterprise</span>
+            <span class="pricing-value">Self-serve or custom</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Claude Cowork Card -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-icon">🤖</div>
+        <div class="product-name">Claude Cowork</div>
+        <div class="product-subtitle">The Workflow Automator</div>
+      </div>
+      <div class="product-content">
+
+        <div class="section">
+          <div class="section-title">What it is</div>
+          <div class="section-content">A desktop automation agent that manages files, apps, and repetitive operational workflows — living directly on your computer.</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Superpower</div>
+          <div class="section-content">Executes cross-app and file-system tasks at scale — including folders, processing documents, syncing data and automating ops flows.</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Use Cases</div>
+          <ul class="feature-list">
+            <li>Process bulk receipts into expense reports</li>
+            <li>Analyze uploaded Excel files & upgrade them</li>
+            <li>Read entire ZIP folders & synthesize content</li>
+            <li>Create research briefs from multiple files</li>
+            <li>Build data Gamma from Drive docs</li>
+            <li>Batch file organization & data syncing</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Not For</div>
+          <ul class="feature-list">
+            <li>Complex reasoning or architectural thinking</li>
+            <li>Direct code editing in development repos</li>
+            <li>Strategic ideation or long-form writing</li>
+          </ul>
+        </div>
+
+        <div class="pro-tip">
+          <div class="pro-tip-title">Pro Tip</div>
+          <div class="pro-tip-content">Use Dispatch to assign tasks from your phone. Claude works on your desktop while you're away, and notifications appear when done. Zero babysitting required.</div>
+        </div>
+
+        <div class="section" style="margin-top: 20px;">
+          <div class="section-title">Key Features</div>
+          <ul class="feature-list">
+            <li>Scheduled — runs daily/weekly automations on your behalf</li>
+            <li>Computer use — opens apps, clicks UI, browses web autonomously</li>
+            <li>Sub-agent coordination — breaks tasks into parallel workstreams</li>
+            <li>Dispatch (mobile) — assign tasks from your phone, work runs on desktop</li>
+            <li>Office outputs — delivers polished .xlsx, .pptx, .docx files</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Pricing</div>
+          <div class="pricing-row">
+            <span class="pricing-label">Pro</span>
+            <span class="pricing-value">$20/mo - Included (limited)</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Max</span>
+            <span class="pricing-value">$100-$200/mo - Heavy usage</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Team</span>
+            <span class="pricing-value">$30/user/mo - Org workflows</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Note</span>
+            <span class="pricing-value">Uses more quota than Chat</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Detailed Comparison Table -->
+  <div class="comparison-section">
+    <h2>Detailed Feature Comparison</h2>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Claude AI</th>
+            <th>Claude Code</th>
+            <th>Claude Cowork</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Conversational Interface</td>
+            <td>✓ Native</td>
+            <td>✓ Terminal-based</td>
+            <td>✓ Desktop app</td>
+          </tr>
+          <tr>
+            <td>Full Codebase Access</td>
+            <td>—</td>
+            <td>✓ Yes</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Terminal & Test Execution</td>
+            <td>—</td>
+            <td>✓ Yes</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Computer Use (Click/Type)</td>
+            <td>—</td>
+            <td>✓ Yes</td>
+            <td>✓ Yes</td>
+          </tr>
+          <tr>
+            <td>File System Access</td>
+            <td>Limited (via connectors)</td>
+            <td>✓ Full repo access</td>
+            <td>✓ Full computer</td>
+          </tr>
+          <tr>
+            <td>Scheduled Automation</td>
+            <td>—</td>
+            <td>—</td>
+            <td>✓ Daily/weekly tasks</td>
+          </tr>
+          <tr>
+            <td>Mobile Dispatch</td>
+            <td>—</td>
+            <td>✓ Yes</td>
+            <td>✓ Yes</td>
+          </tr>
+          <tr>
+            <td>Projects & Memory</td>
+            <td>✓ Persistent</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Extended Thinking</td>
+            <td>✓ Available</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>50+ App Connectors</td>
+            <td>✓ Yes</td>
+            <td>✓ MCP integrations</td>
+            <td>✓ Native integration</td>
+          </tr>
+          <tr>
+            <td>Real-time Collaboration</td>
+            <td>✓ Teams</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>Anthropic Product Suite 2026 Guide. Last updated: April 2026. <a href="https://claude.ai">Learn more at claude.ai</a></p>
+</footer>
+
+<script>
+  // Theme Toggle
+  function toggleNightTheme() {
+    const body = document.body;
+    body.classList.toggle('night-theme');
+    localStorage.setItem('theme', body.classList.contains('night-theme') ? 'night' : 'light');
+  }
+
+  // Load theme from localStorage
+  document.addEventListener('DOMContentLoaded', () => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'night') {
+      document.body.classList.add('night-theme');
+    }
+  });
+
+  // Share current page
+  function shareCurrentPage() {
+    const url = window.location.href;
+    const title = document.title;
+
+    if (navigator.share) {
+      navigator.share({ title, url }).catch(err => console.log('Share error:', err));
+    } else {
+      const text = `${title}: ${url}`;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Link copied to clipboard!');
+      });
+    }
+  }
+
+  // Bookmark page
+  function bookmarkPage() {
+    const url = window.location.href;
+    const title = document.title;
+
+    if (window.sidebar && window.sidebar.addPanel) {
+      window.sidebar.addPanel(title, url, '');
+    } else if (window.external && 'AddFavorite' in window.external) {
+      window.external.AddFavorite(url, title);
+    } else {
+      alert(`Bookmark this page: ${url}`);
+    }
+  }
+
+  // Dropdown toggle for mobile
+  document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const menu = toggle.nextElementSibling;
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+</script>
+
+<script src="js/navbar-loader.js"></script>
+</body>
+</html>
