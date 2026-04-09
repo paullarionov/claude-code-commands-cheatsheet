@@ -526,8 +526,11 @@
 
     .dropdown-menu {
       min-width: 150px;
-      display: block !important;
       grid-template-columns: none;
+    }
+
+    .dropdown-menu[aria-hidden="false"] {
+      display: block;
     }
 
     .dropdown-menu li a {
