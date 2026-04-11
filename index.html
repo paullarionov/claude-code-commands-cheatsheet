@@ -742,6 +742,10 @@
     <div class="row"><span class="key">/diff</span><span class="desc" data-i18n="d-diff">Interactive diff viewer</span></div>
     <div class="row"><span class="key">/copy</span><span class="desc" data-i18n="d-copy">Copy last response</span></div>
     <div class="row"><span class="key">/export</span><span class="desc" data-i18n="d-export">Export conversation</span></div>
+    <div class="row"><span class="key">/rewind</span><span class="desc" data-i18n="d-rewind">Checkpoint / rewind to previous point</span></div>
+    <div class="row"><span class="key">/status</span><span class="desc" data-i18n="d-status">Show version, model, account status</span></div>
+    <div class="row"><span class="key">/stats</span><span class="desc" data-i18n="d-stats">Daily usage, streaks, preferences</span></div>
+    <div class="row"><span class="key">/tasks</span><span class="desc" data-i18n="d-tasks">List background tasks</span></div>
 
     <div class="subsection" data-i18n="sub-settings">Settings</div>
     <div class="row"><span class="key">/config</span><span class="desc" data-i18n="d-config">Open settings</span></div>
@@ -754,6 +758,10 @@
     <div class="row"><span class="key">/color [color]</span><span class="desc" data-i18n="d-color">Prompt line color</span></div>
     <div class="row"><span class="key">/keybindings</span><span class="desc" data-i18n="d-keybindings">Customize keybindings</span></div>
     <div class="row"><span class="key">/terminal-setup</span><span class="desc" data-i18n="d-terminal-setup">Configure terminal keys</span></div>
+    <div class="row"><span class="key">/ide</span><span class="desc" data-i18n="d-ide">Manage IDE integrations</span></div>
+    <div class="row"><span class="key">/privacy-settings</span><span class="desc" data-i18n="d-privacy">View / update privacy settings</span></div>
+    <div class="row"><span class="key">/remote-env</span><span class="desc" data-i18n="d-remote-env">Configure web session environment</span></div>
+    <div class="row"><span class="key">/desktop</span><span class="desc" data-i18n="d-desktop">Continue in Desktop app</span></div>
 
     <div class="subsection" data-i18n="sub-tools">Tools</div>
     <div class="row"><span class="key">/init</span><span class="desc" data-i18n="d-init">Create CLAUDE.md</span></div>
@@ -764,11 +772,18 @@
     <div class="row"><span class="key">/agents</span><span class="desc" data-i18n="d-manage-agents">Manage agents</span></div>
     <div class="row"><span class="key">/add-dir &lt;path&gt;</span><span class="desc" data-i18n="d-add-dir">Add working directory</span></div>
     <div class="row"><span class="key">/reload-plugins</span><span class="desc" data-i18n="d-reload">Hot-reload plugins</span></div>
+    <div class="row"><span class="key">/plugin</span><span class="desc" data-i18n="d-plugin">Manage Claude Code plugins</span></div>
+    <div class="row"><span class="key">/install-github-app</span><span class="desc" data-i18n="d-install-github">Set up GitHub Actions app</span></div>
+    <div class="row"><span class="key">/install-slack-app</span><span class="desc" data-i18n="d-install-slack">Install Slack app</span></div>
+    <div class="row"><span class="key">/web-setup</span><span class="desc" data-i18n="d-web-setup">Connect GitHub to web</span></div>
 
     <div class="subsection" data-i18n="sub-special">Special</div>
     <div class="row"><span class="key">/btw &lt;question&gt;</span><span class="desc" data-i18n="d-btw">Side question (no context cost)</span></div>
     <div class="row"><span class="key">/plan [desc]</span><span class="desc" data-i18n="d-plan-cmd">Plan mode (+ auto-start)</span></div>
-    <div class="row"><span class="key">/ultraplan</span><span class="desc" data-i18n="d-ultraplan">Build implementation plan on the web</span></div>
+    <div class="row"><span class="key">/ultraplan &lt;prompt&gt;</span><span class="desc" data-i18n="d-ultraplan">Draft plan in browser, execute remotely</span></div>
+    <div class="row"><span class="key">/powerup</span><span class="desc" data-i18n="d-powerup">Interactive lessons with animated demos</span></div>
+    <div class="row"><span class="key">/teleport</span><span class="desc" data-i18n="d-teleport">Pull web session to terminal</span></div>
+    <div class="row"><span class="key">/autofix-pr [prompt]</span><span class="desc" data-i18n="d-autofix-pr">Auto-fix PR on CI failures</span></div>
     <div class="row"><span class="key">/loop [interval]</span><span class="desc" data-i18n="d-loop">Schedule recurring task</span></div>
     <div class="row"><span class="key">/voice</span><span class="desc" data-i18n="d-voice-input">Voice input (20 languages)</span></div>
     <div class="row"><span class="key">/doctor</span><span class="desc" data-i18n="d-doctor">Diagnose installation</span></div>
@@ -777,6 +792,9 @@
     <div class="row"><span class="key">/usage</span><span class="desc" data-i18n="d-usage">Plan limits &amp; status</span></div>
     <div class="row"><span class="key">/schedule</span><span class="desc" data-i18n="d-schedule">Cloud scheduled tasks</span></div>
     <div class="row"><span class="key">/security-review</span><span class="desc" data-i18n="d-security">Security analysis</span></div>
+    <div class="row"><span class="key">/insights</span><span class="desc" data-i18n="d-insights">Analyze sessions &amp; patterns</span></div>
+    <div class="row"><span class="key">/sandbox</span><span class="desc" data-i18n="d-sandbox">Toggle sandbox mode</span></div>
+    <div class="row"><span class="key">/extra-usage</span><span class="desc" data-i18n="d-extra-usage">Configure extra usage quota</span></div>
     <div class="row"><span class="key">/help</span><span class="desc" data-i18n="d-help">Help + commands</span></div>
     <div class="row"><span class="key">/feedback</span><span class="desc" data-i18n="d-feedback">Send feedback (alias: /bug)</span></div>
   </section>
@@ -1113,8 +1131,26 @@ const T = {
   // Slash/Special
   'd-btw':          { en:'Side question (no context cost)', ru:'Побочный вопрос (без контекста)', zh:'额外问题（不消耗上下文）', ja:'補足質問（コンテキスト消費なし）', es:'Pregunta lateral (sin costo de contexto)' },
   'd-plan-cmd':     { en:'Plan mode (+ auto-start)', ru:'Режим планирования (+ автостарт)', zh:'计划模式（+ 自动启动）', ja:'プランモード（+ 自動開始）', es:'Modo plan (+ inicio automático)' },
-  'd-ultraplan':    { en:'Build implementation plan on the web', ru:'Создать план реализации в веб-интерфейсе', zh:'在网络上构建实施计划', ja:'Web上で実装計画を作成', es:'Crear plan de implementación en la web' },
+  'd-ultraplan':    { en:'Draft plan in browser, execute remotely', ru:'Создать план в браузере, выполнить удалённо', zh:'在浏览器中起草计划，远程执行', ja:'ブラウザでプランを作成し、リモートで実行', es:'Crear plan en navegador, ejecutar remotamente' },
+  'd-powerup':      { en:'Interactive lessons with animated demos', ru:'Интерактивные уроки с анимированными демо', zh:'带有动画演示的交互式课程', ja:'アニメーション付きのインタラクティブレッスン', es:'Lecciones interactivas con demos animados' },
+  'd-teleport':     { en:'Pull web session to terminal', ru:'Перенести веб-сессию в терминал', zh:'将网络会话拉到终端', ja:'Web セッションをターミナルに取り込む', es:'Traer sesión web a terminal' },
+  'd-autofix-pr':   { en:'Auto-fix PR on CI failures', ru:'Автоматически исправить PR при сбоях CI', zh:'在 CI 失败时自动修复 PR', ja:'CI 失敗時に自動で PR を修正', es:'Auto-reparar PR en fallas de CI' },
   'd-loop':         { en:'Schedule recurring task', ru:'Запланировать повторяющуюся задачу', zh:'计划定期任务', ja:'定期タスクをスケジュール', es:'Programar tarea recurrente' },
+  'd-insights':     { en:'Analyze sessions &amp; patterns', ru:'Анализировать сессии и паттерны', zh:'分析会话和模式', ja:'セッションとパターンを分析', es:'Analizar sesiones y patrones' },
+  'd-sandbox':      { en:'Toggle sandbox mode', ru:'Переключить режим изоляции', zh:'切换沙箱模式', ja:'サンドボックスモードを切り替え', es:'Alternar modo sandbox' },
+  'd-extra-usage':  { en:'Configure extra usage quota', ru:'Настроить дополнительный лимит использования', zh:'配置额外使用配额', ja:'追加使用量クォータを設定', es:'Configurar cuota de uso adicional' },
+  'd-rewind':       { en:'Checkpoint / rewind to previous point', ru:'Контрольная точка / вернуться назад', zh:'检查点/回到之前的位置', ja:'チェックポイント/前の位置に戻る', es:'Punto de control / retroceder' },
+  'd-status':       { en:'Show version, model, account status', ru:'Показать версию, модель, статус аккаунта', zh:'显示版本、模型、账户状态', ja:'バージョン、モデル、アカウント状態を表示', es:'Mostrar versión, modelo, estado de cuenta' },
+  'd-stats':        { en:'Daily usage, streaks, preferences', ru:'Ежедневное использование, серии, предпочтения', zh:'每日使用、连续记录、偏好设置', ja:'日次使用量、連続記録、選好設定', es:'Uso diario, rachas, preferencias' },
+  'd-tasks':        { en:'List background tasks', ru:'Список фоновых задач', zh:'列出后台任务', ja:'バックグラウンドタスクを一覧表示', es:'Listar tareas en segundo plano' },
+  'd-ide':          { en:'Manage IDE integrations', ru:'Управление интеграциями IDE', zh:'管理 IDE 集成', ja:'IDE 統合を管理', es:'Gestionar integraciones de IDE' },
+  'd-privacy':      { en:'View / update privacy settings', ru:'Просмотр/обновление параметров конфиденциальности', zh:'查看/更新隐私设置', ja:'プライバシー設定を表示/更新', es:'Ver / actualizar configuración de privacidad' },
+  'd-remote-env':   { en:'Configure web session environment', ru:'Настроить окружение веб-сессии', zh:'配置网络会话环境', ja:'Web セッション環境を設定', es:'Configurar entorno de sesión web' },
+  'd-desktop':      { en:'Continue in Desktop app', ru:'Продолжить в приложении Desktop', zh:'在桌面应用中继续', ja:'Desktop アプリで続行', es:'Continuar en aplicación Desktop' },
+  'd-plugin':       { en:'Manage Claude Code plugins', ru:'Управление плагинами Claude Code', zh:'管理 Claude Code 插件', ja:'Claude Code プラグインを管理', es:'Gestionar plugins de Claude Code' },
+  'd-install-github':{ en:'Set up GitHub Actions app', ru:'Настроить приложение GitHub Actions', zh:'设置 GitHub Actions 应用', ja:'GitHub Actions アプリを設定', es:'Configurar aplicación GitHub Actions' },
+  'd-install-slack': { en:'Install Slack app', ru:'Установить приложение Slack', zh:'安装 Slack 应用', ja:'Slack アプリをインストール', es:'Instalar aplicación Slack' },
+  'd-web-setup':    { en:'Connect GitHub to web', ru:'Подключить GitHub к веб-интерфейсу', zh:'将 GitHub 连接到网络', ja:'GitHub をウェブに接続', es:'Conectar GitHub a web' },
   'd-voice-input':  { en:'Voice input (20 languages)', ru:'Голосовой ввод (20 языков)', zh:'语音输入（20种语言）', ja:'音声入力（20言語）', es:'Entrada de voz (20 idiomas)' },
   'd-doctor':       { en:'Diagnose installation', ru:'Диагностика установки', zh:'诊断安装', ja:'インストールを診断', es:'Diagnosticar instalación' },
   'd-pr':           { en:'GitHub PR comments', ru:'Комментарии GitHub PR', zh:'GitHub PR 评论', ja:'GitHub PRコメント', es:'Comentarios de PR en GitHub' },
