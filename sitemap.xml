@@ -74,4 +74,11 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/advanced-workflows.html"/>
   </url>
+  <url>
+    <loc>https://claude-guides.com/claude-code-architectural-patterns.html</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/claude-code-architectural-patterns.html"/>
+  </url>
 </urlset>

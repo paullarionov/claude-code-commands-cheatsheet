@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Master Claude Code architectural patterns, agents, and autonomous workflows. Learn research → plan → execute patterns, subagents, MCP servers, and advanced features for production AI development.">
+  <meta name="keywords" content="Claude Code, architectural patterns, agents, AI development, autonomous workflows, MCP servers, cloud tasks, subagents">
+  <meta name="author" content="Claude Guides">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://claude-guides.com/claude-code-architectural-patterns.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://claude-guides.com/claude-code-architectural-patterns.html">
+  <meta property="og:title" content="Claude Code Architectural Patterns & Advanced Workflows — Complete Guide">
+  <meta property="og:description" content="Master Research → Plan → Execute patterns, autonomous agents, subagents, MCP servers, and production AI development with Claude Code.">
+  <meta property="og:image" content="https://claude-guides.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:site_name" content="Claude Code Cheatsheet">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@anthropic">
+  <meta name="twitter:url" content="https://claude-guides.com/claude-code-architectural-patterns.html">
+  <meta name="twitter:title" content="Claude Code Architectural Patterns & Advanced Workflows">
+  <meta name="twitter:description" content="Master Research → Plan → Execute patterns, agents, and production AI development.">
+  <meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+  <meta name="twitter:image:alt" content="Claude Code Architectural Patterns">
+
+  <!-- Article Meta -->
+  <meta property="article:published_time" content="2026-04-12T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-12T00:00:00Z">
+  <meta property="article:section" content="Guide">
+  <meta property="article:tag" content="Claude Code">
+  <meta property="article:tag" content="Architecture">
+  <meta property="article:tag" content="Agents">
+  <meta property="article:tag" content="Workflows">
+
+  <title>Claude Code Architectural Patterns & Advanced Workflows — Complete Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg:           #FAF8F5;
+      --surface:      #FFFFFF;
+      --border:       #EDE6DC;
+      --border-faint: #F4EFE8;
+      --text:         #1C1917;
+      --text-2:       #7C6F65;
+      --text-3:       #B0A499;
+      --accent:       #C96442;
+      --key-bg:       #F2EBE1;
+      --key-border:   #E3D6C8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Inter, -apple-system, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 12px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ─────────────────────────────────── */
+    header {
+      text-align: center;
+      padding: 28px 24px 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 13px;
+      color: var(--text-2);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 11px;
+      transition: color 0.18s;
+      padding: 0 24px;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    /* ── Main Content ──────────────────────────── */
+    main {
+      margin: 0 auto;
+      padding: 0 24px 40px;
+      max-width: 900px;
+    }
+
+    article {
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    article h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 32px 0 12px;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+
+    article h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+      color: var(--text);
+    }
+
+    article p {
+      margin-bottom: 12px;
+      color: var(--text);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    article ul, article ol {
+      margin: 12px 0 12px 20px;
+      font-size: 12px;
+    }
+
+    article li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    code {
+      background: var(--key-bg);
+      color: var(--text);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+    }
+
+    pre {
+      background: var(--key-bg);
+      border: 1px solid var(--key-border);
+      padding: 12px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 12px 0;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: var(--text);
+    }
+
+    .tip {
+      background: rgba(201, 100, 66, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 2px;
+      font-size: 12px;
+    }
+
+    .tip strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .feature-box {
+      background: var(--border-faint);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .feature-box h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    /* ── Footer ────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--text-3);
+      font-size: 11px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Mobile Responsive ─────────────────────── */
+    @media (max-width: 768px) {
+      header h1 { font-size: 22px; }
+      article h2 { font-size: 16px; margin: 24px 0 8px; }
+      main { padding: 0 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Back to Cheatsheet</a>
+
+  <header>
+    <h1>Claude Code Architectural Patterns & Advanced Workflows</h1>
+    <p>Master the convergent Research → Plan → Execute pattern, autonomous agents, subagents, and production-ready AI development strategies that power enterprise workflows.</p>
+  </header>
+
+  <main>
+    <article>
+
+      <h2>1. Core Architectural Pattern: Research → Plan → Execute → Review → Ship</h2>
+      <p>The convergent pattern across all major Claude Code workflows is a five-stage process that ensures systematic, high-quality outcomes:</p>
+      <ol>
+        <li><strong>Research:</strong> Gather information, explore codebase, understand requirements</li>
+        <li><strong>Plan:</strong> Design architecture, identify critical files, outline implementation strategy</li>
+        <li><strong>Execute:</strong> Implement changes, write code, update files systematically</li>
+        <li><strong>Review:</strong> Check quality, test functionality, verify correctness</li>
+        <li><strong>Ship:</strong> Commit, push, and deploy to production</li>
+      </ol>
+      <div class="tip"><strong>💡 Pro Tip:</strong> This pattern scales from single-file edits to enterprise multi-agent deployments. Use it consistently for predictable, reliable outcomes.</div>
+
+      <h2>2. Autonomous Agents & Subagents</h2>
+      <p>Agents are the foundation of autonomous AI workflows in Claude Code. A subagent is:</p>
+      <blockquote style="margin: 12px 0; padding: 12px 16px; border-left: 4px solid var(--accent); background: var(--border-faint); font-style: italic; font-size: 12px;">
+        <strong>"Autonomous actor in fresh isolated context — custom tools, permissions, model, memory, and persistent identity"</strong>
+      </blockquote>
+
+      <h3>Key Characteristics:</h3>
+      <ul>
+        <li><strong>Fresh Context:</strong> Each subagent starts with a clean slate, no history bloat</li>
+        <li><strong>Custom Tools:</strong> Configure exactly which tools (filesystem, git, API access) each agent can use</li>
+        <li><strong>Isolated Permissions:</strong> Fine-grained control over what each agent can access</li>
+        <li><strong>Persistent Identity:</strong> Agents maintain identity across tasks, enabling multi-step workflows</li>
+        <li><strong>Shared Coordination:</strong> Multiple agents work in parallel on the same codebase with shared task tracking</li>
+      </ul>
+
+      <h3>Agent Teams for Parallel Development:</h3>
+      <p>Launch multiple agents simultaneously, each with its own worktree (isolated git branch). This enables true parallelization without conflicts:</p>
+      <pre><code># Agent A works on feature/auth
+# Agent B works on feature/database
+# Agent C works on feature/api
+# All merge back to main when ready</code></pre>
+      <div class="tip"><strong>💡 Pro Tip:</strong> Use agent teams for features that can be developed independently. Each agent gets a dedicated git worktree, eliminating merge conflicts during development.</div>
+
+      <h2>3. Auto Mode: Safety Without Prompts</h2>
+      <p>By default, Claude Code asks for permission before executing sensitive operations. <strong>Auto Mode</strong> replaces manual permission prompts with a background safety classifier:</p>
+      <pre><code>claude --enable-auto-mode</code></pre>
+      <p>This allows agents to work autonomously while maintaining safety guardrails. The classifier evaluates risk and auto-approves safe operations, blocking suspicious ones.</p>
+
+      <h2>4. Organization & Context Management</h2>
+
+      <h3>Commands vs. Skills vs. Memory</h3>
+      <p>Claude Code has three ways to inject knowledge into existing context:</p>
+
+      <div class="feature-box">
+        <h4>Commands</h4>
+        <p>"Knowledge injected into existing context — simple user-invoked prompt templates for workflow orchestration."</p>
+        <p>Use when: You need a quick, repeatable workflow. Examples: <code>/batch</code>, <code>/simplify</code>, <code>/commit</code></p>
+      </div>
+
+      <div class="feature-box">
+        <h4>Skills</h4>
+        <p>"Knowledge injected into existing context — configurable, preloadable, auto-discoverable, with context forking."</p>
+        <p>Use when: You need more complexity and customization than commands. Skills can be triggered automatically based on conditions.</p>
+      </div>
+
+      <div class="feature-box">
+        <h4>Memory (CLAUDE.md Files & @path Imports)</h4>
+        <p>Persistent context via CLAUDE.md files and @path imports with auto-memory and rules organization.</p>
+        <p>Use when: You need rules, conventions, or project-specific knowledge that applies across all sessions.</p>
+      </div>
+
+      <h3>Memory Best Practices:</h3>
+      <ul>
+        <li>Create <code>CLAUDE.md</code> in your project root with project conventions, style guides, and rules</li>
+        <li>Use <code>@path imports</code> to inject context from specific files without bloating memory</li>
+        <li>Organize memory hierarchically: project-level, team-level, personal preferences</li>
+        <li>Keep memory under 5K tokens for optimal context efficiency</li>
+      </ul>
+
+      <h2>5. Execution & Scaling: From Local to Cloud</h2>
+
+      <h3>Scheduled Tasks: /loop vs. /schedule</h3>
+      <ul>
+        <li><strong>/loop:</strong> Runs prompts locally on your machine, up to 3 days of persistence. Perfect for polling, monitoring, and recurring tasks that don't require continuous uptime</li>
+        <li><strong>/schedule:</strong> Runs tasks in the cloud even when your machine is offline. For workflows that must run continuously regardless of your local session state</li>
+      </ul>
+
+      <p><strong>Example:</strong> Use <code>/loop 5m "check deployment status"</code> to poll status every 5 minutes for the next 3 days.</p>
+
+      <h3>Parallel Development with Git Worktrees</h3>
+      <p>Claude Code automatically creates isolated git worktrees for each agent, enabling truly parallel development:</p>
+      <pre><code># Each agent gets its own worktree
+agent-1: .git/worktrees/feature-auth
+agent-2: .git/worktrees/feature-database
+agent-3: .git/worktrees/feature-api
+
+# All changes merge cleanly back to main</code></pre>
+
+      <h3>Remote Control: Continue From Any Device</h3>
+      <p>Resume sessions from any device without loss of context:</p>
+      <pre><code>/remote-control
+# or
+/rc</code></pre>
+      <p>Useful for picking up work on the go, switching between desktop/laptop, or handing off work to teammates.</p>
+
+      <h2>6. Hot Features & Advanced Capabilities</h2>
+
+      <h3>Multi-Agent Code Review</h3>
+      <p>Leverage Claude Code's code review feature to have multiple agents analyze PRs simultaneously, catching:</p>
+      <ul>
+        <li>Logic bugs and edge case failures</li>
+        <li>Security vulnerabilities (SQL injection, XSS, etc.)</li>
+        <li>Performance regressions and memory leaks</li>
+        <li>Style violations and architectural drift</li>
+      </ul>
+
+      <h3>Ultraplan: Cloud-Based Planning</h3>
+      <p>Draft implementation plans in the cloud with:</p>
+      <ul>
+        <li>Browser-based review interface</li>
+        <li>Inline comments and suggestions</li>
+        <li>Real-time collaboration with teammates</li>
+        <li>Version history and approval workflows</li>
+      </ul>
+
+      <h3>Claude Code Web</h3>
+      <p>Run tasks on cloud infrastructure with:</p>
+      <ul>
+        <li>Scheduled tasks that execute without your machine running</li>
+        <li>Parallel sessions for independent workflows</li>
+        <li>Higher resource limits than local execution</li>
+        <li>Persistent logs and audit trails</li>
+      </ul>
+
+      <h3>Agent SDK (Python/TypeScript)</h3>
+      <p>Build production AI agents using Claude Code as a library. Integrate autonomous agents directly into your applications with:</p>
+      <ul>
+        <li>Full control over agent behavior and permissions</li>
+        <li>Custom tool definitions and integrations</li>
+        <li>Embedded model selection and inference parameters</li>
+        <li>Event streaming and real-time monitoring</li>
+      </ul>
+
+      <h3>Channels: Push Events Into Running Sessions</h3>
+      <p>Integrate Telegram, Discord, and other chat platforms to push events directly into Claude Code sessions. Claude reacts autonomously to incoming messages, making your workflow context-aware and responsive.</p>
+
+      <h3>Computer Use (Beta)</h3>
+      <p>Let Claude control your screen on macOS for end-to-end automation of GUI-based workflows. Useful for testing, browser automation, and workflows that require visual feedback.</p>
+
+      <h2>7. MCP Servers: Extend Claude Code Capabilities</h2>
+      <p>MCP (Model Context Protocol) servers connect Claude Code to external tools, databases, and APIs. Configure them in <code>.mcp.json</code>:</p>
+      <pre><code>{
+  "mcpServers": {
+    "github": { "command": "mcp-github" },
+    "slack": { "command": "mcp-slack" },
+    "postgres": { "command": "mcp-postgres" }
+  }
+}</code></pre>
+
+      <p><strong>Common integrations:</strong></p>
+      <ul>
+        <li>Version control (GitHub, GitLab)</li>
+        <li>Communication (Slack, Discord, Email)</li>
+        <li>Databases (PostgreSQL, MongoDB, Firebase)</li>
+        <li>Cloud platforms (AWS, GCP, Azure)</li>
+        <li>Project management (Jira, Linear, Asana)</li>
+        <li>APIs and webhooks</li>
+      </ul>
+
+      <h2>8. Configuration & Settings</h2>
+
+      <h3>Hierarchical Settings in .claude/settings.json</h3>
+      <p>Configure Claude Code behavior globally or per-project:</p>
+      <ul>
+        <li><strong>Permissions:</strong> Which operations require approval</li>
+        <li><strong>Model Config:</strong> Default model, temperature, max tokens</li>
+        <li><strong>Output Styles:</strong> Formatting, colors, verbosity</li>
+        <li><strong>Keyboard Bindings:</strong> Custom shortcuts for frequent actions</li>
+        <li><strong>Auto-Behaviors:</strong> Hooks that run before/after operations</li>
+      </ul>
+
+      <h2>9. Pro Tips for Production Excellence</h2>
+
+      <h3>Tip 1: Simplify Code Quality with /simplify</h3>
+      <p>Review changed code for reuse, quality, and efficiency, then fix issues automatically. Use this after implementing features to ensure clean, maintainable code.</p>
+
+      <h3>Tip 2: Batch Operations with /batch</h3>
+      <p>Apply the same transformation across multiple files. Great for refactoring variable names, updating imports, or applying consistent formatting.</p>
+
+      <h3>Tip 3: Checkpointing for Safety</h3>
+      <p>Use <code>/rewind</code> or press <code>Esc Esc</code> to track and rewind file edits automatically. This gives you a safety net for exploratory changes without committing them.</p>
+
+      <h3>Tip 4: Voice Dictation</h3>
+      <p>Enable voice input with <code>/voice</code>. Supports 20+ languages and rebindable keys for hands-free control during complex problem-solving sessions.</p>
+
+      <h3>Tip 5: Strategic Model Selection</h3>
+      <p>Different models have different costs and capabilities:</p>
+      <ul>
+        <li><strong>Haiku:</strong> Fast, lightweight work (queries, summaries, simple edits)</li>
+        <li><strong>Sonnet:</strong> General-purpose (coding, analysis, detailed writing)</li>
+        <li><strong>Opus:</strong> Deep reasoning required (complex architecture, novel problems)</li>
+      </ul>
+      <p>Switch models deliberately at the start of sessions to optimize for cost vs. capability.</p>
+
+      <h2>10. Workflow Intelligence Across Teams</h2>
+
+      <p>Different teams emphasize distinct approaches to Claude Code workflows:</p>
+
+      <div class="feature-box">
+        <h4>Everything Claude Code (148k references)</h4>
+        <p>Focus: Instinct scoring, AgentShield safety, multi-language rules. Best for: Large teams with diverse tech stacks.</p>
+      </div>
+
+      <div class="feature-box">
+        <h4>Superpowers (143k references)</h4>
+        <p>Focus: TDD-first, Iron Laws, whole-plan review. Best for: Quality-obsessed teams, large refactors, greenfield projects.</p>
+      </div>
+
+      <div class="feature-box">
+        <h4>Get Shit Done (50k references)</h4>
+        <p>Focus: Fresh 200K contexts, wave execution, XML plans. Best for: Speed-first teams, MVPs, rapid iteration.</p>
+      </div>
+
+      <div class="feature-box">
+        <h4>BMAD-METHOD (44k references)</h4>
+        <p>Focus: Full SDLC, agent personas, 22+ platforms. Best for: Enterprise teams, compliance-heavy projects, complex workflows.</p>
+      </div>
+
+      <h2>Conclusion: Building for Scale</h2>
+      <p>Mastering Claude Code's architectural patterns enables you to:</p>
+      <ul>
+        <li>Build autonomous workflows that scale from single features to enterprise systems</li>
+        <li>Leverage agents and subagents for true parallel development</li>
+        <li>Integrate external systems and data sources seamlessly via MCP servers</li>
+        <li>Maintain code quality and safety while accelerating development speed</li>
+        <li>Adopt the Research → Plan → Execute → Review → Ship pattern for predictable outcomes</li>
+      </ul>
+
+      <div class="tip"><strong>🚀 Next Steps:</strong> Start with a single agent on a small feature, master the Research → Plan → Execute pattern, then scale to multi-agent teams and cloud-based workflows. Each step is a natural progression that builds on the previous one.</div>
+
+    </article>
+  </main>
+
+  <footer>
+    <p><strong>Last updated:</strong> April 12, 2026</p>
+    <p><a href="index.html">← Back to Claude Code Cheatsheet</a></p>
+  </footer>
+</body>
+</html>
