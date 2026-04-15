@@ -500,10 +500,7 @@
 
   /* Hour block colors */
   .limits-hour-block.peak { background: linear-gradient(180deg, #ef4444, #dc2626); }
-  .limits-hour-block.best { background: linear-gradient(180deg, #3b82f6, #2563eb); }
-  .limits-hour-block.orange { background: linear-gradient(180deg, #f97316, #ea580c); }
-  .limits-hour-block.yellow { background: linear-gradient(180deg, #eab308, #ca8a04); }
-  .limits-hour-block.good { background: linear-gradient(180deg, #22c55e, #16a34a); }
+  .limits-hour-block.best { background: linear-gradient(180deg, #22c55e, #16a34a); }
 
   .limits-quick-info {
     display: grid;
@@ -555,6 +552,12 @@
     align-items: center;
     gap: 6px;
     flex: 1;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .limits-status-indicator:hover {
+    opacity: 0.8;
   }
 
   .limits-status-dot {
@@ -616,11 +619,7 @@
     background: linear-gradient(135deg, #ef4444, #dc2626);
   }
 
-  .limits-legend-blue {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-  }
-
-  .limits-legend-yellow {
+  .limits-legend-green {
     background: linear-gradient(135deg, #22c55e, #16a34a);
   }
 
@@ -1120,12 +1119,8 @@
         <span data-i18n="limits-peak-label">Peak Hours (16:00–01:00 UTC)</span>
       </div>
       <div class="limits-legend-item">
-        <span class="limits-legend-box limits-legend-blue"></span>
-        <span data-i18n="limits-best-label">Best (01:00–04:00 UTC)</span>
-      </div>
-      <div class="limits-legend-item">
-        <span class="limits-legend-box limits-legend-yellow"></span>
-        <span data-i18n="limits-good-label">Good (04:00–16:00 UTC)</span>
+        <span class="limits-legend-box limits-legend-green"></span>
+        <span data-i18n="limits-best-label">Best Time (01:00–16:00 UTC)</span>
       </div>
     </div>
   </div>
@@ -1781,18 +1776,9 @@ function updateLimitsWidget() {
       if (h >= 16 || h < 1) {
         // Peak hours: red
         block.classList.add('peak');
-      } else if (h >= 1 && h < 4) {
-        // Best time early: dark blue
+      } else {
+        // Best time: green
         block.classList.add('best');
-      } else if (h >= 4 && h < 6) {
-        // Transition: orange
-        block.classList.add('orange');
-      } else if (h >= 6 && h < 8) {
-        // Good time: yellow-green
-        block.classList.add('yellow');
-      } else if (h >= 8 && h < 16) {
-        // Rest of day: blue-green
-        block.classList.add('good');
       }
 
       barsContainer.appendChild(block);
@@ -1898,6 +1884,7 @@ async function fetchClaudeStatus() {
 
     const statusDot = document.getElementById('status-dot');
     const statusText = document.getElementById('status-text');
+    const statusIndicator = document.getElementById('status-indicator');
 
     if (!statusDot || !statusText) return;
 
@@ -1930,6 +1917,12 @@ async function fetchClaudeStatus() {
 
     statusDot.className = `limits-status-dot ${statusClass}`;
     statusText.textContent = statusLabel;
+
+    // Add click handler to open status page
+    if (statusIndicator) {
+      statusIndicator.style.cursor = 'pointer';
+      statusIndicator.onclick = () => window.open('https://status.claude.com', '_blank');
+    }
   } catch (err) {
     const statusDot = document.getElementById('status-dot');
     const statusText = document.getElementById('status-text');
