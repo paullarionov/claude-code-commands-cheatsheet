@@ -366,91 +366,274 @@
     border-radius: 10px;
     padding: 16px;
     margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .limits-widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .limits-widget-title {
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-bottom: 4px;
   }
 
   .limits-widget-time {
-    font-size: 10px;
-    color: var(--text-2);
-    margin-bottom: 12px;
-  }
-
-  .limits-period {
-    margin-bottom: 12px;
-  }
-
-  .limits-period-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-
-  .limits-period-name {
     font-size: 9.5px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .limits-period-time {
-    font-size: 8px;
     color: var(--text-2);
   }
 
-  .limits-period-status {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  .limits-current-status {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-align: center;
   }
 
-  .limits-period-status.high {
+  .limits-current-status.high {
     background: rgba(34, 197, 94, 0.15);
     color: #16a34a;
   }
 
-  .limits-period-status.low {
+  .limits-current-status.low {
     background: rgba(239, 68, 68, 0.15);
     color: #dc2626;
   }
 
-  .limits-progress {
-    height: 8px;
+  .limits-bar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .limits-hourly-bars {
+    display: flex;
+    gap: 3px;
+    height: 32px;
+  }
+
+  .limits-hour-block {
+    flex: 1;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .limits-hour-block:hover {
+    transform: scaleY(1.2);
+    z-index: 10;
+  }
+
+  .limits-hour-block.current {
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.8), inset 0 0 2px rgba(255, 255, 255, 0.6);
+    border-color: #fbbf24;
+  }
+
+  /* Hour block colors */
+  .limits-hour-block.peak { background: linear-gradient(180deg, #ef4444, #dc2626); }
+  .limits-hour-block.best { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+  .limits-hour-block.orange { background: linear-gradient(180deg, #f97316, #ea580c); }
+  .limits-hour-block.yellow { background: linear-gradient(180deg, #eab308, #ca8a04); }
+  .limits-hour-block.good { background: linear-gradient(180deg, #22c55e, #16a34a); }
+
+  .limits-status-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
     background: var(--border-faint);
-    border-radius: 4px;
-    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-top: 4px;
+  }
+
+  .limits-status-label {
+    font-size: 8.5px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    min-width: 80px;
+  }
+
+  .limits-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .limits-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  .limits-status-dot.operational {
+    background: #22c55e;
+  }
+
+  .limits-status-dot.degraded {
+    background: #eab308;
+  }
+
+  .limits-status-dot.outage {
+    background: #ef4444;
+  }
+
+  .limits-status-dot.unknown {
+    background: #6b7280;
+  }
+
+  .limits-status-text {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .limits-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .limits-info-box {
+    background: var(--border-faint);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .limits-info-label {
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+
+  .limits-info-value {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .limits-tips {
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  .limits-tips-title {
+    font-size: 8.5px;
+    font-weight: 700;
+    color: var(--text);
     margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
   }
 
-  .limits-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #22c55e, #16a34a);
-    transition: width 0.3s ease, background 0.3s ease;
-    border-radius: 4px;
+  .limits-tips-content {
+    font-size: 8.5px;
+    color: var(--text-2);
+    line-height: 1.6;
   }
 
-  .limits-progress-bar.low-limits {
-    background: linear-gradient(90deg, #ef4444, #dc2626);
+  .limits-tips-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  .limits-progress-bar.medium-limits {
-    background: linear-gradient(90deg, #f59e0b, #d97706);
+  .limits-tips-content li {
+    margin-bottom: 4px;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .limits-tips-content li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #3b82f6;
+    font-weight: bold;
+  }
+
+  .limits-legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 8.5px;
+    justify-content: center;
+  }
+
+  .limits-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-2);
+  }
+
+  .limits-legend-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .limits-legend-red {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+  }
+
+  .limits-legend-blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+  }
+
+  @media (max-width: 900px) {
+    .limits-info-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   body.night-theme .limits-widget {
     background: linear-gradient(135deg, var(--surface) 0%, rgba(0,0,0,0.2) 100%);
+  }
+
+  body.night-theme .limits-tips {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+
+  body.night-theme .limits-info-box {
+    background: rgba(255, 255, 255, 0.05);
   }
 
   /* ── Platform visibility ─────────────────────── */
@@ -772,43 +955,60 @@
 
   <!-- Limits Widget -->
   <div class="limits-widget">
-    <div class="limits-widget-title">
-      <span class="icon">⏰</span>
-      <span data-i18n="limits-title">API Limits Status</span>
-    </div>
-    <div class="limits-widget-time" id="widget-time"></div>
-
-    <div class="limits-period">
-      <div class="limits-period-header">
-        <span class="limits-period-name" data-i18n="limits-peak-hours">Peak Hours (USA working hours)</span>
-        <span class="limits-period-status" id="status-peak"></span>
+    <div class="limits-widget-header">
+      <div>
+        <div class="limits-widget-title">
+          <span class="icon">⏰</span>
+          <span data-i18n="limits-title">API Limits Status</span>
+        </div>
+        <div class="limits-widget-time" id="widget-time"></div>
       </div>
-      <div class="limits-progress">
-        <div class="limits-progress-bar" id="bar-peak" style="width: 0%"></div>
-      </div>
-      <div class="limits-period-time" data-i18n="limits-peak-time">16:00–01:00 UTC</div>
+      <div class="limits-current-status" id="current-status"></div>
     </div>
 
-    <div class="limits-period">
-      <div class="limits-period-header">
-        <span class="limits-period-name" data-i18n="limits-night-usa">Night (USA)</span>
-        <span class="limits-period-status" id="status-night"></span>
+    <div class="limits-bar-section">
+      <div class="limits-hourly-bars" id="hourly-bars">
+        <!-- 24 hour blocks will be generated by JavaScript -->
       </div>
-      <div class="limits-progress">
-        <div class="limits-progress-bar" id="bar-night" style="width: 0%"></div>
-      </div>
-      <div class="limits-period-time" data-i18n="limits-night-time">02:00–08:00 UTC</div>
     </div>
 
-    <div class="limits-period">
-      <div class="limits-period-header">
-        <span class="limits-period-name" data-i18n="limits-morning-eu">Early Morning (Europe)</span>
-        <span class="limits-period-status" id="status-morning"></span>
+    <div class="limits-status-section">
+      <div class="limits-status-label" data-i18n="limits-status-label">System Status</div>
+      <div class="limits-status-indicator" id="status-indicator">
+        <div class="limits-status-dot" id="status-dot"></div>
+        <div class="limits-status-text" id="status-text">Checking...</div>
       </div>
-      <div class="limits-progress">
-        <div class="limits-progress-bar" id="bar-morning" style="width: 0%"></div>
+    </div>
+
+    <div class="limits-info-grid">
+      <div class="limits-info-box">
+        <div class="limits-info-label" data-i18n="limits-current-period">Current Period</div>
+        <div class="limits-info-value" id="info-current-period">—</div>
       </div>
-      <div class="limits-period-time" data-i18n="limits-morning-time">06:00–10:00 CET</div>
+      <div class="limits-info-box">
+        <div class="limits-info-label" data-i18n="limits-time-until">Time Until Change</div>
+        <div class="limits-info-value" id="info-time-until">—</div>
+      </div>
+      <div class="limits-info-box">
+        <div class="limits-info-label" data-i18n="limits-next-period">Next Period</div>
+        <div class="limits-info-value" id="info-next-period">—</div>
+      </div>
+    </div>
+
+    <div class="limits-tips">
+      <div class="limits-tips-title" data-i18n="limits-tips-title">💡 Tips for Best Results</div>
+      <div class="limits-tips-content" id="tips-content"></div>
+    </div>
+
+    <div class="limits-legend">
+      <div class="limits-legend-item">
+        <span class="limits-legend-box limits-legend-red"></span>
+        <span data-i18n="limits-peak-label">Peak Hours (16:00–01:00 UTC)</span>
+      </div>
+      <div class="limits-legend-item">
+        <span class="limits-legend-box limits-legend-blue"></span>
+        <span data-i18n="limits-best-label">Best Time (01:00–16:00 UTC)</span>
+      </div>
     </div>
   </div>
 
@@ -1401,15 +1601,14 @@ const T = {
 
   // Limits Widget
   'limits-title':   { en:'API Limits Status', ru:'Статус лимитов API', zh:'API 限制状态', ja:'API制限ステータス', es:'Estado de Límites de API' },
-  'limits-peak-hours': { en:'Peak Hours (USA working hours)', ru:'Часы пик (рабочие часы США)', zh:'高峰时段（美国工作时间）', ja:'ピーク時間（USA営業時間）', es:'Horas Pico (horario laboral USA)' },
-  'limits-peak-time': { en:'16:00–01:00 UTC • Heavy load', ru:'16:00–01:00 UTC • Высокая нагрузка', zh:'16:00–01:00 UTC • 负载重', ja:'16:00–01:00 UTC • 高負荷', es:'16:00–01:00 UTC • Carga alta' },
-  'limits-night-usa': { en:'Night (USA)', ru:'Ночь (США)', zh:'夜间（美国）', ja:'夜間（USA）', es:'Noche (USA)' },
-  'limits-night-time': { en:'02:00–08:00 UTC • Min. load', ru:'02:00–08:00 UTC • Мин. нагрузка', zh:'02:00–08:00 UTC • 最小负载', ja:'02:00–08:00 UTC • 最小負荷', es:'02:00–08:00 UTC • Carga mín.' },
-  'limits-morning-eu': { en:'Early Morning (Europe)', ru:'Раннее утро (Европа)', zh:'早上（欧洲）', ja:'早朝（ヨーロッパ）', es:'Madrugada (Europa)' },
-  'limits-morning-time': { en:'06:00–10:00 CET • Low load', ru:'06:00–10:00 CET • Низкая нагрузка', zh:'06:00–10:00 CET • 负载低', ja:'06:00–10:00 CET • 低負荷', es:'06:00–10:00 CET • Carga baja' },
-  'limits-status-high': { en:'High Limits', ru:'Высокие лимиты', zh:'高限制', ja:'高制限', es:'Límites Altos' },
-  'limits-status-low': { en:'Low Limits', ru:'Низкие лимиты', zh:'低限制', ja:'低制限', es:'Límites Bajos' },
-  'limits-your-time': { en:'Your time:', ru:'Ваше время:', zh:'你的时间：', ja:'あなたの時間：', es:'Tu hora:' }
+  'limits-24h':     { en:'24-hour cycle (UTC)', ru:'24-часовой цикл (UTC)', zh:'24小时周期（UTC）', ja:'24時間サイクル（UTC）', es:'Ciclo de 24 horas (UTC)' },
+  'limits-current-period': { en:'Current Period', ru:'Текущий период', zh:'当前时段', ja:'現在の期間', es:'Período Actual' },
+  'limits-time-until': { en:'Time Until Change', ru:'Времени до изменения', zh:'剩余时间', ja:'変更までの時間', es:'Tiempo hasta Cambio' },
+  'limits-next-period': { en:'Next Period', ru:'Следующий период', zh:'下一个时段', ja:'次の期間', es:'Próximo Período' },
+  'limits-peak-label': { en:'Peak Hours (16:00–01:00 UTC)', ru:'Часы пик (16:00–01:00 UTC)', zh:'峰值时段（16:00–01:00 UTC）', ja:'ピーク時間（16:00–01:00 UTC）', es:'Horas Pico (16:00–01:00 UTC)' },
+  'limits-best-label': { en:'Best Time (01:00–16:00 UTC)', ru:'Лучшее время (01:00–16:00 UTC)', zh:'最佳时间（01:00–16:00 UTC）', ja:'最高時（01:00–16:00 UTC）', es:'Mejor Hora (01:00–16:00 UTC)' },
+  'limits-tips-title': { en:'💡 Tips for Best Results', ru:'💡 Советы для лучших результатов', zh:'💡 最佳结果提示', ja:'💡 最高の結果のコツ', es:'💡 Consejos para Mejores Resultados' },
+  'limits-status-label': { en:'System Status', ru:'Статус системы', zh:'系统状态', ja:'システムステータス', es:'Estado del Sistema' }
 };
 
 // Footer HTML per language
@@ -1427,12 +1626,13 @@ let currentLang = 'en';
 // ── Limits Widget ───────────────────────────────────────────────────────────
 function updateLimitsWidget() {
   const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
 
-  // Get timezone info
+  // Get UTC time
+  const utcHours = now.getUTCHours();
+  const utcMinutes = now.getUTCMinutes();
+
+  // Get local time for display
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const utcOffset = -now.getTimezoneOffset() / 60;
   const timeStr = now.toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
@@ -1451,72 +1651,205 @@ function updateLimitsWidget() {
     timeDisplay.textContent = `${label} ${timeStr} (${timezone})`;
   }
 
-  // Determine periods
-  const periods = {
-    peak: { // USA working hours (16:00-01:00 UTC)
-      isActive: (hours >= 16 || hours < 1),
-      progress: calculatePeriodProgress(hours, 16, 1, 24),
-      id: 'peak'
-    },
-    night: { // USA night (02:00-08:00 UTC)
-      isActive: (hours >= 2 && hours < 8),
-      progress: calculatePeriodProgress(hours, 2, 8, 24),
-      id: 'night'
-    },
-    morning: { // Europe early morning (06:00-10:00 CET = 05:00-09:00 UTC)
-      isActive: (hours >= 5 && hours < 9),
-      progress: calculatePeriodProgress(hours, 5, 9, 24),
-      id: 'morning'
-    }
-  };
+  // Generate 24 hour blocks
+  const barsContainer = document.getElementById('hourly-bars');
+  if (barsContainer && barsContainer.children.length === 0) {
+    for (let h = 0; h < 24; h++) {
+      const block = document.createElement('div');
+      block.className = 'limits-hour-block';
+      block.title = `${h.toString().padStart(2, '0')}:00 UTC`;
 
-  // Update UI for each period
-  for (const [key, period] of Object.entries(periods)) {
-    const statusEl = document.getElementById(`status-${period.id}`);
-    const barEl = document.getElementById(`bar-${period.id}`);
+      // Determine color based on period
+      if (h >= 16 || h < 1) {
+        // Peak hours: red
+        block.classList.add('peak');
+      } else if (h >= 1 && h < 4) {
+        // Best time early: dark blue
+        block.classList.add('best');
+      } else if (h >= 4 && h < 6) {
+        // Transition: orange
+        block.classList.add('orange');
+      } else if (h >= 6 && h < 8) {
+        // Good time: yellow-green
+        block.classList.add('yellow');
+      } else if (h >= 8 && h < 16) {
+        // Rest of day: blue-green
+        block.classList.add('good');
+      }
 
-    if (statusEl) {
-      const statusText = period.isActive ?
-        (currentLang === 'en' ? 'High Limits' :
-         currentLang === 'ru' ? 'Высокие лимиты' :
-         currentLang === 'zh' ? '高限制' :
-         currentLang === 'ja' ? '高制限' :
-         currentLang === 'es' ? 'Límites Altos' : 'High Limits') :
-        (currentLang === 'en' ? 'Low Limits' :
-         currentLang === 'ru' ? 'Низкие лимиты' :
-         currentLang === 'zh' ? '低限制' :
-         currentLang === 'ja' ? '低制限' :
-         currentLang === 'es' ? 'Límites Bajos' : 'Low Limits');
-
-      statusEl.textContent = statusText;
-      statusEl.className = `limits-period-status ${period.isActive ? 'high' : 'low'}`;
-    }
-
-    if (barEl) {
-      barEl.style.width = period.progress + '%';
-      barEl.className = `limits-progress-bar ${period.isActive ? 'high-limits' : 'low-limits'}`;
+      barsContainer.appendChild(block);
     }
   }
+
+  // Mark current hour
+  if (barsContainer) {
+    const blocks = barsContainer.querySelectorAll('.limits-hour-block');
+    blocks.forEach((block, index) => {
+      if (index === utcHours) {
+        block.classList.add('current');
+      } else {
+        block.classList.remove('current');
+      }
+    });
+  }
+
+  // Determine current period
+  const isPeak = utcHours >= 16 || utcHours < 1;
+
+  // Update status
+  const statusEl = document.getElementById('current-status');
+  if (statusEl) {
+    const statusText = isPeak ?
+      (currentLang === 'en' ? '⏬ Low Limits' :
+       currentLang === 'ru' ? '⏬ Низкие лимиты' :
+       currentLang === 'zh' ? '⏬ 低限制' :
+       currentLang === 'ja' ? '⏬ 低制限' :
+       currentLang === 'es' ? '⏬ Límites Bajos' : '⏬ Low Limits') :
+      (currentLang === 'en' ? '⬆ High Limits' :
+       currentLang === 'ru' ? '⬆ Высокие лимиты' :
+       currentLang === 'zh' ? '⬆ 高限制' :
+       currentLang === 'ja' ? '⬆ 高制限' :
+       currentLang === 'es' ? '⬆ Límites Altos' : '⬆ High Limits');
+
+    statusEl.textContent = statusText;
+    statusEl.className = `limits-current-status ${isPeak ? 'low' : 'high'}`;
+  }
+
+  // Calculate time until next period
+  let timeUntil, currentPeriodText, nextPeriodText;
+
+  if (isPeak) {
+    let nextHour = 1;
+    let hoursUntil = nextHour - utcHours;
+    if (hoursUntil <= 0) hoursUntil += 24;
+    const minutesUntil = 60 - utcMinutes;
+    if (minutesUntil === 60) {
+      hoursUntil -= 1;
+    }
+    timeUntil = `${hoursUntil}h ${minutesUntil % 60}m`;
+
+    currentPeriodText = currentLang === 'en' ? 'Peak Hours (Low Limits)' :
+                        currentLang === 'ru' ? 'Часы пик (низкие лимиты)' :
+                        currentLang === 'zh' ? '峰值时段（低限制）' :
+                        currentLang === 'ja' ? 'ピーク時間（低制限）' :
+                        currentLang === 'es' ? 'Horas Pico (Límites Bajos)' : 'Peak Hours';
+    nextPeriodText = currentLang === 'en' ? 'Best Time (High Limits)' :
+                     currentLang === 'ru' ? 'Лучшее время (высокие лимиты)' :
+                     currentLang === 'zh' ? '最佳时间（高限制）' :
+                     currentLang === 'ja' ? '最高時（高制限）' :
+                     currentLang === 'es' ? 'Mejor Hora (Límites Altos)' : 'Best Time';
+  } else {
+    let nextHour = 16;
+    let hoursUntil = nextHour - utcHours;
+    const minutesUntil = 60 - utcMinutes;
+    if (minutesUntil === 60) {
+      hoursUntil -= 1;
+    }
+    timeUntil = `${hoursUntil}h ${minutesUntil % 60}m`;
+
+    currentPeriodText = currentLang === 'en' ? 'Best Time (High Limits)' :
+                        currentLang === 'ru' ? 'Лучшее время (высокие лимиты)' :
+                        currentLang === 'zh' ? '最佳时间（高限制）' :
+                        currentLang === 'ja' ? '最高時（高制限）' :
+                        currentLang === 'es' ? 'Mejor Hora (Límites Altos)' : 'Best Time';
+    nextPeriodText = currentLang === 'en' ? 'Peak Hours (Low Limits)' :
+                     currentLang === 'ru' ? 'Часы пик (низкие лимиты)' :
+                     currentLang === 'zh' ? '峰值时段（低限制）' :
+                     currentLang === 'ja' ? 'ピーク時間（低制限）' :
+                     currentLang === 'es' ? 'Horas Pico (Límites Bajos)' : 'Peak Hours';
+  }
+
+  // Update info boxes
+  const currentPeriodEl = document.getElementById('info-current-period');
+  if (currentPeriodEl) currentPeriodEl.textContent = currentPeriodText;
+
+  const timeUntilEl = document.getElementById('info-time-until');
+  if (timeUntilEl) timeUntilEl.textContent = timeUntil;
+
+  const nextPeriodEl = document.getElementById('info-next-period');
+  if (nextPeriodEl) nextPeriodEl.textContent = nextPeriodText;
+
+  // Update tips
+  const tipsEl = document.getElementById('tips-content');
+  if (tipsEl) {
+    let tipsText;
+    if (isPeak) {
+      tipsText = currentLang === 'en' ?
+        '<ul><li>Rate limits active</li><li>Expect slower responses</li><li>Large requests may fail</li><li>Best to defer heavy work</li><li>Wait for best time zone</li></ul>' :
+        currentLang === 'ru' ?
+        '<ul><li>Активны ограничения скорости</li><li>Ожидайте медленных ответов</li><li>Большие запросы могут не пройти</li><li>Отложите тяжелую работу</li><li>Дождитесь лучшего периода</li></ul>' :
+        currentLang === 'zh' ?
+        '<ul><li>速率限制激活</li><li>预期响应较慢</li><li>大型请求可能失败</li><li>推迟繁重工作</li><li>等待最佳时段</li></ul>' :
+        currentLang === 'ja' ?
+        '<ul><li>レート制限有効</li><li>応答が遅くなる可能性</li><li>大型リクエスト失敗の可能性</li><li>重い処理を遅延</li><li>最高時まで待機</li></ul>' :
+        currentLang === 'es' ?
+        '<ul><li>Límites de velocidad activos</li><li>Espere respuestas más lentas</li><li>Las solicitudes grandes pueden fallar</li><li>Difiera trabajo pesado</li><li>Espere al mejor período</li></ul>' :
+        '<ul><li>Rate limits active</li></ul>';
+    } else {
+      tipsText = currentLang === 'en' ?
+        '<ul><li>✅ Best time for API requests</li><li>Minimal server load</li><li>Fast responses expected</li><li>Large files work well</li><li>Perfect for batch operations</li></ul>' :
+        currentLang === 'ru' ?
+        '<ul><li>✅ Лучшее время для запросов</li><li>Минимальная нагрузка</li><li>Ожидайте быстрые ответы</li><li>Большие файлы работают</li><li>Идеально для пакетных операций</li></ul>' :
+        currentLang === 'zh' ?
+        '<ul><li>✅ API请求的最佳时段</li><li>服务器负载最小</li><li>预期快速响应</li><li>大文件运行良好</li><li>完美用于批处理</li></ul>' :
+        currentLang === 'ja' ?
+        '<ul><li>✅ API リクエストの最高時</li><li>サーバー負荷最小</li><li>高速応答を期待</li><li>大ファイル動作良好</li><li>バッチ処理に最適</li></ul>' :
+        currentLang === 'es' ?
+        '<ul><li>✅ Mejor hora para solicitudes API</li><li>Carga mínima del servidor</li><li>Respuestas rápidas esperadas</li><li>Archivos grandes funcionan bien</li><li>Perfecto para operaciones por lotes</li></ul>' :
+        '<ul><li>✅ Best time for API requests</li></ul>';
+    }
+    tipsEl.innerHTML = tipsText;
+  }
+
+  // Fetch Claude system status
+  fetchClaudeStatus();
 }
 
-function calculatePeriodProgress(current, start, end, total) {
-  if (start < end) {
-    // Normal range (e.g., 2-8)
-    if (current >= start && current < end) {
-      return ((current - start) / (end - start)) * 100;
-    } else {
-      return current < start ? 0 : 100;
-    }
-  } else {
-    // Wraparound range (e.g., 16-1)
-    if (current >= start || current < end) {
-      if (current >= start) {
-        return ((current - start) / (total - start + end)) * 100;
-      } else {
-        return ((total - start + current) / (total - start + end)) * 100;
+async function fetchClaudeStatus() {
+  try {
+    const response = await fetch('https://status.claude.com/api/v2/status.json');
+    const data = await response.json();
+
+    const statusDot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+
+    if (!statusDot || !statusText) return;
+
+    const status = data.status.indicator;
+    let statusClass = 'unknown';
+    let statusLabel = 'Unknown';
+
+    if (currentLang === 'en') {
+      switch(status) {
+        case 'none': statusClass = 'operational'; statusLabel = 'All Systems Operational'; break;
+        case 'minor': statusClass = 'degraded'; statusLabel = 'Minor Issues'; break;
+        case 'major': statusClass = 'degraded'; statusLabel = 'Major Issues'; break;
+        case 'critical': statusClass = 'outage'; statusLabel = 'Critical Outage'; break;
+      }
+    } else if (currentLang === 'ru') {
+      switch(status) {
+        case 'none': statusClass = 'operational'; statusLabel = 'Все системы работают'; break;
+        case 'minor': statusClass = 'degraded'; statusLabel = 'Незначительные проблемы'; break;
+        case 'major': statusClass = 'degraded'; statusLabel = 'Серьёзные проблемы'; break;
+        case 'critical': statusClass = 'outage'; statusLabel = 'Критический сбой'; break;
       }
     } else {
-      return 0;
+      switch(status) {
+        case 'none': statusClass = 'operational'; statusLabel = 'Operational'; break;
+        case 'minor': statusClass = 'degraded'; statusLabel = 'Degraded'; break;
+        case 'major': statusClass = 'degraded'; statusLabel = 'Major Issues'; break;
+        case 'critical': statusClass = 'outage'; statusLabel = 'Critical'; break;
+      }
+    }
+
+    statusDot.className = `limits-status-dot ${statusClass}`;
+    statusText.textContent = statusLabel;
+  } catch (err) {
+    const statusDot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+    if (statusDot && statusText) {
+      statusDot.className = 'limits-status-dot unknown';
+      statusText.textContent = currentLang === 'ru' ? 'Не удалось загрузить' : 'Unable to load';
     }
   }
 }
