@@ -1,1 +1,15 @@
 .worktrees/
+node_modules/
+dist/
+build/
+out/
+*.dmg
+*.exe
+*.msi
+*.zip
+*.tar.gz
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
