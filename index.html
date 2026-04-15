@@ -358,6 +358,101 @@
   footer a { color: #EDE4DA; text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
+  /* ── Limits Widget ──────────────────────────── */
+  .limits-widget {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(255,255,255,0.5) 100%);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 8px;
+  }
+
+  .limits-widget-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .limits-widget-time {
+    font-size: 10px;
+    color: var(--text-2);
+    margin-bottom: 12px;
+  }
+
+  .limits-period {
+    margin-bottom: 12px;
+  }
+
+  .limits-period-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .limits-period-name {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .limits-period-time {
+    font-size: 8px;
+    color: var(--text-2);
+  }
+
+  .limits-period-status {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .limits-period-status.high {
+    background: rgba(34, 197, 94, 0.15);
+    color: #16a34a;
+  }
+
+  .limits-period-status.low {
+    background: rgba(239, 68, 68, 0.15);
+    color: #dc2626;
+  }
+
+  .limits-progress {
+    height: 8px;
+    background: var(--border-faint);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .limits-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    transition: width 0.3s ease, background 0.3s ease;
+    border-radius: 4px;
+  }
+
+  .limits-progress-bar.low-limits {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+  }
+
+  .limits-progress-bar.medium-limits {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+  }
+
+  body.night-theme .limits-widget {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(0,0,0,0.2) 100%);
+  }
+
   /* ── Platform visibility ─────────────────────── */
   .win-only { display: none; }
   .mac-only { display: inline; }
@@ -674,6 +769,48 @@
 </header>
 
 <main>
+
+  <!-- Limits Widget -->
+  <div class="limits-widget">
+    <div class="limits-widget-title">
+      <span class="icon">⏰</span>
+      <span data-i18n="limits-title">API Limits Status</span>
+    </div>
+    <div class="limits-widget-time" id="widget-time"></div>
+
+    <div class="limits-period">
+      <div class="limits-period-header">
+        <span class="limits-period-name" data-i18n="limits-peak-hours">Peak Hours (USA working hours)</span>
+        <span class="limits-period-status" id="status-peak"></span>
+      </div>
+      <div class="limits-progress">
+        <div class="limits-progress-bar" id="bar-peak" style="width: 0%"></div>
+      </div>
+      <div class="limits-period-time" data-i18n="limits-peak-time">16:00–01:00 UTC</div>
+    </div>
+
+    <div class="limits-period">
+      <div class="limits-period-header">
+        <span class="limits-period-name" data-i18n="limits-night-usa">Night (USA)</span>
+        <span class="limits-period-status" id="status-night"></span>
+      </div>
+      <div class="limits-progress">
+        <div class="limits-progress-bar" id="bar-night" style="width: 0%"></div>
+      </div>
+      <div class="limits-period-time" data-i18n="limits-night-time">02:00–08:00 UTC</div>
+    </div>
+
+    <div class="limits-period">
+      <div class="limits-period-header">
+        <span class="limits-period-name" data-i18n="limits-morning-eu">Early Morning (Europe)</span>
+        <span class="limits-period-status" id="status-morning"></span>
+      </div>
+      <div class="limits-progress">
+        <div class="limits-progress-bar" id="bar-morning" style="width: 0%"></div>
+      </div>
+      <div class="limits-period-time" data-i18n="limits-morning-time">06:00–10:00 CET</div>
+    </div>
+  </div>
 
   <!-- Keyboard Shortcuts -->
   <section class="section">
@@ -1260,7 +1397,19 @@ const T = {
   'd-channels':     { en:'Permission relay / MCP push', ru:'Ретрансляция разрешений / MCP push', zh:'权限中继 / MCP 推送', ja:'権限リレー / MCPプッシュ', es:'Retransmisión de permisos / MCP push' },
   'd-web-sess':     { en:'Web session', ru:'Веб-сессия', zh:'网页会话', ja:'ウェブセッション', es:'Sesión web' },
   'd-effort-flag':  { en:'low / med / high / max', ru:'low/med/high/max', zh:'低/中/高/最大', ja:'低/中/高/最大', es:'bajo / medio / alto / máx' },
-  'd-skip-all':     { en:'Skip all prompts ⚠', ru:'Пропустить все запросы ⚠', zh:'跳过所有提示 ⚠', ja:'全プロンプトをスキップ ⚠', es:'Omitir todas las solicitudes ⚠' }
+  'd-skip-all':     { en:'Skip all prompts ⚠', ru:'Пропустить все запросы ⚠', zh:'跳过所有提示 ⚠', ja:'全プロンプトをスキップ ⚠', es:'Omitir todas las solicitudes ⚠' },
+
+  // Limits Widget
+  'limits-title':   { en:'API Limits Status', ru:'Статус лимитов API', zh:'API 限制状态', ja:'API制限ステータス', es:'Estado de Límites de API' },
+  'limits-peak-hours': { en:'Peak Hours (USA working hours)', ru:'Часы пик (рабочие часы США)', zh:'高峰时段（美国工作时间）', ja:'ピーク時間（USA営業時間）', es:'Horas Pico (horario laboral USA)' },
+  'limits-peak-time': { en:'16:00–01:00 UTC • Heavy load', ru:'16:00–01:00 UTC • Высокая нагрузка', zh:'16:00–01:00 UTC • 负载重', ja:'16:00–01:00 UTC • 高負荷', es:'16:00–01:00 UTC • Carga alta' },
+  'limits-night-usa': { en:'Night (USA)', ru:'Ночь (США)', zh:'夜间（美国）', ja:'夜間（USA）', es:'Noche (USA)' },
+  'limits-night-time': { en:'02:00–08:00 UTC • Min. load', ru:'02:00–08:00 UTC • Мин. нагрузка', zh:'02:00–08:00 UTC • 最小负载', ja:'02:00–08:00 UTC • 最小負荷', es:'02:00–08:00 UTC • Carga mín.' },
+  'limits-morning-eu': { en:'Early Morning (Europe)', ru:'Раннее утро (Европа)', zh:'早上（欧洲）', ja:'早朝（ヨーロッパ）', es:'Madrugada (Europa)' },
+  'limits-morning-time': { en:'06:00–10:00 CET • Low load', ru:'06:00–10:00 CET • Низкая нагрузка', zh:'06:00–10:00 CET • 负载低', ja:'06:00–10:00 CET • 低負荷', es:'06:00–10:00 CET • Carga baja' },
+  'limits-status-high': { en:'High Limits', ru:'Высокие лимиты', zh:'高限制', ja:'高制限', es:'Límites Altos' },
+  'limits-status-low': { en:'Low Limits', ru:'Низкие лимиты', zh:'低限制', ja:'低制限', es:'Límites Bajos' },
+  'limits-your-time': { en:'Your time:', ru:'Ваше время:', zh:'你的时间：', ja:'あなたの時間：', es:'Tu hora:' }
 };
 
 // Footer HTML per language
@@ -1274,6 +1423,103 @@ const FOOTER = {
 
 // ── State ───────────────────────────────────────────────────────────────────
 let currentLang = 'en';
+
+// ── Limits Widget ───────────────────────────────────────────────────────────
+function updateLimitsWidget() {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+
+  // Get timezone info
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const utcOffset = -now.getTimezoneOffset() / 60;
+  const timeStr = now.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: timezone
+  });
+
+  // Update time display
+  const timeDisplay = document.getElementById('widget-time');
+  if (timeDisplay) {
+    const label = currentLang === 'en' ? 'Your time:' :
+                  currentLang === 'ru' ? 'Ваше время:' :
+                  currentLang === 'zh' ? '你的时间：' :
+                  currentLang === 'ja' ? 'あなたの時間：' :
+                  currentLang === 'es' ? 'Tu hora:' : 'Your time:';
+    timeDisplay.textContent = `${label} ${timeStr} (${timezone})`;
+  }
+
+  // Determine periods
+  const periods = {
+    peak: { // USA working hours (16:00-01:00 UTC)
+      isActive: (hours >= 16 || hours < 1),
+      progress: calculatePeriodProgress(hours, 16, 1, 24),
+      id: 'peak'
+    },
+    night: { // USA night (02:00-08:00 UTC)
+      isActive: (hours >= 2 && hours < 8),
+      progress: calculatePeriodProgress(hours, 2, 8, 24),
+      id: 'night'
+    },
+    morning: { // Europe early morning (06:00-10:00 CET = 05:00-09:00 UTC)
+      isActive: (hours >= 5 && hours < 9),
+      progress: calculatePeriodProgress(hours, 5, 9, 24),
+      id: 'morning'
+    }
+  };
+
+  // Update UI for each period
+  for (const [key, period] of Object.entries(periods)) {
+    const statusEl = document.getElementById(`status-${period.id}`);
+    const barEl = document.getElementById(`bar-${period.id}`);
+
+    if (statusEl) {
+      const statusText = period.isActive ?
+        (currentLang === 'en' ? 'High Limits' :
+         currentLang === 'ru' ? 'Высокие лимиты' :
+         currentLang === 'zh' ? '高限制' :
+         currentLang === 'ja' ? '高制限' :
+         currentLang === 'es' ? 'Límites Altos' : 'High Limits') :
+        (currentLang === 'en' ? 'Low Limits' :
+         currentLang === 'ru' ? 'Низкие лимиты' :
+         currentLang === 'zh' ? '低限制' :
+         currentLang === 'ja' ? '低制限' :
+         currentLang === 'es' ? 'Límites Bajos' : 'Low Limits');
+
+      statusEl.textContent = statusText;
+      statusEl.className = `limits-period-status ${period.isActive ? 'high' : 'low'}`;
+    }
+
+    if (barEl) {
+      barEl.style.width = period.progress + '%';
+      barEl.className = `limits-progress-bar ${period.isActive ? 'high-limits' : 'low-limits'}`;
+    }
+  }
+}
+
+function calculatePeriodProgress(current, start, end, total) {
+  if (start < end) {
+    // Normal range (e.g., 2-8)
+    if (current >= start && current < end) {
+      return ((current - start) / (end - start)) * 100;
+    } else {
+      return current < start ? 0 : 100;
+    }
+  } else {
+    // Wraparound range (e.g., 16-1)
+    if (current >= start || current < end) {
+      if (current >= start) {
+        return ((current - start) / (total - start + end)) * 100;
+      } else {
+        return ((total - start + current) / (total - start + end)) * 100;
+      }
+    } else {
+      return 0;
+    }
+  }
+}
 
 // ── setLang ─────────────────────────────────────────────────────────────────
 function setLang(lang) {
@@ -1302,6 +1548,9 @@ function setLang(lang) {
   // Update html lang attribute
   const langMap = { en:'en', ru:'ru', zh:'zh-Hans', ja:'ja', es:'es' };
   document.documentElement.lang = langMap[lang] || 'en';
+
+  // Update limits widget
+  updateLimitsWidget();
 }
 
 // ── setOS ────────────────────────────────────────────────────────────────────
@@ -1411,6 +1660,12 @@ document.addEventListener('DOMContentLoaded', function() {
   if (oldBookmarkBtn && !isBookmarkSupported()) {
     oldBookmarkBtn.classList.add('hidden');
   }
+
+  // Initialize limits widget
+  updateLimitsWidget();
+
+  // Update limits widget every minute
+  setInterval(updateLimitsWidget, 60000);
 });
 </script>
 
