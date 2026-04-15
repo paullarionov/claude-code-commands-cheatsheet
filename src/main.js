@@ -44,8 +44,8 @@ const createWindow = () => {
 
 const getTrayIcon = () => {
   const iconPath = process.platform === 'darwin'
-    ? path.join(__dirname, '../assets/tray-icon-mac.png')
-    : path.join(__dirname, '../assets/tray-icon-win.png');
+    ? path.join(__dirname, '../favicon/favicon-96x96.png')
+    : path.join(__dirname, '../favicon.ico');
   return iconPath;
 };
 

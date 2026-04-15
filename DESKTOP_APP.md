@@ -23,15 +23,12 @@ The Claude Limits Widget is now available as a standalone desktop application fo
 npm install
 ```
 
-2. Create tray icons:
-   - Place `tray-icon-mac.png` (16x16-44x44px) in the `assets/` directory for macOS
-   - Place `tray-icon-win.png` (16x16-32x32px) in the `assets/` directory for Windows
-   - See `assets/README.md` for icon creation guidance
-
-3. Run in development mode:
+2. Run in development mode:
 ```bash
 npm run dev
 ```
+
+The app automatically uses the project's existing favicon files for the tray icons.
 
 ## Building
 
@@ -126,10 +123,10 @@ package.json         # App configuration and scripts
 
 ## Troubleshooting
 
-### Tray Icon Not Showing
-- Ensure icon files exist in the `assets/` directory
-- Check that icon dimensions are correct (16x16 minimum)
-- Rebuild the application: `npm run build`
+### Application Not Starting
+- Make sure Node.js 14+ is installed: `node --version`
+- Verify all dependencies are installed: `npm install`
+- Check that all `src/` files exist
 
 ### Widget Not Updating
 - Check that you have an internet connection (for status updates)
