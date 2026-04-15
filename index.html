@@ -381,72 +381,123 @@
   .limits-widget-time {
     font-size: 10px;
     color: var(--text-2);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
-  .limits-period {
-    margin-bottom: 12px;
+  .limits-widget-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .limits-period-header {
+  .limits-timeline-label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
-  }
-
-  .limits-period-name {
-    font-size: 9.5px;
+    font-size: 9px;
     font-weight: 600;
-    color: var(--text);
-  }
-
-  .limits-period-time {
-    font-size: 8px;
     color: var(--text-2);
-  }
-
-  .limits-period-status {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 8px;
-    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
-  .limits-period-status.high {
+  .limits-current-status {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .limits-current-status.high {
     background: rgba(34, 197, 94, 0.15);
     color: #16a34a;
   }
 
-  .limits-period-status.low {
+  .limits-current-status.low {
     background: rgba(239, 68, 68, 0.15);
     color: #dc2626;
   }
 
-  .limits-progress {
-    height: 8px;
+  .limits-timeline {
+    position: relative;
+    height: 32px;
     background: var(--border-faint);
-    border-radius: 4px;
+    border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
-  .limits-progress-bar {
+  .limits-zone {
+    position: absolute;
     height: 100%;
-    background: linear-gradient(90deg, #22c55e, #16a34a);
-    transition: width 0.3s ease, background 0.3s ease;
-    border-radius: 4px;
+    top: 0;
   }
 
-  .limits-progress-bar.low-limits {
+  .limits-zone-red {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+    opacity: 0.7;
+  }
+
+  .limits-zone-green {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    opacity: 0.7;
+  }
+
+  .limits-current-indicator {
+    position: absolute;
+    top: -4px;
+    width: 3px;
+    height: 40px;
+    background: #8B5CF6;
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+    z-index: 10;
+  }
+
+  .limits-timeline-hours {
+    position: relative;
+    height: 16px;
+    font-size: 8px;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .limits-hour-mark {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .limits-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 9px;
+    margin-top: 4px;
+  }
+
+  .limits-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-2);
+  }
+
+  .limits-legend-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .limits-legend-red {
     background: linear-gradient(90deg, #ef4444, #dc2626);
   }
 
-  .limits-progress-bar.medium-limits {
-    background: linear-gradient(90deg, #f59e0b, #d97706);
+  .limits-legend-green {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
   }
 
   body.night-theme .limits-widget {
@@ -778,37 +829,42 @@
     </div>
     <div class="limits-widget-time" id="widget-time"></div>
 
-    <div class="limits-period">
-      <div class="limits-period-header">
-        <span class="limits-period-name" data-i18n="limits-peak-hours">Peak Hours (USA working hours)</span>
-        <span class="limits-period-status" id="status-peak"></span>
+    <div class="limits-widget-main">
+      <div class="limits-timeline-label">
+        <span data-i18n="limits-24h">24-hour cycle (UTC)</span>
+        <span class="limits-current-status" id="current-status"></span>
       </div>
-      <div class="limits-progress">
-        <div class="limits-progress-bar" id="bar-peak" style="width: 0%"></div>
-      </div>
-      <div class="limits-period-time" data-i18n="limits-peak-time">16:00–01:00 UTC</div>
-    </div>
 
-    <div class="limits-period">
-      <div class="limits-period-header">
-        <span class="limits-period-name" data-i18n="limits-night-usa">Night (USA)</span>
-        <span class="limits-period-status" id="status-night"></span>
-      </div>
-      <div class="limits-progress">
-        <div class="limits-progress-bar" id="bar-night" style="width: 0%"></div>
-      </div>
-      <div class="limits-period-time" data-i18n="limits-night-time">02:00–08:00 UTC</div>
-    </div>
+      <div class="limits-timeline">
+        <!-- Red zone: 16:00-01:00 UTC (Peak hours) -->
+        <div class="limits-zone limits-zone-red" style="left: 0%; width: calc(100% * 9 / 24); border-radius: 6px 0 0 6px;"></div>
+        <div class="limits-zone limits-zone-red" style="right: 0%; width: calc(100% * 1 / 24); border-radius: 0 6px 6px 0;"></div>
 
-    <div class="limits-period">
-      <div class="limits-period-header">
-        <span class="limits-period-name" data-i18n="limits-morning-eu">Early Morning (Europe)</span>
-        <span class="limits-period-status" id="status-morning"></span>
+        <!-- Green zones: 02:00-08:00 and 06:00-10:00 UTC -->
+        <div class="limits-zone limits-zone-green" style="left: calc(100% * 2 / 24); width: calc(100% * 6 / 24);"></div>
+        <div class="limits-zone limits-zone-green" style="left: calc(100% * 6 / 24); width: calc(100% * 4 / 24);"></div>
+
+        <!-- Current time indicator -->
+        <div class="limits-current-indicator" id="current-indicator"></div>
       </div>
-      <div class="limits-progress">
-        <div class="limits-progress-bar" id="bar-morning" style="width: 0%"></div>
+
+      <div class="limits-timeline-hours">
+        <div class="limits-hour-mark" style="left: 0%;">00</div>
+        <div class="limits-hour-mark" style="left: 25%;">06</div>
+        <div class="limits-hour-mark" style="left: 50%;">12</div>
+        <div class="limits-hour-mark" style="left: 75%;">18</div>
       </div>
-      <div class="limits-period-time" data-i18n="limits-morning-time">06:00–10:00 CET</div>
+
+      <div class="limits-legend">
+        <div class="limits-legend-item">
+          <span class="limits-legend-box limits-legend-red"></span>
+          <span data-i18n="limits-peak-label">Peak Hours (16:00–01:00 UTC)</span>
+        </div>
+        <div class="limits-legend-item">
+          <span class="limits-legend-box limits-legend-green"></span>
+          <span data-i18n="limits-best-label">Best Time (02:00–10:00 UTC)</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1401,15 +1457,9 @@ const T = {
 
   // Limits Widget
   'limits-title':   { en:'API Limits Status', ru:'Статус лимитов API', zh:'API 限制状态', ja:'API制限ステータス', es:'Estado de Límites de API' },
-  'limits-peak-hours': { en:'Peak Hours (USA working hours)', ru:'Часы пик (рабочие часы США)', zh:'高峰时段（美国工作时间）', ja:'ピーク時間（USA営業時間）', es:'Horas Pico (horario laboral USA)' },
-  'limits-peak-time': { en:'16:00–01:00 UTC • Heavy load', ru:'16:00–01:00 UTC • Высокая нагрузка', zh:'16:00–01:00 UTC • 负载重', ja:'16:00–01:00 UTC • 高負荷', es:'16:00–01:00 UTC • Carga alta' },
-  'limits-night-usa': { en:'Night (USA)', ru:'Ночь (США)', zh:'夜间（美国）', ja:'夜間（USA）', es:'Noche (USA)' },
-  'limits-night-time': { en:'02:00–08:00 UTC • Min. load', ru:'02:00–08:00 UTC • Мин. нагрузка', zh:'02:00–08:00 UTC • 最小负载', ja:'02:00–08:00 UTC • 最小負荷', es:'02:00–08:00 UTC • Carga mín.' },
-  'limits-morning-eu': { en:'Early Morning (Europe)', ru:'Раннее утро (Европа)', zh:'早上（欧洲）', ja:'早朝（ヨーロッパ）', es:'Madrugada (Europa)' },
-  'limits-morning-time': { en:'06:00–10:00 CET • Low load', ru:'06:00–10:00 CET • Низкая нагрузка', zh:'06:00–10:00 CET • 负载低', ja:'06:00–10:00 CET • 低負荷', es:'06:00–10:00 CET • Carga baja' },
-  'limits-status-high': { en:'High Limits', ru:'Высокие лимиты', zh:'高限制', ja:'高制限', es:'Límites Altos' },
-  'limits-status-low': { en:'Low Limits', ru:'Низкие лимиты', zh:'低限制', ja:'低制限', es:'Límites Bajos' },
-  'limits-your-time': { en:'Your time:', ru:'Ваше время:', zh:'你的时间：', ja:'あなたの時間：', es:'Tu hora:' }
+  'limits-24h':     { en:'24-hour cycle (UTC)', ru:'24-часовой цикл (UTC)', zh:'24小时周期（UTC）', ja:'24時間サイクル（UTC）', es:'Ciclo de 24 horas (UTC)' },
+  'limits-peak-label': { en:'Peak Hours (16:00–01:00 UTC)', ru:'Часы пик (16:00–01:00 UTC)', zh:'峰值时段（16:00–01:00 UTC）', ja:'ピーク時間（16:00–01:00 UTC）', es:'Horas Pico (16:00–01:00 UTC)' },
+  'limits-best-label': { en:'Best Time (02:00–10:00 UTC)', ru:'Лучшее время (02:00–10:00 UTC)', zh:'最佳时间（02:00–10:00 UTC）', ja:'最高時（02:00–10:00 UTC）', es:'Mejor Hora (02:00–10:00 UTC)' }
 };
 
 // Footer HTML per language
@@ -1427,12 +1477,13 @@ let currentLang = 'en';
 // ── Limits Widget ───────────────────────────────────────────────────────────
 function updateLimitsWidget() {
   const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
 
-  // Get timezone info
+  // Get UTC time for period detection
+  const utcHours = now.getUTCHours();
+  const utcMinutes = now.getUTCMinutes();
+
+  // Get local time for display
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const utcOffset = -now.getTimezoneOffset() / 60;
   const timeStr = now.toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
@@ -1451,73 +1502,39 @@ function updateLimitsWidget() {
     timeDisplay.textContent = `${label} ${timeStr} (${timezone})`;
   }
 
-  // Determine periods
-  const periods = {
-    peak: { // USA working hours (16:00-01:00 UTC)
-      isActive: (hours >= 16 || hours < 1),
-      progress: calculatePeriodProgress(hours, 16, 1, 24),
-      id: 'peak'
-    },
-    night: { // USA night (02:00-08:00 UTC)
-      isActive: (hours >= 2 && hours < 8),
-      progress: calculatePeriodProgress(hours, 2, 8, 24),
-      id: 'night'
-    },
-    morning: { // Europe early morning (06:00-10:00 CET = 05:00-09:00 UTC)
-      isActive: (hours >= 5 && hours < 9),
-      progress: calculatePeriodProgress(hours, 5, 9, 24),
-      id: 'morning'
-    }
-  };
+  // Calculate position on 24-hour timeline (UTC) - 0 to 100%
+  const totalMinutesUTC = utcHours * 60 + utcMinutes;
+  const positionPercent = (totalMinutesUTC / (24 * 60)) * 100;
 
-  // Update UI for each period
-  for (const [key, period] of Object.entries(periods)) {
-    const statusEl = document.getElementById(`status-${period.id}`);
-    const barEl = document.getElementById(`bar-${period.id}`);
-
-    if (statusEl) {
-      const statusText = period.isActive ?
-        (currentLang === 'en' ? 'High Limits' :
-         currentLang === 'ru' ? 'Высокие лимиты' :
-         currentLang === 'zh' ? '高限制' :
-         currentLang === 'ja' ? '高制限' :
-         currentLang === 'es' ? 'Límites Altos' : 'High Limits') :
-        (currentLang === 'en' ? 'Low Limits' :
-         currentLang === 'ru' ? 'Низкие лимиты' :
-         currentLang === 'zh' ? '低限制' :
-         currentLang === 'ja' ? '低制限' :
-         currentLang === 'es' ? 'Límites Bajos' : 'Low Limits');
-
-      statusEl.textContent = statusText;
-      statusEl.className = `limits-period-status ${period.isActive ? 'high' : 'low'}`;
-    }
-
-    if (barEl) {
-      barEl.style.width = period.progress + '%';
-      barEl.className = `limits-progress-bar ${period.isActive ? 'high-limits' : 'low-limits'}`;
-    }
+  // Update current indicator position
+  const indicator = document.getElementById('current-indicator');
+  if (indicator) {
+    indicator.style.left = positionPercent + '%';
   }
-}
 
-function calculatePeriodProgress(current, start, end, total) {
-  if (start < end) {
-    // Normal range (e.g., 2-8)
-    if (current >= start && current < end) {
-      return ((current - start) / (end - start)) * 100;
-    } else {
-      return current < start ? 0 : 100;
-    }
-  } else {
-    // Wraparound range (e.g., 16-1)
-    if (current >= start || current < end) {
-      if (current >= start) {
-        return ((current - start) / (total - start + end)) * 100;
-      } else {
-        return ((total - start + current) / (total - start + end)) * 100;
-      }
-    } else {
-      return 0;
-    }
+  // Determine if in peak hours (16:00-01:00 UTC)
+  const isPeak = utcHours >= 16 || utcHours < 1;
+
+  // Determine if in best time (02:00-10:00 UTC)
+  const isBest = (utcHours >= 2 && utcHours < 10);
+
+  // Update status indicator
+  const statusEl = document.getElementById('current-status');
+  if (statusEl) {
+    const statusText = isPeak ?
+      (currentLang === 'en' ? '⏬ Low Limits (Peak Hours)' :
+       currentLang === 'ru' ? '⏬ Низкие лимиты (часы пик)' :
+       currentLang === 'zh' ? '⏬ 低限制（峰值时段）' :
+       currentLang === 'ja' ? '⏬ 低制限（ピーク時）' :
+       currentLang === 'es' ? '⏬ Límites Bajos (Horas Pico)' : '⏬ Low Limits') :
+      (currentLang === 'en' ? '⬆ High Limits (Best Time)' :
+       currentLang === 'ru' ? '⬆ Высокие лимиты (лучшее время)' :
+       currentLang === 'zh' ? '⬆ 高限制（最佳时间）' :
+       currentLang === 'ja' ? '⬆ 高制限（最高時）' :
+       currentLang === 'es' ? '⬆ Límites Altos (Mejor Hora)' : '⬆ High Limits');
+
+    statusEl.textContent = statusText;
+    statusEl.className = `limits-current-status ${isPeak ? 'low' : 'high'}`;
   }
 }
 
