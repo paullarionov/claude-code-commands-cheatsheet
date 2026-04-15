@@ -413,23 +413,16 @@
     color: #dc2626;
   }
 
-  .limits-timeline-section {
+  .limits-bar-section {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    margin-bottom: 8px;
   }
 
-  .limits-timeline-label {
-    font-size: 8.5px;
-    font-weight: 600;
-    color: var(--text-2);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .limits-timeline {
+  .limits-progress-bar-container {
     position: relative;
-    height: 40px;
+    height: 28px;
     background: var(--border-faint);
     border-radius: 8px;
     overflow: hidden;
@@ -443,35 +436,21 @@
   }
 
   .limits-zone-red {
-    background: linear-gradient(180deg, rgba(239, 68, 68, 0.8), rgba(220, 38, 38, 0.8));
+    background: linear-gradient(90deg, #ef4444, #dc2626);
   }
 
-  .limits-zone-green {
-    background: linear-gradient(180deg, rgba(34, 197, 94, 0.8), rgba(22, 163, 74, 0.8));
+  .limits-zone-blue {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
   }
 
-  .limits-current-indicator {
+  .limits-time-marker {
     position: absolute;
     top: 0;
     width: 2px;
     height: 100%;
-    background: #a78bfa;
-    box-shadow: 0 0 10px rgba(167, 139, 250, 0.8);
+    background: #fbbf24;
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.8), inset 0 0 4px rgba(255, 255, 255, 0.6);
     z-index: 10;
-  }
-
-  .limits-timeline-hours {
-    position: relative;
-    height: 18px;
-    font-size: 7.5px;
-    color: var(--text-3);
-    font-weight: 500;
-  }
-
-  .limits-hour-mark {
-    position: absolute;
-    top: 0;
-    transform: translateX(-50%);
   }
 
   .limits-info-grid {
@@ -573,8 +552,8 @@
     background: linear-gradient(135deg, #ef4444, #dc2626);
   }
 
-  .limits-legend-green {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
+  .limits-legend-blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
   }
 
   @media (max-width: 900px) {
@@ -926,27 +905,17 @@
       <div class="limits-current-status" id="current-status"></div>
     </div>
 
-    <div class="limits-timeline-section">
-      <div class="limits-timeline-label" data-i18n="limits-24h">24-hour cycle (UTC)</div>
+    <div class="limits-bar-section">
+      <div class="limits-progress-bar-container">
+        <!-- Red zones: 16:00-01:00 UTC -->
+        <div class="limits-zone limits-zone-red" style="left: 0%; width: calc(100% * 9 / 24);"></div>
+        <div class="limits-zone limits-zone-red" style="right: 0%; width: calc(100% * 1 / 24);"></div>
 
-      <div class="limits-timeline">
-        <!-- Red zone: 16:00-01:00 UTC (Peak hours) -->
-        <div class="limits-zone limits-zone-red" style="left: 0%; width: calc(100% * 9 / 24); border-radius: 8px 0 0 8px;"></div>
-        <div class="limits-zone limits-zone-red" style="right: 0%; width: calc(100% * 1 / 24); border-radius: 0 8px 8px 0;"></div>
+        <!-- Blue zone: 01:00-16:00 UTC -->
+        <div class="limits-zone limits-zone-blue" style="left: calc(100% * 1 / 24); width: calc(100% * 15 / 24);"></div>
 
-        <!-- Green zones: 02:00-10:00 UTC -->
-        <div class="limits-zone limits-zone-green" style="left: calc(100% * 1 / 24); width: calc(100% * 9 / 24);"></div>
-
-        <!-- Current time indicator (full height line) -->
-        <div class="limits-current-indicator" id="current-indicator"></div>
-      </div>
-
-      <div class="limits-timeline-hours">
-        <div class="limits-hour-mark" style="left: 0%;">00</div>
-        <div class="limits-hour-mark" style="left: 20.83%;">05</div>
-        <div class="limits-hour-mark" style="left: 41.66%;">10</div>
-        <div class="limits-hour-mark" style="left: 62.5%;">15</div>
-        <div class="limits-hour-mark" style="left: 83.33%;">20</div>
+        <!-- Current time marker -->
+        <div class="limits-time-marker" id="time-marker"></div>
       </div>
     </div>
 
@@ -976,8 +945,8 @@
         <span data-i18n="limits-peak-label">Peak Hours (16:00–01:00 UTC)</span>
       </div>
       <div class="limits-legend-item">
-        <span class="limits-legend-box limits-legend-green"></span>
-        <span data-i18n="limits-best-label">Best Time (02:00–10:00 UTC)</span>
+        <span class="limits-legend-box limits-legend-blue"></span>
+        <span data-i18n="limits-best-label">Best Time (01:00–16:00 UTC)</span>
       </div>
     </div>
   </div>
@@ -1620,18 +1589,17 @@ function updateLimitsWidget() {
     timeDisplay.textContent = `${label} ${timeStr} (${timezone})`;
   }
 
-  // Calculate position on timeline
+  // Calculate position on progress bar
   const totalMinutesUTC = utcHours * 60 + utcMinutes;
   const positionPercent = (totalMinutesUTC / (24 * 60)) * 100;
 
-  const indicator = document.getElementById('current-indicator');
-  if (indicator) {
-    indicator.style.left = positionPercent + '%';
+  const marker = document.getElementById('time-marker');
+  if (marker) {
+    marker.style.left = positionPercent + '%';
   }
 
   // Determine current period
   const isPeak = utcHours >= 16 || utcHours < 1;
-  const isBest = utcHours >= 1 && utcHours < 16;
 
   // Update status
   const statusEl = document.getElementById('current-status');
@@ -1652,21 +1620,19 @@ function updateLimitsWidget() {
     statusEl.className = `limits-current-status ${isPeak ? 'low' : 'high'}`;
   }
 
-  // Calculate next period transition
-  let nextTransitionHour, nextTransitionMinute, timeUntil, currentPeriodText, nextPeriodText;
+  // Calculate time until next period
+  let timeUntil, currentPeriodText, nextPeriodText;
 
   if (isPeak) {
-    // Currently in peak (16:00-01:00), next is best (01:00)
-    if (utcHours < 1) {
-      nextTransitionHour = 1;
-      nextTransitionMinute = 0;
-    } else {
-      nextTransitionHour = 1;
-      nextTransitionMinute = 0;
-    }
-    const hoursUntil = (nextTransitionHour - utcHours - 1) % 24;
+    // Currently in peak, next is best at 01:00 UTC
+    let nextHour = 1;
+    let hoursUntil = nextHour - utcHours;
+    if (hoursUntil <= 0) hoursUntil += 24;
     const minutesUntil = 60 - utcMinutes;
-    timeUntil = `${hoursUntil}h ${minutesUntil}m`;
+    if (minutesUntil === 60) {
+      hoursUntil -= 1;
+    }
+    timeUntil = `${hoursUntil}h ${minutesUntil % 60}m`;
 
     currentPeriodText = currentLang === 'en' ? 'Peak Hours (Low Limits)' :
                         currentLang === 'ru' ? 'Часы пик (низкие лимиты)' :
@@ -1679,11 +1645,14 @@ function updateLimitsWidget() {
                      currentLang === 'ja' ? '最高時（高制限）' :
                      currentLang === 'es' ? 'Mejor Hora (Límites Altos)' : 'Best Time';
   } else {
-    // Currently in best (01:00-16:00), next is peak (16:00)
-    nextTransitionHour = 16;
-    const hoursUntil = nextTransitionHour - utcHours;
+    // Currently in best, next is peak at 16:00 UTC
+    let nextHour = 16;
+    let hoursUntil = nextHour - utcHours;
     const minutesUntil = 60 - utcMinutes;
-    timeUntil = `${hoursUntil}h ${minutesUntil}m`;
+    if (minutesUntil === 60) {
+      hoursUntil -= 1;
+    }
+    timeUntil = `${hoursUntil}h ${minutesUntil % 60}m`;
 
     currentPeriodText = currentLang === 'en' ? 'Best Time (High Limits)' :
                         currentLang === 'ru' ? 'Лучшее время (высокие лимиты)' :
