@@ -1,0 +1,56 @@
+{
+  "name": "claude-limits-widget",
+  "version": "1.0.0",
+  "description": "Claude API Limits Status Widget for Mac and Windows traybar",
+  "main": "src/main.js",
+  "homepage": "./",
+  "author": "Claude Code Community",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "npm run build:mac && npm run build:win",
+    "build:mac": "electron-builder --mac --publish never",
+    "build:win": "electron-builder --win --publish never",
+    "build:all": "electron-builder -mw --publish never"
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest"
+  },
+  "build": {
+    "appId": "com.claude.limits-widget",
+    "productName": "Claude Limits Widget",
+    "files": [
+      "src/main.js",
+      "src/preload.js",
+      "src/widget.html",
+      "src/widget.css",
+      "src/widget.js",
+      "favicon/favicon-96x96.png",
+      "favicon.ico",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.utilities",
+      "icon": "favicon/favicon-96x96.png"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "favicon.ico",
+      "uninstallerIcon": "favicon.ico"
+    }
+  }
+}
