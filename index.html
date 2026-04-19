@@ -2314,51 +2314,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script>
-  const dropdownToggle = document.querySelector('.dropdown-toggle');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
-  const dropdown = document.querySelector('.dropdown');
-  let hideTimeout;
-
-  if (dropdownToggle && dropdownMenu && dropdown) {
-    // Show menu on click
-    dropdownToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-      dropdownToggle.setAttribute('aria-expanded', !isExpanded);
-      dropdownMenu.setAttribute('aria-hidden', isExpanded);
-    });
-
-    // Show menu on hover
-    dropdown.addEventListener('mouseenter', () => {
-      clearTimeout(hideTimeout);
-      dropdownToggle.setAttribute('aria-expanded', 'true');
-      dropdownMenu.setAttribute('aria-hidden', 'false');
-    });
-
-    // Hide menu on mouse leave with small delay
-    dropdown.addEventListener('mouseleave', () => {
-      hideTimeout = setTimeout(() => {
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-        dropdownMenu.setAttribute('aria-hidden', 'true');
-      }, 150);
-    });
-
-    // Keyboard navigation
-    dropdownToggle.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-        dropdownToggle.setAttribute('aria-expanded', !isExpanded);
-        dropdownMenu.setAttribute('aria-hidden', isExpanded);
-      } else if (e.key === 'Escape') {
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-        dropdownMenu.setAttribute('aria-hidden', 'true');
-      }
-    });
-  }
-</script>
-
 <script src="js/navbar-loader.js"></script>
 </body>
 </html>

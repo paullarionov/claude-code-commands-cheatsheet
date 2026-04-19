@@ -32,24 +32,62 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 function initializeDropdownToggle() {
   const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  let hideTimeout;
 
   dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const menu = toggle.nextElementSibling;
-      if (menu && menu.classList.contains('dropdown-menu')) {
-        const isHidden = menu.style.display === 'none' || menu.style.display === '';
-        menu.style.display = isHidden ? 'block' : 'none';
-        toggle.setAttribute('aria-expanded', isHidden);
+    const dropdown = toggle.closest('.dropdown');
+    const menu = toggle.nextElementSibling;
+
+    if (menu && menu.classList.contains('dropdown-menu')) {
+      // Show menu on click
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isExpanded);
+        menu.setAttribute('aria-hidden', isExpanded);
+      });
+
+      // Show menu on hover
+      if (dropdown) {
+        dropdown.addEventListener('mouseenter', () => {
+          clearTimeout(hideTimeout);
+          toggle.setAttribute('aria-expanded', 'true');
+          menu.setAttribute('aria-hidden', 'false');
+        });
+
+        // Hide menu on mouse leave with small delay
+        dropdown.addEventListener('mouseleave', () => {
+          hideTimeout = setTimeout(() => {
+            toggle.setAttribute('aria-expanded', 'false');
+            menu.setAttribute('aria-hidden', 'true');
+          }, 150);
+        });
       }
-    });
+
+      // Keyboard navigation
+      toggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', !isExpanded);
+          menu.setAttribute('aria-hidden', isExpanded);
+        } else if (e.key === 'Escape') {
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
   });
 
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.dropdown')) {
       document.querySelectorAll('.dropdown-menu').forEach(menu => {
-        menu.style.display = 'none';
+        menu.setAttribute('aria-hidden', 'true');
+        const toggle = menu.previousElementSibling;
+        if (toggle && toggle.classList.contains('dropdown-toggle')) {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
       });
     }
   });
