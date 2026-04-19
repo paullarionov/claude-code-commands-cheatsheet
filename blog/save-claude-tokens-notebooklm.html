@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Stretch your Claude Code token budget by routing heavy document analysis to NotebookLM. Four workflows, install steps, and the risks to watch for.">
+<meta name="keywords" content="Claude Code, NotebookLM, token usage, notebooklm-py, Claude skills, RAG, research workflow, Obsidian">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/save-claude-tokens-notebooklm.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/save-claude-tokens-notebooklm.html">
+<meta property="og:title" content="Save Claude Tokens by Integrating NotebookLM">
+<meta property="og:description" content="Let Claude orchestrate and NotebookLM do the heavy document work. Four workflows, install, and the caveats.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/save-claude-tokens-notebooklm.html">
+<meta name="twitter:title" content="Save Claude Tokens by Integrating NotebookLM">
+<meta name="twitter:description" content="Let Claude orchestrate and NotebookLM do the heavy document work. Four workflows, install, and the caveats.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Save Claude Tokens by Integrating NotebookLM">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-04-16T00:00:00Z">
+<meta property="article:modified_time" content="2026-04-19T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude">
+<meta property="article:tag" content="Tokens">
+<meta property="article:tag" content="NotebookLM">
+
+<title>Save Claude Tokens by Integrating NotebookLM — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Save Claude Tokens by Integrating NotebookLM",
+  "description": "Let Claude orchestrate and NotebookLM do the heavy document work. Four workflows, install, and the caveats.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Organization", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-04-16T00:00:00Z",
+  "dateModified": "2026-04-19T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/save-claude-tokens-notebooklm.html"}
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Save Claude Tokens by Integrating NotebookLM", "item": "https://claude-guides.com/blog/save-claude-tokens-notebooklm.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>Save Claude Tokens by Integrating NotebookLM</h1>
+  <p class="lede">Offload the heavy document crunching to Google's free infrastructure. Keep Claude tokens for orchestration and polish.</p>
+  <div class="post-meta">
+    <span>April 16, 2026</span>
+    <span>7 min read</span>
+    <span>Tips</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Install <code>notebooklm-py</code>, give Claude a skill that knows how to drive it, and let NotebookLM handle the big-document Q&A. Claude spends tokens only on orchestration and final polish. The result: a $20/mo Pro plan does what used to cost $200/mo.</p>
+</div>
+
+<p>"Claude usage limit reached. Your limit will reset at 7pm." If that message shows up at 2pm on a research day, you already know the problem. Claude is amnesic — every doc you feed into the context eats tokens, and a 30-document analysis eats a lot of them.</p>
+
+<p>The fix isn't a bigger plan. It's a bridge. Route heavy analytical work to Google NotebookLM (free, 50 sources per notebook) and keep Claude's tokens for the parts where Claude is uniquely good: orchestration and final polish.</p>
+
+<h2>Why the combination works</h2>
+
+<p>Claude Code is fantastic at multi-step orchestration — reading a repo, spinning up subagents, writing files, running scripts. It's expensive at bulk document Q&A because everything has to fit through its context window.</p>
+
+<p>NotebookLM is the inverse. It's a RAG tool built for cross-document questions. Upload PDFs, articles, YouTube transcripts, Docs, audio, images. Ask questions and get cited answers across all sources at once. Free tier: 50 sources per notebook. Pro: 300. Processing cost: zero.</p>
+
+<p>The catch: no official API. Browser-only. You can't script it.</p>
+
+<h2>The bridge: notebooklm-py</h2>
+
+<p>Developer Teng Ling reverse-engineered NotebookLM's internal protocols and shipped <code>notebooklm-py</code>, an open-source CLI. It drives NotebookLM entirely from the terminal — create notebooks, upload sources, run queries, generate slide decks, podcasts, and flashcards.</p>
+
+<p>You need Python 3.10+, a Google account, and a terminal. The repo lives at <code>github.com/teng-lin/notebooklm-py</code>. Follow the README to install and authenticate.</p>
+
+<h2>Teaching Claude to use it via skills</h2>
+
+<p>A <strong>skill</strong> is a set of instructions in a <code>SKILL.md</code> file that Claude reads when it detects a matching task. Think of it as a playbook on your machine — Claude loads it automatically when your request matches.</p>
+
+<p>Skills follow an open standard. They work in Claude Code, Cursor, Gemini CLI, Codex, and others. Personal skills live in <code>~/.claude/skills/skill-name/SKILL.md</code>. Project-scoped skills (shareable via git) live in <code>.claude/skills/skill-name/SKILL.md</code>.</p>
+
+<p>Install the NotebookLM skill in one command:</p>
+
+<pre><code>notebooklm skill install</code></pre>
+
+<p>Verify with <code>notebooklm skill status</code>. Once installed, Claude knows the command syntax without being told each session. Say something like "research B2B sales strategies and put together a report" and Claude picks up the skill automatically. Or invoke it directly with <code>/notebooklm</code>.</p>
+
+<div class="tip">
+  <strong>Build your own skills:</strong> run <code>/skill-creator</code> in Claude Code. Anthropic's meta-skill interviews you, generates the SKILL.md, runs test prompts, and packages the result. From idea to a tested skill in minutes.
+</div>
+
+<h2>Workflow A: research without burning tokens</h2>
+
+<p>You need to analyze 30+ documents. Doing it locally kills your token budget. Here's the loop:</p>
+
+<ol>
+  <li>Collect sources — PDFs, articles, YouTube transcripts (Claude can pull them with yt-dlp).</li>
+  <li>Claude creates the notebook: <code>notebooklm create "My Research Project"</code></li>
+  <li>Claude uploads every source with <code>notebooklm source add "./file.md" "https://url" "./report.pdf"</code></li>
+  <li>Claude queries instead of processing locally: <code>notebooklm ask "what are the three most important themes across all sources?"</code></li>
+  <li>Claude generates outputs — slide decks, flashcards, mind maps, data tables, audio — via <code>notebooklm generate</code> commands.</li>
+  <li>Claude polishes locally. Only this final step spends your Claude tokens.</li>
+</ol>
+
+<p>The expensive analytical work runs on Google's infrastructure. Claude tokens are reserved for orchestration and polish. That's how you stretch a $20 plan into what used to be a $200 month.</p>
+
+<h2>Workflow B: build expert agents from web research</h2>
+
+<p>You want a custom Claude skill for a specific domain, say B2B sales. Vague prompts produce vague agents. Use NotebookLM's Deep Research for autonomous expert-knowledge collection, then structure it into a skill.</p>
+
+<ol>
+  <li>Run Deep Research in the NotebookLM browser UI. Pick the "web" source type. Give it a specific query: <em>"advanced B2B multi-channel outbound sales strategies, retention loops, and re-engagement sequences."</em> Deep Research crawls hundreds of pages and builds a cited report.</li>
+  <li>Structure the output with the <strong>DBS framework</strong>: <em>Direction</em> (step-by-step logic, becomes the core <code>SKILL.md</code>), <em>Blueprints</em> (static reference material — templates, tone, rules — becomes companion files), <em>Solutions</em> (deterministic code needs — API calls, formatting, calculations — becomes scripts).</li>
+  <li>Paste the DBS output into Claude Code and run <code>/skill-creator</code>. Claude generates the full skill package.</li>
+  <li>Test and deploy. skill-creator stress-tests the new skill with generated prompts and lets you iterate to the quality bar.</li>
+</ol>
+
+<h2>Workflow C: memory that survives sessions</h2>
+
+<p>You spent three hours teaching Claude your naming conventions and project quirks. You closed the terminal. All gone.</p>
+
+<p>Fix it with a <code>/wrap-up</code> skill that extracts session gains and saves them to a persistent "Master Brain" NotebookLM notebook. Claude consults it at the start of every subsequent session.</p>
+
+<p>The skill extracts four things each time:</p>
+
+<ul>
+  <li>Your corrections (where Claude got it wrong)</li>
+  <li>Winning patterns that worked</li>
+  <li>Open questions and feature requests</li>
+  <li>Key decisions and their rationale</li>
+</ul>
+
+<p>Instead of saving to a local file, wrap-up pushes to the Master Brain: <code>notebooklm use master-brain-notebook-id "./session-summary-2026-04-06.md"</code>. Then add this line to your <code>CLAUDE.md</code>:</p>
+
+<p><em>"Before answering questions about project architecture, historical decisions, or my preferences, query the Master Brain notebook via the NotebookLM CLI."</em></p>
+
+<p>Over weeks the notebook accumulates hundreds of summaries. NotebookLM indexes them and builds semantic links. Claude pulls exactly the context it needs without loading everything into its window. Your agent actually remembers.</p>
+
+<h2>Workflow D: visual knowledge management with Obsidian</h2>
+
+<p>Claude-generated research, session summaries, and analysis pile up as invisible files in terminal directories. Launch Claude Code from the root of an Obsidian vault and everything shows up in a visual knowledge graph instead.</p>
+
+<pre><code>cd ~/Documents/MyVault
+claude</code></pre>
+
+<p>Add a <code>CLAUDE.md</code> at the vault root that defines folder structure, required metadata, link rules (wrap concepts in <code>[[double brackets]]</code> for the Obsidian graph), and formatting standards. Then build vault-specific skills:</p>
+
+<ul>
+  <li><code>/research &lt;topic&gt;</code> — Claude queries NotebookLM, downloads results, creates a note with metadata and cross-links</li>
+  <li><code>/daily</code> — generates a daily summary linking to everything you worked on</li>
+  <li><code>/wrap-up</code> — memory skill from Workflow C, saving directly into the vault</li>
+</ul>
+
+<p>As Claude creates files you see them in Obsidian. Miscategorized a note? Fix it and ask Claude to update <code>CLAUDE.md</code>. The feedback loop trains it to your preferences. Pair this with the Karpathy <a href="/blog/llm-knowledge-base-obsidian.html">LLM knowledge base pattern</a> for a compounding research layer.</p>
+
+<h2>What can go wrong</h2>
+
+<p>This stack is powerful. It also rides on an unofficial tool that could break tomorrow. Go in eyes open.</p>
+
+<ul>
+  <li><strong>Unofficial API.</strong> <code>notebooklm-py</code> reverse-engineers Google's internal protocols. Google doesn't endorse this. If they change the backend, commands will break. Treat it as a power-user tool, not production infrastructure.</li>
+  <li><strong>Anthropic usage policy.</strong> Automated workflows must use the official Claude Code client with an appropriate plan. Don't use this stack to bypass token limits through unofficial wrappers.</li>
+  <li><strong>GDPR and data residency.</strong> Claude's consumer tools process data in the US. For sensitive or regulated data, the enterprise API offers regional processing; the consumer tier does not.</li>
+  <li><strong>Cookie security.</strong> <code>storage_state.json</code> contains live Google session cookies. Never commit it to a public repo. Treat it like a password.</li>
+  <li><strong>Cookie expiry.</strong> You'll periodically need <code>notebooklm login</code> to re-auth. Takes 30 seconds.</li>
+</ul>
+
+<div class="tip">
+  <strong>Watch your actual usage.</strong> Before and after you install the bridge, check your <a href="/token-usage.html">Claude token usage</a>. The savings are dramatic only if you actually route the heavy work. If you're still pasting 30 PDFs into Claude, the skill isn't firing — fix the description so it matches your requests.
+</div>
+
+<h2>Command quick reference</h2>
+
+<ul>
+  <li><code>notebooklm create "Name"</code> — create a notebook</li>
+  <li><code>notebooklm source add file url ...</code> — add sources</li>
+  <li><code>notebooklm ask "question"</code> — query the notebook</li>
+  <li><code>notebooklm generate slide-deck | flashcards | mind-map | audio | data-table</code></li>
+  <li><code>notebooklm skill install</code> / <code>notebooklm skill status</code></li>
+  <li><code>notebooklm login</code> — re-authenticate when cookies expire</li>
+</ul>
+
+<h2>The bottom line</h2>
+
+<p>The heavy lifting doesn't have to happen inside Claude's context window. Route bulk document analysis to NotebookLM, keep Claude for orchestration and polish, and your token budget stops being the bottleneck. Install the bridge, install the skill, and try Workflow A on your next research project. For a compounding knowledge layer to pair with it, read <a href="/blog/llm-knowledge-base-obsidian.html">Build a Karpathy-Style LLM Knowledge Base in Obsidian</a>, or jump to <a href="/">the cheatsheet</a> for the full Claude Code reference.</p>
+
+<div class="cta">
+  Want the full Claude Code reference? <a href="/">Open the cheatsheet →</a>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/token-usage.html">Claude Token Usage</a></li>
+    <li><a href="/blog/llm-knowledge-base-obsidian.html">Build a Karpathy-Style LLM Knowledge Base in Obsidian</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2026 Claude Guides. <a href="/">Back to cheatsheet</a> · <a href="/blog/">All posts</a></p>
+</footer>
+
+<script src="/js/navbar-loader.js"></script>
+</body>
+</html>

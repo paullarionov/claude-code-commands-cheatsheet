@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How a 25-person startup rebuilt its entire engineering org around harness engineering, shipped 99% AI-written code, and deployed 3-8 times a day.">
+<meta name="keywords" content="AI-first, harness engineering, Claude Code, AI agents, engineering leadership, monorepo, CI/CD, autonomous engineering">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/ai-first-company-harness-engineering.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/ai-first-company-harness-engineering.html">
+<meta property="og:title" content="AI-First Companies: Restructuring Around Harness Engineering">
+<meta property="og:description" content="99% AI-written code, 3-8 deploys a day, two engineering roles. A field report from a company that actually rebuilt the loop.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/ai-first-company-harness-engineering.html">
+<meta name="twitter:title" content="AI-First Companies: Restructuring Around Harness Engineering">
+<meta name="twitter:description" content="99% AI-written code, 3-8 deploys a day, two engineering roles. A field report from a company that actually rebuilt the loop.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="AI-First Companies: Restructuring Around Harness Engineering">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-04-06T00:00:00Z">
+<meta property="article:modified_time" content="2026-04-19T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="AI-First">
+<meta property="article:tag" content="Engineering">
+<meta property="article:tag" content="Strategy">
+
+<title>AI-First Companies: Restructuring Around Harness Engineering — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AI-First Companies: Restructuring Around Harness Engineering",
+  "description": "99% AI-written code, 3-8 deploys a day, two engineering roles. A field report from a company that actually rebuilt the loop.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Organization", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-04-06T00:00:00Z",
+  "dateModified": "2026-04-19T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/ai-first-company-harness-engineering.html"}
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AI-First Companies: Restructuring Around Harness Engineering", "item": "https://claude-guides.com/blog/ai-first-company-harness-engineering.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>AI-First Companies: Restructuring Around Harness Engineering</h1>
+  <p class="lede">99% AI-written code, 3-8 deploys a day, two engineering roles. A field report from a company that actually rebuilt the loop.</p>
+  <div class="post-meta">
+    <span>April 6, 2026</span>
+    <span>9 min read</span>
+    <span>Strategy</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Adding AI to your existing workflow gets you 10-20% efficiency. Rebuilding the workflow around AI — harness engineering — is multiplicative. That means a monorepo agents can inspect, deterministic CI/CD, AI code review as a gate, and a self-healing triage loop. Two roles emerge: architects who design the harness, and operators who work the tickets it generates.</p>
+</div>
+
+<p>A team at CREAO ships a feature at 10 AM, A/B tests it by noon, kills it by 3 PM based on the data, and ships an improved version by 5 PM. Three months ago that loop would have taken six weeks. They didn't get there by dropping Copilot into the IDE. They took the engineering process apart and rebuilt it around agents.</p>
+
+<p>OpenAI later named the pattern <strong>harness engineering</strong>: the team's job is no longer to write code. It's to give agents the ability to do useful work — and to make every failure a missing capability, not a missing effort.</p>
+
+<h2>AI-assisted is not AI-first</h2>
+
+<p>Most "AI-first" companies aren't. The engineer opens Cursor. The PM drafts specs in ChatGPT. QA tries AI test generation. The process stays the same and you get a 10-20% lift.</p>
+
+<p>That's AI-assisted. AI-first means you redesign the process, architecture, and org on the assumption that AI is the primary builder. You stop asking "how can AI help engineers?" and start asking "how do we rebuild everything so AI builds and engineers provide direction and judgment?"</p>
+
+<p>Vibe coding — prompt until something works, commit, repeat — produces prototypes. Production needs stability, reliability, and security even when AI writes the code. You build the system that guarantees those properties. Prompts become consumable.</p>
+
+<h2>Three bottlenecks that force the rebuild</h2>
+
+<h3>Product management</h3>
+
+<p>PMs used to spend weeks researching, designing, and spec'ing. Agents implement features in two hours. A week-long planning cycle becomes the constraint. PMs either evolve into product architects working at iteration speed or step out of the build cycle.</p>
+
+<h3>QA</h3>
+
+<p>Same dynamic. Build time: two hours. Manual test time: three days. You've moved the bottleneck three meters downstream. Replace manual QA with AI-built testing platforms that test AI-written code.</p>
+
+<h3>Headcount</h3>
+
+<p>Competitors have 100× the people. You can't hire to parity. You have to design to parity — and that means all three systems (design, implement, test) need AI inside them. Leave one manual and it caps the entire pipeline.</p>
+
+<h2>The architectural move: one monorepo Claude can see</h2>
+
+<p>CREAO's old architecture sprawled across several independent repositories. One change meant edits in three or four places. From a human engineer's view: tolerable. From an agent's view: opaque. No cross-service reasoning, no local integration tests, no full picture.</p>
+
+<p>They consolidated into a single monorepo for one reason: <em>so AI can see everything</em>. That's harness engineering in practice. The more of your system lives in a form an agent can inspect, validate, and modify, the more leverage you get. A fragmented codebase is invisible to agents. A unified one is readable.</p>
+
+<div class="tip">
+  <strong>Harness first:</strong> before you scale agents, build the harness. Fast AI without fast validation is fast-growing tech debt. The monorepo, the CI gates, and the observability come first. Everything else rides on top.
+</div>
+
+<h2>The deployment stack</h2>
+
+<p>Every code change runs a six-phase pipeline with no manual overrides: <strong>Verify CI → Build and Deploy Dev → Test Dev → Deploy Prod → Test Prod → Release.</strong> The CI gate checks types, lint, unit and integration tests, Docker builds, Playwright E2E, and environment parity. Determinism lets agents predict outcomes and reason about failures.</p>
+
+<p>The key components:</p>
+
+<ul>
+  <li><strong>AWS + CloudWatch</strong> with container autoscaling and circuit-breaker rollback. If metrics degrade after deploy, the system rolls itself back. Structured logging, 25+ alerts, custom metrics queried daily.</li>
+  <li><strong>Claude code review as a gate.</strong> Every PR triggers three parallel passes: code quality, security, dependencies. These are gates, not recommendations. When you deploy eight times a day, no human maintains attention on every PR.</li>
+  <li><strong>Statsig feature flags.</strong> Every feature ships behind a gate with a kill switch. Bad features die the day they ship.</li>
+  <li><strong>Graphite merge queues</strong> rebase on main, rerun CI, merge only if green.</li>
+  <li><strong>Linear</strong> as the human-facing layer for auto-created tickets with severity, sample logs, and suggested investigation paths.</li>
+</ul>
+
+<h2>The self-healing loop</h2>
+
+<p>This is the piece that makes the rest pay off.</p>
+
+<p>Every morning at 9:00 UTC an automated health check runs. Claude queries CloudWatch, analyzes error patterns across services, and posts a summary in Teams. An hour later the triage engine clusters production errors from CloudWatch and Sentry, scores each on nine severity parameters, and creates Linear tickets with sample logs, affected users, endpoints, and suggested investigation paths.</p>
+
+<p>The system deduplicates. Open ticket for the same pattern? Update it. Previously closed ticket recurring? Reopen as regression. When an engineer pushes a fix, the same pipeline processes it. After deploy, the triage engine rechecks CloudWatch. Errors resolved? Ticket auto-closes.</p>
+
+<p>Every tool owns one phase. No tool tries to do everything. The daily cycle creates a loop where errors are detected, prioritized, fixed, and verified with minimal manual intervention.</p>
+
+<h2>Results over 14 days</h2>
+
+<ul>
+  <li>3-8 production deploys per day on average</li>
+  <li>Bad features pulled the same day they ship</li>
+  <li>User engagement up, checkout conversion up</li>
+</ul>
+
+<p>People assume speed comes at the cost of quality. The opposite happened. Tighter feedback loops mean you learn more shipping daily than shipping monthly.</p>
+
+<h2>The two-role engineering org</h2>
+
+<h3>Architect</h3>
+
+<p>One or two people. They design the SOPs that teach AI how to work, build the test and triage infrastructure, define system boundaries, and define what "good" looks like to agents. The role requires deep critical thinking — you critique AI, you don't follow it. When an agent proposes a plan, the architect looks for holes: what failure modes did it miss, what safety boundaries did it break, what tech debt is it accumulating.</p>
+
+<p>Hardest role to hire for.</p>
+
+<h3>Operator</h3>
+
+<p>Everyone else. AI assigns tasks to people. The triage system finds a bug, creates a ticket, produces diagnostics, routes it. The human investigates, validates, approves the fix. AI writes the PR. The human checks for strategic risk, not line-by-line correctness.</p>
+
+<p>The work still requires skill and attention. It no longer requires the architectural thinking the old model required.</p>
+
+<div class="tip">
+  <strong>Juniors adapted faster than seniors.</strong> Less to unlearn, tools that amplified their impact. Seniors had to watch two months of their old work get done in an hour. In this transition, adaptability matters more than accumulated skill.
+</div>
+
+<h2>The human side of the transition</h2>
+
+<p>Management collapsed. The CTO went from 60% of time on people to under 10%. He moved from managing to building — writing code, designing SOPs, maintaining the harness.</p>
+
+<p>Most team conversations used to be alignment meetings, trade-off debates, priority arguments. Those conversations are necessary in the old model and exhausting. The team still talks, just about different things.</p>
+
+<p>The anxiety is real. When the CTO stops talking to you every day, you wonder what your value is. Some people spend more time debating whether AI can do their job than doing the job. There's no clean answer — but the same principle applies to humans and AI: if AI makes a mistake, you don't fire the agent. You build better validation, clearer constraints, stronger observability.</p>
+
+<h2>AI-first doesn't stop at engineering</h2>
+
+<p>Ship features in hours while marketing needs a week to announce and you've moved the bottleneck. Same for a monthly product planning cycle. CREAO extended AI-native operations to every function: release notes from changelogs, feature videos via AI motion graphics, daily social posts, health reports from CloudWatch and production DBs.</p>
+
+<p>If one function runs at agent speed and another at human speed, human speed caps everything.</p>
+
+<h2>What this means for you</h2>
+
+<h3>For engineers</h3>
+
+<p>Your value shifts from producing code to quality of judgment. Writing code fast is worth less every month. Evaluating, critiquing, and directing AI is worth more. Can you look at a generated UI and know it's wrong before a user tells you? Can you spot the failure mode the agent missed?</p>
+
+<h3>For CTOs and founders</h3>
+
+<ul>
+  <li>If your PM process takes longer than the build, start there</li>
+  <li>Build the testing harness <em>before</em> you scale agents</li>
+  <li>Start with one architect who builds the system and proves it works</li>
+  <li>Extend AI-native operations to every function, not just engineering</li>
+  <li>Expect resistance — and real employee uncertainty</li>
+</ul>
+
+<h2>The bottom line</h2>
+
+<p>Harness engineering is becoming standard. Nothing in CREAO's stack is proprietary — AWS, GitHub Actions, Claude, Statsig, Linear, Sentry, Graphite. The competitive edge is the decision to redesign everything around these tools and the willingness to pay the transition cost. If you're mapping your own path, our <a href="/blog/6-month-roadmap-ai-automation-builder.html">6-month automation-builder roadmap</a> lays out the skills curve, and <a href="/blog/claude-code-2-months-review.html">our 2-month Claude Code review</a> covers what breaks at scale. Ready to wire up the harness? Start with <a href="/">the cheatsheet</a>.</p>
+
+<div class="cta">
+  Want the full Claude Code reference? <a href="/">Open the cheatsheet →</a>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/6-month-roadmap-ai-automation-builder.html">6-Month Roadmap: AI Automation Builder</a></li>
+    <li><a href="/blog/claude-code-2-months-review.html">Claude Code: 2 Months Review</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2026 Claude Guides. <a href="/">Back to cheatsheet</a> · <a href="/blog/">All posts</a></p>
+</footer>
+
+<script src="/js/navbar-loader.js"></script>
+</body>
+</html>

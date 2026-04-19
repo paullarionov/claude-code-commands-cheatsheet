@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Five non-code pipelines you can package and sell with Claude Code as the orchestration layer — video clipping, lead enrichment, competitive intel, docs, and support.">
+<meta name="keywords" content="Claude Code, freelance automation, business pipelines, lead enrichment, video clipping, competitive intelligence, document extraction, AI services">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html">
+<meta property="og:title" content="5 Non-Code Pipelines You Can Sell Using Claude Code">
+<meta property="og:description" content="Claude Code isn't just an autocomplete. It's an orchestration layer for five repeatable, sellable business workflows — no app, no SaaS, no support queue.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html">
+<meta name="twitter:title" content="5 Non-Code Pipelines You Can Sell Using Claude Code">
+<meta name="twitter:description" content="Claude Code isn't just an autocomplete. It's an orchestration layer for five repeatable, sellable business workflows — no app, no SaaS, no support queue.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="5 Non-Code Pipelines You Can Sell Using Claude Code">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-04-11T00:00:00Z">
+<meta property="article:modified_time" content="2026-04-19T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Freelance">
+<meta property="article:tag" content="Automation">
+
+<title>5 Non-Code Pipelines You Can Sell Using Claude Code — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "5 Non-Code Pipelines You Can Sell Using Claude Code",
+  "description": "Claude Code isn't just an autocomplete. It's an orchestration layer for five repeatable, sellable business workflows — no app, no SaaS, no support queue.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Organization", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-04-11T00:00:00Z",
+  "dateModified": "2026-04-19T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html"}
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "5 Non-Code Pipelines You Can Sell Using Claude Code", "item": "https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>5 Non-Code Pipelines You Can Sell Using Claude Code</h1>
+  <p class="lede">Claude Code hit $2.5B ARR in nine months. Most users treat it as autocomplete. The real money is using it as an orchestration layer for workflows that aren't about code at all.</p>
+  <div class="post-meta">
+    <span>April 11, 2026</span>
+    <span>7 min read</span>
+    <span>Business</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Claude Code is being used as fancy autocomplete when it should be used as an orchestration layer. Five pipelines you can package and sell today: video clipping, lead enrichment, competitive intel, document extraction, and knowledge-base automation. No app. No SaaS. No support queue.</p>
+</div>
+
+<p>Claude Code hit $2.5B annual revenue in nine months — faster than ChatGPT, faster than Slack, faster than any B2B product in history to $1B. Almost everyone using it treats it as a faster way to write code. That's leaving money on the table.</p>
+
+<p>The real game is Claude Code as an orchestration layer for non-code businesses: repeatable workflows that pull data, process it, generate output, and deliver it. No apps to build. No SaaS to host. Just pipelines that solve expensive problems. Here are five you can package and sell this quarter.</p>
+
+<h2>1. Video clipping pipeline</h2>
+
+<p>Every creator you know has 50+ hours of long-form video sitting on YouTube, published once, never revisited. Repackaging it manually is 3–4 hours per video: watch, scrub, cut, write platform-specific copy, schedule. Every week. Forever.</p>
+
+<p>The pipeline: drop a YouTube URL into Claude Code. Claude calls a clipping API and gets 15+ clips ranked by virality (0–99), each with titles, hashtags, 9:16 reframes, and burned-in captions. In parallel, it pulls a full transcript. Then it filters — score above 75, duration over 20s — down to 7–10 keepers.</p>
+
+<p>For each survivor, Claude extracts the matching transcript chunk, runs it through a copywriting prompt with your voice profile, and outputs LinkedIn, TikTok, and Shorts posts adapted per platform. Optional: push everything into a CMS as "In review." One URL in, ten publish-ready posts out.</p>
+
+<p><strong>The math.</strong> 4 hours saved per video × 3 videos/week × $50/hour = $600/week of saved time. Charge $500/month. The ROI sells itself.</p>
+
+<p><strong>Best buyers:</strong> creators and agencies publishing 2–3 videos a week.</p>
+
+<h2>2. Lead enrichment agent</h2>
+
+<p>Sales teams still hand-enrich leads. LinkedIn tab, company site, Google, spreadsheet, CRM. Eight to twelve minutes per prospect. At 50 leads a day, that's a full workday spent on data entry.</p>
+
+<p>Four stages: load, enrich, score, route. You define the ICP once. Claude takes a raw list of domains, visits each site, reads industry signals, team size, tech stack, positioning, recent press — and scores 0–100 against the ICP. Matches go to HubSpot. Non-matches get flagged with a reason so nobody revisits them.</p>
+
+<p>The useful layer is interpretation. Claude reads the "About" page to extract what a company <em>actually</em> does, not what the tagline says. It checks careers pages: three new DevOps openings means they're scaling infrastructure; a fresh Head of AI means they're buying, not building.</p>
+
+<p>Add a personalization pass — Claude pulls a recent blog post and writes a one-line opener per prospect. That single line turns cold into warm.</p>
+
+<div class="tip">
+  <strong>Compliance note.</strong> Don't scrape LinkedIn directly. Use approved connectors or public-profile-only flows. Position it as open-source enrichment. Nobody wants a cease-and-desist over a prospecting sheet.
+</div>
+
+<p><strong>Best buyers:</strong> outbound agencies, recruiting firms, B2B sales teams with SDRs.</p>
+
+<h2>3. Competitive intelligence pipeline</h2>
+
+<p>Somebody on the product or marketing team spends every Monday opening five tabs, reading changelogs, screenshotting pricing pages, and posting a Slack summary three people skim before it gets buried. 3–5 hours per week per analyst. Misses anything that changes between checks.</p>
+
+<p>Replace it with a scheduled pipeline. Target URLs live in a config. Claude scrapes on cadence, stores snapshots, diffs against the previous version, and writes human-readable change descriptions:</p>
+
+<p><em>"Competitor A raised Pro pricing from $49 to $59. Competitor B added SOC 2 to the enterprise page. Competitor C posted 4 new ML engineer roles last week."</em></p>
+
+<p>That last one matters more than it looks. Hiring patterns reveal roadmap priorities six months before features ship. Stack pricing analysis on top and you've got a table of plans, bundles, and price points across 10 competitors, updated daily.</p>
+
+<p><strong>Pricing:</strong> $1,000–2,500/month depending on target count and cadence. Your compute is under $100/mo. The margin is in the analysis layer — knowing which signals matter and how to interpret them.</p>
+
+<p><strong>Best buyers:</strong> B2B SaaS PMs, marketing teams on positioning, strategy consultants working multiple clients in one vertical.</p>
+
+<h2>4. Document extraction pipeline</h2>
+
+<p>Boring. Routine. Sells like crazy.</p>
+
+<p>Invoices, receipts, contracts, POs. In 2026, still being typed into spreadsheets by hand. Finance teams at mid-size companies burn 15–20 hours per week on manual data entry from documents that follow predictable formats.</p>
+
+<p>The pipeline: upload a document, run OCR if it's a scan, extract fields into a fixed schema (vendor, invoice number, date, line items, totals, tax, terms), validate (does the line-item math add up? does the PO match an open order?), push clean records to accounting, queue flagged ones for human review.</p>
+
+<p>Production pipelines show <strong>94–97% field-level accuracy</strong> on standard invoices. Dirty scans still need review. That honesty is what makes it sellable — you're not promising magic, you're promising that 95% of the routine disappears and the rest gets flagged with context.</p>
+
+<p>Claude adds a layer most OCR tools miss: <em>understanding</em>. It reads a contract and extracts renewal dates, termination clauses, and payment schedules. Reads a receipt and categorizes the expense. Extraction is semantic, not positional.</p>
+
+<div class="tip">
+  <strong>Why it closes fast.</strong> For companies doing hundreds of documents a month, this is one FTE's worth of work. The person currently doing it hates it. Their manager knows it's a retention risk. You solve both in one sale.
+</div>
+
+<p><strong>Pricing:</strong> per document ($1–3/invoice) or flat monthly ($500–2,000). Your cost is cents. The value is 8–12 minutes of skilled labor per document.</p>
+
+<p><strong>Best buyers:</strong> finance at 50–500 person companies, accounting firms, ops teams handling vendor docs, legal reviewing contract portfolios.</p>
+
+<h2>5. Knowledge base and support automation</h2>
+
+<p>Every SaaS company with more than 1,000 users has the same problem: documentation lags the product by six months. Engineers ship. The changelog is two lines. Support tickets stack up. A tech writer adds to the backlog. Three months later, the article ships — but the feature already changed twice.</p>
+
+<p>Two stages close the gap.</p>
+
+<p><strong>Gap analysis.</strong> Claude crawls the existing docs, pulls recent tickets from Zendesk or Intercom, and maps them. Questions customers ask repeatedly with no matching article get ranked by ticket volume. 200 tickets on one topic outweighs 5 on another.</p>
+
+<p><strong>Content generation.</strong> Claude drafts articles per gap. Pulls context from the actual tickets (real questions, real confusion), the product changelog, and adjacent articles. Matches your team's format. Drafts land in a review queue. A writer approves, edits, publishes. Weekly cadence.</p>
+
+<p>One level deeper: Claude flags stale articles. If tickets reference a feature and its doc was last updated eight months ago, it queues an update based on recent changelog entries.</p>
+
+<p><strong>Pricing:</strong> one-time setup ($5,000–10,000) plus monthly retainer ($1,500–3,000).</p>
+
+<p><strong>ROI math:</strong> 2,000 tickets/month, 30% should be docs-deflectable, that's 600 tickets at $5–15 handling cost each — $3,000–9,000/month saved. Pays for itself in month one.</p>
+
+<h2>The pattern across all five</h2>
+
+<p>Notice what none of these require.</p>
+
+<ul>
+  <li>No app to build and maintain</li>
+  <li>No infrastructure to babysit</li>
+  <li>No technically sophisticated buyer — each buyer already pays for the work</li>
+  <li>No support queue — your client operates the pipeline, you run it as a service</li>
+</ul>
+
+<p>You're not selling "AI automation." You're packaging recurring business work into pipelines customers already understand and already pay for. Claude Code is the orchestration layer. APIs and tools are the capability layer. <strong>Your domain knowledge is the competitive moat.</strong></p>
+
+<div class="tip">
+  <strong>How to start.</strong> Pick one. Build it for yourself first — even if you're not the customer, build it on your own data so the kinks surface before a client sees them. Then sell it to someone with the same problem at 10× the scale. Most of the value in each pipeline is the hundred small decisions you make while building it the first time.
+</div>
+
+<h2>The bottom line</h2>
+
+<p>Claude Code is the most useful orchestration layer in tech right now, and almost nobody is using it that way. The five pipelines above are recurring, high-margin, and low-overhead. Pick the one closest to your existing network and build it this week. You can spin up agent infrastructure with <a href="/blog/claude-managed-agents-playbook.html">Managed Agents</a> if you want to host it for clients — or keep it as a freelance service on top of your own setup.</p>
+
+<p>The business nobody's building is the one Claude Code makes easy. Reference commands on the <a href="/">cheatsheet</a>; more playbooks on the <a href="/blog/">blog index</a>.</p>
+
+<div class="cta">
+  Want the full Claude Code reference? <a href="/">Open the cheatsheet →</a>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/6-month-roadmap-ai-automation-builder.html">A 6-Month Roadmap for the AI Automation Builder</a></li>
+    <li><a href="/blog/claude-managed-agents-playbook.html">Claude Managed Agents: A Practical Playbook</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2026 Claude Guides. <a href="/">Back to cheatsheet</a> · <a href="/blog/">All posts</a></p>
+</footer>
+
+<script src="/js/navbar-loader.js"></script>
+</body>
+</html>

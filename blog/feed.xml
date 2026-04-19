@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Claude Guides Blog</title>
+    <link>https://claude-guides.com/blog/</link>
+    <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <image>
+      <url>https://claude-guides.com/og-image.png</url>
+      <title>Claude Guides Blog</title>
+      <link>https://claude-guides.com/blog/</link>
+    </image>
+
+    <item>
+      <title>Save Claude Tokens by Integrating NotebookLM</title>
+      <link>https://claude-guides.com/blog/save-claude-tokens-notebooklm.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/save-claude-tokens-notebooklm.html</guid>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Tips</category>
+      <description>Cut Claude token spend by offloading research and retrieval to Google's NotebookLM — a practical integration pattern with real numbers.</description>
+    </item>
+    <item>
+      <title>Hermes: Build a Self-Learning Agent with 7 Workflows</title>
+      <link>https://claude-guides.com/blog/hermes-self-learning-agent.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/hermes-self-learning-agent.html</guid>
+      <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Tutorial</category>
+      <description>A Claude Code agent that learns from its own runs — seven composable workflows, full walkthrough.</description>
+    </item>
+    <item>
+      <title>Claude Managed Agents: A Practical Playbook</title>
+      <link>https://claude-guides.com/blog/claude-managed-agents-playbook.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-managed-agents-playbook.html</guid>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Patterns, traps, and the playbook we wish existed when we shipped managed agents to production.</description>
+    </item>
+    <item>
+      <title>The Complete Claude Tools Guide</title>
+      <link>https://claude-guides.com/blog/claude-tools-complete-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-tools-complete-guide.html</guid>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>The four levels of Claude tool design — from your first tool to MCP and multi-agent orchestration.</description>
+    </item>
+    <item>
+      <title>The Complete Prompt Engineering Guide for Claude</title>
+      <link>https://claude-guides.com/blog/prompt-engineering-complete-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/prompt-engineering-complete-guide.html</guid>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Every prompt engineering technique that moved quality, ranked by how much it actually helped.</description>
+    </item>
+    <item>
+      <title>5 Non-Code Pipelines You Can Sell Using Claude Code</title>
+      <link>https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html</guid>
+      <pubDate>Sat, 11 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Business</category>
+      <description>Five productized Claude Code pipelines that don't involve writing a single line of application code — and how to price them.</description>
+    </item>
+    <item>
+      <title>The 6-Month Roadmap to Becoming an AI Automation Builder</title>
+      <link>https://claude-guides.com/blog/6-month-roadmap-ai-automation-builder.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/6-month-roadmap-ai-automation-builder.html</guid>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Career</category>
+      <description>A concrete month-by-month path from zero to your first paying clients as an AI automation builder.</description>
+    </item>
+    <item>
+      <title>15 Under-Used Claude Code Features (from Boris Cherny)</title>
+      <link>https://claude-guides.com/blog/boris-cherny-15-hidden-features.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/boris-cherny-15-hidden-features.html</guid>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Tips</category>
+      <description>Fifteen Claude Code features most users still miss — condensed into a practical checklist.</description>
+    </item>
+    <item>
+      <title>2 Months with Claude Code: A Field Report</title>
+      <link>https://claude-guides.com/blog/claude-code-2-months-review.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-2-months-review.html</guid>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Review</category>
+      <description>Honest field notes from two months of heavy Claude Code use — what worked, what wasted time, what surprised us.</description>
+    </item>
+    <item>
+      <title>Build a Karpathy-Style LLM Knowledge Base in Obsidian</title>
+      <link>https://claude-guides.com/blog/llm-knowledge-base-obsidian.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/llm-knowledge-base-obsidian.html</guid>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Tutorial</category>
+      <description>A step-by-step guide to building a Karpathy-inspired LLM knowledge base in Obsidian and feeding it to Claude.</description>
+    </item>
+    <item>
+      <title>AI-First Companies: Restructuring Around Harness Engineering</title>
+      <link>https://claude-guides.com/blog/ai-first-company-harness-engineering.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/ai-first-company-harness-engineering.html</guid>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Strategy</category>
+      <description>What CREAO-style AI-first restructuring means, and why harness engineering is replacing traditional application design.</description>
+    </item>
+    <item>
+      <title>The AI Perception Gap: What 632 Users Actually Believe</title>
+      <link>https://claude-guides.com/blog/ai-perception-gap-research.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/ai-perception-gap-research.html</guid>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Research</category>
+      <description>A survey of 632 practitioners reveals the gap between what modern AI can do and what people think is possible.</description>
+    </item>
+  </channel>
+</rss>

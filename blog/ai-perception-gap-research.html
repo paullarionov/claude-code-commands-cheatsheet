@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A survey of 632 AI users reveals a perception gap between what current models can do and what users believe is possible. Here are the four segments and the implications.">
+<meta name="keywords" content="AI perception gap, AI adoption research, AI literacy, audience segmentation, AI barriers, TAM, diffusion of innovations">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/ai-perception-gap-research.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/ai-perception-gap-research.html">
+<meta property="og:title" content="The AI Perception Gap: What 632 Users Actually Believe">
+<meta property="og:description" content="Most of AI's unrealized value isn't a technical ceiling — it's an information vacuum. A 632-person survey maps the gap, and the four segments inside it.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/ai-perception-gap-research.html">
+<meta name="twitter:title" content="The AI Perception Gap: What 632 Users Actually Believe">
+<meta name="twitter:description" content="Most of AI's unrealized value isn't a technical ceiling — it's an information vacuum. A 632-person survey maps the gap, and the four segments inside it.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="The AI Perception Gap: What 632 Users Actually Believe">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-04-05T00:00:00Z">
+<meta property="article:modified_time" content="2026-04-19T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Research">
+<meta property="article:tag" content="AI Adoption">
+<meta property="article:tag" content="Audience">
+
+<title>The AI Perception Gap: What 632 Users Actually Believe — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The AI Perception Gap: What 632 Users Actually Believe",
+  "description": "Most of AI's unrealized value isn't a technical ceiling — it's an information vacuum. A 632-person survey maps the gap, and the four segments inside it.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Organization", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-04-05T00:00:00Z",
+  "dateModified": "2026-04-19T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/ai-perception-gap-research.html"}
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "The AI Perception Gap: What 632 Users Actually Believe", "item": "https://claude-guides.com/blog/ai-perception-gap-research.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>The AI Perception Gap: What 632 Users Actually Believe</h1>
+  <p class="lede">A survey of active AI users finds that the real ceiling isn't model capability — it's what people think the models can do.</p>
+  <div class="post-meta">
+    <span>April 5, 2026</span>
+    <span>6 min read</span>
+    <span>Research</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>A 632-person study of active AI users found a large gap between what current models can do and what users believe is possible. Four segments — Curious, Ambitious, Blocked, Advanced — want different things. The biggest lever isn't better models; it's better information.</p>
+</div>
+
+<p>Ask a practitioner what today's AI can do, and the answer is usually a few years out of date. That's the finding from a 632-person survey of active AI users: the bottleneck isn't technology, it's belief. Most of the untapped value sits behind an information vacuum, not a technical one.</p>
+
+<p>This is a short writeup of the methodology, the four audience segments, and what the data implies for anyone building content, products, or positioning in AI today.</p>
+
+<h2>How the study was run</h2>
+
+<p>Sample: <strong>n = 632</strong>, drawn from the Telegram channel "Silicon Bag" (@prompt_design). A mixed quantitative and qualitative approach, with frameworks that are standard in the adoption literature:</p>
+
+<ul>
+  <li><strong>TAM</strong> (Technology Acceptance Model) — adoption barriers</li>
+  <li><strong>Rogers' Diffusion of Innovations</strong> — audience segmentation</li>
+  <li><strong>MAILS</strong> and <strong>GAIL</strong> — AI-literacy measurement</li>
+</ul>
+
+<p>Analysis combined k-means clustering (k=2 and k=4), NLP on open-ended responses (sentence-transformers, UMAP, HDBSCAN), and standard statistical tests (ANOVA, Chi², Spearman). The sample skews male, 25–40, technical, educated — so these are findings about <em>active users</em>, not the general public.</p>
+
+<h2>Confidence doesn't match usage</h2>
+
+<p>Self-assessed confidence breaks down roughly as:</p>
+
+<ul>
+  <li><strong>High</strong> (consider themselves advanced): ~17%</li>
+  <li><strong>Medium</strong> (regular, see the potential): ~50%</li>
+  <li><strong>Low</strong> (feel barriers, rarely use): ~33%</li>
+</ul>
+
+<p>The interesting finding: confidence and actual usage correlate only weakly. Spearman rho = 0.19 (p &lt; 0.001). Statistically real, practically small. People who call themselves advanced often aren't; people who feel blocked often do more than they realize.</p>
+
+<h2>The four segments</h2>
+
+<h3>A. Curious — 99 people (15.7%)</h3>
+<p>Interested, not yet active. They read about AI; they haven't found a starting point. Barrier: not knowing where to begin. They want step-by-step tutorials and concrete use cases with a low bar.</p>
+
+<h3>B. Ambitious — 315 people (49.8%)</h3>
+<p>Half the audience. Regular users who want to go deeper. They already use several tools and can see the automation potential. Barrier: no systematic knowledge. They want advanced techniques, integrations, and business-process automation.</p>
+
+<h3>C. Blocked — 110 people (17.4%)</h3>
+<p>Motivated but stuck. Tried multiple tools, hit concrete walls — technical complexity, language, cost. Frustration from expectations not matching results. They want solutions to specific problems and affordable alternatives.</p>
+
+<h3>D. Advanced — 108 people (17.1%)</h3>
+<p>Professional users with deep understanding. They build their own integrations, track new releases closely, and are frustrated by shallow content. They want frontier models, APIs, benchmarks, and research.</p>
+
+<div class="tip">
+  <strong>Where the money is.</strong> Segment B is half the audience and has the highest willingness to pay. Segment C has the highest pain — they'll pay for specific fixes. Segment D are opinion leaders who drive adoption of new tools, even if they buy less directly.
+</div>
+
+<h2>The gap, concretely</h2>
+
+<p>The gap shows up in three repeatable ways:</p>
+
+<ul>
+  <li>Users <strong>underestimate code generation quality</strong> — assumptions from 2023 don't match 2026 models</li>
+  <li>Users <strong>overestimate agent setup complexity</strong> — they think building an agent needs a team</li>
+  <li>Users <strong>don't know what exists</strong> — capabilities ship faster than awareness spreads</li>
+</ul>
+
+<p>The consequence is blunt: most unrealized AI value isn't technical — it's informational. Improving content quality moves the needle more than waiting for the next model.</p>
+
+<h2>What NLP on the open responses showed</h2>
+
+<p>Clustering the text answers surfaced 19 task categories. The top ten, in order of frequency:</p>
+
+<ol>
+  <li>Writing and editing</li>
+  <li>Data analysis and reporting</li>
+  <li>Code generation</li>
+  <li>Research and information gathering</li>
+  <li>Automation of routine tasks</li>
+  <li>Content for social media</li>
+  <li>Translation and localization</li>
+  <li>Customer support</li>
+  <li>Idea generation and brainstorming</li>
+  <li>Document work</li>
+</ol>
+
+<p>On payment behavior, 18 clusters collapsed into three patterns: people pay for a <em>concrete result</em>, not a tool; they prefer subscriptions to one-off payments; they're highly price-sensitive relative to perceived quality.</p>
+
+<h2>Statistical sanity checks</h2>
+
+<p>Segments aren't a post-hoc story — they hold up under testing:</p>
+
+<ul>
+  <li><strong>ANOVA on confidence</strong>: F = 214.63, p &lt; 0.001 (segments are meaningfully different)</li>
+  <li><strong>Chi² on barriers</strong>: 52.47, p &lt; 0.001 (barriers depend on segment)</li>
+  <li><strong>Chi² on product requests</strong>: 73.02, p &lt; 0.001 (asks depend on segment)</li>
+  <li><strong>Silhouette</strong>: 0.281 for k=2, 0.244 for k=4 (both acceptable; binary and four-way views agree)</li>
+  <li><strong>NLP clusters</strong> align with segment membership — two methods converged</li>
+</ul>
+
+<h2>Implications</h2>
+
+<h3>For content</h3>
+<p>Stop writing one-size-fits-all overviews. The four segments want genuinely different formats. Curious → structured learning paths. Ambitious → practical cases and templates. Blocked → concrete fixes in their language. Advanced → depth, benchmarks, and frontier topics.</p>
+
+<h3>For product</h3>
+<p>Segment B is the commercial core. Segment D are the early adopters who validate new tools. Segment C will pay for a concrete pain fix. Build for one first.</p>
+
+<h3>For positioning</h3>
+<p>Lead with applicability, not capability. Show a concrete result, not a feature list. Localized, no-fluff content is a competitive edge.</p>
+
+<div class="tip">
+  <strong>One actionable takeaway.</strong> If you're writing about AI for a general audience, assume your reader is 18–24 months behind on capability. The gap is that big. Calibrate examples accordingly and lead with the outcome, not the technique.
+</div>
+
+<h2>The bottom line</h2>
+
+<p>Technical progress has outpaced public awareness by a wide margin, even inside a pre-selected pool of active users. That's an opportunity. Segmented content, concrete demos, and localized material convert more of the existing capability into realized value than another model release will.</p>
+
+<p>If you build or teach in this space, treat the perception gap as your primary design constraint. For tooling references, see the <a href="/">Claude Code cheatsheet</a>; for more analysis like this, browse the <a href="/blog/">blog index</a>.</p>
+
+<div class="cta">
+  Want the full Claude Code reference? <a href="/">Open the cheatsheet →</a>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/6-month-roadmap-ai-automation-builder.html">A 6-Month Roadmap for the AI Automation Builder</a></li>
+    <li><a href="/blog/prompt-engineering-complete-guide.html">The Complete Guide to Prompt Engineering</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2026 Claude Guides. <a href="/">Back to cheatsheet</a> · <a href="/blog/">All posts</a></p>
+</footer>
+
+<script src="/js/navbar-loader.js"></script>
+</body>
+</html>

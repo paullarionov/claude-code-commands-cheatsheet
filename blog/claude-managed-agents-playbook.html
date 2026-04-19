@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A practical playbook for Claude Managed Agents: four core concepts, a 10-minute quick start, built-in tools, permissions, outcomes, and multiagent patterns.">
+<meta name="keywords" content="Claude Managed Agents, Anthropic API, agent infrastructure, agent SDK, managed agents beta, AI agents, agent orchestration">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-managed-agents-playbook.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-managed-agents-playbook.html">
+<meta property="og:title" content="Claude Managed Agents: A Practical Playbook">
+<meta property="og:description" content="Skip months of harness engineering. Here's how to ship your first Claude Managed Agent in 10 minutes and scale it to production.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-managed-agents-playbook.html">
+<meta name="twitter:title" content="Claude Managed Agents: A Practical Playbook">
+<meta name="twitter:description" content="Skip months of harness engineering. Here's how to ship your first Claude Managed Agent in 10 minutes and scale it to production.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Claude Managed Agents: A Practical Playbook">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-04-14T00:00:00Z">
+<meta property="article:modified_time" content="2026-04-19T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude">
+<meta property="article:tag" content="Agents">
+<meta property="article:tag" content="Automation">
+
+<title>Claude Managed Agents: A Practical Playbook — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Managed Agents: A Practical Playbook",
+  "description": "Skip months of harness engineering. Here's how to ship your first Claude Managed Agent in 10 minutes and scale it to production.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Organization", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-04-14T00:00:00Z",
+  "dateModified": "2026-04-19T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/claude-managed-agents-playbook.html"}
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Claude Managed Agents: A Practical Playbook", "item": "https://claude-guides.com/blog/claude-managed-agents-playbook.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>Claude Managed Agents: A Practical Playbook</h1>
+  <p class="lede">Anthropic now runs the harness so you don't have to. Here's the concrete path from API key to a production agent.</p>
+  <div class="post-meta">
+    <span>April 14, 2026</span>
+    <span>8 min read</span>
+    <span>Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Claude Managed Agents ships the sandbox, session state, tool execution and event stream as a hosted service. You describe the agent, Anthropic runs it. Four concepts (Agent, Environment, Session, Events), a ten-minute quick start, and patterns for outcomes and multiagent delegation.</p>
+</div>
+
+<p>If you've built agents on the raw Messages API, you already know the tax: your own tool-call loop, your own sandbox, your own retry logic, your own secrets store. Months of plumbing before the agent does anything interesting. Claude Managed Agents deletes that list.</p>
+
+<p>You describe the agent. Anthropic runs it — secure containers, long-lived sessions, built-in code execution, streaming events. This post is the short version of what it is, when to use it, and how to ship your first one today.</p>
+
+<h2>Messages API vs Managed Agents</h2>
+
+<p>They solve different problems. Pick based on how much control you actually need.</p>
+
+<ul>
+  <li><strong>Messages API</strong> — direct model access. You write the agent loop. Right for custom harnesses or when you need total control.</li>
+  <li><strong>Managed Agents</strong> — a hosted agent platform. Right for long tasks, async work, and anything you'd rather ship this quarter than next year.</li>
+</ul>
+
+<p>Two deeper reasons to prefer the managed path. First, self-written harnesses bake in assumptions about what the model <em>can't</em> do — those assumptions go stale with every release. Managed Agents updates the harness for you. Second, task horizons are growing fast. Anthropic expects future Claude versions to work for days or weeks on a single task. That demands fault-tolerant infrastructure you probably don't want to maintain.</p>
+
+<h2>Four concepts that run the whole system</h2>
+
+<p>Learn these four and the rest follows.</p>
+
+<ul>
+  <li><strong>Agent</strong> — a versioned config: model, system prompt, tools, MCP servers, skills. Create once, reference by ID. Models: <code>claude-sonnet-4-6</code>, <code>claude-opus-4-6</code>.</li>
+  <li><strong>Environment</strong> — a container template. Networking rules, preinstalled packages (Python, Node, Go). Each session gets its own isolated container from it.</li>
+  <li><strong>Session</strong> — a running instance of the agent in an environment. Holds history, filesystem, status. Runs for hours. Secrets live in a vault.</li>
+  <li><strong>Events</strong> — the message bus. You send <code>user.message</code>; the agent streams text, tool calls, and status via Server-Sent Events.</li>
+</ul>
+
+<div class="tip">
+  <strong>Access.</strong> Managed Agents is in open beta. All endpoints require the <code>managed-agents-2026-04-01</code> header (the SDK adds it automatically). Outcomes, Multiagent, and Memory are separate research previews — request them individually.
+</div>
+
+<h2>Your first agent in ten minutes</h2>
+
+<h3>Install</h3>
+
+<pre><code># CLI
+brew install anthropics/tap/ant
+
+# SDK
+pip install anthropic          # Python
+npm install @anthropic-ai/sdk  # TypeScript
+
+export ANTHROPIC_API_KEY="your-api-key-here"</code></pre>
+
+<p>If you already use Claude Code, there's a faster path: run <code>claude</code>, then <code>/claude-api managed-agents-onboarding</code>. The built-in skill walks you through everything below.</p>
+
+<h3>Create the agent</h3>
+
+<pre><code>from anthropic import Anthropic
+
+client = Anthropic()
+
+agent = client.beta.agents.create(
+    name="Coding Assistant",
+    model="claude-sonnet-4-6",
+    system="You are a helpful coding assistant.",
+    tools=[{"type": "agent_toolset_20260401"}],
+)</code></pre>
+
+<p><code>agent_toolset_20260401</code> bundles bash, read, write, edit, glob, grep, web_fetch, and web_search. One line, full toolbox.</p>
+
+<h3>Create an environment and start a session</h3>
+
+<pre><code>env = client.beta.environments.create(
+    name="dev-env",
+    config={"type": "cloud", "networking": {"type": "unrestricted"}},
+)
+
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=env.id,
+    title="My first session",
+)</code></pre>
+
+<h3>Send a task and stream the result</h3>
+
+<pre><code>with client.beta.sessions.events.stream(session.id) as stream:
+    client.beta.sessions.events.send(
+        session.id,
+        events=[{
+            "type": "user.message",
+            "content": [{"type": "text",
+                         "text": "Generate the first 20 Fibonacci "
+                                 "numbers and save to fibonacci.txt"}],
+        }],
+    )
+    for event in stream:
+        if event.type == "session.status_idle":
+            break</code></pre>
+
+<p>Under the hood: a container spins up, Claude picks tools, calls execute in the sandbox, results stream back. No Docker config, no tool dispatcher, no recovery logic on your side.</p>
+
+<h2>Built-in tools and how to scope them</h2>
+
+<p>The toolset gives you eight capabilities by default. You'll usually want to narrow it down for production agents.</p>
+
+<p>Disable specific tools:</p>
+
+<pre><code>{
+  "type": "agent_toolset_20260401",
+  "configs": [
+    {"name": "web_fetch", "enabled": false},
+    {"name": "web_search", "enabled": false}
+  ]
+}</code></pre>
+
+<p>Or flip the default and enable only what you need:</p>
+
+<pre><code>{
+  "type": "agent_toolset_20260401",
+  "default_config": {"enabled": false},
+  "configs": [
+    {"name": "bash", "enabled": true},
+    {"name": "read", "enabled": true},
+    {"name": "write", "enabled": true}
+  ]
+}</code></pre>
+
+<p>Custom tools slot in alongside the built-ins. Four rules that matter more than anything else:</p>
+
+<ul>
+  <li><strong>Describe richly</strong> — 3–4 sentences per tool on what, when, and limits. Tool-use quality tracks description quality.</li>
+  <li><strong>Bundle related ops</strong> into one tool with an <code>action</code> parameter rather than ten near-duplicates.</li>
+  <li><strong>Namespace</strong> — <code>db_query</code>, <code>storage_read</code>.</li>
+  <li><strong>Return stable identifiers</strong>, not internal links the agent can't use later.</li>
+</ul>
+
+<h2>Permissions: always_allow vs always_ask</h2>
+
+<p>Two modes, and you can mix them per tool.</p>
+
+<ul>
+  <li><strong><code>always_allow</code></strong> — the tool runs automatically. Use for trusted internal agents.</li>
+  <li><strong><code>always_ask</code></strong> — the session pauses for your app to approve each call. Use for user-facing agents. MCP tools default to this.</li>
+</ul>
+
+<p>A common shape: reads and web search auto, bash gated. This is one of the things that makes Managed Agents more production-ready than LangGraph, CrewAI, or AutoGen — none of them ship permissions out of the box.</p>
+
+<h2>Usage patterns to steal</h2>
+
+<ul>
+  <li><strong>Event-triggered</strong> — external service fires the agent. Sentry's Seer detects a bug, the agent writes the patch, opens the PR.</li>
+  <li><strong>Scheduled</strong> — daily digests, GitHub activity, team task review.</li>
+  <li><strong>Fire-and-forget</strong> — human files a task in Slack, gets back a table or presentation. Asana AI Teammates.</li>
+  <li><strong>Long-horizon</strong> — multi-hour research, code migrations, deep analysis. Sessions preserve state across the run.</li>
+</ul>
+
+<div class="tip">
+  <strong>Deploy pattern that works.</strong> Keep agent templates as YAML in git. Apply them with the CLI from your deploy pipeline. Run sessions with the SDK at runtime. Config lives in version control; runtime stays lightweight.
+</div>
+
+<h2>Outcomes: turn conversations into jobs</h2>
+
+<p>Outcomes (research preview) promote a session from chat to job. You supply a rubric. The system spins up a separate grader in its own context — unbiased by the main agent's decisions — and scores each iteration. The agent keeps working until it passes or hits <code>max_iterations</code>.</p>
+
+<p>Rubric rule: concrete and checkable wins.</p>
+
+<ul>
+  <li>Good: "CSV contains a <code>price</code> column with numeric values"</li>
+  <li>Bad: "Data looks good"</li>
+</ul>
+
+<pre><code>client.beta.sessions.events.send(
+    session_id=session.id,
+    events=[{
+        "type": "user.define_outcome",
+        "description": "Build a DCF model for Costco in .xlsx",
+        "rubric": {"type": "text", "content": RUBRIC},
+        "max_iterations": 5,
+    }],
+)</code></pre>
+
+<p>Outputs land in <code>/mnt/session/outputs/</code>. Pull them via the Files API once the session reports <code>satisfied</code>.</p>
+
+<h2>Multiagent delegation</h2>
+
+<p>A coordinator agent can call other agents listed in its <code>callable_agents</code>. Each runs in its own thread with isolated context, but they share one container and filesystem. Useful for code review with read-only tools, test generation in a sandboxed agent, or research agents with web access.</p>
+
+<p>One limit: delegation is one level deep. The coordinator calls sub-agents; sub-agents can't chain further. Design accordingly.</p>
+
+<h2>Architecture in one paragraph</h2>
+
+<p>Anthropic deliberately split the system into three replaceable pieces: the <strong>brain</strong> (Claude plus harness), the <strong>hands</strong> (sandboxes and tools), and the <strong>session</strong> (an event log). Each is an interface with minimal assumptions about the others. A failure in one doesn't kill the system, execution is isolated from context, and you can plug in new harnesses as they evolve. Prompt caching, compaction, and automatic recovery are all built in.</p>
+
+<h2>Cost and limits</h2>
+
+<p>Standard API token rates plus <strong>$0.08 per active session hour</strong>. A ten-minute coding session costs a few cents in compute on top of tokens. API rate limits: 60 writes/min for resource creation, 600 reads/min for gets, lists, and streaming. Your org and plan limits stack on top.</p>
+
+<h2>Launch checklist</h2>
+
+<ol>
+  <li>Get an API key at console.anthropic.com</li>
+  <li>Install the CLI or SDK</li>
+  <li>Export <code>ANTHROPIC_API_KEY</code></li>
+  <li>Create an agent (model + prompt + tools)</li>
+  <li>Create an environment (container + packages + networking)</li>
+  <li>Start a session and send a task</li>
+  <li>Handle the event stream in your app</li>
+</ol>
+
+<h2>The bottom line</h2>
+
+<p>Managed Agents is the shortest path from "we want an agent" to "it's running in production." If your infrastructure is the blocker, switch. If you need a custom harness and total control, stay on Messages. Either way, the cost of hand-building a sandbox and event log just went to zero as a default choice.</p>
+
+<p>For the full command reference, see the <a href="/">Claude Code cheatsheet</a>, or browse other deep dives on the <a href="/blog/">blog index</a>.</p>
+
+<div class="cta">
+  Want the full Claude Code reference? <a href="/">Open the cheatsheet →</a>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/hermes-self-learning-agent.html">Hermes: A Self-Learning Agent</a></li>
+    <li><a href="/blog/claude-tools-complete-guide.html">The Complete Guide to Claude Tools</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2026 Claude Guides. <a href="/">Back to cheatsheet</a> · <a href="/blog/">All posts</a></p>
+</footer>
+
+<script src="/js/navbar-loader.js"></script>
+</body>
+</html>
