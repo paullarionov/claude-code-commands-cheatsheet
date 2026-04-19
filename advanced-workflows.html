@@ -489,29 +489,6 @@
 </footer>
 
 <script>
-  const dropdownToggle = document.querySelector('.dropdown-toggle');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
-  const dropdown = document.querySelector('.dropdown');
-  let hideTimeout;
-
-  if (dropdownToggle && dropdownMenu && dropdown) {
-    dropdownToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-      dropdownToggle.setAttribute('aria-expanded', !isExpanded);
-      dropdownMenu.style.display = isExpanded ? 'none' : 'block';
-    });
-
-    dropdown.addEventListener('mouseleave', () => {
-      hideTimeout = setTimeout(() => {
-        dropdownMenu.style.display = 'none';
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-      }, 200);
-    });
-
-    dropdown.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
-  }
-
   // Load night theme preference on page load
   document.addEventListener('DOMContentLoaded', function() {
     const nightThemePreference = localStorage.getItem('nightTheme');
