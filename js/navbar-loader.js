@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     // Fetch the navbar HTML
-    const response = await fetch('navbar.html');
+    const response = await fetch('/navbar.html');
     if (!response.ok) throw new Error('Failed to load navbar');
 
     const navbarHTML = await response.text();
