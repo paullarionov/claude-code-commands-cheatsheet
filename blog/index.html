@@ -210,11 +210,86 @@
   .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
   body > header, body > main { padding-top: 50px; }
 
+  .controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .control-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .control-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .control-group select, .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 11px;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .control-group select:hover, .filter-btn:hover {
+    border-color: var(--accent);
+  }
+
+  .filter-btn {
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+
+  .filter-btn.active {
+    background: var(--accent);
+    color: var(--surface);
+    border-color: var(--accent);
+  }
+
+  .filter-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .clear-filters {
+    font-size: 11px;
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline;
+    transition: opacity 0.2s;
+  }
+
+  .clear-filters:hover {
+    opacity: 0.7;
+  }
+
+  .results-count {
+    font-size: 11px;
+    color: var(--text-2);
+    margin-top: 8px;
+  }
+
   @media (max-width: 768px) {
     .nav-menu { gap: 15px; }
     .logo { margin-right: 20px; font-size: 14px; }
     .nav-container { padding: 10px 16px; }
     header.page-header h1 { font-size: 26px; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .control-group { flex-direction: column; align-items: stretch; }
+    .control-group select { width: 100%; }
   }
 </style>
 </head>
@@ -256,179 +331,23 @@
 </header>
 
 <main>
-<div class="post-list">
-
-  <article class="post-card">
-    <a href="/blog/save-claude-tokens-notebooklm.html" class="post-title-link"><h2>Save Claude Tokens by Integrating NotebookLM</h2></a>
-    <p class="excerpt">Cut Claude token spend by offloading research and retrieval to Google's NotebookLM — a practical integration pattern with real numbers.</p>
-    <div class="post-meta"><span>Apr 16, 2026</span><span>7 min read</span><span>Tips</span></div>
-    <span class="tag">Claude</span><span class="tag">Tokens</span><span class="tag">NotebookLM</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/hermes-self-learning-agent.html" class="post-title-link"><h2>Hermes: Build a Self-Learning Agent with 7 Workflows</h2></a>
-    <p class="excerpt">A full walkthrough of Hermes — a Claude Code agent that learns from its own runs through seven composable workflows.</p>
-    <div class="post-meta"><span>Apr 15, 2026</span><span>7 min read</span><span>Tutorial</span></div>
-    <span class="tag">Agents</span><span class="tag">Claude Code</span><span class="tag">Automation</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/claude-managed-agents-playbook.html" class="post-title-link"><h2>Claude Managed Agents: A Practical Playbook</h2></a>
-    <p class="excerpt">Everything we learned shipping Claude managed agents into production — patterns, traps, and the playbook we wish existed earlier.</p>
-    <div class="post-meta"><span>Apr 14, 2026</span><span>8 min read</span><span>Guide</span></div>
-    <span class="tag">Claude</span><span class="tag">Agents</span><span class="tag">Automation</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/claude-tools-complete-guide.html" class="post-title-link"><h2>The Complete Claude Tools Guide: From Basics to Advanced</h2></a>
-    <p class="excerpt">The four levels of Claude tool design, from your first tool definition up to MCP and multi-agent orchestration.</p>
-    <div class="post-meta"><span>Apr 13, 2026</span><span>8 min read</span><span>Guide</span></div>
-    <span class="tag">Claude</span><span class="tag">Tools</span><span class="tag">MCP</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/prompt-engineering-complete-guide.html" class="post-title-link"><h2>The Complete Prompt Engineering Guide for Claude</h2></a>
-    <p class="excerpt">Prompt engineering from the ground up — every technique that moved quality, ranked by how much it actually helped.</p>
-    <div class="post-meta"><span>Apr 12, 2026</span><span>10 min read</span><span>Guide</span></div>
-    <span class="tag">Prompt Engineering</span><span class="tag">Claude</span><span class="tag">LLM</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/5-non-code-pipelines-claude-code.html" class="post-title-link"><h2>5 Non-Code Pipelines You Can Sell Using Claude Code</h2></a>
-    <p class="excerpt">Five productized Claude Code pipelines that don't involve writing a single line of application code — and how to price them.</p>
-    <div class="post-meta"><span>Apr 11, 2026</span><span>7 min read</span><span>Business</span></div>
-    <span class="tag">Claude Code</span><span class="tag">Freelance</span><span class="tag">Automation</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/6-month-roadmap-ai-automation-builder.html" class="post-title-link"><h2>The 6-Month Roadmap to Becoming an AI Automation Builder</h2></a>
-    <p class="excerpt">A concrete month-by-month path from zero to your first paying clients as an AI automation builder. No fluff, no mountains-of-gold promises.</p>
-    <div class="post-meta"><span>Apr 10, 2026</span><span>9 min read</span><span>Career</span></div>
-    <span class="tag">AI Automation</span><span class="tag">Career</span><span class="tag">n8n</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/boris-cherny-15-hidden-features.html" class="post-title-link"><h2>15 Under-Used Claude Code Features (from Boris Cherny)</h2></a>
-    <p class="excerpt">Fifteen Claude Code features most users still miss — sourced from Boris Cherny, condensed into a practical checklist.</p>
-    <div class="post-meta"><span>Apr 9, 2026</span><span>7 min read</span><span>Tips</span></div>
-    <span class="tag">Claude Code</span><span class="tag">Tips</span><span class="tag">Productivity</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/claude-code-2-months-review.html" class="post-title-link"><h2>2 Months with Claude Code: A Field Report</h2></a>
-    <p class="excerpt">Honest field notes from two months of heavy Claude Code use — what actually worked, what wasted time, and what surprised us.</p>
-    <div class="post-meta"><span>Apr 8, 2026</span><span>11 min read</span><span>Review</span></div>
-    <span class="tag">Claude Code</span><span class="tag">Workflow</span><span class="tag">Review</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/llm-knowledge-base-obsidian.html" class="post-title-link"><h2>Build a Karpathy-Style LLM Knowledge Base in Obsidian</h2></a>
-    <p class="excerpt">A step-by-step guide to building a Karpathy-inspired LLM knowledge base in Obsidian — structure, automation, and feeding it to Claude.</p>
-    <div class="post-meta"><span>Apr 7, 2026</span><span>8 min read</span><span>Tutorial</span></div>
-    <span class="tag">Obsidian</span><span class="tag">LLM</span><span class="tag">Knowledge Base</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/ai-first-company-harness-engineering.html" class="post-title-link"><h2>AI-First Companies: Restructuring Around Harness Engineering</h2></a>
-    <p class="excerpt">What CREAO-style AI-first restructuring really means, and why harness engineering is quickly replacing traditional application design.</p>
-    <div class="post-meta"><span>Apr 6, 2026</span><span>9 min read</span><span>Strategy</span></div>
-    <span class="tag">AI-First</span><span class="tag">Engineering</span><span class="tag">Strategy</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/blog/ai-perception-gap-research.html" class="post-title-link"><h2>The AI Perception Gap: What 632 Users Actually Believe</h2></a>
-    <p class="excerpt">A survey of 632 practitioners reveals a significant gap between what modern AI can do and what people think is possible.</p>
-    <div class="post-meta"><span>Apr 5, 2026</span><span>6 min read</span><span>Research</span></div>
-    <span class="tag">Research</span><span class="tag">AI Adoption</span><span class="tag">Audience</span>
-  </article>
-
-  <h2 class="section-divider">Earlier guides</h2>
-
-  <article class="post-card">
-    <a href="/claude-code-architectural-patterns.html" class="post-title-link"><h2>Claude Code Architectural Patterns</h2></a>
-    <p class="excerpt">Agent orchestration, multi-agent workflows, and the architectural patterns that scale beyond one-off scripts.</p>
-    <div class="post-meta"><span>Apr 12, 2026</span><span>Guide</span></div>
-    <span class="tag">Architecture</span><span class="tag">Agents</span><span class="tag">Workflows</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/cheatsheet-landing-page.html" class="post-title-link"><h2>Claude Code Features Overview</h2></a>
-    <p class="excerpt">A visual tour of the Claude Code feature surface — everything the CLI can do, laid out on one page.</p>
-    <div class="post-meta"><span>Apr 8, 2026</span><span>Reference</span></div>
-    <span class="tag">Claude Code</span><span class="tag">Features</span><span class="tag">Reference</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/advanced-workflows.html" class="post-title-link"><h2>Advanced Claude Code Workflows</h2></a>
-    <p class="excerpt">Push Claude Code past basics — plan mode, agents, subagents, custom commands, and the workflows that unlock serious output.</p>
-    <div class="post-meta"><span>Apr 3, 2026</span><span>Guide</span></div>
-    <span class="tag">Claude Code</span><span class="tag">Workflow</span><span class="tag">Advanced</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/performance-optimization.html" class="post-title-link"><h2>Performance Optimization for Claude Code</h2></a>
-    <p class="excerpt">Practical techniques to make Claude Code faster, leaner, and cheaper — from context hygiene to response streaming.</p>
-    <div class="post-meta"><span>Apr 3, 2026</span><span>Guide</span></div>
-    <span class="tag">Performance</span><span class="tag">Optimization</span><span class="tag">Claude Code</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/memory-management.html" class="post-title-link"><h2>Claude Code Memory Management</h2></a>
-    <p class="excerpt">How Claude Code handles project memory, CLAUDE.md, and long sessions — and how to keep it useful instead of bloated.</p>
-    <div class="post-meta"><span>Apr 3, 2026</span><span>Guide</span></div>
-    <span class="tag">Memory</span><span class="tag">CLAUDE.md</span><span class="tag">Claude Code</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/debugging-guide.html" class="post-title-link"><h2>Claude Code Debugging Guide</h2></a>
-    <p class="excerpt">A no-nonsense debugging playbook for Claude Code — catch the common failure modes and fix them fast.</p>
-    <div class="post-meta"><span>Apr 3, 2026</span><span>Guide</span></div>
-    <span class="tag">Debugging</span><span class="tag">Claude Code</span><span class="tag">Troubleshooting</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/prompt-engineering.html" class="post-title-link"><h2>Prompt Engineering for Claude Code</h2></a>
-    <p class="excerpt">Clear, specific prompts make Claude Code dramatically better. A concise set of techniques that move quality fast.</p>
-    <div class="post-meta"><span>Apr 3, 2026</span><span>Guide</span></div>
-    <span class="tag">Prompt Engineering</span><span class="tag">Claude Code</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/token-usage.html" class="post-title-link"><h2>Reduce Claude Token Usage</h2></a>
-    <p class="excerpt">Concrete patterns to cut Claude token consumption without losing output quality.</p>
-    <div class="post-meta"><span>Apr 3, 2026</span><span>Tips</span></div>
-    <span class="tag">Tokens</span><span class="tag">Cost</span><span class="tag">Claude</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/hidden-features.html" class="post-title-link"><h2>Hidden Claude Code Features</h2></a>
-    <p class="excerpt">The advanced Claude Code features most users never touch — and why the power users rely on them daily.</p>
-    <div class="post-meta"><span>Apr 1, 2026</span><span>Tips</span></div>
-    <span class="tag">Claude Code</span><span class="tag">Advanced</span><span class="tag">Tips</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/best-practices.html" class="post-title-link"><h2>Claude Code Best Practices</h2></a>
-    <p class="excerpt">The complete best-practices guide for Claude Code — patterns we've watched work across dozens of real projects.</p>
-    <div class="post-meta"><span>Apr 1, 2026</span><span>Guide</span></div>
-    <span class="tag">Best Practices</span><span class="tag">Claude Code</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/anthropic-product-suite.html" class="post-title-link"><h2>The Anthropic Product Suite</h2></a>
-    <p class="excerpt">A tour of the Anthropic product line — Claude, Claude Code, the API, and how the pieces fit together.</p>
-    <div class="post-meta"><span>Apr 1, 2026</span><span>Overview</span></div>
-    <span class="tag">Anthropic</span><span class="tag">Claude</span><span class="tag">Products</span>
-  </article>
-
-  <article class="post-card">
-    <a href="/claude-certified-architect.html" class="post-title-link"><h2>Claude Certified Architect</h2></a>
-    <p class="excerpt">A structured path to architect-level Claude proficiency — the skills, the references, and how to prove you have them.</p>
-    <div class="post-meta"><span>Apr 1, 2026</span><span>Career</span></div>
-    <span class="tag">Certification</span><span class="tag">Claude</span><span class="tag">Career</span>
-  </article>
-
+<div class="controls">
+  <div class="control-group">
+    <label for="sort-select">Sort</label>
+    <select id="sort-select">
+      <option value="date-desc">Newest first</option>
+      <option value="date-asc">Oldest first</option>
+      <option value="title">Title (A-Z)</option>
+    </select>
+  </div>
+  <div class="control-group">
+    <label>Filter by category</label>
+    <div class="filter-tags" id="filter-tags"></div>
+  </div>
+  <span class="clear-filters" id="clear-filters" style="display:none;">Clear filters</span>
 </div>
+<div class="results-count" id="results-count"></div>
+<div class="post-list" id="post-list"></div>
 </main>
 
 <footer>
@@ -436,5 +355,126 @@
 </footer>
 
 <script src="/js/navbar-loader.js"></script>
+<script>
+const posts = [
+  { url: "/blog/save-claude-tokens-notebooklm.html", title: "Save Claude Tokens by Integrating NotebookLM", excerpt: "Cut Claude token spend by offloading research and retrieval to Google's NotebookLM — a practical integration pattern with real numbers.", date: "2026-04-16", readTime: 7, category: "Tips", tags: ["Claude", "Tokens", "NotebookLM"] },
+  { url: "/blog/hermes-self-learning-agent.html", title: "Hermes: Build a Self-Learning Agent with 7 Workflows", excerpt: "A full walkthrough of Hermes — a Claude Code agent that learns from its own runs through seven composable workflows.", date: "2026-04-15", readTime: 7, category: "Tutorial", tags: ["Agents", "Claude Code", "Automation"] },
+  { url: "/blog/claude-managed-agents-playbook.html", title: "Claude Managed Agents: A Practical Playbook", excerpt: "Everything we learned shipping Claude managed agents into production — patterns, traps, and the playbook we wish existed earlier.", date: "2026-04-14", readTime: 8, category: "Guide", tags: ["Claude", "Agents", "Automation"] },
+  { url: "/blog/claude-tools-complete-guide.html", title: "The Complete Claude Tools Guide: From Basics to Advanced", excerpt: "The four levels of Claude tool design, from your first tool definition up to MCP and multi-agent orchestration.", date: "2026-04-13", readTime: 8, category: "Guide", tags: ["Claude", "Tools", "MCP"] },
+  { url: "/blog/prompt-engineering-complete-guide.html", title: "The Complete Prompt Engineering Guide for Claude", excerpt: "Prompt engineering from the ground up — every technique that moved quality, ranked by how much it actually helped.", date: "2026-04-12", readTime: 10, category: "Guide", tags: ["Prompt Engineering", "Claude", "LLM"] },
+  { url: "/blog/5-non-code-pipelines-claude-code.html", title: "5 Non-Code Pipelines You Can Sell Using Claude Code", excerpt: "Five productized Claude Code pipelines that don't involve writing a single line of application code — and how to price them.", date: "2026-04-11", readTime: 7, category: "Business", tags: ["Claude Code", "Freelance", "Automation"] },
+  { url: "/blog/6-month-roadmap-ai-automation-builder.html", title: "The 6-Month Roadmap to Becoming an AI Automation Builder", excerpt: "A concrete month-by-month path from zero to your first paying clients as an AI automation builder. No fluff, no mountains-of-gold promises.", date: "2026-04-10", readTime: 9, category: "Career", tags: ["AI Automation", "Career", "n8n"] },
+  { url: "/blog/boris-cherny-15-hidden-features.html", title: "15 Under-Used Claude Code Features (from Boris Cherny)", excerpt: "Fifteen Claude Code features most users still miss — sourced from Boris Cherny, condensed into a practical checklist.", date: "2026-04-09", readTime: 7, category: "Tips", tags: ["Claude Code", "Tips", "Productivity"] },
+  { url: "/blog/claude-code-2-months-review.html", title: "2 Months with Claude Code: A Field Report", excerpt: "Honest field notes from two months of heavy Claude Code use — what actually worked, what wasted time, and what surprised us.", date: "2026-04-08", readTime: 11, category: "Review", tags: ["Claude Code", "Workflow", "Review"] },
+  { url: "/blog/llm-knowledge-base-obsidian.html", title: "Build a Karpathy-Style LLM Knowledge Base in Obsidian", excerpt: "A step-by-step guide to building a Karpathy-inspired LLM knowledge base in Obsidian — structure, automation, and feeding it to Claude.", date: "2026-04-07", readTime: 8, category: "Tutorial", tags: ["Obsidian", "LLM", "Knowledge Base"] },
+  { url: "/blog/ai-first-company-harness-engineering.html", title: "AI-First Companies: Restructuring Around Harness Engineering", excerpt: "What CREAO-style AI-first restructuring really means, and why harness engineering is quickly replacing traditional application design.", date: "2026-04-06", readTime: 9, category: "Strategy", tags: ["AI-First", "Engineering", "Strategy"] },
+  { url: "/blog/ai-perception-gap-research.html", title: "The AI Perception Gap: What 632 Users Actually Believe", excerpt: "A survey of 632 practitioners reveals a significant gap between what modern AI can do and what people think is possible.", date: "2026-04-05", readTime: 6, category: "Research", tags: ["Research", "AI Adoption", "Audience"] },
+  { url: "/claude-code-architectural-patterns.html", title: "Claude Code Architectural Patterns", excerpt: "Agent orchestration, multi-agent workflows, and the architectural patterns that scale beyond one-off scripts.", date: "2026-04-12", readTime: 0, category: "Guide", tags: ["Architecture", "Agents", "Workflows"] },
+  { url: "/cheatsheet-landing-page.html", title: "Claude Code Features Overview", excerpt: "A visual tour of the Claude Code feature surface — everything the CLI can do, laid out on one page.", date: "2026-04-08", readTime: 0, category: "Reference", tags: ["Claude Code", "Features", "Reference"] },
+  { url: "/advanced-workflows.html", title: "Advanced Claude Code Workflows", excerpt: "Push Claude Code past basics — plan mode, agents, subagents, custom commands, and the workflows that unlock serious output.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Claude Code", "Workflow", "Advanced"] },
+  { url: "/performance-optimization.html", title: "Performance Optimization for Claude Code", excerpt: "Practical techniques to make Claude Code faster, leaner, and cheaper — from context hygiene to response streaming.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Performance", "Optimization", "Claude Code"] },
+  { url: "/memory-management.html", title: "Claude Code Memory Management", excerpt: "How Claude Code handles project memory, CLAUDE.md, and long sessions — and how to keep it useful instead of bloated.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Memory", "CLAUDE.md", "Claude Code"] },
+  { url: "/debugging-guide.html", title: "Claude Code Debugging Guide", excerpt: "A no-nonsense debugging playbook for Claude Code — catch the common failure modes and fix them fast.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Debugging", "Claude Code", "Troubleshooting"] },
+  { url: "/prompt-engineering.html", title: "Prompt Engineering for Claude Code", excerpt: "Clear, specific prompts make Claude Code dramatically better. A concise set of techniques that move quality fast.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Prompt Engineering", "Claude Code"] },
+  { url: "/token-usage.html", title: "Reduce Claude Token Usage", excerpt: "Concrete patterns to cut Claude token consumption without losing output quality.", date: "2026-04-03", readTime: 0, category: "Tips", tags: ["Tokens", "Cost", "Claude"] },
+  { url: "/hidden-features.html", title: "Hidden Claude Code Features", excerpt: "The advanced Claude Code features most users never touch — and why the power users rely on them daily.", date: "2026-04-01", readTime: 0, category: "Tips", tags: ["Claude Code", "Advanced", "Tips"] },
+  { url: "/best-practices.html", title: "Claude Code Best Practices", excerpt: "The complete best-practices guide for Claude Code — patterns we've watched work across dozens of real projects.", date: "2026-04-01", readTime: 0, category: "Guide", tags: ["Best Practices", "Claude Code"] },
+  { url: "/anthropic-product-suite.html", title: "The Anthropic Product Suite", excerpt: "A tour of the Anthropic product line — Claude, Claude Code, the API, and how the pieces fit together.", date: "2026-04-01", readTime: 0, category: "Overview", tags: ["Anthropic", "Claude", "Products"] },
+  { url: "/claude-certified-architect.html", title: "Claude Certified Architect", excerpt: "A structured path to architect-level Claude proficiency — the skills, the references, and how to prove you have them.", date: "2026-04-01", readTime: 0, category: "Career", tags: ["Certification", "Claude", "Career"] }
+];
+
+let selectedTags = [];
+const postList = document.getElementById('post-list');
+const sortSelect = document.getElementById('sort-select');
+const filterTagsContainer = document.getElementById('filter-tags');
+const clearFiltersBtn = document.getElementById('clear-filters');
+const resultsCount = document.getElementById('results-count');
+
+function getAllTags() {
+  const tags = new Set();
+  posts.forEach(post => post.tags.forEach(tag => tags.add(tag)));
+  return Array.from(tags).sort();
+}
+
+function renderFilterButtons() {
+  const tags = getAllTags();
+  filterTagsContainer.innerHTML = tags.map(tag =>
+    `<button class="filter-btn" data-tag="${tag}">${tag}</button>`
+  ).join('');
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      if (selectedTags.includes(tag)) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+      } else {
+        selectedTags.push(tag);
+      }
+      renderPosts();
+      updateFilterButtons();
+    });
+  });
+}
+
+function updateFilterButtons() {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const tag = btn.dataset.tag;
+    btn.classList.toggle('active', selectedTags.includes(tag));
+  });
+  clearFiltersBtn.style.display = selectedTags.length > 0 ? 'inline' : 'none';
+}
+
+function sortPosts(postsToSort) {
+  const sortValue = sortSelect.value;
+  const sorted = [...postsToSort];
+
+  switch(sortValue) {
+    case 'date-asc':
+      return sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+    case 'title':
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    default: // date-desc
+      return sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+}
+
+function renderPosts() {
+  let filtered = posts;
+
+  if (selectedTags.length > 0) {
+    filtered = posts.filter(post =>
+      selectedTags.some(tag => post.tags.includes(tag))
+    );
+  }
+
+  const sorted = sortPosts(filtered);
+
+  postList.innerHTML = sorted.map(post => {
+    const readTimeText = post.readTime ? `<span>${post.readTime} min read</span>` : '';
+    const categoryText = `<span>${post.category}</span>`;
+    return `
+      <article class="post-card">
+        <a href="${post.url}" class="post-title-link"><h2>${post.title}</h2></a>
+        <p class="excerpt">${post.excerpt}</p>
+        <div class="post-meta">${readTimeText}${readTimeText ? categoryText : `${categoryText}`}</div>
+        ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+      </article>
+    `;
+  }).join('');
+
+  resultsCount.textContent = `${sorted.length} post${sorted.length !== 1 ? 's' : ''}`;
+}
+
+sortSelect.addEventListener('change', renderPosts);
+
+clearFiltersBtn.addEventListener('click', () => {
+  selectedTags = [];
+  renderPosts();
+  updateFilterButtons();
+});
+
+renderFilterButtons();
+renderPosts();
+</script>
 </body>
 </html>
