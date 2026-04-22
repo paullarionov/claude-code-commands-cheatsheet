@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="35 Claude Code commands, tricks, and workflows that most users don't know. Essential techniques that transform Claude Code from a useful assistant into a productivity superpower.">
+<meta name="keywords" content="Claude Code, commands, tricks, workflows, productivity, plan mode, /compact, /clear, /init, /memory, git worktrees, best practices">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html">
+<meta property="og:title" content="35 Claude Code Commands, Tricks, and Workflows Most Users Don't Know">
+<meta property="og:description" content="The complete list of 35 techniques that transform Claude Code into a cheat code. Plan mode, /compact, hooks, worktrees, and more — tested daily with zero theory.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html">
+<meta name="twitter:title" content="35 Claude Code Commands, Tricks, and Workflows Most Users Don't Know">
+<meta name="twitter:description" content="The complete list of 35 techniques that transform Claude Code into a cheat code. Tested daily, zero theory.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="35 Claude Code Commands, Tricks, and Workflows">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-04-22T00:00:00Z">
+<meta property="article:modified_time" content="2026-04-22T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Commands">
+<meta property="article:tag" content="Productivity">
+<meta property="article:tag" content="Workflows">
+
+<title>35 Claude Code Commands, Tricks, and Workflows — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "35 Claude Code Commands, Tricks, and Workflows Most Users Don't Know",
+  "description": "The complete list of 35 techniques that transform Claude Code from a useful assistant into a productivity superpower. Essential commands, productivity techniques, architecture strategies, workflow automation, and debugging approaches.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Person", "name": "Khairallah AL-Awady"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-04-22T00:00:00Z",
+  "dateModified": "2026-04-22T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html"},
+  "wordCount": 4200,
+  "keywords": ["Claude Code", "commands", "tricks", "workflows", "productivity", "plan mode", "/compact", "/init", "/memory", "git worktrees"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "35 Claude Code Commands, Tricks, and Workflows", "item": "https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>35 Claude Code Commands, Tricks, and Workflows Most Users Don't Know</h1>
+  <p class="lede">The complete list of techniques that transform Claude Code from "useful assistant" into "the most productive I have ever been".</p>
+  <div class="post-meta">
+    <span>April 22, 2026</span>
+    <span>18 min read</span>
+    <span>Tips & Workflows</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Use plan mode before building. Compact your context with <code>/compact</code>. Master <code>/init</code>, <code>/clear</code>, <code>/memory</code>. Branch conversations. Run parallel agents in worktrees. Automate with hooks and <code>/loop</code>. Test first, build second. Break features into incremental steps. These 35 techniques, tested daily, turn Claude Code from a coding assistant into a genuine productivity multiplier.</p>
+</div>
+
+<p>Most developers install Claude Code, use it for basic code generation, and think they've seen what it can do. They've seen maybe 20 percent.</p>
+
+<p>The other 80 percent — the techniques that turn Claude Code from "useful assistant" into "the most productive I have ever been" — are buried in documentation, discovered through experimentation, or shared in small communities.</p>
+
+<p>I compiled every technique that moved the needle. Tested daily. Zero theory. Bookmark this. You will use it every time you open your terminal.</p>
+
+<h2>Essential Commands (01 to 08)</h2>
+
+<h3>01. Plan Mode (Shift + Tab)</h3>
+<p>Before any implementation, switch to plan mode. Claude Code analyzes your codebase and creates an architecture plan WITHOUT writing any code. Review the plan. Approve it. Then switch back to implementation. This single habit prevents more bugs than any other technique on this list.</p>
+
+<h3>02. Compact (/compact)</h3>
+<p>After 30 to 45 minutes of conversation, your context gets bloated. Type <code>/compact</code> to compress the entire conversation history into a focused summary of key decisions and current state. Claude Code stays sharp instead of gradually losing track of what you discussed.</p>
+
+<h3>03. Clear (/clear)</h3>
+<p>Starting a new task? Clear the slate entirely. Carrying context from a database refactor into a frontend redesign produces confused, conflicting code. One conversation per feature. Always.</p>
+
+<h3>04. Init (/init)</h3>
+<p>Run this at the start of any new project. Claude Code scans your codebase and generates a <code>CLAUDE.md</code> file — a persistent context document that it reads automatically in every future session. Includes project structure, tech stack, coding patterns, and key architecture decisions.</p>
+
+<h3>05. The Cost Check (/cost)</h3>
+<p>Displays your token usage for the current session. Check this every hour during long sessions. AI-assisted development costs money and surprises are never fun. Set a mental budget per session and check against it.</p>
+
+<h3>06. Memory (/memory)</h3>
+<p>Add persistent instructions that Claude Code remembers across all sessions. "Always use TypeScript strict mode." "Always add JSDoc comments to public functions." "Always run tests after modifying any file in <code>/src/core</code>." These rules apply automatically in every future conversation without repeating them.</p>
+
+<h3>07. Terminal Integration (! prefix)</h3>
+<p>Prefix any message with <code>!</code> to run it as a terminal command instead of sending it to Claude. Quick way to run tests, check git status, or navigate directories without leaving the Claude Code interface.</p>
+
+<h3>08. Multi-Model Switching</h3>
+<p>Use Opus for planning and architecture decisions. Switch to Sonnet for implementation and execution. Opus thinks deeper but costs more. Sonnet executes faster and cheaper. Plan with the thinker. Build with the builder.</p>
+
+<h2>Productivity Techniques (09 to 18)</h2>
+
+<h3>09. The Reference File Technique</h3>
+<p>Instead of describing the code style you want, point to an existing file: "Look at how authentication is implemented in <code>src/auth/login.ts</code>. Implement password reset following the exact same patterns." Claude Code reads the reference and replicates the patterns precisely. Produces far more consistent code than verbal descriptions.</p>
+
+<h3>10. The Screenshot Debug</h3>
+<p>Something looks wrong in the UI? Do not write a paragraph. Screenshot it. Paste with Ctrl+V. Say: "The button is misaligned with the input field. The spacing between cards is inconsistent. Fix both." Visual feedback is faster and more accurate than written descriptions.</p>
+
+<h3>11. The Test-First Workflow</h3>
+<p>"Write tests for a function that calculates discounted prices. Cover: normal discounts, zero discount, 100 percent discount, negative prices, and string inputs. Then implement the function to pass all tests." Tests define behavior before code exists. The implementation is automatically correct because it must pass the predefined tests.</p>
+
+<h3>12. The Incremental Build</h3>
+<p>Never say "build the entire feature." Break it into steps: "Create the database schema." Test. "Build the API endpoint." Test. "Add validation." Test. "Build the frontend form." Test. Five small steps with testing between each one produces dramatically better code than one massive implementation prompt.</p>
+
+<h3>13. The Codebase Question</h3>
+<p>Before implementing anything in an unfamiliar part of the codebase: "Read <code>src/services/</code> and explain how data flows from the API routes to the database. What patterns are used? What should I know before modifying anything here?" Understanding before building prevents architectural mistakes.</p>
+
+<h3>14. The Diff Review</h3>
+<p>After Claude Code makes changes: "Show me a diff of every file you modified. Explain each change in one sentence." This catches unintended modifications — Claude Code sometimes "helpfully" changes files you did not ask it to touch.</p>
+
+<h3>15. The Error Paste</h3>
+<p>When something breaks, copy the COMPLETE error message and stack trace. Not a summary. The complete output. "I got this error: [paste full error]. Diagnose the root cause step by step before suggesting a fix." The step-by-step constraint prevents Claude from jumping to a wrong fix.</p>
+
+<h3>16. The Undo Checkpoint</h3>
+<p>Before every major change: <code>git add . && git commit -m "checkpoint before [change]"</code>. If Claude Code breaks something, you revert in seconds instead of spending thirty minutes debugging what used to work.</p>
+
+<h3>17. The Parallel Session</h3>
+<p>For large features, open two terminal windows. One runs Claude Code for the backend implementation. The other runs Claude Code for the frontend. Each session has clean, focused context for its domain. Connect the pieces at the end.</p>
+
+<h3>18. The Documentation Pass</h3>
+<p>After completing a feature: "Read every file you created or modified for this feature. Generate comprehensive documentation: what each function does, how they connect, what the expected inputs and outputs are, and any non-obvious design decisions." Documentation generated immediately after building is more accurate than documentation written days later from memory.</p>
+
+<h2>Architecture Techniques (19 to 26)</h2>
+
+<h3>19. The Architecture Audit</h3>
+<p>Before starting a new project: "Analyze my project requirements: [list them]. Propose 2 different architectural approaches. For each: component diagram, pros, cons, estimated complexity, and what could go wrong. Recommend one with clear reasoning." Making architecture decisions with AI analysis prevents expensive rewrites later.</p>
+
+<h3>20. The Dependency Check</h3>
+<p>Before adding any new package: "I want to add [package] to handle [use case]. Check: is this actively maintained? Are there known security issues? What is the bundle size impact? Are there lighter alternatives that cover my specific use case?" Prevents bloating your project with unnecessary or risky dependencies.</p>
+
+<h3>21. The Pattern Enforcer</h3>
+<p>Add to your <code>CLAUDE.md</code>: "When creating new files, follow these patterns: API routes follow the structure in <code>src/api/example-route.ts</code>. Database queries use the repository pattern in <code>src/repositories/example-repo.ts</code>. React components follow the structure in <code>src/components/ExampleComponent.tsx</code>." Claude Code reads this and automatically matches your patterns in every new file.</p>
+
+<h3>22. The Migration Builder</h3>
+<p>"I need to change the user table schema: add a 'role' column (enum: admin, editor, viewer, default: viewer) and rename 'name' to 'display_name'. Generate the migration file, update the repository layer, update all API routes that reference the old schema, and update the TypeScript types. Show me every file that needs to change before making any modifications." Schema changes that touch multiple layers are where Claude Code shines — it tracks all the ripple effects.</p>
+
+<h3>23. The API Design Review</h3>
+<p>"Review my API design: [paste route definitions]. Check for: inconsistent naming, missing error responses, endpoints that should be paginated, missing authentication on protected routes, and any REST convention violations. Suggest specific improvements."</p>
+
+<h3>24. The Security Scan</h3>
+<p>"Scan this codebase for security vulnerabilities: SQL injection, XSS, exposed secrets in code or config files, missing input validation, insecure direct object references, and missing rate limiting. For each finding: severity, exact location, why it is dangerous, and the fix."</p>
+
+<h3>25. The Performance Profiler</h3>
+<p>"Analyze this codebase for performance issues: N+1 database queries, missing indexes based on query patterns, unnecessary re-renders in React components, large bundle imports that could be lazy loaded, and API endpoints that should be cached. Prioritize by estimated impact."</p>
+
+<h3>26. The Refactoring Planner</h3>
+<p>"Read <code>src/services/user-service.ts</code>. This file has grown to 800 lines and handles too many responsibilities. Propose a refactoring plan that splits it into focused modules. Show the proposed file structure, what moves where, and verify that no external imports will break. Do NOT start refactoring yet — just show me the plan."</p>
+
+<h2>Workflow Automation (27 to 31)</h2>
+
+<h3>27. The Git Hook Writer</h3>
+<p>"Create a pre-commit hook that: runs the linter on staged files, runs type checking, checks for console.log statements in production code, and blocks commits that fail any check. Install it in <code>.husky/pre-commit</code>." Automated quality gates that run every time you commit.</p>
+
+<h3>28. The CI Pipeline Builder</h3>
+<p>"Create a GitHub Actions workflow that: runs on every PR, installs dependencies, runs the full test suite, runs the linter, builds the project, and posts a comment on the PR with the results. Use caching for node_modules."</p>
+
+<h3>29. The Environment Setup Script</h3>
+<p>"Create a <code>setup.sh</code> script that a new developer runs once to set up the entire development environment: install dependencies, create <code>.env</code> from <code>.env.example</code>, set up the local database, run migrations, seed test data, and verify everything works by running the test suite."</p>
+
+<h3>30. The Release Notes Generator</h3>
+<p>"Read the git log since the last tag. Generate release notes organized by: new features, bug fixes, performance improvements, and breaking changes. Write each entry in user-friendly language, not developer jargon. Format as a markdown changelog entry."</p>
+
+<h3>31. The Database Seed Builder</h3>
+<p>"Create a comprehensive seed file for the development database. Include: 5 users (1 admin, 2 editors, 2 viewers), 20 sample projects with realistic data, relationships between entities, and edge cases (archived project, deleted user, project with no members). Make the data realistic, not 'test123'."</p>
+
+<h2>Debug and Recovery (32 to 35)</h2>
+
+<h3>32. The Reproduction Prompt</h3>
+<p>"This bug was reported by a user: [paste bug report]. Create a minimal reproduction: the exact steps, the expected behavior, the actual behavior. Then write a failing test that captures this bug. Then fix the code to make the test pass."</p>
+
+<h3>33. The Blame Investigator</h3>
+<p>"This function started failing yesterday. Read the git log for this file over the past week. Identify which commit likely introduced the issue and explain what changed. Then suggest the fix."</p>
+
+<h3>34. The Dependency Conflict Resolver</h3>
+<p>"I am getting this dependency conflict: [paste error]. Analyze the conflict. Identify which packages require conflicting versions of the shared dependency. Suggest the resolution that requires the fewest changes and explain the tradeoffs."</p>
+
+<h3>35. The Recovery Mode</h3>
+<p>When Claude Code produces a broken implementation and you have been going back and forth for too long: "Stop. Read the original working version of this file from git: [paste the git show command output]. Now look at what we have been trying to achieve: [restate the goal simply]. Start fresh with a different approach. The previous approach clearly is not working."</p>
+
+<p>Sometimes starting over from a clean state is faster than fixing accumulated mistakes. Know when to use this.</p>
+
+<h2>The Setup That Ties It All Together</h2>
+
+<p>When you start a new project, run this sequence:</p>
+
+<ol>
+  <li><code>/init</code> — generate the <code>CLAUDE.md</code> file</li>
+  <li>Add your coding standards and patterns to <code>CLAUDE.md</code></li>
+  <li><code>/memory</code> — add persistent rules you want in every session</li>
+  <li>Plan mode — design the architecture before writing any code</li>
+  <li>Start building incrementally — one feature at a time, tested at each step</li>
+</ol>
+
+<p>This five-minute setup transforms every subsequent hour of development.</p>
+
+<div class="tip">
+  <strong>Bookmark this.</strong> Print it. Tattoo it on your screen. These 35 techniques are not exotic. They are shipping today. They work. Most developers will never use them. You now have the list.
+</div>
+
+<div class="related">
+  <h3>Related Articles</h3>
+  <ul>
+    <li><a href="/blog/boris-cherny-15-hidden-features.html">15 Under-Used Claude Code Features (from Boris Cherny)</a></li>
+    <li><a href="/blog/claude-code-2-months-review.html">Claude Code After 2 Months: The Most Productive I've Ever Been</a></li>
+    <li><a href="/advanced-workflows.html">Advanced Workflows</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>Claude Guides is a comprehensive resource for Claude Code commands, tricks, and workflows. <a href="/">Back to home</a>.</p>
+</footer>
+
+</body>
+</html>

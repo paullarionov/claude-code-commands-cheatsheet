@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The 30 MCP servers that make Claude 100x more powerful. Complete list with full GitHub links. Turn Claude from a chatbot into a tool that reads databases, manages GitHub, sends Slack messages, and deploys code.">
+<meta name="keywords" content="MCP servers, Model Context Protocol, Claude integrations, GitHub, Slack, database access, automation, AI tools, Claude extensions">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html">
+<meta property="og:title" content="30 MCP Servers That Make Claude 100x More Powerful">
+<meta property="og:description" content="The complete list of MCP servers worth installing. GitHub, Slack, databases, AWS, Notion, Stripe, and more. With full links and setup instructions.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html">
+<meta name="twitter:title" content="30 MCP Servers That Make Claude 100x More Powerful">
+<meta name="twitter:description" content="The complete list of MCP servers worth installing. GitHub, Slack, databases, AWS, and more with full links.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="30 MCP Servers for Claude">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-04-22T00:00:00Z">
+<meta property="article:modified_time" content="2026-04-22T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="MCP Servers">
+<meta property="article:tag" content="Claude">
+<meta property="article:tag" content="Integrations">
+<meta property="article:tag" content="Tools">
+
+<title>30 MCP Servers That Make Claude 100x More Powerful — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "30 MCP Servers That Make Claude 100x More Powerful",
+  "description": "The complete list of 30 Model Context Protocol servers worth installing. Turn Claude from a chatbot into a tool that reads databases, manages GitHub, sends Slack messages, and deploys code.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Organization", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-04-22T00:00:00Z",
+  "dateModified": "2026-04-22T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html"},
+  "wordCount": 5800,
+  "keywords": ["MCP servers", "Model Context Protocol", "Claude", "integrations", "GitHub", "Slack", "databases", "automation"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "30 MCP Servers That Make Claude 100x More Powerful", "item": "https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .mcp-card {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin: 12px 0;
+  }
+
+  .mcp-card a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .mcp-card a:hover { text-decoration: underline; }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>30 MCP Servers That Make Claude 100x More Powerful</h1>
+  <p class="lede">95% of people use Claude like a search bar. No MCP servers. No connections. No tools. Just raw prompting. Then they wonder why their Claude can't do what yours does.</p>
+  <div class="post-meta">
+    <span>April 22, 2026</span>
+    <span>21 min read</span>
+    <span>Integration Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>MCP servers turn Claude from a chatbot into a tool that reads your database, manages your GitHub, sends your Slack messages, and deploys your code. Here are the 30 servers worth installing, with full GitHub links. Start with GitHub, Postgres, and Memory. Add your stack. Layer productivity tools. The ecosystem has exploded: 10,000+ public servers. This is the definitive list.</p>
+</div>
+
+<p>It's not a different Claude. It's the same $20 subscription. The difference: MCP servers.</p>
+
+<p>Without them, you copy-paste data into Claude, ask a question, copy-paste the answer back into your tool. You are the middleware.</p>
+
+<p>With them, Claude reads your database directly. Opens your GitHub issues. Sends your Slack messages. Queries your logs. You just describe what you want done.</p>
+
+<h2>What is an MCP Server?</h2>
+
+<p>MCP means Model Context Protocol. It's an open standard that lets Claude connect to external tools and services, databases, APIs, SaaS platforms, local files, browsers, and cloud infrastructure through a universal plug-and-play interface.</p>
+
+<h3>MCP vs Skills</h3>
+
+<p>They're not the same thing, and one doesn't replace the other.</p>
+
+<p><strong>Skills</strong> tell Claude HOW to think. They're instruction sets, a SKILL.md file that teaches Claude a specific workflow, methodology, or process. "Here's how to do TDD." "Here's how to write a PRD." "Here's how to review code."</p>
+
+<p><strong>MCP servers</strong> give Claude access to WHERE things live. They're connections, bridges to real systems with real data. "Here's your database." "Here's your GitHub." "Here's your Slack."</p>
+
+<p>Skills without MCP = a brilliant employee who can't access any of your company's tools. MCP without skills = an employee with access to everything but no playbook. You need both.</p>
+
+<h2>Where to Find MCP Servers</h2>
+
+<p>Before building your own, search these registries first. 90% of what you need already exists:</p>
+
+<ul>
+  <li><strong>Official MCP Servers Repo:</strong> <a href="https://github.com/modelcontextprotocol/servers" target="_blank">github.com/modelcontextprotocol/servers</a> — Reference implementations maintained by the MCP steering group. Start here.</li>
+  <li><strong>Official MCP Registry:</strong> <a href="https://registry.modelcontextprotocol.io" target="_blank">registry.modelcontextprotocol.io</a> — The "app store" for MCP servers. 500+ indexed servers. Searchable API.</li>
+  <li><strong>Awesome MCP Servers:</strong> <a href="https://github.com/wong2/awesome-mcp-servers" target="_blank">github.com/wong2/awesome-mcp-servers</a> — The most comprehensive community-curated list. Updated regularly.</li>
+  <li><strong>MCP.run:</strong> <a href="https://mcp.run" target="_blank">mcp.run</a> — Run MCP servers without installing anything locally. Great for testing.</li>
+</ul>
+
+<h2>The 30 MCP Servers Worth Installing</h2>
+
+<h3>Development & Code</h3>
+
+<h4>1. GitHub MCP Server</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/github/github-mcp-server" target="_blank">github.com/github/github-mcp-server</a></p>
+  <p>The most popular MCP server in existence. 28,000+ stars. 51 tools. Claude can create repos, open PRs, review code, manage issues, trigger workflows, and navigate your entire GitHub org. If you install one server, make it this one.</p>
+</div>
+
+<h4>2. Playwright MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/microsoft/playwright-mcp" target="_blank">github.com/microsoft/playwright-mcp</a></p>
+  <p>Full browser automation. Claude can run UI tests, walk through funnels, take screenshots, and verify that your frontend actually works. Built by Microsoft. Replaces half your QA process.</p>
+</div>
+
+<h4>3. Sentry MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/getsentry/sentry-mcp" target="_blank">github.com/getsentry/sentry-mcp</a></p>
+  <p>Connects Claude to your error tracking. It can read crash reports, analyze stack traces, identify patterns, and suggest fixes based on real production errors. Stop copy-pasting Sentry links into chat.</p>
+</div>
+
+<h4>4. Semgrep MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/semgrep/mcp" target="_blank">github.com/semgrep/mcp</a></p>
+  <p>Static analysis and security scanning. Claude can audit your code for vulnerabilities, enforce rules, and catch bugs before they ship. Think of it as a security reviewer that never sleeps.</p>
+</div>
+
+<h4>5. CircleCI MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/circleci/mcp-server-circleci" target="_blank">github.com/circleci/mcp-server-circleci</a></p>
+  <p>Claude can read your CI/CD pipelines, debug failed builds, and understand why your deploy broke at 2am. Pairs perfectly with the GitHub server.</p>
+</div>
+
+<h3>Databases & Data</h3>
+
+<h4>6. PostgreSQL / Neon MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/neondatabase/mcp-server-neon" target="_blank">github.com/neondatabase/mcp-server-neon</a></p>
+  <p>Claude talks directly to your Postgres database. Run queries, inspect schemas, analyze data, create branches. Neon's serverless Postgres makes this zero-config.</p>
+</div>
+
+<h4>7. Supabase MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/supabase-community/supabase-mcp" target="_blank">github.com/supabase-community/supabase-mcp</a></p>
+  <p>Full Supabase access: database, auth, storage, edge functions. Claude can manage your entire backend. One of the most complete MCP integrations.</p>
+</div>
+
+<h4>8. Neo4j MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/neo4j/neo4j-mcp" target="_blank">github.com/neo4j/neo4j-mcp</a></p>
+  <p>Graph database access. Claude can run Cypher queries, explore relationships, and navigate complex data models. Perfect for knowledge graphs and recommendation engines.</p>
+</div>
+
+<h4>9. Qdrant MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/qdrant/mcp-server-qdrant" target="_blank">github.com/qdrant/mcp-server-qdrant</a></p>
+  <p>Vector search and semantic memory. Claude can store and retrieve embeddings, build RAG pipelines, and create its own long-term memory layer. Critical for AI-native apps.</p>
+</div>
+
+<h4>10. Tinybird MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/tinybirdco/mcp-tinybird" target="_blank">github.com/tinybirdco/mcp-tinybird</a></p>
+  <p>Real-time analytics at scale. Claude can query billions of rows, build dashboards, and analyze event data without you writing a single SQL statement.</p>
+</div>
+
+<h3>Cloud & Infrastructure</h3>
+
+<h4>11. AWS MCP Servers</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/awslabs/mcp" target="_blank">github.com/awslabs/mcp</a></p>
+  <p>Not one server — a full suite. CDK advice, cost analysis, documentation search, Bedrock AI, Nova image generation. If you're on AWS, this is non-negotiable.</p>
+</div>
+
+<h4>12. Cloudflare MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/cloudflare/mcp-server-cloudflare" target="_blank">github.com/cloudflare/mcp-server-cloudflare</a></p>
+  <p>16 specialized servers. Workers, R2 storage, D1 databases, browser rendering, DNS, KV store. Claude becomes your Cloudflare admin. Deploy edge functions from a chat message.</p>
+</div>
+
+<h4>13. Grafana MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/grafana/mcp-grafana" target="_blank">github.com/grafana/mcp-grafana</a></p>
+  <p>Claude can search dashboards, query datasources, investigate incidents, and pull metrics. Your observability stack, accessible through natural language.</p>
+</div>
+
+<h4>14. Railway MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/nichochar/railway-mcp" target="_blank">github.com/nichochar/railway-mcp</a></p>
+  <p>Deploy and manage Railway projects. Claude can spin up services, check logs, manage databases, and monitor deployments. Infrastructure-as-conversation.</p>
+</div>
+
+<h4>15. Render MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/render-oss/render-mcp-server" target="_blank">github.com/render-oss/render-mcp-server</a></p>
+  <p>Spin up services, query databases, and manage your Render stack. One more way to make "deploy this" a one-line instruction.</p>
+</div>
+
+<h3>Productivity & Business</h3>
+
+<h4>16. Notion MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/makenotion/notion-mcp-server" target="_blank">github.com/makenotion/notion-mcp-server</a></p>
+  <p>Notion's official server. Claude can read, create, and update pages, databases, and blocks. Your entire knowledge base becomes queryable and writable through Claude.</p>
+</div>
+
+<h4>17. Slack MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/anthropics/slack-mcp" target="_blank">github.com/anthropics/slack-mcp</a></p>
+  <p>Claude can read channels, search messages, post updates, and manage threads. Imagine: "summarize what the team discussed about the launch this week" — and getting an actual answer.</p>
+</div>
+
+<h4>18. Gmail MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://registry.modelcontextprotocol.io" target="_blank">See registry.modelcontextprotocol.io</a></p>
+  <p>Email access and management. Claude can read, search, draft, and organize your inbox. Pair with Slack MCP and you've got a communication assistant that actually knows what's happening.</p>
+</div>
+
+<h4>19. Jira MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://registry.modelcontextprotocol.io" target="_blank">See registry.modelcontextprotocol.io</a></p>
+  <p>Project management access. Claude can create tickets, update statuses, assign tasks, and report on sprint progress. Stop being the human middleware between your PM tool and your team.</p>
+</div>
+
+<h4>20. Stripe MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/stripe/agent-toolkit" target="_blank">github.com/stripe/agent-toolkit</a></p>
+  <p>Payments, subscriptions, invoices, webhooks. Claude can check transaction status, debug payment flows, and set up new products. The official agent toolkit from Stripe.</p>
+</div>
+
+<h4>21. HubSpot MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://registry.modelcontextprotocol.io" target="_blank">See registry.modelcontextprotocol.io</a></p>
+  <p>CRM access. Claude can pull contact data, track deals, update pipelines, and generate reports. Your sales team's new favorite tool they don't know about yet.</p>
+</div>
+
+<h3>Web Scraping & Data Extraction</h3>
+
+<h4>22. Firecrawl MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/mendableai/firecrawl" target="_blank">github.com/mendableai/firecrawl</a></p>
+  <p>Scrapes structured data from hostile or complex websites. JavaScript rendering, anti-bot bypass, clean markdown output. When fetch isn't enough, Firecrawl is.</p>
+</div>
+
+<h4>23. Browserbase MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/browserbase/mcp-server-browserbase" target="_blank">github.com/browserbase/mcp-server-browserbase</a></p>
+  <p>Cloud-hosted browser automation. Claude can interact with any website, fill forms, extract data, and navigate complex flows. Headless Chrome on demand.</p>
+</div>
+
+<h4>24. Bright Data MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://registry.modelcontextprotocol.io" target="_blank">See registry.modelcontextprotocol.io</a></p>
+  <p>Real-time web data access at scale. Proxy networks, SERP data, e-commerce scraping. Enterprise-grade data extraction.</p>
+</div>
+
+<h4>25. Apify MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/apify/actors-mcp-server" target="_blank">github.com/apify/actors-mcp-server</a></p>
+  <p>3,000+ pre-built scrapers and automation tools. Claude can extract data from almost any website using Apify's existing actor library. Don't build a scraper — use one that already exists.</p>
+</div>
+
+<h3>AI, Knowledge & Memory</h3>
+
+<h4>26. Memory MCP (Official)</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/memory" target="_blank">github.com/modelcontextprotocol/servers/tree/main/src/memory</a></p>
+  <p>Knowledge graph-based persistent memory. Claude remembers facts, relationships, and context across sessions. The closest thing to giving Claude a brain that doesn't reset.</p>
+</div>
+
+<h4>27. Sequential Thinking MCP (Official)</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking" target="_blank">github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking</a></p>
+  <p>Forces Claude into structured, step-by-step reasoning. Dynamic thought revision. Branching paths. Get Claude to actually think hard instead of pattern-matching.</p>
+</div>
+
+<h4>28. Context7 MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/upstash/context7" target="_blank">github.com/upstash/context7</a></p>
+  <p>Up-to-date documentation for any library, framework, or tool. Claude stops hallucinating outdated APIs and starts referencing current docs. Should be installed by default.</p>
+</div>
+
+<h3>Media & Design</h3>
+
+<h4>29. Figma MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/nichochar/figma-mcp" target="_blank">github.com/nichochar/figma-mcp</a></p>
+  <p>Design-to-code bridge. Claude can inspect Figma files, read component specs, extract styles, and generate code that matches your designs. No more squinting at Figma and guessing padding values.</p>
+</div>
+
+<h4>30. ElevenLabs MCP</h4>
+<div class="mcp-card">
+  <p><strong>Link:</strong> <a href="https://github.com/elevenlabs/elevenlabs-mcp" target="_blank">github.com/elevenlabs/elevenlabs-mcp</a></p>
+  <p>Text-to-speech and voice generation. Claude can create voiceovers, narrations, and audio content. Pair with a content workflow and you've got automated podcast production.</p>
+</div>
+
+<h2>How to Wire This Into Your Workflow</h2>
+
+<p>Don't install all 30 at once. Here's the order:</p>
+
+<ol>
+  <li><strong>Start with the foundation:</strong> Filesystem, Git, Memory, Sequential Thinking. These are free, official, and make everything else work better.</li>
+  <li><strong>Add your stack:</strong> If you use Postgres, install the Postgres MCP. GitHub? Install GitHub MCP. AWS? Install the AWS suite. Match your tools.</li>
+  <li><strong>Layer productivity:</strong> Notion, Slack, and Gmail turn Claude into a communication hub.</li>
+  <li><strong>Add data access last:</strong> Firecrawl, Browserbase, and Apify are powerful but situational. Install when you need them.</li>
+</ol>
+
+<p>Foundation → Stack → Productivity → Data. That's the playbook.</p>
+
+<div class="tip">
+  <strong>The MCP explosion.</strong> 10,000+ public servers exist. 97 million monthly SDK downloads. The ecosystem is moving fast. This list is current as of April 2026, but check the registries regularly — new servers ship every week. The servers listed here are battle-tested and widely used. They work. Install them.</p>
+</div>
+
+<div class="related">
+  <h3>Related Articles</h3>
+  <ul>
+    <li><a href="/blog/35-claude-code-commands-tricks-workflows.html">35 Claude Code Commands, Tricks, and Workflows</a></li>
+    <li><a href="/blog/claude-tools-complete-guide.html">Claude Tools: Complete Guide</a></li>
+    <li><a href="/blog/claude-managed-agents-playbook.html">Claude Managed Agents Playbook</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>Claude Guides is your comprehensive resource for Claude, MCP servers, and AI automation. <a href="/">Back to home</a>.</p>
+</footer>
+
+</body>
+</html>
