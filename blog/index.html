@@ -450,11 +450,13 @@ function renderPosts() {
 
 sortSelect.addEventListener('change', renderPosts);
 
-clearFiltersBtn.addEventListener('click', () => {
-  selectedTags = [];
-  renderPosts();
-  updateFilterButtons();
-});
+if (clearFiltersBtn) {
+  clearFiltersBtn.addEventListener('click', () => {
+    selectedTags = [];
+    renderPosts();
+    updateFilterButtons();
+  });
+}
 
 renderFilterButtons();
 renderPosts();
