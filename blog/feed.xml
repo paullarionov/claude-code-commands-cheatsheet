@@ -6,13 +6,21 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 03 May 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
 
+    <item>
+      <title>Token Optimization in Claude Code: A 430-Hour Forensics Analysis</title>
+      <link>https://claude-guides.com/blog/token-optimization-430-hour-analysis.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/token-optimization-430-hour-analysis.html</guid>
+      <pubDate>Sat, 03 May 2026 00:00:00 GMT</pubDate>
+      <category>Performance</category>
+      <description>Discover the 9 invisible patterns wasting 73% of your Claude Code tokens. Analysis of 6M tokens and $1,340 API spend reveals actionable optimization strategies with ROI calculations.</description>
+    </item>
     <item>
       <title>Save Claude Tokens by Integrating NotebookLM</title>
       <link>https://claude-guides.com/blog/save-claude-tokens-notebooklm.html</link>
