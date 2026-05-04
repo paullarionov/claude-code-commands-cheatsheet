@@ -335,12 +335,27 @@
       <option value="date-desc">Newest first</option>
       <option value="date-asc">Oldest first</option>
       <option value="title">Title (A-Z)</option>
+      <option value="readtime">Read time (longest)</option>
+    </select>
+  </div>
+  <div class="control-group">
+    <label for="minreadtime-select">Min Read Time</label>
+    <select id="minreadtime-select">
+      <option value="0">Any duration</option>
+      <option value="5">5+ min</option>
+      <option value="10">10+ min</option>
+      <option value="15">15+ min</option>
     </select>
   </div>
 </div>
 
+<div style="margin-bottom:16px;">
+  <input type="text" id="search-input" placeholder="🔍 Search posts by title, excerpt, or tags..." style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:10px 12px;font-size:12px;color:var(--text);" />
+</div>
+
 <div id="filter-tags" class="filter-tags"></div>
-<div id="clear-filters" class="clear-filters" style="display:none;">Clear filters</div>
+<div id="active-filters" style="margin-bottom:12px;font-size:11px;color:var(--text-2);"></div>
+<div id="clear-filters" class="clear-filters" style="display:none;">Clear all filters</div>
 <div class="results-count" id="results-count"></div>
 <div class="post-list" id="post-list"></div>
 </main>
@@ -354,12 +369,17 @@
 let posts = [];
 let selectedTags = [];
 let selectedCategory = '';
+let selectedMinReadTime = 0;
+let searchQuery = '';
 
 const postList = document.getElementById('post-list');
 const sortSelect = document.getElementById('sort-select');
 const categorySelect = document.getElementById('category-select');
+const minReadTimeSelect = document.getElementById('minreadtime-select');
+const searchInput = document.getElementById('search-input');
 const filterTagsContainer = document.getElementById('filter-tags');
 const clearFiltersBtn = document.getElementById('clear-filters');
+const activeFiltersDiv = document.getElementById('active-filters');
 const resultsCount = document.getElementById('results-count');
 
 async function loadPosts() {
@@ -420,7 +440,25 @@ function updateFilterButtons() {
     const tag = btn.dataset.tag;
     btn.classList.toggle('active', selectedTags.includes(tag));
   });
-  clearFiltersBtn.style.display = (selectedTags.length > 0 || selectedCategory) ? 'inline' : 'none';
+
+  const hasActiveFilters = selectedTags.length > 0 || selectedCategory || selectedMinReadTime > 0 || searchQuery;
+  clearFiltersBtn.style.display = hasActiveFilters ? 'inline' : 'none';
+
+  updateActiveFiltersDisplay();
+}
+
+function updateActiveFiltersDisplay() {
+  const activeFiltersList = [];
+  if (selectedCategory) activeFiltersList.push(`Category: <strong>${selectedCategory}</strong>`);
+  if (selectedMinReadTime > 0) activeFiltersList.push(`Min read time: <strong>${selectedMinReadTime}+ min</strong>`);
+  if (searchQuery) activeFiltersList.push(`Search: <strong>"${searchQuery}"</strong>`);
+  if (selectedTags.length > 0) activeFiltersList.push(`Tags: <strong>${selectedTags.join(', ')}</strong>`);
+
+  if (activeFiltersList.length > 0) {
+    activeFiltersDiv.innerHTML = `<div style="font-size:11px;color:var(--text-2);padding:8px;background:rgba(0,0,0,0.02);border-radius:4px;border:1px solid var(--border-faint);">Active filters: ${activeFiltersList.join(' • ')}</div>`;
+  } else {
+    activeFiltersDiv.innerHTML = '';
+  }
 }
 
 function sortPosts(postsToSort) {
@@ -432,6 +470,8 @@ function sortPosts(postsToSort) {
       return sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
     case 'title':
       return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    case 'readtime':
+      return sorted.sort((a, b) => (b.readTime || 0) - (a.readTime || 0));
     default:
       return sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
@@ -444,6 +484,18 @@ function renderPosts() {
     filtered = filtered.filter(post => post.category === selectedCategory);
   }
 
+  if (selectedMinReadTime > 0) {
+    filtered = filtered.filter(post => post.readTime >= selectedMinReadTime);
+  }
+
+  if (searchQuery) {
+    filtered = filtered.filter(post =>
+      post.title.toLowerCase().includes(searchQuery) ||
+      post.excerpt.toLowerCase().includes(searchQuery) ||
+      post.tags.some(t => t.toLowerCase().includes(searchQuery))
+    );
+  }
+
   if (selectedTags.length > 0) {
     filtered = filtered.filter(post =>
       selectedTags.some(tag => post.tags.includes(tag))
@@ -452,7 +504,7 @@ function renderPosts() {
 
   const sorted = sortPosts(filtered);
 
-  postList.innerHTML = sorted.map(post => {
+  postList.innerHTML = sorted.length > 0 ? sorted.map(post => {
     const readTimeText = post.readTime ? `<span>${post.readTime} min read</span>` : '';
     const categoryText = `<span>${post.category}</span>`;
     return `
@@ -463,9 +515,9 @@ function renderPosts() {
         ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
       </article>
     `;
-  }).join('');
+  }).join('') : '<div style="padding:32px;text-align:center;color:var(--text-2);">No posts found matching your filters. Try adjusting your search criteria.</div>';
 
-  resultsCount.textContent = `${sorted.length} post${sorted.length !== 1 ? 's' : ''}`;
+  resultsCount.textContent = `${sorted.length} post${sorted.length !== 1 ? 's' : ''} found`;
 }
 
 sortSelect.addEventListener('change', renderPosts);
@@ -476,10 +528,26 @@ categorySelect.addEventListener('change', (e) => {
   updateFilterButtons();
 });
 
+minReadTimeSelect.addEventListener('change', (e) => {
+  selectedMinReadTime = parseInt(e.target.value);
+  renderPosts();
+  updateFilterButtons();
+});
+
+searchInput.addEventListener('input', (e) => {
+  searchQuery = e.target.value.toLowerCase();
+  renderPosts();
+  updateFilterButtons();
+});
+
 clearFiltersBtn.addEventListener('click', () => {
   selectedTags = [];
   selectedCategory = '';
+  selectedMinReadTime = 0;
+  searchQuery = '';
   categorySelect.value = '';
+  minReadTimeSelect.value = '0';
+  searchInput.value = '';
   renderPosts();
   updateFilterButtons();
 });

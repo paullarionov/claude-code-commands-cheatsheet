@@ -1622,32 +1622,98 @@
     <h2>From the blog</h2>
     <a href="/blog/" class="view-all">View all posts →</a>
   </div>
-  <div id="blog-preview-controls" style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:center;">
-    <select id="blog-category-select" style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:11px;color:var(--text);cursor:pointer;">
-      <option value="">All Categories</option>
-    </select>
-    <select id="blog-sort-select" style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:11px;color:var(--text);cursor:pointer;">
-      <option value="date-desc">Newest first</option>
-      <option value="date-asc">Oldest first</option>
-      <option value="title">Title (A-Z)</option>
-    </select>
+
+  <div id="blog-settings-toggle" style="margin-bottom:12px;">
+    <button style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:11px;color:var(--text);cursor:pointer;transition:all 0.2s;" onclick="toggleBlogSettings(this)">⚙️ Filters & Settings</button>
   </div>
+
+  <div id="blog-preview-controls" style="display:none;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:flex-start;padding:12px;background:rgba(0,0,0,0.02);border-radius:4px;border:1px solid var(--border-faint);">
+
+    <div style="flex:1;min-width:150px;">
+      <label style="display:block;font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-2);margin-bottom:4px;">Category</label>
+      <select id="blog-category-select" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font-size:11px;color:var(--text);cursor:pointer;">
+        <option value="">All Categories</option>
+      </select>
+    </div>
+
+    <div style="flex:1;min-width:150px;">
+      <label style="display:block;font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-2);margin-bottom:4px;">Sort By</label>
+      <select id="blog-sort-select" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font-size:11px;color:var(--text);cursor:pointer;">
+        <option value="date-desc">Newest first</option>
+        <option value="date-asc">Oldest first</option>
+        <option value="title">Title (A-Z)</option>
+        <option value="readtime">Read time</option>
+      </select>
+    </div>
+
+    <div style="flex:1;min-width:150px;">
+      <label style="display:block;font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-2);margin-bottom:4px;">Display Count</label>
+      <select id="blog-count-select" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font-size:11px;color:var(--text);cursor:pointer;">
+        <option value="3">3 posts</option>
+        <option value="6" selected>6 posts</option>
+        <option value="12">12 posts</option>
+        <option value="all">All posts</option>
+      </select>
+    </div>
+
+    <div style="flex:1;min-width:150px;">
+      <label style="display:block;font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-2);margin-bottom:4px;">Min Read Time</label>
+      <select id="blog-minreadtime-select" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font-size:11px;color:var(--text);cursor:pointer;">
+        <option value="0">Any duration</option>
+        <option value="5">5+ min</option>
+        <option value="10">10+ min</option>
+        <option value="15">15+ min</option>
+      </select>
+    </div>
+
+    <div style="flex:0 0 auto;margin-top:22px;">
+      <button id="blog-reset-filters" style="background:var(--accent);color:var(--surface);border:1px solid var(--accent);border-radius:4px;padding:6px 12px;font-size:11px;cursor:pointer;transition:opacity 0.2s;" onclick="resetBlogFilters()" title="Reset all filters">↻ Reset</button>
+    </div>
+  </div>
+
+  <div id="blog-search-box" style="margin-bottom:12px;">
+    <input type="text" id="blog-search-input" placeholder="🔍 Search posts..." style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:8px 12px;font-size:12px;color:var(--text);" />
+  </div>
+
+  <div id="blog-active-filters" style="margin-bottom:8px;min-height:20px;"></div>
+
   <div class="blog-preview-grid" id="blog-preview-grid"></div>
+
+  <div id="blog-results-summary" style="margin-top:12px;font-size:11px;color:var(--text-2);text-align:center;"></div>
 </section>
 
 <script>
+let blogPostsCache = null;
+let blogFiltersState = {
+  category: '',
+  sort: 'date-desc',
+  count: 6,
+  minReadTime: 0,
+  search: ''
+};
+
+function toggleBlogSettings(btn) {
+  const controls = document.getElementById('blog-preview-controls');
+  const isHidden = controls.style.display === 'none';
+  controls.style.display = isHidden ? 'flex' : 'none';
+  btn.style.background = isHidden ? 'var(--accent)' : 'var(--surface)';
+  btn.style.color = isHidden ? 'var(--surface)' : 'var(--text)';
+}
+
 async function initializeBlogPreview() {
   try {
     const response = await fetch('/blog/blog-posts.json');
     const data = await response.json();
-    const posts = data.posts;
+    blogPostsCache = data.posts;
 
     const categorySelect = document.getElementById('blog-category-select');
     const sortSelect = document.getElementById('blog-sort-select');
-    const grid = document.getElementById('blog-preview-grid');
+    const countSelect = document.getElementById('blog-count-select');
+    const minReadTimeSelect = document.getElementById('blog-minreadtime-select');
+    const searchInput = document.getElementById('blog-search-input');
 
     // Get unique categories
-    const categories = [...new Set(posts.map(p => p.category))].sort();
+    const categories = [...new Set(blogPostsCache.map(p => p.category))].sort();
     categories.forEach(cat => {
       const option = document.createElement('option');
       option.value = cat;
@@ -1655,47 +1721,129 @@ async function initializeBlogPreview() {
       categorySelect.appendChild(option);
     });
 
-    function renderPosts() {
-      const selectedCategory = categorySelect.value;
-      const sortBy = sortSelect.value;
+    // Event listeners
+    categorySelect.addEventListener('change', (e) => {
+      blogFiltersState.category = e.target.value;
+      renderBlogPosts();
+    });
 
-      let filtered = posts;
-      if (selectedCategory) {
-        filtered = filtered.filter(p => p.category === selectedCategory);
-      }
+    sortSelect.addEventListener('change', (e) => {
+      blogFiltersState.sort = e.target.value;
+      renderBlogPosts();
+    });
 
-      // Sort
-      const sorted = [...filtered].sort((a, b) => {
-        switch(sortBy) {
-          case 'date-asc':
-            return new Date(a.date) - new Date(b.date);
-          case 'title':
-            return a.title.localeCompare(b.title);
-          default:
-            return new Date(b.date) - new Date(a.date);
-        }
-      });
+    countSelect.addEventListener('change', (e) => {
+      blogFiltersState.count = e.target.value === 'all' ? blogPostsCache.length : parseInt(e.target.value);
+      renderBlogPosts();
+    });
 
-      // Display first 6
-      const displayed = sorted.slice(0, 6);
+    minReadTimeSelect.addEventListener('change', (e) => {
+      blogFiltersState.minReadTime = parseInt(e.target.value);
+      renderBlogPosts();
+    });
 
-      grid.innerHTML = displayed.map(post => `
-        <a href="${post.url}" class="blog-preview-card">
-          <span class="bp-cat">${post.category}</span>
-          <h3>${post.title}</h3>
-          <p>${post.excerpt}</p>
-          <span class="bp-meta">${post.date.split('-').reverse().join(' ')} ${post.readTime ? '· ' + post.readTime + ' min read' : ''}</span>
-        </a>
-      `).join('');
-    }
+    searchInput.addEventListener('input', (e) => {
+      blogFiltersState.search = e.target.value.toLowerCase();
+      renderBlogPosts();
+    });
 
-    categorySelect.addEventListener('change', renderPosts);
-    sortSelect.addEventListener('change', renderPosts);
-
-    renderPosts();
+    renderBlogPosts();
   } catch (err) {
     console.error('Error loading blog preview:', err);
   }
+}
+
+function renderBlogPosts() {
+  if (!blogPostsCache) return;
+
+  let filtered = blogPostsCache;
+
+  // Apply category filter
+  if (blogFiltersState.category) {
+    filtered = filtered.filter(p => p.category === blogFiltersState.category);
+  }
+
+  // Apply min read time filter
+  if (blogFiltersState.minReadTime > 0) {
+    filtered = filtered.filter(p => p.readTime >= blogFiltersState.minReadTime);
+  }
+
+  // Apply search filter
+  if (blogFiltersState.search) {
+    filtered = filtered.filter(p =>
+      p.title.toLowerCase().includes(blogFiltersState.search) ||
+      p.excerpt.toLowerCase().includes(blogFiltersState.search) ||
+      p.tags.some(t => t.toLowerCase().includes(blogFiltersState.search))
+    );
+  }
+
+  // Sort
+  const sorted = [...filtered].sort((a, b) => {
+    switch(blogFiltersState.sort) {
+      case 'date-asc':
+        return new Date(a.date) - new Date(b.date);
+      case 'title':
+        return a.title.localeCompare(b.title);
+      case 'readtime':
+        return (b.readTime || 0) - (a.readTime || 0);
+      default:
+        return new Date(b.date) - new Date(a.date);
+    }
+  });
+
+  // Display limited count
+  const displayed = sorted.slice(0, blogFiltersState.count);
+  const grid = document.getElementById('blog-preview-grid');
+  const summary = document.getElementById('blog-results-summary');
+  const activeFilters = document.getElementById('blog-active-filters');
+
+  // Render cards
+  grid.innerHTML = displayed.length > 0 ? displayed.map(post => `
+    <a href="${post.url}" class="blog-preview-card">
+      <span class="bp-cat">${post.category}</span>
+      <h3>${post.title}</h3>
+      <p>${post.excerpt}</p>
+      <span class="bp-meta">
+        ${new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+        ${post.readTime ? '· ' + post.readTime + ' min read' : ''}
+      </span>
+    </a>
+  `).join('') : '<div style="padding:24px;text-align:center;color:var(--text-2);">No posts found matching your filters.</div>';
+
+  // Update summary
+  const totalAvailable = filtered.length;
+  const showing = Math.min(displayed.length, totalAvailable);
+  summary.textContent = `Showing ${showing} of ${totalAvailable} post${totalAvailable !== 1 ? 's' : ''}`;
+
+  // Render active filters
+  const activeFiltersList = [];
+  if (blogFiltersState.category) activeFiltersList.push(`Category: ${blogFiltersState.category}`);
+  if (blogFiltersState.minReadTime > 0) activeFiltersList.push(`${blogFiltersState.minReadTime}+ min read`);
+  if (blogFiltersState.search) activeFiltersList.push(`Search: "${blogFiltersState.search}"`);
+
+  if (activeFiltersList.length > 0) {
+    activeFilters.innerHTML = `<span style="font-size:10px;color:var(--text-2);">Filters: ${activeFiltersList.join(' • ')}</span>`;
+  } else {
+    activeFilters.innerHTML = '';
+  }
+}
+
+function resetBlogFilters() {
+  blogFiltersState = {
+    category: '',
+    sort: 'date-desc',
+    count: 6,
+    minReadTime: 0,
+    search: ''
+  };
+
+  document.getElementById('blog-category-select').value = '';
+  document.getElementById('blog-sort-select').value = 'date-desc';
+  document.getElementById('blog-count-select').value = '6';
+  document.getElementById('blog-minreadtime-select').value = '0';
+  document.getElementById('blog-search-input').value = '';
+
+  renderBlogPosts();
 }
 
 document.addEventListener('DOMContentLoaded', initializeBlogPreview);
