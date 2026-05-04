@@ -1622,45 +1622,84 @@
     <h2>From the blog</h2>
     <a href="/blog/" class="view-all">View all posts →</a>
   </div>
-  <div class="blog-preview-grid">
-    <a href="/blog/save-claude-tokens-notebooklm.html" class="blog-preview-card">
-      <span class="bp-cat">Tips</span>
-      <h3>Save Claude Tokens by Integrating NotebookLM</h3>
-      <p>Cut Claude token spend by offloading research and retrieval to Google's NotebookLM.</p>
-      <span class="bp-meta">Apr 16, 2026 · 7 min read</span>
-    </a>
-    <a href="/blog/hermes-self-learning-agent.html" class="blog-preview-card">
-      <span class="bp-cat">Tutorial</span>
-      <h3>Hermes: Build a Self-Learning Agent with 7 Workflows</h3>
-      <p>A Claude Code agent that learns from its own runs — seven composable workflows, full walkthrough.</p>
-      <span class="bp-meta">Apr 15, 2026 · 7 min read</span>
-    </a>
-    <a href="/blog/claude-managed-agents-playbook.html" class="blog-preview-card">
-      <span class="bp-cat">Guide</span>
-      <h3>Claude Managed Agents: A Practical Playbook</h3>
-      <p>Patterns, traps, and the playbook we wish existed when we shipped managed agents to production.</p>
-      <span class="bp-meta">Apr 14, 2026 · 8 min read</span>
-    </a>
-    <a href="/blog/claude-tools-complete-guide.html" class="blog-preview-card">
-      <span class="bp-cat">Guide</span>
-      <h3>The Complete Claude Tools Guide</h3>
-      <p>The four levels of Claude tool design — from your first tool to MCP and multi-agent orchestration.</p>
-      <span class="bp-meta">Apr 13, 2026 · 8 min read</span>
-    </a>
-    <a href="/blog/prompt-engineering-complete-guide.html" class="blog-preview-card">
-      <span class="bp-cat">Guide</span>
-      <h3>The Complete Prompt Engineering Guide for Claude</h3>
-      <p>Every technique that moved quality, ranked by how much it actually helped.</p>
-      <span class="bp-meta">Apr 12, 2026 · 10 min read</span>
-    </a>
-    <a href="/blog/6-month-roadmap-ai-automation-builder.html" class="blog-preview-card">
-      <span class="bp-cat">Career</span>
-      <h3>The 6-Month Roadmap to AI Automation Builder</h3>
-      <p>A concrete month-by-month path from zero to your first paying clients. No fluff.</p>
-      <span class="bp-meta">Apr 10, 2026 · 9 min read</span>
-    </a>
+  <div id="blog-preview-controls" style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:center;">
+    <select id="blog-category-select" style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:11px;color:var(--text);cursor:pointer;">
+      <option value="">All Categories</option>
+    </select>
+    <select id="blog-sort-select" style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:11px;color:var(--text);cursor:pointer;">
+      <option value="date-desc">Newest first</option>
+      <option value="date-asc">Oldest first</option>
+      <option value="title">Title (A-Z)</option>
+    </select>
   </div>
+  <div class="blog-preview-grid" id="blog-preview-grid"></div>
 </section>
+
+<script>
+async function initializeBlogPreview() {
+  try {
+    const response = await fetch('/blog/blog-posts.json');
+    const data = await response.json();
+    const posts = data.posts;
+
+    const categorySelect = document.getElementById('blog-category-select');
+    const sortSelect = document.getElementById('blog-sort-select');
+    const grid = document.getElementById('blog-preview-grid');
+
+    // Get unique categories
+    const categories = [...new Set(posts.map(p => p.category))].sort();
+    categories.forEach(cat => {
+      const option = document.createElement('option');
+      option.value = cat;
+      option.textContent = cat;
+      categorySelect.appendChild(option);
+    });
+
+    function renderPosts() {
+      const selectedCategory = categorySelect.value;
+      const sortBy = sortSelect.value;
+
+      let filtered = posts;
+      if (selectedCategory) {
+        filtered = filtered.filter(p => p.category === selectedCategory);
+      }
+
+      // Sort
+      const sorted = [...filtered].sort((a, b) => {
+        switch(sortBy) {
+          case 'date-asc':
+            return new Date(a.date) - new Date(b.date);
+          case 'title':
+            return a.title.localeCompare(b.title);
+          default:
+            return new Date(b.date) - new Date(a.date);
+        }
+      });
+
+      // Display first 6
+      const displayed = sorted.slice(0, 6);
+
+      grid.innerHTML = displayed.map(post => `
+        <a href="${post.url}" class="blog-preview-card">
+          <span class="bp-cat">${post.category}</span>
+          <h3>${post.title}</h3>
+          <p>${post.excerpt}</p>
+          <span class="bp-meta">${post.date.split('-').reverse().join(' ')} ${post.readTime ? '· ' + post.readTime + ' min read' : ''}</span>
+        </a>
+      `).join('');
+    }
+
+    categorySelect.addEventListener('change', renderPosts);
+    sortSelect.addEventListener('change', renderPosts);
+
+    renderPosts();
+  } catch (err) {
+    console.error('Error loading blog preview:', err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initializeBlogPreview);
+</script>
 
 <section class="resources">
   <a href="best-practices.html" class="resource-tile">
