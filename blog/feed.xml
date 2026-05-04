@@ -6,13 +6,21 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 04 May 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
 
+    <item>
+      <title>Burning Through Claude Code's Weekly Limit in 3 Days? Here's How to Fix It</title>
+      <link>https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html</guid>
+      <pubDate>Sun, 04 May 2026 00:00:00 GMT</pubDate>
+      <category>Cost Optimization</category>
+      <description>Reduced weekly token limits from burnout in 3 days to sustainable usage. Learn how to delegate I/O operations to cheaper models and save 75% on API costs using three CLI-based tools and one strategic configuration.</description>
+    </item>
     <item>
       <title>Token Optimization in Claude Code: A 430-Hour Forensics Analysis</title>
       <link>https://claude-guides.com/blog/token-optimization-430-hour-analysis.html</link>
