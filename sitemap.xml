@@ -85,15 +85,21 @@
   <!-- Blog -->
   <url>
     <loc>https://claude-guides.com/blog/</loc>
-    <lastmod>2026-04-19</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://claude-guides.com/blog/feed.xml</loc>
-    <lastmod>2026-04-19</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://claude-guides.com/blog/save-claude-tokens-notebooklm.html</loc>

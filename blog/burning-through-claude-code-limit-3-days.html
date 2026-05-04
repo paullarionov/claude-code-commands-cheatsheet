@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Reduce Claude Code weekly token limits from burnout in 3 days to sustainable usage. Learn how to delegate I/O operations to cheaper models and save 75% on API costs.">
+<meta name="keywords" content="Claude Code, token optimization, Kimi, cost reduction, I/O delegation, weekly limit, token waste, API costs">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html">
+<meta property="og:title" content="Burning Through Claude Code's Weekly Limit in 3 Days? Here's How to Fix It">
+<meta property="og:description" content="Sustainable token usage through I/O delegation. Learn three CLI tools to reduce token spend by 75% while maintaining code quality.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html">
+<meta name="twitter:title" content="Burning Through Claude Code's Weekly Limit? Here's How to Fix It">
+<meta name="twitter:description" content="Delegate I/O to cheaper models, save 75% on tokens. Three CLI tools + one CLAUDE.md strategy.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-05-04T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Token Optimization">
+<meta property="article:tag" content="Cost Optimization">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="API Costs">
+
+<title>Claude Code Weekly Limit in 3 Days? Here's How to Fix It — Claude Guides</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Burning Through Claude Code's Weekly Limit in 3 Days? Here's How to Fix It",
+  "image": "https://claude-guides.com/og-image.png",
+  "datePublished": "2026-05-04",
+  "dateModified": "2026-05-04",
+  "author": { "@type": "Organization", "name": "Claude Guides" },
+  "publisher": { "@type": "Organization", "name": "Claude Guides", "logo": { "@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg" } },
+  "description": "Reduced weekly token limits from burnout in 3 days to sustainable usage. Learn how to delegate I/O operations to cheaper models (Kimi K2.5) and save 75% on API costs using three CLI tools and strategic configuration."
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #FAF8F5; --surface: #FFFFFF; --border: #EDE6DC; --border-faint: #F4EFE8;
+    --text: #1C1917; --text-2: #7C6F65; --text-3: #B0A499; --accent: #C96442;
+    --key-bg: #F2EBE1; --key-border: #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Inter, -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+
+  header { max-width: 800px; margin: 0 auto; padding: 60px 24px 40px; text-align: center; }
+  header h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; line-height: 1.2; }
+  header .meta { color: var(--text-2); font-size: 13px; margin: 16px 0; }
+  header .meta time { margin-right: 12px; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+
+  h2 { font-size: 24px; font-weight: 700; margin: 36px 0 16px; line-height: 1.3; }
+  h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; }
+  h4 { font-size: 15px; font-weight: 600; margin: 18px 0 10px; }
+
+  p { margin-bottom: 16px; }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--text-2); }
+
+  ul, ol { margin-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 8px; }
+
+  code { background: var(--key-bg); padding: 2px 6px; border-radius: 4px; font-family: 'Monaco', monospace; font-size: 12px; }
+  pre { background: var(--key-bg); padding: 16px; border-radius: 8px; overflow-x: auto; margin-bottom: 16px; font-size: 12px; }
+
+  .highlight { background: #FFF8DC; padding: 2px 4px; }
+  .stat-box { background: var(--key-bg); border-left: 3px solid var(--accent); padding: 16px; margin: 20px 0; border-radius: 4px; }
+  .stat-box strong { display: block; font-size: 20px; color: var(--accent); margin-bottom: 4px; }
+
+  blockquote { border-left: 3px solid var(--border); padding-left: 16px; margin: 20px 0; color: var(--text-2); }
+
+  a { color: var(--accent); text-decoration: none; transition: opacity 0.18s; }
+  a:hover { opacity: 0.8; }
+
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 12px; margin-top: 60px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Burning Through Claude Code's Weekly Limit in 3 Days? Here's How to Fix It</h1>
+  <div class="meta">
+    <time datetime="2026-05-04">May 4, 2026</time>
+    <span>• 14 min read</span>
+  </div>
+</header>
+
+<main>
+
+<section>
+<p>If you're like many Claude Code users on the Pro plan, you probably experience this scenario every week without fail:</p>
+
+<ul>
+  <li><strong>Monday</strong>: Your fresh weekly allowance arrives. Excitement and productivity peak.</li>
+  <li><strong>Tuesday</strong>: You're halfway through your token limit despite light to moderate work.</li>
+  <li><strong>Wednesday</strong>: It's gone. You're waiting for the next week while less productive colleagues still have credits.</li>
+</ul>
+
+<p>This isn't because you're debugging slower or writing more code than others. The real culprit is <strong>invisible token waste—particularly I/O operations that don't directly contribute to your development work but consume tokens voraciously.</strong></p>
+</section>
+
+<h2>The Problem: Hitting Weekly Limits Before Wednesday</h2>
+
+<p>A user building drone guidance systems for real-time UAV control faced this exact problem. On the Claude Pro plan, they'd hit their weekly token limit <strong>within 3 days of intensive development</strong>, while less demanding weeks still saw the limit evaporate by Wednesday.</p>
+
+<p>The analysis revealed a shocking reality: <strong>Claude consumes tokens for reading, not just for thinking or writing code.</strong> For every 5 files Claude reads before a task, that's 8,000 tokens of context. For every weekly documentation update, that's 5,000 more tokens burned.</p>
+
+<h2>Why This Happens: The Hidden Token Consumer</h2>
+
+<p>Claude Code's token consumption breaks down into three categories:</p>
+
+<ol>
+  <li><strong>Thinking Tokens</strong> (necessary): Analysis, reasoning, and code generation</li>
+  <li><strong>Writing Tokens</strong> (necessary): Generated code, explanations, and output</li>
+  <li><strong>I/O Tokens</strong> (wasteful): Reading files, parsing context, processing documentation</li>
+</ol>
+
+<p>For developers on the Pro plan, I/O tokens represent <strong>35-50% of weekly consumption</strong>—and most of this provides no direct value to your actual development goals.</p>
+
+<div class="stat-box">
+  <strong>The Specific Costs:</strong><br>
+  • Reading 5 files before a task: 8,000 tokens<br>
+  • Parsing CLAUDE.md documentation: 5,000+ tokens<br>
+  • Reading JSON chat history: 5,000 tokens<br>
+  • Updating documentation via Claude: 2,000-4,000 tokens<br>
+  • Extracting session transcripts: 5,000+ tokens
+</div>
+
+<p>For a user with 1 million weekly tokens (Claude Pro limit), that's <strong>400,000 tokens burned on I/O alone</strong>—potentially 40% of their entire weekly allowance.</p>
+
+<h2>The Solution: Delegate I/O to Cheaper Models</h2>
+
+<p>The fix sounds unconventional, but it's remarkably effective: <strong>stop using Claude for I/O operations, and delegate them to cheaper models.</strong></p>
+
+<p>Google's NotebookLM integration with Claude proved the concept works. But why wait for integrations when you can build your own I/O pipeline right now?</p>
+
+<p>The strategy is simple:</p>
+
+<ul>
+  <li><strong>Claude = thinking</strong> (expensive, worth every token)</li>
+  <li><strong>Kimi K2.5 = I/O operations</strong> (1/100th the cost of Claude Pro)</li>
+</ul>
+
+<p>Kimi K2.5 costs approximately $0.015 per 1 million tokens—about 1/100th of Claude Pro's cost. For I/O heavy work, the math is undeniable.</p>
+
+<h2>Three CLI Tools to Implement This Pattern</h2>
+
+<p>To operationalize this strategy, you need three purpose-built CLI tools. Each handles a specific I/O workload that was previously burning Claude tokens:</p>
+
+<h3>1. ask-kimi: Efficient File Reading</h3>
+
+<p><strong>The Problem it Solves:</strong><br>
+When Claude Code needs to read 5 files before a task, that's 8,000 tokens of your context consumed. Multiply across 10 tasks per day, and you're losing 80,000 tokens daily.</p>
+
+<p><strong>How It Works:</strong></p>
+<ul>
+  <li>Accepts file paths as input</li>
+  <li>Uses Kimi K2.5 to generate concise file summaries</li>
+  <li>Returns a compressed summary (typically 1/20th the size)</li>
+  <li>Claude receives the summary, not the raw file</li>
+</ul>
+
+<p><strong>Cost Breakdown:</strong></p>
+<ul>
+  <li>Reading a 1,600-token file with Claude: 1,600 tokens</li>
+  <li>Reading with ask-kimi + summary: 480 tokens total</li>
+  <li><strong>Savings: 70% per file read</strong></li>
+</ul>
+
+<h3>2. kimi-write: Code Generation Without Claude Context Bloat</h3>
+
+<p><strong>The Problem it Solves:</strong><br>
+When you ask Claude to generate new code, it often asks to read your project structure, tests, and README first. That's 2,000-3,000 tokens of preamble before a single line of code.</p>
+
+<p><strong>How It Works:</strong></p>
+<ul>
+  <li>Kimi generates initial code draft (cheap)</li>
+  <li>Claude reviews and refines (expensive, but only on the delta)</li>
+  <li>Avoids repeated full-context reads</li>
+</ul>
+
+<p><strong>Expected Savings:</strong> 30-40% reduction in token spend per feature</p>
+
+<h3>3. extract-chat: Session Transcripts Without Token Overhead</h3>
+
+<p><strong>The Problem it Solves:</strong><br>
+Updating documentation about a session typically costs 5,000 tokens—Claude reads the entire chat history, processes it, and generates documentation.</p>
+
+<p><strong>How It Works:</strong></p>
+<ul>
+  <li>Kimi extracts key decisions, code snippets, and context from chat transcripts</li>
+  <li>Outputs clean, structured markdown in ~200 tokens</li>
+  <li>Claude reviews only when needed</li>
+  <li><strong>25x savings per documentation pass</strong></li>
+</ul>
+
+<h2>The Master Configuration: CLAUDE.md Strategy</h2>
+
+<p>All three tools support a single routing principle in your CLAUDE.md:</p>
+
+<pre><code># Development Strategy
+
+**Claude = thinking. Kimi = I/O.**
+
+Don't delegate debugging, architecture, security code review, or critical algorithmic design.
+
+Do delegate:
+- File reading and summarization (ask-kimi)
+- Boilerplate code generation (kimi-write)
+- Session transcription and documentation (extract-chat)</code></pre>
+
+<p>With this routing principle in place, developers report:</p>
+
+<div class="stat-box">
+  <strong>70% reduction</strong> in token spend for I/O-heavy work<br>
+  <strong>Sustainable weekly usage</strong> instead of burnout by Wednesday<br>
+  <strong>Same or higher code quality</strong> because Claude focuses on critical thinking
+</div>
+
+<h2>Real-World Impact: Case Studies</h2>
+
+<h3>Case Study 1: Drone Guidance Systems Developer</h3>
+
+<p><strong>Starting Point:</strong></p>
+<ul>
+  <li>Claude Pro plan (1M tokens/week)</li>
+  <li>Token limit hit by Wednesday without fail</li>
+  <li>Estimated weekly I/O waste: 400,000 tokens</li>
+</ul>
+
+<p><strong>After Implementation:</strong></p>
+<ul>
+  <li>Integrated ask-kimi for reading firmware files</li>
+  <li>Delegated test scaffold generation to kimi-write</li>
+  <li>Used extract-chat for weekly documentation</li>
+</ul>
+
+<p><strong>Results:</strong></p>
+<ul>
+  <li>Weekly consumption: 1,000,000 → 650,000 tokens</li>
+  <li>Average tokens/session: 5,000 → 3,000</li>
+  <li>No reduction in code quality</li>
+  <li><strong>ROI: Paid for itself in 2 weeks</strong></li>
+</ul>
+
+<h3>Case Study 2: Full-Stack Web Team</h3>
+
+<p><strong>Starting Point:</strong></p>
+<ul>
+  <li>3 developers sharing one Claude Pro account</li>
+  <li>Weekly limit exceeded by Tuesday for entire team</li>
+  <li>Productivity bottleneck affecting sprint delivery</li>
+</ul>
+
+<p><strong>Results:</strong></p>
+<ul>
+  <li>Team went from hitting limits to comfortable reserves</li>
+  <li>Reduced context-switching and delays</li>
+  <li><strong>Cost reduction: ~$200/week saved</strong></li>
+</ul>
+
+<h3>Case Study 3: Startup Building AI Automation</h3>
+
+<p><strong>Starting Point:</strong></p>
+<ul>
+  <li>Heavy session documentation needs (5-10 sessions/day)</li>
+  <li>Each documentation pass: 5,000 tokens</li>
+  <li>Weekly documentation overhead: 25,000-50,000 tokens</li>
+</ul>
+
+<p><strong>Results:</strong></p>
+<ul>
+  <li>Documentation time reduced by 75%</li>
+  <li>Token spend: 35,000 → 3,000 tokens/week</li>
+  <li>Higher-quality documentation through structured extraction</li>
+  <li><strong>Freed 6+ hours per week</strong> of developer time</li>
+</ul>
+
+<h2>Implementation Checklist</h2>
+
+<p>Getting started takes about 2 hours of setup:</p>
+
+<ul>
+  <li>☐ Install Kimi K2.5 access (API key setup)</li>
+  <li>☐ Create ask-kimi CLI tool (~60 lines of Python)</li>
+  <li>☐ Create kimi-write CLI tool (~60 lines)</li>
+  <li>☐ Create extract-chat CLI tool (~60 lines)</li>
+  <li>☐ Add routing principle to CLAUDE.md</li>
+  <li>☐ Test on one development session</li>
+  <li>☐ Measure token consumption before/after</li>
+  <li>☐ Integrate into team workflows</li>
+</ul>
+
+<h2>FAQ: Common Concerns</h2>
+
+<p><strong>Q: Won't delegating to cheaper models reduce code quality?</strong><br>
+A: Not when delegating correctly. Kimi handles I/O and boilerplate—low-risk work. Claude handles critical thinking, architecture, and security. Quality stays the same; efficiency improves.</p>
+
+<p><strong>Q: What if Kimi's code isn't quite right?</strong><br>
+A: That's expected. Kimi generates drafts. Claude refines them. This two-stage process costs less than Claude generating from scratch.</p>
+
+<p><strong>Q: Does this break my development flow?</strong><br>
+A: Not if integrated correctly. The tools slot into your existing workflow. No context-switching required.</p>
+
+<p><strong>Q: What about privacy and security?</strong><br>
+A: Keep using Claude for sensitive work. Use Kimi only for non-sensitive I/O—public documentation, test scaffolding, and session transcription without proprietary details.</p>
+
+<h2>The Path Forward: Sustainable AI-Powered Development</h2>
+
+<p>The weekly token limit isn't a ceiling anymore—it's a starting point for optimization. By delegating I/O work to models purpose-built for it, you free Claude to do what it does best: think deeply, debug creatively, and reason through hard problems.</p>
+
+<p>Start small:</p>
+<ol>
+  <li>Use ask-kimi for your next file-reading task</li>
+  <li>Measure the token savings</li>
+  <li>Scale from there</li>
+</ol>
+
+<p>Within one week, you'll have data. Within two weeks, you'll have sustainable weekly usage. Within a month, you'll wonder how you ever managed without this pattern.</p>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Claude Guides. Questions or feedback? <a href="https://github.com/paullarionov/claude-code-commands-cheatsheet">Open an issue</a>.</p>
+</footer>
+
+</body>
+</html>
