@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "url": "/blog/ai-engineer-roadmap-2026.html",
+      "title": "AI Engineer Roadmap 2026: Build Production Agents in 17 Weeks",
+      "excerpt": "Complete 6-phase learning path from agent fundamentals to production hardening. For AI/ML practitioners building agentic systems.",
+      "date": "2026-05-08",
+      "readTime": 35,
+      "category": "Engineering",
+      "tags": ["AI Engineering", "Agents", "Learning Path"]
+    },
+    {
       "url": "/blog/burning-through-claude-code-limit-3-days.html",
       "title": "Burning Through Claude Code's Weekly Limit in 3 Days? Here's How to Fix It",
       "excerpt": "Reduced weekly token limits from burnout in 3 days to sustainable usage. Learn how to delegate I/O operations to cheaper models and save 75% on API costs.",
