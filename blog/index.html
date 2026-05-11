@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../css/navbar.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="The Claude Guides blog: practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation for builders who ship.">
 <meta name="keywords" content="Claude Code blog, AI automation, prompt engineering, Claude agents, LLM guides, claude-guides, AI builder">
@@ -201,28 +202,6 @@
   footer a:hover { text-decoration: underline; }
 
   /* Navbar */
-  .navbar { position: fixed; top: 0; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--accent); z-index: 1000; }
-  .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
-  .logo { font-weight: 600; color: var(--text); text-decoration: none; margin-right: 40px; display: flex; align-items: center; gap: 8px; }
-  .logo-img { height: 24px; width: 24px; }
-  .nav-menu { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; align-items: center; }
-  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-  .nav-menu a:hover { color: var(--accent); }
-  .dropdown { position: relative; }
-  .dropdown-toggle { cursor: pointer; }
-  .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--surface); border: 1px solid var(--accent); border-radius: 4px; list-style: none; margin: 8px 0 0 0; padding: 8px 0; min-width: 200px; }
-  .dropdown:hover .dropdown-menu { display: block; }
-  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
-  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
-  body > header, body > main { padding-top: 50px; }
-
-  .controls {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
 
   .control-group {
     display: flex;
@@ -289,140 +268,6 @@
   }
 
   @media (max-width: 768px) {
-    .nav-menu { gap: 15px; }
-    .logo { margin-right: 20px; font-size: 14px; }
-    .nav-container { padding: 10px 16px; }
-    header.page-header h1 { font-size: 26px; }
-    .controls { flex-direction: column; align-items: stretch; }
-    .control-group { flex-direction: column; align-items: stretch; }
-    .control-group select { width: 100%; }
-  }
-</style>
-</head>
-<body>
-
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
-    <ul class="nav-menu">
-      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
-      <li><a href="/blog/">Blog</a></li>
-      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-
-
-
-
-
-<header class="page-header">
-  <h1>The Claude Guides Blog</h1>
-  <p>Practical guides, field reports, and research for people building with Claude Code, AI agents, and LLM tooling.</p>
-</header>
-
-<main>
-<div class="controls">
-  <div class="control-group">
-    <label for="category-select">Category</label>
-    <select id="category-select">
-      <option value="">All Categories</option>
-    </select>
-  </div>
-  <div class="control-group">
-    <label for="sort-select">Sort</label>
-    <select id="sort-select">
-      <option value="date-desc">Newest first</option>
-      <option value="date-asc">Oldest first</option>
-      <option value="title">Title (A-Z)</option>
-      <option value="readtime">Read time (longest)</option>
-    </select>
-  </div>
-  <div class="control-group">
-    <label for="minreadtime-select">Min Read Time</label>
-    <select id="minreadtime-select">
-      <option value="0">Any duration</option>
-      <option value="5">5+ min</option>
-      <option value="10">10+ min</option>
-      <option value="15">15+ min</option>
-    </select>
-  </div>
-</div>
-
-<div style="margin-bottom:16px;">
-  <input type="text" id="search-input" placeholder="🔍 Search posts by title, excerpt, or tags..." style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:10px 12px;font-size:12px;color:var(--text);" />
-</div>
-
-<div id="filter-tags" class="filter-tags"></div>
-<div id="active-filters" style="margin-bottom:12px;font-size:11px;color:var(--text-2);"></div>
-<div id="clear-filters" class="clear-filters" style="display:none;">Clear all filters</div>
-<div class="results-count" id="results-count"></div>
-<div class="post-list" id="post-list"></div>
-</main>
-
-<footer>
-  <p>&copy; 2026 Claude Guides. <a href="/">Back to cheatsheet</a></p>
-</footer>
-
-<script src="/js/navbar-loader.js"></script>
-<script>
-let posts = [
-  { url: "/blog/ai-engineer-roadmap-2026.html", title: "AI Engineer Roadmap 2026: Build Production Agents in 17 Weeks", excerpt: "Complete 6-phase learning path from agent fundamentals to production hardening. For AI/ML practitioners building agentic systems.", date: "2026-05-08", readTime: 35, category: "Engineering", tags: ["AI Engineering", "Agents", "Learning Path"] },
-  { url: "/blog/30-mcp-servers-claude-100x-more-powerful.html", title: "30 MCP Servers That Make Claude 100x More Powerful", excerpt: "The complete list of MCP servers worth installing. GitHub, Slack, databases, AWS, Notion, Stripe, and more. With full links and setup instructions.", date: "2026-04-22", readTime: 21, category: "Integration", tags: ["MCP", "Claude", "Integrations", "Tools"] },
-  { url: "/blog/35-claude-code-commands-tricks-workflows.html", title: "35 Claude Code Commands, Tricks, and Workflows Most Users Don't Know", excerpt: "The complete list of techniques that transform Claude Code from 'useful assistant' into 'the most productive I have ever been'.", date: "2026-04-22", readTime: 18, category: "Tips", tags: ["Claude Code", "Commands", "Productivity", "Workflows"] },
-  { url: "/blog/save-claude-tokens-notebooklm.html", title: "Save Claude Tokens by Integrating NotebookLM", excerpt: "Cut Claude token spend by offloading research and retrieval to Google's NotebookLM — a practical integration pattern with real numbers.", date: "2026-04-16", readTime: 7, category: "Tips", tags: ["Claude", "Tokens", "NotebookLM"] },
-  { url: "/blog/hermes-self-learning-agent.html", title: "Hermes: Build a Self-Learning Agent with 7 Workflows", excerpt: "A full walkthrough of Hermes — a Claude Code agent that learns from its own runs through seven composable workflows.", date: "2026-04-15", readTime: 7, category: "Tutorial", tags: ["Agents", "Claude Code", "Automation"] },
-  { url: "/blog/claude-managed-agents-playbook.html", title: "Claude Managed Agents: A Practical Playbook", excerpt: "Everything we learned shipping Claude managed agents into production — patterns, traps, and the playbook we wish existed earlier.", date: "2026-04-14", readTime: 8, category: "Guide", tags: ["Claude", "Agents", "Automation"] },
-  { url: "/blog/claude-tools-complete-guide.html", title: "The Complete Claude Tools Guide: From Basics to Advanced", excerpt: "The four levels of Claude tool design, from your first tool definition up to MCP and multi-agent orchestration.", date: "2026-04-13", readTime: 8, category: "Guide", tags: ["Claude", "Tools", "MCP"] },
-  { url: "/blog/prompt-engineering-complete-guide.html", title: "The Complete Prompt Engineering Guide for Claude", excerpt: "Prompt engineering from the ground up — every technique that moved quality, ranked by how much it actually helped.", date: "2026-04-12", readTime: 10, category: "Guide", tags: ["Prompt Engineering", "Claude", "LLM"] },
-  { url: "/blog/5-non-code-pipelines-claude-code.html", title: "5 Non-Code Pipelines You Can Sell Using Claude Code", excerpt: "Five productized Claude Code pipelines that don't involve writing a single line of application code — and how to price them.", date: "2026-04-11", readTime: 7, category: "Business", tags: ["Claude Code", "Freelance", "Automation"] },
-  { url: "/blog/6-month-roadmap-ai-automation-builder.html", title: "The 6-Month Roadmap to Becoming an AI Automation Builder", excerpt: "A concrete month-by-month path from zero to your first paying clients as an AI automation builder. No fluff, no mountains-of-gold promises.", date: "2026-04-10", readTime: 9, category: "Career", tags: ["AI Automation", "Career", "n8n"] },
-  { url: "/blog/boris-cherny-15-hidden-features.html", title: "15 Under-Used Claude Code Features (from Boris Cherny)", excerpt: "Fifteen Claude Code features most users still miss — sourced from Boris Cherny, condensed into a practical checklist.", date: "2026-04-09", readTime: 7, category: "Tips", tags: ["Claude Code", "Tips", "Productivity"] },
-  { url: "/blog/claude-code-2-months-review.html", title: "2 Months with Claude Code: A Field Report", excerpt: "Honest field notes from two months of heavy Claude Code use — what actually worked, what wasted time, and what surprised us.", date: "2026-04-08", readTime: 11, category: "Review", tags: ["Claude Code", "Workflow", "Review"] },
-  { url: "/blog/llm-knowledge-base-obsidian.html", title: "Build a Karpathy-Style LLM Knowledge Base in Obsidian", excerpt: "A step-by-step guide to building a Karpathy-inspired LLM knowledge base in Obsidian — structure, automation, and feeding it to Claude.", date: "2026-04-07", readTime: 8, category: "Tutorial", tags: ["Obsidian", "LLM", "Knowledge Base"] },
-  { url: "/blog/ai-first-company-harness-engineering.html", title: "AI-First Companies: Restructuring Around Harness Engineering", excerpt: "What CREAO-style AI-first restructuring really means, and why harness engineering is quickly replacing traditional application design.", date: "2026-04-06", readTime: 9, category: "Strategy", tags: ["AI-First", "Engineering", "Strategy"] },
-  { url: "/blog/ai-perception-gap-research.html", title: "The AI Perception Gap: What 632 Users Actually Believe", excerpt: "A survey of 632 practitioners reveals a significant gap between what modern AI can do and what people think is possible.", date: "2026-04-05", readTime: 6, category: "Research", tags: ["Research", "AI Adoption", "Audience"] },
-  { url: "/blog/claude-code-architectural-patterns.html", title: "Claude Code Architectural Patterns", excerpt: "Agent orchestration, multi-agent workflows, and the architectural patterns that scale beyond one-off scripts.", date: "2026-04-12", readTime: 0, category: "Guide", tags: ["Architecture", "Agents", "Workflows"] },
-  { url: "/cheatsheet-landing-page.html", title: "Claude Code Features Overview", excerpt: "A visual tour of the Claude Code feature surface — everything the CLI can do, laid out on one page.", date: "2026-04-08", readTime: 0, category: "Reference", tags: ["Claude Code", "Features", "Reference"] },
-  { url: "/blog/advanced-workflows.html", title: "Advanced Claude Code Workflows", excerpt: "Push Claude Code past basics — plan mode, agents, subagents, custom commands, and the workflows that unlock serious output.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Claude Code", "Workflow", "Advanced"] },
-  { url: "/blog/performance-optimization.html", title: "Performance Optimization for Claude Code", excerpt: "Practical techniques to make Claude Code faster, leaner, and cheaper — from context hygiene to response streaming.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Performance", "Optimization", "Claude Code"] },
-  { url: "/blog/memory-management.html", title: "Claude Code Memory Management", excerpt: "How Claude Code handles project memory, CLAUDE.md, and long sessions — and how to keep it useful instead of bloated.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Memory", "CLAUDE.md", "Claude Code"] },
-  { url: "/blog/debugging-guide.html", title: "Claude Code Debugging Guide", excerpt: "A no-nonsense debugging playbook for Claude Code — catch the common failure modes and fix them fast.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Debugging", "Claude Code", "Troubleshooting"] },
-  { url: "/blog/prompt-engineering.html", title: "Prompt Engineering for Claude Code", excerpt: "Clear, specific prompts make Claude Code dramatically better. A concise set of techniques that move quality fast.", date: "2026-04-03", readTime: 0, category: "Guide", tags: ["Prompt Engineering", "Claude Code"] },
-  { url: "/blog/token-usage.html", title: "Reduce Claude Token Usage", excerpt: "Concrete patterns to cut Claude token consumption without losing output quality.", date: "2026-04-03", readTime: 0, category: "Tips", tags: ["Tokens", "Cost", "Claude"] },
-  { url: "/blog/hidden-features.html", title: "Hidden Claude Code Features", excerpt: "The advanced Claude Code features most users never touch — and why the power users rely on them daily.", date: "2026-04-01", readTime: 0, category: "Tips", tags: ["Claude Code", "Advanced", "Tips"] },
-  { url: "/blog/best-practices.html", title: "Claude Code Best Practices", excerpt: "The complete best-practices guide for Claude Code — patterns we've watched work across dozens of real projects.", date: "2026-04-01", readTime: 0, category: "Guide", tags: ["Best Practices", "Claude Code"] },
-  { url: "/blog/anthropic-product-suite.html", title: "The Anthropic Product Suite", excerpt: "A tour of the Anthropic product line — Claude, Claude Code, the API, and how the pieces fit together.", date: "2026-04-01", readTime: 0, category: "Overview", tags: ["Anthropic", "Claude", "Products"] },
-  { url: "/blog/claude-certified-architect.html", title: "Claude Certified Architect", excerpt: "A structured path to architect-level Claude proficiency — the skills, the references, and how to prove you have them.", date: "2026-04-01", readTime: 0, category: "Career", tags: ["Certification", "Claude", "Career"] }
-];
-
-let selectedTags = [];
-let selectedCategory = '';
-let selectedMinReadTime = 0;
-let searchQuery = '';
-
-const postList = document.getElementById('post-list');
-const sortSelect = document.getElementById('sort-select');
-const categorySelect = document.getElementById('category-select');
-const minReadTimeSelect = document.getElementById('minreadtime-select');
-const searchInput = document.getElementById('search-input');
-const filterTagsContainer = document.getElementById('filter-tags');
-const clearFiltersBtn = document.getElementById('clear-filters');
-const activeFiltersDiv = document.getElementById('active-filters');
-const resultsCount = document.getElementById('results-count');
-
-async function loadPosts() {
-  try {
-    const response = await fetch('/blog/blog-posts.json');
-    const data = await response.json();
-    posts = data.posts;
-    initializeFilters();
-    renderPosts();
-  } catch (error) {
-    console.error('Error loading posts:', error);
-    postList.innerHTML = '<p>Error loading blog posts.</p>';
-  }
 }
 
 function getCategories() {
