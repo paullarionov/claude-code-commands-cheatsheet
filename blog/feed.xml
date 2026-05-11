@@ -6,12 +6,21 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 11 May 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
+
+    <item>
+      <title>How to Manage Context When You Keep Hitting Token Limits</title>
+      <link>https://claude-guides.com/blog/context-optimization-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/context-optimization-guide.html</guid>
+      <pubDate>Sun, 11 May 2026 00:00:00 GMT</pubDate>
+      <category>Cost Optimization</category>
+      <description>Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering context measurement, CLAUDE.md optimization, log filtering, prompt caching, and troubleshooting.</description>
+    </item>
 
     <item>
       <title>AI Engineer Roadmap 2026: Build Production Agents in 17 Weeks</title>

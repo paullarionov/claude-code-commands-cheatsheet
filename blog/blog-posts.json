@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "url": "/blog/context-optimization-guide.html",
+      "title": "How to Manage Context When You Keep Hitting Token Limits",
+      "excerpt": "Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering context measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting.",
+      "date": "2026-05-11",
+      "readTime": 30,
+      "category": "Cost Optimization",
+      "tags": ["Token Optimization", "Context Management", "Cost Reduction", "Claude Code"]
+    },
+    {
       "url": "/blog/ai-engineer-roadmap-2026.html",
       "title": "AI Engineer Roadmap 2026: Build Production Agents in 17 Weeks",
       "excerpt": "Complete 6-phase learning path from agent fundamentals to production hardening. For AI/ML practitioners building agentic systems.",

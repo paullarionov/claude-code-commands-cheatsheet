@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Complete guide to managing AI assistant context. Reduce token spending by 60-80% without losing quality. 10-part guide covering optimization strategies, cost reduction, and practical techniques.">
+<meta name="keywords" content="Claude Code, context optimization, token management, cost reduction, prompt caching, CLAUDE.md, token efficiency, AI development, API costs, context management">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/context-optimization-guide.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/context-optimization-guide.html">
+<meta property="og:title" content="How to Manage Context When You Keep Hitting Token Limits">
+<meta property="og:description" content="Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/context-optimization-guide.html">
+<meta name="twitter:title" content="How to Manage Context and Reduce Token Spending">
+<meta name="twitter:description" content="Complete 10-part guide to optimize Claude Code context. Cut token spending 60-80% with practical strategies for CLAUDE.md, log filtering, and prompt caching.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-05-11T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Context Optimization">
+<meta property="article:tag" content="Token Management">
+<meta property="article:tag" content="Cost Reduction">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Performance">
+
+<title>How to Manage Context When You Keep Hitting Token Limits — Claude Guides</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Manage Context When You Keep Hitting Token Limits: A Practical Guide to Reduce Token Spending by 60-80%",
+  "image": "https://claude-guides.com/og-image.png",
+  "datePublished": "2026-05-11",
+  "dateModified": "2026-05-11",
+  "author": { "@type": "Organization", "name": "Claude Guides" },
+  "publisher": { "@type": "Organization", "name": "Claude Guides", "logo": { "@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg" } },
+  "description": "A comprehensive practical guide to managing context in Claude Code and reducing token spending by 60-80% without losing quality. Covers measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting."
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #FAF8F5; --surface: #FFFFFF; --border: #EDE6DC; --border-faint: #F4EFE8;
+    --text: #1C1917; --text-2: #7C6F65; --text-3: #B0A499; --accent: #C96442;
+    --key-bg: #F2EBE1; --key-border: #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Inter, -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+
+  header { max-width: 800px; margin: 0 auto; padding: 28px 24px 18px; text-align: center; }
+  header h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; line-height: 1.2; }
+  header .meta { color: var(--text-2); font-size: 13px; margin: 16px 0; }
+  header .meta time { margin-right: 12px; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+
+  h2 { font-size: 24px; font-weight: 700; margin: 36px 0 16px; line-height: 1.3; }
+  h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; }
+  h4 { font-size: 15px; font-weight: 600; margin: 18px 0 10px; }
+
+  p { margin-bottom: 16px; }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--text-2); }
+
+  ul, ol { margin-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 8px; }
+
+  code { background: var(--key-bg); padding: 2px 6px; border-radius: 4px; font-family: 'Monaco', monospace; font-size: 12px; }
+  pre { background: var(--key-bg); padding: 16px; border-radius: 8px; overflow-x: auto; margin-bottom: 16px; font-size: 12px; }
+
+  .highlight { background: #FFF8DC; padding: 2px 4px; }
+  .stat-box { background: var(--key-bg); border-left: 3px solid var(--accent); padding: 16px; margin: 20px 0; border-radius: 4px; }
+  .stat-box strong { display: block; font-size: 20px; color: var(--accent); margin-bottom: 4px; }
+
+  blockquote { border-left: 3px solid var(--border); padding-left: 16px; margin: 20px 0; color: var(--text-2); }
+
+  a { color: var(--accent); text-decoration: none; transition: opacity 0.18s; }
+  a:hover { opacity: 0.8; }
+
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 12px; margin-top: 60px; }
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.18s;
+  }
+
+  .logo:hover {
+    color: var(--accent);
+  }
+
+  .logo-img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.18s;
+  }
+
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
+
+  body > header, body > main { padding-top: 50px; }
+
+  @media (max-width: 640px) {
+    header h1 { font-size: 20px; line-height: 1.3; }
+    .nav-menu { gap: 16px; }
+    .logo { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <h1>How to Manage Context When You Keep Hitting Token Limits</h1>
+  <div class="meta">
+    <time datetime="2026-05-11">May 11, 2026</time>
+    <span>• 30 min read</span>
+  </div>
+</header>
+
+<main>
+
+<section>
+<p>You open Claude Code to fix a small bug. The first 15 minutes are perfect—the model quickly reads code, offers precise solutions, writes tests. But an hour in, something breaks. The model starts responding in 30 seconds. Instead of fixing one line, it rewrites the entire file. It forgets the project rules you explained at the start.</p>
+
+<p>Why? Because the model gets overwhelmed by the volume of information. Every request sends your entire conversation history, all system rules, tool schemas, and command results. This "context tax" grows with every step.</p>
+
+<p>When context balloons to 150,000 tokens, three things happen: the model loses focus, you pay for garbage, and speed tanks.</p>
+
+<p>This guide isn't about terminal commands. It's about managing the model's attention—giving it exactly what it needs for the current task, and filtering out everything else.</p>
+
+<div class="stat-box">
+  <strong>Result:</strong> The model becomes smart again, works twice as fast, and your API bills drop 60–80%.
+</div>
+</section>
+
+<h2>Part 1: Measure First, Then Cut</h2>
+
+<h3>Why You Need to Measure Context</h3>
+<p>You can't optimize what you can't see. Before deleting files or changing settings, understand exactly where your tokens leak. Often the problem isn't long code—it's a hidden plugin sending megabytes of logs with every request.</p>
+
+<h3>How to Fix It</h3>
+<ul>
+  <li><strong>Use `/context` and `/usage`.</strong> These commands show how many tokens are loaded and what they're spent on. If you just opened a project and already have 20,000 tokens loaded, that's a red flag.</li>
+  <li><strong>Check file sizes.</strong> Run <code>wc -w CLAUDE.md</code> to see how many words are in your rules. If there are more than 300—time to trim.</li>
+  <li><strong>Hunt for hidden garbage.</strong> Use <code>find . -name "*.log" -size +1M</code> to find giant files before the model accidentally reads them.</li>
+</ul>
+
+<p><strong>What changes:</strong> You'll know your "attention budget." You'll see that disabling one unnecessary integration saves more than deleting a paragraph of rules. Optimization becomes surgical, not random.</p>
+
+<h2>Part 2: Stop Paying for "Always-On" Rules</h2>
+
+<h3>Why CLAUDE.md Gets Bloated</h3>
+<p>When starting a project, you want the model to understand everything. You create <code>CLAUDE.md</code> with architecture, tech stack, naming rules, test instructions, deployment guides, and ownership info. Result: a 500-line document. It seems right—now the model knows everything.</p>
+
+<p>Problem: <code>CLAUDE.md</code> is "always-on" context. The model reads it with every request. If you ask it to rename a variable, it first reads 500 lines about architecture and deployment. If you make 50 requests in a session, the model reads those 500 lines 50 times. You pay for this 50 times. Worse—because there are too many rules, the model starts ignoring them.</p>
+
+<h3>How to Fix It</h3>
+<p>Split information into two categories: rules and reference.</p>
+
+<p><code>CLAUDE.md</code> should contain only rules the model should apply to every line of code. This is your "constitutional minimum."</p>
+
+<p>Everything else—reference info, architectural decisions, deployment guides—should live in separate files like <code>docs/</code>. When the model needs to know how to deploy, it will find and read <code>docs/deployment.md</code> by itself. It doesn't need to keep this in its head constantly.</p>
+
+<p><strong>What should stay in CLAUDE.md:</strong></p>
+<ul>
+  <li>Hard prohibitions (what absolutely can't be done)</li>
+  <li>Basic tech stack (React 18, TypeScript, Tailwind)</li>
+  <li>Code style (functional components, not classes)</li>
+  <li>Error handling patterns</li>
+</ul>
+
+<p><strong>What should be removed:</strong></p>
+<ul>
+  <li>Long code examples (keep only short patterns)</li>
+  <li>Environment setup instructions</li>
+  <li>History of architectural decisions</li>
+  <li>Lists of all available scripts</li>
+</ul>
+
+<p><strong>What changes:</strong> Your <code>CLAUDE.md</code> shrinks from 500 to 100 lines. The model stops getting distracted by irrelevant information. You save thousands of tokens on every request.</p>
+
+<h2>Part 3: Don't Drag Around Your Life's History</h2>
+
+<h3>Why Conversation History Matters</h3>
+<p>Working with the model, it's important it remembers what you discussed 10 minutes ago. You asked it to write a function, then add error handling, then write a test. The model remembers, creating a continuous dialogue feeling.</p>
+
+<p>Problem: tasks change. The first hour you debugged a complex auth bug together. You tried five approaches, read dozens of files, checked logs. You fixed it.</p>
+
+<p>Now you move to the next task—fix button styling. If you just continue the dialogue, the model drags all that auth garbage with it. When fixing the button, it still has tokens of old auth logic, logs, and failed attempts in its "head." It's like solving geometry while someone yells spelling rules in your ear. The model gets confused, suggests strange solutions, and speed tanks.</p>
+
+<h3>How to Fix It</h3>
+<p>Build a habit of "closing phases." Once one logical task is complete, clean the context. Use the <code>/compact</code> command. It doesn't just delete history—it asks the model itself to write a brief summary of what was done and current state.</p>
+
+<p>Instead of 50 messages with logs and errors, context keeps one paragraph: "We fixed the auth bug by updating JWT token in <code>auth.ts</code>. Everything works, tests are green."</p>
+
+<p><strong>When to compress:</strong></p>
+<ul>
+  <li>After tests successfully pass</li>
+  <li>Before switching to a new feature</li>
+  <li>When the model starts acting "dumb"</li>
+  <li>When responses take 15–20+ seconds</li>
+  <li>When context is filled 50%+</li>
+</ul>
+
+<p><strong>What changes:</strong> You start each new task with a "clean slate," but the model doesn't forget global context. Its answers become instant and precise again.</p>
+
+<h2>Part 4: Stop Feeding the Model Mountains of Logs</h2>
+
+<h3>Why Tool Logs Are Toxic</h3>
+<p>For the model to fix errors, it needs to see what went wrong. It runs tests (<code>npm test</code>), compiles code, or searches files. Tools produce output, the model reads it, understands the problem.</p>
+
+<p>Problem: most tools were built for humans, not neural networks. When you run <code>npm test</code> on a large project, the tool might output 5,000 lines. There are pretty progress bars, lists of all successful tests, warnings about old library versions, and somewhere at the very end—those 10 lines with the actual error.</p>
+
+<p>Humans scroll down and look at the error. Models can't. They honestly read all 5,000 lines, spending your money, their "attention," and time. Worst—the error might get lost in volume, and the model draws wrong conclusions.</p>
+
+<h3>How to Fix It</h3>
+<p>Never let the model read raw tool output. Always filter information before it enters context.</p>
+
+<ul>
+  <li>Instead of "run tests" → "run tests and show only failures"</li>
+  <li>Instead of "find all function mentions" → "find mentions excluding tests and node_modules, show only filenames"</li>
+  <li>Instead of "show commit logs" → "show last 5 commits"</li>
+</ul>
+
+<p><strong>What changes:</strong> Tool information shrinks 90–95%. The model gets only the concentrate: "One test failed on line 145, expected 200, got 500." Problem-solving speed multiplies.</p>
+
+<h2>Part 5: Delegate Grunt Work to the "Cheap Intern"</h2>
+
+<h3>When You Need All Project Files</h3>
+<p>Sometimes a task requires broad context. For example, write documentation for all API endpoints. The model needs to read dozens of files to build the full picture.</p>
+
+<p>Problem: you ask Claude Code to analyze 50 files. It loads them all into context—this could take 100,000 tokens. Claude Code (especially with powerful models like Sonnet) is expensive. Making it read 50 files to find endpoint lists is like hiring a $200/hour architect to copy-paste data between Excel sheets.</p>
+
+<h3>How to Fix It</h3>
+<p>Use the "cheap intern" approach. You have access to faster, cheaper models (like Claude Haiku). This model costs pennies and works instantly. It can't architect systems, but it's perfect for "read these 50 files and extract all API endpoints."</p>
+
+<p>Instead of loading all files into the main session, open a separate terminal. Run the "intern" (Haiku) there with a simple instruction: "Read the <code>src/api</code> folder and summarize all routes into <code>api_summary.md</code>."</p>
+
+<p>The intern does the dirty work, reads 100,000 tokens (costing pennies), and creates a compact file with needed data. Then you return to your main "senior" (Sonnet) and say: "Read <code>api_summary.md</code> and write documentation based on it."</p>
+
+<p><strong>What changes:</strong> You isolate "noisy" work from the main session. Your main context stays clean and focused. You get the same result but pay 10 times less.</p>
+
+<h2>Part 6: When Tools Hurt More Than They Help</h2>
+
+<h3>Why Tool Overload Damages Quality</h3>
+<p>Modern AI assistants can connect to external systems. They can read GitHub, check Jira, watch Sentry, or call internal APIs. This is MCP (Model Context Protocol). It seems logical to connect everything. More tools = smarter model, right?</p>
+
+<p>Wrong. Every connected tool is an instruction the model must keep in mind. "You have a Jira tool. To use it, send a task ID. It returns status and description." With 10 tools, the model constantly spends part of its attention remembering how to use them. Even if you're just asking it to fix CSS styling.</p>
+
+<p>Worse—sometimes tools work "in the background" (hooks). Every request might automatically attach git branch info or latest file changes. This adds hidden garbage to every request. The model gets confused.</p>
+
+<h3>How to Fix It</h3>
+<p>Treat the model's tools like phone apps: delete everything you don't use daily.</p>
+
+<p>If you're not working with Jira this session—disable it. If you don't need the model making its own commits—disable git integration. Keep only basics: file reading, terminal execution, code editing. Enable complex tools only when the task directly requires them.</p>
+
+<p><strong>What changes:</strong> The model stops hallucinating and trying to use tools where they're not needed. Instructions get shorter. It focuses better on actual code. You stop paying for "tool usage schemas" you don't need.</p>
+
+<h2>Part 7: Make the Model "Think" Only As Much As Needed</h2>
+
+<h3>When Thinking Helps (and When It Hurts)</h3>
+<p>Sometimes a task looks simple but needs deep analysis. For example, "why does this component render twice?" The model needs to trace call chains, understand React lifecycle, and find non-obvious dependencies. For such cases, models can "think" before answering (reasoning effort). They generate hidden thinking tokens, analyze options, then deliver the result.</p>
+
+<p>Problem: if you enable maximum thinking for all tasks, the model philosophizes where it should just act. You ask: "Rename function <code>getUser</code> to <code>fetchUser</code>." The model with high-thinking mode starts: "So the user wants to rename. Why? Maybe it's about network patterns. If I rename here, will it break elsewhere? Let me analyze all files..." Instead of 2 seconds and 1 cent, you wait 20 seconds and pay 10 cents.</p>
+
+<h3>How to Fix It</h3>
+<p>Control thinking level based on task type. For 80% of daily tasks (write test, add button, fix typo), the model doesn't need to "think" deeply. It already knows patterns.</p>
+
+<p><strong>Enable "deep thinking" only for:</strong></p>
+<ul>
+  <li>Designing new feature architecture</li>
+  <li>Finding reasons for flaky bugs</li>
+  <li>Security code reviews</li>
+  <li>Complex refactoring with many dependencies</li>
+</ul>
+
+<p><strong>What changes:</strong> You find balance between speed, cost, and quality. Simple tasks solve instantly and cheaply. Complex tasks solve thoughtfully and correctly.</p>
+
+<h2>Part 8: Make the Model Remember, Not Reread</h2>
+
+<h3>Why Caching Matters</h3>
+<p>Every time you send a request, the model rereads your system rules, tool schemas, and basic context. And you pay each time. If your basic context weighs 10,000 tokens, then over 50 requests daily, the model rereads 500,000 tokens of just basic info. Not only expensive—it's slow. Reading 10,000 tokens each time takes server processing.</p>
+
+<h3>How to Fix It</h3>
+<p>Modern models support Prompt Caching. If part of your request doesn't change, the server saves it to fast memory. Next time it doesn't reread—just pulls from memory. This costs 90% less and works many times faster.</p>
+
+<p>But for this to work, you need proper structure. The server only caches if information is at the request's very start and absolutely unchanging. Once the server sees changed text, it stops caching everything after that.</p>
+
+<p><strong>How to break caching:</strong> You put the current task ("fix bug in cart") at the start and system rules at the end. Since the task changes every time, the server sees changes at the very start and rereads everything. Cache fails.</p>
+
+<p><strong>How to fix caching:</strong> Always put the most stable information first:</p>
+<ol>
+  <li>System rules (never change)</li>
+  <li>Tool schemas (never change)</li>
+  <li>Project architecture (rarely changes)</li>
+  <li>Current task, error logs, conversation history (constantly change)</li>
+</ol>
+
+<p><strong>What changes:</strong> Your API bills drop because you pay 10% of cost for reading stable parts. Responses become nearly instant.</p>
+
+<h2>Part 9: When You Don't Need to Optimize Anything</h2>
+
+<h3>Optimization Isn't Always the Answer</h3>
+<p>This guide tells you to trim, filter, and compress info. Seems like you should do this always. But chasing token savings can lose what matters—solution quality.</p>
+
+<p>Say your production server crashes. Customers can't pay. Every minute costs thousands. You open Claude Code to find the cause. But strict optimization rules mean the model doesn't see full server logs, only filtered errors. It doesn't see database history. It can't find non-obvious links between recent commits and the crash. You saved 50 cents on tokens but lost hours of debugging.</p>
+
+<h3>When to Stop Optimizing</h3>
+<p>Context optimization is a tool for everyday routine. For 80% of tasks that are clear, predictable, and low-risk.</p>
+
+<p>But there are times to "turn dials to max" and give the model absolutely everything.</p>
+
+<p><strong>Scenarios where you should disable filters:</strong></p>
+<ul>
+  <li><strong>Production incidents.</strong> When everything burns, you need a smart partner with the full picture. Load full logs, enable all analytics, give access to all commit history. Token cost doesn't matter.</li>
+  <li><strong>Security reviews.</strong> If you ask the model to find vulnerabilities in auth code, it needs to see the full data flow. A filtered log might hide the exact detail hackers exploit.</li>
+  <li><strong>Designing new architecture.</strong> When laying foundation for years ahead, the model needs to understand business logic, scaling plans, old system limits.</li>
+</ul>
+
+<p><strong>What changes:</strong> You stop treating optimization like religion. It's a tool for budget and focus management. You switch modes: from "frugal intern for routine" to "expensive architect with full access" for critical tasks.</p>
+
+<h2>Part 10: How to Tell When Something Goes Wrong</h2>
+
+<h3>Symptom 1: Model Writing Bad Code</h3>
+<p><strong>How it looks:</strong> Yesterday the model wrote perfect components, today it suggests old approaches, forgets typing.</p>
+<p><strong>Real problem:</strong> You over-compressed. The model forgot important nuances because compression made them seem "minor."</p>
+<p><strong>Treatment:</strong> Add to <code>CLAUDE.md</code> those conclusions the model keeps forgetting. If it's task-specific—just describe it again in the current request.</p>
+
+<h3>Symptom 2: Responses Take a Minute</h3>
+<p><strong>How it looks:</strong> You ask to add a console log, the model "thinks" for 60 seconds.</p>
+<p><strong>Real problem:</strong> Your caching broke, or you accidentally fed the model a huge file.</p>
+<p><strong>Treatment:</strong> Check if dynamic text snuck into the request start (like a timestamp). Check if some tool output a giant log the model is now digesting.</p>
+
+<h3>Symptom 3: Model Goes in Circles</h3>
+<p><strong>How it looks:</strong> Model suggests a solution. Doesn't work. Apologizes, suggests another. Also doesn't work. Suggests the first one again.</p>
+<p><strong>Real problem:</strong> Context is flooded with failed attempts. The model sees so many errors it can't build clean logic anymore.</p>
+<p><strong>Treatment:</strong> Stop immediately. Do hard compression or start fresh. Describe the problem from scratch with only current code state and the latest error.</p>
+
+<h3>Symptom 4: Model Tries Non-Existent Tools</h3>
+<p><strong>How it looks:</strong> Model writes "now I'll check the database" even though it has no database access.</p>
+<p><strong>Real problem:</strong> You left tool usage instructions in system prompt or <code>CLAUDE.md</code> but disabled the tools.</p>
+<p><strong>Treatment:</strong> Sync <code>CLAUDE.md</code> with the real set of enabled tools. If a tool is off—remove all mentions.</p>
+
+<h3>Symptom 5: You Forgot to Say Something Important</h3>
+<p><strong>How it looks:</strong> You press Enter, the model starts generating, then you realize "Wait, I didn't mention the new API!"</p>
+<p><strong>Why dangerous:</strong> If you wait for the answer, wrong code gets logged plus your correction. Context doubles for nothing.</p>
+<p><strong>Treatment:</strong> Stop the model immediately with Esc. Better—use `/rewind` to roll back one step, as if the bad request never happened. For quick questions that shouldn't be in history, use `/btw`.</p>
+
+<h2>Conclusion</h2>
+
+<p>Working with an AI assistant isn't the same as coding or Googling solutions. It's like managing a very smart but easily-distracted employee.</p>
+
+<p>Your main job as a developer isn't remembering JavaScript syntax anymore. Your job is managing context.</p>
+
+<p>Whoever learns to clearly state tasks, cut noise, filter logs, and clean history on time gets an tireless partner who writes code at the speed of thought.</p>
+
+<p>Whoever just dumps mountains of unreadable logs into the chat and hopes "AI figures it out" will burn company budgets and get slow, confused, broken code in return.</p>
+
+<p>The choice is yours. Start cleaning your <code>CLAUDE.md</code> right now.</p>
+
+</main>
+
+<footer>
+  <p>© 2026 Claude Guides. Practical guides and research on Claude Code, agents, and AI development.</p>
+  <p><a href="/">Home</a> • <a href="/blog/">Blog</a> • <a href="/cheatsheet-landing-page.html">Features</a></p>
+</footer>
+
+</body>
+</html>
