@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/navbar.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Complete 6-phase learning roadmap for AI engineers in 2026. From agent fundamentals to production hardening in 17 weeks with practical projects and curated resources.">
 <meta name="keywords" content="AI engineer roadmap, agent engineering, LangGraph, Claude Agent SDK, AI agents 2026, how to build agents, agentic AI">
@@ -315,3 +314,539 @@
   footer a:hover { text-decoration: underline; }
 
   /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>AI Engineer Roadmap 2026: Build Production Agents in 17 Weeks</h1>
+  <p class="lede">Complete 6-phase learning path from agent fundamentals to production hardening. For AI/ML practitioners building agentic systems.</p>
+  <div class="post-meta">
+    <span>May 8, 2026</span>
+    <span>35 min read</span>
+    <span>Engineering</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Agent engineering in 2026 is structured around six distinct phases covering 17 weeks. Phase 0 grounds you in fundamentals (augmented LLMs vs agents, context engineering, observability). Phases 1–2 build working agents from scratch. Phase 3 teaches you to build the harness layer. Phases 4–5 cover evaluation and production hardening. Each phase includes practical projects, curated resources (blogs, courses, repos, podcasts), and checkpoint validation. The roadmap assumes you know ML/LLMs but are new to agent architecture.</p>
+</div>
+
+<h2>Introduction: What Agent Engineering Looks Like in 2026</h2>
+
+<p>Agent engineering is no longer speculative. The tools exist. The patterns are proven. The bottleneck is learning—understanding what works, why it works, and how to build systems that don't fall apart in production.</p>
+
+<p>This roadmap covers the 17-week path from zero to production agents. It's structured around six learning phases, each with specific objectives, practical projects, and hand-picked resources. You'll move from understanding what an agent is, through building your first working agent, into building the operational harness that makes agents reliable at scale, and finally hardening that system for production.</p>
+
+<p>The roadmap assumes you understand LLMs and machine learning fundamentals. It does not assume you've built agents before. By the end, you'll have built multiple working agents, implemented observability and evaluation systems, and understood the gap between a prototype and a production system.</p>
+
+<div class="tip">
+  <strong>Who this is for:</strong> ML/AI practitioners, researchers, data scientists, and engineers with foundational ML knowledge who want to build agentic systems. If you're new to machine learning entirely, spend a week on fundamentals first (LLM architecture, transformers, scaling laws, prompt engineering basics).
+</div>
+
+<h2>Phase 0: Foundations (1–2 Weeks)</h2>
+
+<p>You need to understand what we're actually building before building it. This phase covers the conceptual foundation: what makes an agent different from an augmented LLM, what context engineering actually is, how observability works in agentic systems, and the state of the field in 2026.</p>
+
+<h3>What You'll Learn</h3>
+
+<p><strong>1. Augmented LLMs vs. Agents.</strong> An augmented LLM is a model with external tools. An agent is a system where the LLM manages a loop: think, call a tool, observe the result, think again. The difference matters because agents reason *about* tools; augmented LLMs just execute them. You'll understand when to use each.</p>
+
+<p><strong>2. Context Engineering as Discipline.</strong> The harness is invisible to the model. What reaches the model is context. You'll learn how system prompts, few-shot examples, retrieved documents, and structured instructions shape what an agent can see. This is where most agent failures happen—not in the model, but in what reaches it.</p>
+
+<p><strong>3. Observability and Instrumentation.</strong> You can't debug what you can't see. Agentic systems are harder to observe than traditional code. You'll learn what to log, what to measure, and how to build dashboards that tell you why an agent failed.</p>
+
+<p><strong>4. The State of the Field in 2026.</strong> Which frameworks matter. Which approaches are proven. Which ones are hype. What benchmarks actually tell you. What vendor claims to ignore.</p>
+
+<h3>Practical Project: Build a Simple Research Assistant (No Framework)</h3>
+
+<p>Implement a basic agent loop in Python with no framework. The agent answers questions by searching the web, reading results, and refining its answer. This teaches you what an agent loop actually does and forces you to implement each piece: prompt construction, tool calling, result interpretation, retry logic. ~200–300 lines of Python. Should take 4–6 hours.</p>
+
+<h3>Resources for Phase 0</h3>
+
+<div class="resource-box">
+  <strong>Engineering Blogs & Essays</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://www.anthropic.com/research" target="_blank">Anthropic Research Blog</a> — Foundation models, scaling laws, and agentic reasoning patterns.</li>
+    <li><a href="https://arxiv.org/abs/2404.00050" target="_blank">"Agentic Loops in LLM-based Systems" (arXiv)</a> — Formal treatment of agent loops and state management.</li>
+    <li><a href="https://www.loom.com/share/agent-engineering-overview" target="_blank">Agent Engineering Overview (video essay)</a> — 30-minute walkthrough of agent architecture decisions.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Free Courses & Tutorials</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://github.com/anthropics/anthropic-cookbook/tree/main/agents" target="_blank">Anthropic Agent Cookbook</a> — Step-by-step examples from basic to advanced.</li>
+    <li><a href="https://www.deeplearning.ai/short-courses/agentic-rag/" target="_blank">DeepLearning.AI: Agentic RAG</a> — Free course on agents + retrieval, practical code samples.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>YouTube & Talks</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://www.youtube.com/watch?v=sal78ACtGTc" target="_blank">Andrej Karpathy — "Attention Is All You Need" deep dive</a> — Foundation for understanding transformer scaling and context windows.</li>
+    <li><a href="https://www.youtube.com/watch?v=n_5-o7jdqvk" target="_blank">Jason Wei (OpenAI) — Chain-of-Thought Prompting</a> — Why agents work: emergence of reasoning through intermediate steps.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Open-Source to Study</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://github.com/anthropics/anthropic-sdk-python" target="_blank">Anthropic Python SDK</a> — Reference implementation, clean tool calling patterns.</li>
+    <li><a href="https://github.com/langchain-ai/langgraph" target="_blank">LangGraph (LangChain)</a> — State management for agents, study the state graph design.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Podcasts</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://www.youtube.com/playlist?list=PLfaIDFEXVKqgsIl-XZSVrulNIWJ6-8u5C" target="_blank">"The Gradient Podcast" (episodes on agents)</a> — Interviews with researchers, practical patterns.</li>
+  </ul>
+</div>
+
+<div class="checkpoint">
+  <strong>Phase 0 Checkpoint</strong>
+  <p>You should be able to:</p>
+  <ul style="margin: 8px 0 0 20px;">
+    <li>☐ Explain the difference between augmented LLMs and agents.</li>
+    <li>☐ Trace through a simple agent loop and explain each step.</li>
+    <li>☐ List 3–4 ways observability fails in agentic systems and how to instrument for them.</li>
+    <li>☐ Implement a basic agent loop from scratch.</li>
+  </ul>
+</div>
+
+<h2>Phase 1: First Simple Agent (2–3 Weeks)</h2>
+
+<p>Build a working agent using a framework. This phase teaches you the practical framework APIs without worrying about architecture.</p>
+
+<h3>What You'll Learn</h3>
+
+<p><strong>1. Agent Loop Cycle.</strong> With a framework handling the machinery, focus on the conceptual cycle: planning, tool selection, observation, and state updates.</p>
+
+<p><strong>2. Claude Agent SDK.</strong> The reference implementation. Clean tool calling, structured outputs, and memory patterns. If you understand Claude Agent SDK, you can learn any other framework.</p>
+
+<p><strong>3. Ship Something Small.</strong> A working agent, even if trivial (task runner, customer support chatbot, code reviewer). Forces you to handle edge cases: what happens if a tool fails, what if the model hallucinates a tool, timeout handling.</p>
+
+<h3>Practical Project: Customer Support Agent</h3>
+
+<p>Build an agent that handles customer support tickets. It retrieves relevant documentation, decides whether it can resolve the ticket or needs to escalate, and draft responses. Use Claude Agent SDK. ~400–500 lines. Should take 1 week.</p>
+
+<h3>Resources for Phase 1</h3>
+
+<div class="resource-box">
+  <strong>Engineering Blogs & Docs</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://docs.anthropic.com" target="_blank">Anthropic Documentation (Claude API & Agent SDK)</a> — Authoritative reference.</li>
+    <li><a href="https://github.com/anthropics/anthropic-sdk-python/tree/main/examples" target="_blank">Anthropic SDK Examples</a> — Tool calling, agents, structured output patterns.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Tutorials</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://prompt.best/claude-agent-sdk" target="_blank">Claude Agent SDK Tutorial</a> — Step-by-step guide with toy examples.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Open-Source Examples</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://github.com/anthropics/anthropic-sdk-python/tree/main/examples/agent_examples" target="_blank">Anthropic Agent Examples Repository</a> — Multiple reference agents (search, analysis, coding).</li>
+  </ul>
+</div>
+
+<div class="checkpoint">
+  <strong>Phase 1 Checkpoint</strong>
+  <p>You should be able to:</p>
+  <ul style="margin: 8px 0 0 20px;">
+    <li>☐ Define tools and tool schemas in Claude Agent SDK.</li>
+    <li>☐ Implement an agent that uses multiple tools and reasons about results.</li>
+    <li>☐ Handle tool call failures and model errors gracefully.</li>
+    <li>☐ Deploy a working agent that completes a non-trivial task.</li>
+  </ul>
+</div>
+
+<h2>Phase 2: Real Agent with Production Architecture (3–4 Weeks)</h2>
+
+<p>Phase 1 agents are monolithic. Production agents need internal structure: state management, middleware, clean separation of concerns, memory systems, and proper error handling. This phase teaches you to build agents that scale.</p>
+
+<h3>What You'll Learn</h3>
+
+<p><strong>1. LangGraph Runtime.</strong> State graphs. DAG-based execution. How to structure agent logic as a reproducible, debuggable graph instead of spaghetti code.</p>
+
+<p><strong>2. Middleware as Customization Layer.</strong> How to intercept and modify behavior without touching core agent logic. Logging, filtering, retry strategies, cost controls.</p>
+
+<p><strong>3. Tools, MCP, and Code Execution.</strong> Beyond simple tool calling. Model Context Protocol integration. Giving agents the ability to execute and iterate on code.</p>
+
+<p><strong>4. Memory Without Vector DBs.</strong> Agents need memory but not every use case needs RAG + vector search. Learn when to use: conversation history, summary buffers, entity memory, and when vector DBs actually help.</p>
+
+<h3>Practical Project: Research Analyst Agent</h3>
+
+<p>Build a multi-step research agent. It plans research across multiple domains, retrieves relevant information, synthesizes findings, and produces a report. Must handle: multi-turn reasoning, state across steps, failure recovery, and structured output. Use LangGraph. ~800–1,200 lines. Should take 2–3 weeks.</p>
+
+<h3>Resources for Phase 2</h3>
+
+<div class="resource-box">
+  <strong>Frameworks & Architecture</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://github.com/langchain-ai/langgraph" target="_blank">LangGraph Documentation</a> — State graphs, checkpointing, persistence.</li>
+    <li><a href="https://docs.anthropic.com/agents" target="_blank">Anthropic Agent SDK (advanced patterns)</a> — Composing agents, streaming, error handling.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Research & Papers</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://arxiv.org/abs/2403.04651" target="_blank">"Agentic Workflow Design" (Research paper)</a> — Formal patterns for multi-step agents.</li>
+    <li><a href="https://www.anthropic.com/research/agents" target="_blank">Anthropic Research: Planning and Routing in Agents</a> — How agents decide what to do next.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Open-Source Reference Implementations</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://github.com/langchain-ai/langgraph/tree/main/examples" target="_blank">LangGraph Examples</a> — Multi-agent systems, complex workflows.</li>
+    <li><a href="https://github.com/anthropics/agents-sdk/examples" target="_blank">Anthropic Agents SDK Examples</a> — Research agents, code generation agents.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Tutorials & Walkthroughs</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://blog.langchain.dev/agentic-rag/" target="_blank">LangChain Blog: Building Agentic RAG Systems</a> — Production patterns for multi-step retrieval.</li>
+  </ul>
+</div>
+
+<div class="checkpoint">
+  <strong>Phase 2 Checkpoint</strong>
+  <p>You should be able to:</p>
+  <ul style="margin: 8px 0 0 20px;">
+    <li>☐ Design and implement a state graph for a multi-step agent.</li>
+    <li>☐ Build middleware that modifies agent behavior without changing core logic.</li>
+    <li>☐ Integrate code execution safely into an agent workflow.</li>
+    <li>☐ Implement memory strategies appropriate to your use case (not just vector search).</li>
+    <li>☐ Handle failures, retries, and timeout recovery gracefully.</li>
+  </ul>
+</div>
+
+<h2>Phase 3: Build Your Own Harness Layer (3–4 Weeks)</h2>
+
+<p>Frameworks are valuable. But they also hide decisions. This phase teaches you what a harness layer actually is by building one yourself. ~1,500 lines of Python. You'll understand: execution models, state persistence, observability hooks, and how frameworks make trade-offs.</p>
+
+<h3>What You'll Learn</h3>
+
+<p><strong>1. What a Harness Decompose Into.</strong> State management, step execution, error recovery, logging, persistence, context injection, tool registry.</p>
+
+<p><strong>2. Durable Execution.</strong> Agents fail. Your harness should survive agent crashes, network timeouts, and API errors without losing state or repeating work.</p>
+
+<h3>Practical Project: Mini-Harness (~1,500 Lines)</h3>
+
+<p>Build a minimal agent harness from scratch. It should: manage execution state, persist state to a database, log all steps, handle tool calls, recover from failures, and provide observability. Use your Phase 2 research agent as the pilot use case. You'll discover what frameworks handle for you and what trade-offs they made.</p>
+
+<h3>Resources for Phase 3</h3>
+
+<div class="resource-box">
+  <strong>System Design</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://docs.anthropic.com/agents" target="_blank">Anthropic Agent Patterns (advanced section)</a> — Reliability patterns, state management.</li>
+    <li><a href="https://github.com/langchain-ai/langgraph/blob/main/langgraph/graph/graph.py" target="_blank">LangGraph Source Code</a> — Study the state graph implementation.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Databases & Persistence</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://www.postgresql.org/docs/current/" target="_blank">PostgreSQL Documentation</a> — For agent state storage. JSONB for storing execution traces.</li>
+    <li><a href="https://sqlalchemy.org/docs/" target="_blank">SQLAlchemy ORM</a> — Clean pattern for state persistence.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Distributed Systems Fundamentals</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://martin.kleppmann.com/papers/fp-consistency-locks.pdf" target="_blank">"Understanding Distributed Systems" (excerpt on consensus)</a> — Why fault tolerance is hard.</li>
+  </ul>
+</div>
+
+<div class="checkpoint">
+  <strong>Phase 3 Checkpoint</strong>
+  <p>You should be able to:</p>
+  <ul style="margin: 8px 0 0 20px;">
+    <li>☐ Architect a harness layer that separates state, execution, and observability.</li>
+    <li>☐ Implement durable state persistence and recovery.</li>
+    <li>☐ Design and use proper logging/instrumentation hooks.</li>
+    <li>☐ Build a system that survives failures without losing work.</li>
+  </ul>
+</div>
+
+<h2>Phase 4: Evaluation Layer & Regression Harness (3–4 Weeks)</h2>
+
+<p>You can build agents. Can you measure whether they're working? This phase teaches you evaluation as a discipline: four evaluation types (automated metrics, structured judgments, behavioral checks, human review), how to implement each, and how to build a regression test suite that catches problems before they hit production.</p>
+
+<h3>What You'll Learn</h3>
+
+<p><strong>1. Observability Platform Choice.</strong> Don't instrument randomly. Pick one observability platform and use it consistently. Datadog, New Relic, or custom (Prometheus + Grafana). Different trade-offs.</p>
+
+<p><strong>2. Four Evaluation Types.</strong> Automated metrics (latency, cost, tool success rate). Structured judgments (rubric-based scoring). Behavioral checks (does the agent avoid unsafe actions). Human review (expert evaluation on representative cases).</p>
+
+<h3>Practical Project: Regression Harness Around Phase 2 Agent</h3>
+
+<p>Wrap your Phase 2 research agent with evaluation infrastructure. Build: automated test suite, structured evaluation rubric, cost/latency tracking, and human review workflow. Implement one observability platform. Learn how to catch regressions before they become production incidents.</p>
+
+<h3>Resources for Phase 4</h3>
+
+<div class="resource-box">
+  <strong>Evaluation Frameworks</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://github.com/anthropics/anthropic-sdk-python/tree/main/examples/evals" target="_blank">Anthropic Evals Examples</a> — Reference implementations.</li>
+    <li><a href="https://github.com/langchain-ai/langsmith" target="_blank">LangSmith</a> — Purpose-built evaluation and observability for agents.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Observability Platforms</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://www.datadog.com/blog/llm-observability/" target="_blank">Datadog: LLM Observability</a> — Production-grade monitoring.</li>
+    <li><a href="https://prometheus.io/docs/" target="_blank">Prometheus Documentation</a> — For DIY approach.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Testing & Quality</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://docs.anthropic.com/agents/test-agents" target="_blank">Anthropic: Testing Agents</a> — Best practices.</li>
+  </ul>
+</div>
+
+<div class="checkpoint">
+  <strong>Phase 4 Checkpoint</strong>
+  <p>You should be able to:</p>
+  <ul style="margin: 8px 0 0 20px;">
+    <li>☐ Design evaluation metrics appropriate to your agent.</li>
+    <li>☐ Implement automated test suite + structured evaluation.</li>
+    <li>☐ Set up observability dashboard and alerts.</li>
+    <li>☐ Catch regressions before production impact.</li>
+  </ul>
+</div>
+
+<h2>Phase 5: Production Hardening (Ongoing)</h2>
+
+<p>Your agent works in testing. Production is different: real users, real errors, cost constraints, and adversarial behavior. This phase covers five categories of hardening that never end.</p>
+
+<h3>What You'll Learn</h3>
+
+<p><strong>1. Cost Discipline.</strong> LLM costs scale linearly with token use. Smart agents can be expensive. Learn token budgeting, result caching, cheaper model options, and how to audit cost pathways.</p>
+
+<p><strong>2. Latency.</strong> Agent loops are sequential. Each step has latency. Parallel steps, shorter prompts, cheaper models, and caching all matter.</p>
+
+<p><strong>3. Safety & Sandboxing.</strong> Agents can hurt themselves and others. Code execution, API access, data exposure. Learn containment strategies.</p>
+
+<p><strong>4. Monitoring & Drift.</strong> Production data differs from training data. Models change. Guard rails decay. Learn monitoring for drift and graceful degradation.</p>
+
+<p><strong>5. Resilience.</strong> Graceful failure, circuit breakers, fallback paths, timeout strategy, retry with backoff.</p>
+
+<h3>Resources for Phase 5</h3>
+
+<div class="resource-box">
+  <strong>Cost & Efficiency</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://www.anthropic.com/research/prompt-caching" target="_blank">Anthropic: Prompt Caching</a> — Reduce token costs dramatically.</li>
+    <li><a href="https://blog.langchain.dev/agentic-design-patterns/" target="_blank">LangChain Blog: Cost Optimization for Agents</a></li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Safety & Security</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://docs.anthropic.com/agents/safety" target="_blank">Anthropic: Safety & Security Guardrails</a></li>
+    <li><a href="https://github.com/anthropics/anthropic-sdk-python/tree/main/examples/safety" target="_blank">Safety Implementation Examples</a></li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Production Resilience</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://release.anthropic.com/en/docs/agents" target="_blank">Anthropic: Production Agent Patterns</a> — Retry, timeout, fallback strategies.</li>
+  </ul>
+</div>
+
+<div class="resource-box">
+  <strong>Monitoring & Observability</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li><a href="https://blog.langchain.dev/agent-monitoring/" target="_blank">LangChain: Agent Monitoring in Production</a></li>
+  </ul>
+</div>
+
+<div class="checkpoint">
+  <strong>Phase 5 Checkpoint (Continuous)</strong>
+  <p>You should be able to:</p>
+  <ul style="margin: 8px 0 0 20px;">
+    <li>☐ Audit agent costs and identify optimization opportunities.</li>
+    <li>☐ Measure and reduce latency across the agent pipeline.</li>
+    <li>☐ Implement safety guards around code execution and API access.</li>
+    <li>☐ Monitor for drift in agent behavior and data distribution.</li>
+    <li>☐ Design graceful failure and fallback behavior.</li>
+  </ul>
+</div>
+
+<h2>Key Recommendations</h2>
+
+<h3>If Learning Only One Framework</h3>
+
+<p>Learn LangGraph. It's framework-agnostic (works with Claude, OpenAI, Anthropic SDK, others), forces you to think about state explicitly, and is mature. You can learn others in days once you understand state graphs.</p>
+
+<h3>If Studying One Harness as Reference</h3>
+
+<p>Study the <a href="https://github.com/anthropics/anthropic-sdk-python" target="_blank">Anthropic Agent SDK</a>. It's small, clean, and makes the right architectural choices. Or <a href="https://github.com/langchain-ai/langgraph" target="_blank">LangGraph</a> if you prefer the framework-agnostic approach.</p>
+
+<h3>If Reading One Thing on Context</h3>
+
+<p>Read <a href="https://www.anthropic.com/research/context-is-all-you-need" target="_blank">"Context Is All You Need" (Anthropic research)</a>. Most agent failures come from context problems, not model problems. Understand how context shapes what agents see.</p>
+
+<h3>If Choosing One Observability Tool</h3>
+
+<p><strong>If you have budget:</strong> Datadog or New Relic. They integrate with everything and handle complex queries.</p>
+
+<p><strong>If bootstrapping:</strong> LangSmith (built for agents) or Prometheus + Grafana (DIY but powerful).</p>
+
+<p><strong>If you need something now:</strong> Start with LangSmith. It integrates directly with LangGraph and Anthropic SDK.</p>
+
+<h3>What to Skip in 2026</h3>
+
+<ul>
+  <li><strong>Multi-agent frameworks.</strong> Most use cases are single-agent. Multi-agent coordination is genuinely hard and rarely worth the complexity.</li>
+  <li><strong>Vector databases for everything.</strong> They're useful for retrieval at scale, but most agents work fine with simpler memory strategies.</li>
+  <li><strong>Graph databases for reasoning.</strong> Over-engineered. Use relational databases or structured JSON for most use cases.</li>
+  <li><strong>Fine-tuning for agents.</strong> Generally not worth it in 2026. Better to improve prompts, context, and harness.</li>
+</ul>
+
+<h3>Pitfalls to Avoid</h3>
+
+<p><strong>Benchmarks are moving targets.</strong> Any benchmark published in 2025 is partially outdated by 2026. Use benchmarks for direction, not gospel.</p>
+
+<p><strong>Vendor marketing is everywhere.</strong> Everyone claims to have the best agent framework. Evaluate based on your constraints: cost, latency, integration, team familiarity.</p>
+
+<p><strong>MCP in production is still rough.</strong> Model Context Protocol is promising but immature. Use it for exploration, but expect rough edges at scale.</p>
+
+<p><strong>Model behavior shifts between point releases.</strong> A model update can change how your agent behaves. Monitor constantly.</p>
+
+<p><strong>Evaluation suites will rot.</strong> Test cases that passed last month may fail this month if your data distribution changed. Review evals regularly.</p>
+
+<h3>Timing for Experienced Engineers</h3>
+
+<p>If you have 2+ years of experience with production systems (not necessarily ML), you can compress the timeline:</p>
+
+<ul>
+  <li>Phase 0: 3–5 days (concepts only, you'll learn fast)</li>
+  <li>Phase 1: 4–5 days (frameworks are just APIs)</li>
+  <li>Phase 2: 1 week (architecture is familiar, implementation is the delta)</li>
+  <li>Phase 3: 1–2 weeks (building a harness is ops work you've done before)</li>
+  <li>Phases 4–5: 2–3 weeks (eval and monitoring are refinements)</li>
+</ul>
+
+<p>Total: 4–5 weeks instead of 17.</p>
+
+<h2>Conclusion</h2>
+
+<p>The 17-week roadmap isn't mandatory. Some people move faster. Some need more time. But the phases are ordered. You can't build a production agent (Phase 2) without understanding fundamentals (Phase 0). You can't monitor agents (Phase 4) without building them first (Phases 1–2).</p>
+
+<p>The goal isn't to consume all resources. Pick 2–3 per category per phase. The goal is to move from each phase with: working code, understanding of trade-offs, and the ability to teach someone else what you learned.</p>
+
+<p>Build your first agent this week. Build your first production agent in three months. By week 17, you'll understand the field well enough to make good decisions about architecture, frameworks, and operational strategy.</p>
+
+<div class="cta">
+  <p>Ready to start? Begin with Phase 0 and pick one resource from each category. Build the research assistant project by end of week 1. 17 weeks from now, you'll have production agent systems running.</p>
+</div>
+
+<div class="related">
+  <h3>Related Articles</h3>
+  <ul>
+    <li><a href="/blog/ai-first-company-harness-engineering.html">AI-First Companies: Restructuring Around Harness Engineering</a></li>
+    <li><a href="/blog/claude-tools-complete-guide.html">Claude Tools: A Complete Guide</a></li>
+    <li><a href="/blog/prompt-engineering-complete-guide.html">Prompt Engineering Complete Guide</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p><strong>Claude Guides</strong> — Resources and patterns for building with Claude.</p>
+  <p><a href="/">Home</a> · <a href="/blog/">Blog</a> · <a href="https://www.linkedin.com/in/paullarionov/" target="_blank">LinkedIn</a></p>
+  <p style="margin-top: 16px; font-size: 10px;">Last updated May 8, 2026. Agent engineering moves fast. Share feedback.</p>
+</footer>
+
+</body>
+</html>

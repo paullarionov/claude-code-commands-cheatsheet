@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/navbar.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A pragmatic 6-month roadmap for becoming an AI automation builder: stack picks, first clients, niches, production hardening, and how to scale the work.">
 <meta name="keywords" content="AI automation builder, n8n, AI freelancing, automation career, LLM automation, AI consulting, low-code AI, workflow automation">
@@ -302,3 +301,283 @@
   }
 
   /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>The 6-Month Roadmap to Becoming an AI Automation Builder</h1>
+  <p class="lede">Month by month: what to learn, what to build, and how to get paid — without turning into a developer or a data scientist.</p>
+  <div class="post-meta">
+    <span>April 10, 2026</span>
+    <span>9 min read</span>
+    <span>Career</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>98% of small and mid-sized businesses haven't deployed a single AI automation. Pick one stack (start with n8n), ship one real workflow a month, and you can be charging clients by month three and running retainers by month six.</p>
+</div>
+
+<p>Every week there's a new "AI tools top 10" post. None of them tell you how to actually get paid. This roadmap does — six months, one deliverable per month, ending with paying clients or a full-time role.</p>
+
+<p>An AI Automation Builder isn't a developer and isn't a data scientist. It's someone who takes a messy business problem and solves it with no-code tools plus an LLM. The market is starving for this skill, and the barrier to entry is lower than any other AI career path.</p>
+
+<h2>Month 1: One working automation</h2>
+
+<p>The goal is not ten automations. Not a portfolio. One thing that runs on its own and solves a real problem in your life.</p>
+
+<h3>Pick a stack and stop shopping</h3>
+
+<ul>
+  <li><strong>No-code:</strong> n8n (self-hosted, free) or Make.com. Best starting point for most people.</li>
+  <li><strong>Low-code:</strong> n8n plus small Python scripts, if you already know a bit of code.</li>
+  <li><strong>Pure code:</strong> LangChain or LangGraph. Only if you write code daily already.</li>
+</ul>
+
+<p>Most people should start with n8n. It's visual, free, and hireable.</p>
+
+<h3>Learn one LLM API</h3>
+
+<p>Anthropic Quickstart, OpenAI Cookbook, Groq for fast cheap experiments. You need exactly three things from month one: how to make a call, how to parse the response, how to drop the result into a workflow.</p>
+
+<h3>Build the first automation from your own life</h3>
+
+<p>Not a client project. Your life. Summarize incoming emails. Sort bookmarks. Generate a daily news digest. Auto-reply to common questions.</p>
+
+<div class="tip">
+  <strong>Month 1 checkpoint.</strong> One automation that runs on its own and saves you at least 10 minutes a day. If you can't point to that, don't move to month 2.
+</div>
+
+<h2>Month 2: Build to understand</h2>
+
+<p>Goal: three automations of different types. You learn by failing, not reading.</p>
+
+<h3>Agent workflows</h3>
+
+<p>An agent is an LLM that decides what to do next, not just answers a question. Read Anthropic's "Building Effective Agents." Play with n8n's AI Agent node. Focus on three concepts:</p>
+
+<ul>
+  <li><strong>Tools</strong> — what the agent can do (search, write to DB, send email)</li>
+  <li><strong>Memory</strong> — what it remembers between calls</li>
+  <li><strong>Planning</strong> — how it breaks a task into steps</li>
+</ul>
+
+<h3>Data extraction and transformation</h3>
+
+<p>Most automations follow one shape: pull data from A, transform with an LLM, push to B. Practice parsing unstructured text, converting PDFs into structured JSON, and enriching records with tags and summaries.</p>
+
+<h3>External APIs</h3>
+
+<p>Connect Gmail, Google Sheets, Notion, Slack, Airtable. These five cover roughly 80% of client work.</p>
+
+<div class="tip">
+  <strong>The 7-day rule.</strong> Don't start a new automation until the previous one has run cleanly for seven days straight. Stability beats quantity every time.
+</div>
+
+<h2>Month 3: First money</h2>
+
+<p>The target is $100. Not ten thousand. A real client, real money, real feedback.</p>
+
+<h3>Where to find clients</h3>
+
+<p>Not Upwork. Freelance platforms are a race to zero. Instead:</p>
+
+<ul>
+  <li>Your existing network — coworkers, former colleagues, local small businesses</li>
+  <li>Industry Slack, Discord, and Telegram communities</li>
+  <li>LinkedIn, but only with a concrete pain, not "I do AI"</li>
+</ul>
+
+<h3>Sell the result, not the tech</h3>
+
+<p><em>Bad:</em> "I build AI automations with n8n and GPT-4."</p>
+
+<p><em>Good:</em> "I help real estate agencies respond to inbound leads in 2 minutes instead of 2 hours."</p>
+
+<h3>The shape of a good first project</h3>
+
+<ul>
+  <li>Clear problem with a measurable outcome</li>
+  <li>1–2 weeks of work</li>
+  <li>$300–800 price</li>
+  <li>Client sees the result immediately</li>
+</ul>
+
+<p>Send 20 personalized messages in week one. Every message: specific observation about their business, the problem you spotted, the result you can deliver, a simple next step. No templates.</p>
+
+<h2>Month 4: Specialize and systematize</h2>
+
+<p>After your first paying clients, you'll have intuition about where selling was easy. Follow that signal into a niche.</p>
+
+<h3>Niches that work</h3>
+
+<ul>
+  <li>Real estate agencies — lead qualification</li>
+  <li>E-commerce — customer support</li>
+  <li>Law firms — first-pass document analysis</li>
+  <li>Recruiting — resume screening</li>
+  <li>Medical clinics — booking and reminders</li>
+</ul>
+
+<h3>Build templates</h3>
+
+<p>Every automation you ship, document so you can rebuild it in 20% of the time: export the n8n JSON, save prompts with notes on the logic, list the common failures and their fixes.</p>
+
+<h3>Offer retainers</h3>
+
+<p>After a successful project, pitch support: "I can maintain this, add features, and guarantee it runs — $X/month." Three retainers at $300/mo is $900/mo of effectively passive income.</p>
+
+<h2>Month 5: Make it production-ready</h2>
+
+<p>Everything you built so far assumed nothing would fail. Month 5 is where you prepare for real traffic, real clients, and real outages at 2 AM.</p>
+
+<h3>Deploy properly</h3>
+
+<p>You don't need to learn Docker. Railway has a one-click n8n template. Render and n8n Cloud are the alternatives. Put secrets in environment variables, never in the canvas. Turn on automatic backups.</p>
+
+<h3>Logs and monitoring</h3>
+
+<p>If you can't see what's happening inside the flow, you can't fix it — and you'll learn about every outage from an angry client. Use n8n execution logs, Better Stack for uptime, Langfuse for LLM-specific observability.</p>
+
+<div class="tip">
+  <strong>Never learn about an outage from a client.</strong> This is the single rule that separates hobby work from professional work. Set up alerts before you take on retainers.
+</div>
+
+<h3>Version your prompts</h3>
+
+<p>Prompts are code. Random edits in live flows silently break everything. Keep the last three versions, log <em>why</em> you changed each one, and never edit a production prompt without testing.</p>
+
+<h3>Client handoff</h3>
+
+<p>The difference between a $500 project and a $5,000 project is often just the documentation. Deliver a one-page overview, 3–5 minute Loom walkthroughs, sticky notes inside the canvas explaining the why, a runbook of the five likely failures, and a monitoring dashboard the client can read.</p>
+
+<h2>Month 6: Pick a direction</h2>
+
+<p>You now have working processes, at least one paying client, a production setup, and the start of a portfolio. Pick one path and commit.</p>
+
+<h3>Direction 1: Freelance</h3>
+
+<p>Fastest money. Ship 2–3 repeatable templates (lead gen, outreach, content, support bot). Write one documented case study per template with real numbers. Productize: "Lead-gen pipeline setup — $1,500" converts ten times better than "Custom automation, hourly."</p>
+
+<h3>Direction 2: In-house</h3>
+
+<p>Stability and a salary. Focus on internal tooling, plugging AI into the existing company stack, and rigorous measurement of time and money saved. Write internal case studies. Speak at demo days. Build a LinkedIn narrative around "automation specialist."</p>
+
+<h3>Direction 3: Agency</h3>
+
+<p>Highest ceiling, hardest path. Pick one industry and own it — generalist agencies are dying. Hire operators first, not builders. Don't hire until you have at least three paying clients. Read <em>The E-Myth Revisited</em> and <em>Built to Sell</em> before you do anything else.</p>
+
+<h2>What the market actually pays</h2>
+
+<ul>
+  <li><strong>Full-time (US/EU):</strong> Junior $75–110k, Mid $125–180k, Senior $180–280k+</li>
+  <li><strong>Freelance projects:</strong> $500–5,000 each</li>
+  <li><strong>Retainers:</strong> $500–2,000/mo basic, $3,000–8,000/mo active development</li>
+  <li><strong>Agency engagements:</strong> $3,000–15,000 for full systems, $10,000–50,000 for enterprise</li>
+</ul>
+
+<p>People earning $15k/month solo, stitching n8n flows together for small businesses, are not rare. The market is underserved, not saturated.</p>
+
+<div class="tip">
+  <strong>Ship, don't study.</strong> People get hired for what they've built, not what they've read. Take one process from each month and actually build it. Break it. Fix it. Put it in a portfolio.
+</div>
+
+<h2>The bottom line</h2>
+
+<p>Six months won't make you the next Zapier CEO. It will make you someone who can build, ship, and deploy real AI automations that solve real business problems — and that's exactly what the market pays for right now.</p>
+
+<p>Don't wait until you feel ready. The gap between "I'm learning" and "I'm building" is where most people get stuck forever. Start offering services the moment you have one working flow, even if it's rough. The market doesn't reward perfection — it rewards people who ship.</p>
+
+<div class="cta">
+  Want the full Claude Code reference? <a href="/">Open the cheatsheet →</a>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+<li><a href="/blog/5-non-code-pipelines-claude-code.html">5 Non-Code Pipelines You Can Run With Claude Code</a></li>
+<li><a href="/blog/claude-managed-agents-playbook.html">The Claude Managed Agents Playbook</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+  <p>&copy; 2026 Claude Guides. <a href="/">Back to cheatsheet</a> · <a href="/blog/">All posts</a></p>
+</footer>
+
+<script src="/js/navbar-loader.js"></script>
+</body>
+</html>

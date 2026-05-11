@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/navbar.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A practical playbook for Claude Managed Agents: four core concepts, a 10-minute quick start, built-in tools, permissions, outcomes, and multiagent patterns.">
 <meta name="keywords" content="Claude Managed Agents, Anthropic API, agent infrastructure, agent SDK, managed agents beta, AI agents, agent orchestration">
@@ -302,6 +301,263 @@
   }
 
   /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>Claude Managed Agents: A Practical Playbook</h1>
+  <p class="lede">Anthropic now runs the harness so you don't have to. Here's the concrete path from API key to a production agent.</p>
+  <div class="post-meta">
+    <span>April 14, 2026</span>
+    <span>8 min read</span>
+    <span>Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Claude Managed Agents ships the sandbox, session state, tool execution and event stream as a hosted service. You describe the agent, Anthropic runs it. Four concepts (Agent, Environment, Session, Events), a ten-minute quick start, and patterns for outcomes and multiagent delegation.</p>
+</div>
+
+<p>If you've built agents on the raw Messages API, you already know the tax: your own tool-call loop, your own sandbox, your own retry logic, your own secrets store. Months of plumbing before the agent does anything interesting. Claude Managed Agents deletes that list.</p>
+
+<p>You describe the agent. Anthropic runs it — secure containers, long-lived sessions, built-in code execution, streaming events. This post is the short version of what it is, when to use it, and how to ship your first one today.</p>
+
+<h2>Messages API vs Managed Agents</h2>
+
+<p>They solve different problems. Pick based on how much control you actually need.</p>
+
+<ul>
+  <li><strong>Messages API</strong> — direct model access. You write the agent loop. Right for custom harnesses or when you need total control.</li>
+  <li><strong>Managed Agents</strong> — a hosted agent platform. Right for long tasks, async work, and anything you'd rather ship this quarter than next year.</li>
+</ul>
+
+<p>Two deeper reasons to prefer the managed path. First, self-written harnesses bake in assumptions about what the model <em>can't</em> do — those assumptions go stale with every release. Managed Agents updates the harness for you. Second, task horizons are growing fast. Anthropic expects future Claude versions to work for days or weeks on a single task. That demands fault-tolerant infrastructure you probably don't want to maintain.</p>
+
+<h2>Four concepts that run the whole system</h2>
+
+<p>Learn these four and the rest follows.</p>
+
+<ul>
+  <li><strong>Agent</strong> — a versioned config: model, system prompt, tools, MCP servers, skills. Create once, reference by ID. Models: <code>claude-sonnet-4-6</code>, <code>claude-opus-4-6</code>.</li>
+  <li><strong>Environment</strong> — a container template. Networking rules, preinstalled packages (Python, Node, Go). Each session gets its own isolated container from it.</li>
+  <li><strong>Session</strong> — a running instance of the agent in an environment. Holds history, filesystem, status. Runs for hours. Secrets live in a vault.</li>
+  <li><strong>Events</strong> — the message bus. You send <code>user.message</code>; the agent streams text, tool calls, and status via Server-Sent Events.</li>
+</ul>
+
+<div class="tip">
+  <strong>Access.</strong> Managed Agents is in open beta. All endpoints require the <code>managed-agents-2026-04-01</code> header (the SDK adds it automatically). Outcomes, Multiagent, and Memory are separate research previews — request them individually.
+</div>
+
+<h2>Your first agent in ten minutes</h2>
+
+<h3>Install</h3>
+
+<pre><code># CLI
+brew install anthropics/tap/ant
+
+# SDK
+pip install anthropic          # Python
+npm install @anthropic-ai/sdk  # TypeScript
+
+export ANTHROPIC_API_KEY="your-api-key-here"</code></pre>
+
+<p>If you already use Claude Code, there's a faster path: run <code>claude</code>, then <code>/claude-api managed-agents-onboarding</code>. The built-in skill walks you through everything below.</p>
+
+<h3>Create the agent</h3>
+
+<pre><code>from anthropic import Anthropic
+
+client = Anthropic()
+
+agent = client.beta.agents.create(
+    name="Coding Assistant",
+    model="claude-sonnet-4-6",
+    system="You are a helpful coding assistant.",
+    tools=[{"type": "agent_toolset_20260401"}],
+)</code></pre>
+
+<p><code>agent_toolset_20260401</code> bundles bash, read, write, edit, glob, grep, web_fetch, and web_search. One line, full toolbox.</p>
+
+<h3>Create an environment and start a session</h3>
+
+<pre><code>env = client.beta.environments.create(
+    name="dev-env",
+    config={"type": "cloud", "networking": {"type": "unrestricted"}},
+)
+
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=env.id,
+    title="My first session",
+)</code></pre>
+
+<h3>Send a task and stream the result</h3>
+
+<pre><code>with client.beta.sessions.events.stream(session.id) as stream:
+    client.beta.sessions.events.send(
+        session.id,
+        events=[{
+            "type": "user.message",
+            "content": [{"type": "text",
+                         "text": "Generate the first 20 Fibonacci "
+                                 "numbers and save to fibonacci.txt"}],
+        }],
+    )
+    for event in stream:
+        if event.type == "session.status_idle":
+            break</code></pre>
+
+<p>Under the hood: a container spins up, Claude picks tools, calls execute in the sandbox, results stream back. No Docker config, no tool dispatcher, no recovery logic on your side.</p>
+
+<h2>Built-in tools and how to scope them</h2>
+
+<p>The toolset gives you eight capabilities by default. You'll usually want to narrow it down for production agents.</p>
+
+<p>Disable specific tools:</p>
+
+<pre><code>{
+  "type": "agent_toolset_20260401",
+  "configs": [
+    {"name": "web_fetch", "enabled": false},
+    {"name": "web_search", "enabled": false}
+  ]
+}</code></pre>
+
+<p>Or flip the default and enable only what you need:</p>
+
+<pre><code>{
+  "type": "agent_toolset_20260401",
+  "default_config": {"enabled": false},
+  "configs": [
+    {"name": "bash", "enabled": true},
+    {"name": "read", "enabled": true},
+    {"name": "write", "enabled": true}
+  ]
+}</code></pre>
+
+<p>Custom tools slot in alongside the built-ins. Four rules that matter more than anything else:</p>
+
+<ul>
+  <li><strong>Describe richly</strong> — 3–4 sentences per tool on what, when, and limits. Tool-use quality tracks description quality.</li>
+  <li><strong>Bundle related ops</strong> into one tool with an <code>action</code> parameter rather than ten near-duplicates.</li>
+  <li><strong>Namespace</strong> — <code>db_query</code>, <code>storage_read</code>.</li>
+  <li><strong>Return stable identifiers</strong>, not internal links the agent can't use later.</li>
+</ul>
+
+<h2>Permissions: always_allow vs always_ask</h2>
+
+<p>Two modes, and you can mix them per tool.</p>
+
+<ul>
+  <li><strong><code>always_allow</code></strong> — the tool runs automatically. Use for trusted internal agents.</li>
+  <li><strong><code>always_ask</code></strong> — the session pauses for your app to approve each call. Use for user-facing agents. MCP tools default to this.</li>
+</ul>
+
+<p>A common shape: reads and web search auto, bash gated. This is one of the things that makes Managed Agents more production-ready than LangGraph, CrewAI, or AutoGen — none of them ship permissions out of the box.</p>
+
+<h2>Usage patterns to steal</h2>
+
+<ul>
+  <li><strong>Event-triggered</strong> — external service fires the agent. Sentry's Seer detects a bug, the agent writes the patch, opens the PR.</li>
+  <li><strong>Scheduled</strong> — daily digests, GitHub activity, team task review.</li>
+  <li><strong>Fire-and-forget</strong> — human files a task in Slack, gets back a table or presentation. Asana AI Teammates.</li>
+  <li><strong>Long-horizon</strong> — multi-hour research, code migrations, deep analysis. Sessions preserve state across the run.</li>
+</ul>
+
+<div class="tip">
+  <strong>Deploy pattern that works.</strong> Keep agent templates as YAML in git. Apply them with the CLI from your deploy pipeline. Run sessions with the SDK at runtime. Config lives in version control; runtime stays lightweight.
+</div>
+
+<h2>Outcomes: turn conversations into jobs</h2>
+
+<p>Outcomes (research preview) promote a session from chat to job. You supply a rubric. The system spins up a separate grader in its own context — unbiased by the main agent's decisions — and scores each iteration. The agent keeps working until it passes or hits <code>max_iterations</code>.</p>
+
+<p>Rubric rule: concrete and checkable wins.</p>
+
+<ul>
+  <li>Good: "CSV contains a <code>price</code> column with numeric values"</li>
+  <li>Bad: "Data looks good"</li>
+</ul>
+
+<pre><code>client.beta.sessions.events.send(
+    session_id=session.id,
+    events=[{
+        "type": "user.define_outcome",
+        "description": "Build a DCF model for Costco in .xlsx",
+        "rubric": {"type": "text", "content": RUBRIC},
+        "max_iterations": 5,
+    }],
 )</code></pre>
 
 <p>Outputs land in <code>/mnt/session/outputs/</code>. Pull them via the Files API once the session reports <code>satisfied</code>.</p>

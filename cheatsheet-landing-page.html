@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/navbar.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Claude Code Cheatsheet features overview. Keyboard shortcuts, slash commands, MCP servers, memory management, and more.">
 <meta name="keywords" content="Claude Code, cheatsheet, features, commands, shortcuts, guides">
@@ -76,19 +75,103 @@
   }
 
   /* ── Navbar ─────────────────────────────────── */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+  }
 
+  body.night-theme .navbar {
+    background-color: rgba(37, 37, 37, 0.95);
+  }
 
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.18s;
+  }
 
+  .logo:hover {
+    color: var(--accent);
+  }
 
+  .logo-img {
+    width: 24px;
+    height: 24px;
+  }
 
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+    align-items: center;
+  }
 
+  .nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.18s;
+  }
 
+  .nav-menu a:hover {
+    color: var(--accent);
+  }
 
+  .dropdown {
+    position: relative;
+  }
 
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    list-style: none;
+    min-width: 200px;
+    padding: 8px 0;
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
 
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 
+  .dropdown-menu li a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.18s;
+  }
 
+  .dropdown-menu li a:hover {
+    background: var(--border-faint);
+    color: var(--accent);
+  }
 
   /* ── Icon Toolbar ────────────────────────────── */
   .icon-toolbar {
@@ -348,6 +431,11 @@
   @media (max-width: 768px) {
     header h1 { font-size: 28px; }
     header p { font-size: 13px; }
+    .nav-menu { gap: 16px; }
+    .icon-toolbar { display: none; }
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-card { padding: 20px; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     * {
@@ -356,6 +444,7 @@
       transition-duration: 0.01ms !important;
     }
   }
+  body > header, body > main { padding-top: 50px; }
 </style>
 </head>
 <body>
