@@ -74,7 +74,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: Inter, -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
 
-  header { max-width: 800px; margin: 0 auto; padding: 60px 24px 40px; text-align: center; }
+  header { max-width: 800px; margin: 0 auto; padding: 28px 24px 18px; text-align: center; }
   header h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; line-height: 1.2; }
   header .meta { color: var(--text-2); font-size: 13px; margin: 16px 0; }
   header .meta time { margin-right: 12px; }
@@ -106,11 +106,8 @@
 
   footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 12px; margin-top: 60px; }
 
-  @media (max-width: 768px) {
-    header { padding: 20px 16px 16px; }
-    header h1 { font-size: 20px; line-height: 1.3; margin-bottom: 12px; }
-    header .meta { font-size: 11px; }
-    main { padding: 0 16px 60px; }
+  @media (max-width: 640px) {
+    header h1 { font-size: 20px; line-height: 1.3; }
   }
 </style>
 </head>
