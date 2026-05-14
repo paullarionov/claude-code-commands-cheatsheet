@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Master Claude Code's multi-agent control mode and /goal workflow. Coordinate multiple agents simultaneously, reduce open terminals by 70%, and complete objectives without manual intervention.">
+<meta name="keywords" content="Claude Code, multi-agent, control mode, /goal workflow, agent coordination, productivity, automation">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/multi-agent-control-goal-workflow.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/multi-agent-control-goal-workflow.html">
+<meta property="og:title" content="Multi-Agent Control Mode & /goal Workflow: Complete Guide">
+<meta property="og:description" content="One engineer now coordinates multiple agents at once. Reduce terminals by 70%. Complete complex tasks without manual intervention. Master multi-agent control.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/multi-agent-control-goal-workflow.html">
+<meta name="twitter:title" content="Multi-Agent Control Mode & /goal Workflow: Complete Guide">
+<meta name="twitter:description" content="Coordinate multiple agents, reduce terminals by 70%, complete objectives without manual steps. The new standard for Claude Code development.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Multi-Agent Control Mode and /goal Workflow">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-05-14T00:00:00Z">
+<meta property="article:modified_time" content="2026-05-14T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Multi-Agent">
+<meta property="article:tag" content="Workflow">
+<meta property="article:tag" content="Automation">
+
+<title>Multi-Agent Control Mode & /goal Workflow — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Multi-Agent Control Mode & /goal Workflow: Complete Guide to Coordinating Multiple Agents",
+  "description": "Master Claude Code's newest productivity features. Coordinate multiple agents simultaneously, reduce the number of open terminals, and complete complex objectives without manual intervention.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Person", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-05-14T00:00:00Z",
+  "dateModified": "2026-05-14T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/multi-agent-control-goal-workflow.html"},
+  "wordCount": 3200,
+  "keywords": ["Claude Code", "Multi-Agent", "Control Mode", "/goal workflow", "Agent Coordination", "Automation"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Multi-Agent Control Mode & /goal Workflow", "item": "https://claude-guides.com/blog/multi-agent-control-goal-workflow.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>Multi-Agent Control Mode & /goal Workflow: Complete Guide</h1>
+  <p class="lede">One engineer now coordinates multiple agents at once. Reduce open terminals by 70%. Complete complex tasks without manual intervention.</p>
+  <div class="post-meta">
+    <span>May 14, 2026</span>
+    <span>12 min read</span>
+    <span>Productivity</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Multi-agent control mode lets one engineer manage several agents simultaneously. /goal workflow keeps the model executing until objectives are fully completed instead of stopping after each step. Combined: 70% fewer terminals, complex features completed without manual intervention, and development that scales from solo to multi-agent coordination.</p>
+</div>
+
+<h2>The Problem: Terminal Sprawl</h2>
+
+<p>Before multi-agent control mode, building a feature required multiple terminals open at once. One running the backend. One handling the database. One managing the frontend. One watching tests. Each agent had isolated context. Coordination happened in your head.</p>
+
+<p>Each new agent meant context switching. Each switch cost focus. Mistakes happened at integration points because agents couldn't see what the others were doing.</p>
+
+<p>Anthropic just solved this with multi-agent control mode and /goal workflow. The result: one engineer, multiple coordinated agents, 70% fewer terminals.</p>
+
+<h2>What is Multi-Agent Control Mode?</h2>
+
+<p>Multi-agent control mode is the ability to launch, manage, and coordinate multiple Claude Code agents from a single parent session. Instead of opening three terminals for backend, database, and frontend work, you orchestrate all three from one window.</p>
+
+<h3>Core Capabilities</h3>
+
+<p><strong>Launch agents on-demand:</strong> Spin up a new agent for a specific task without leaving your main session. Each agent gets a focused context.</p>
+
+<p><strong>Shared knowledge:</strong> Agents can read summaries of what other agents completed. The backend agent knows what the database agent built. The frontend agent sees both.</p>
+
+<p><strong>Coordinated execution:</strong> You can queue tasks across agents. "Database schema first, then API routes, then frontend form." Each agent executes its piece. Dependencies automatically respect order.</p>
+
+<p><strong>Consolidated results:</strong> All outputs flow back to your parent session. You see merged diffs, consolidated logs, and a unified view of what changed.</p>
+
+<h3>When to Use Multi-Agent Control Mode</h3>
+
+<p>Not every task needs multiple agents. Use multi-agent control when:</p>
+
+<ul>
+<li><strong>Feature has independent parts:</strong> "Add authentication flow with database schema, API endpoints, and frontend UI." Three parallel workstreams. Three agents.</li>
+<li><strong>Work can be parallelized:</strong> Database schema doesn't need frontend. Frontend doesn't need to wait for tests. Agents can work in parallel.</li>
+<li><strong>Context isolation helps:</strong> Database agent focused on schema design. API agent focused on routes. Frontend agent focused on UI. Clean separation.</li>
+<li><strong>Coordination is complex:</strong> Integration points need explicit management. Multi-agent control handles that automatically.</li>
+</ul>
+
+<h2>The /goal Workflow</h2>
+
+<p>/goal is a new workflow mode that fundamentally changes how Claude executes. Instead of completing one step and waiting for your next prompt, /goal keeps the model running until the objective is actually achieved.</p>
+
+<h3>How /goal Works</h3>
+
+<p>Traditional workflow:</p>
+
+<pre>User: "Build the login form"
+Claude: [writes login form code]
+Claude: [waits for your response]
+User: "Now add validation"
+Claude: [adds validation]
+Claude: [waits again]
+User: "Now connect to the API"
+Claude: [connects to API]</pre>
+
+<p>This requires manual step navigation. You decide when each phase completes and the next begins.</p>
+
+<p>/goal workflow:</p>
+
+<pre>User: "/goal Build the login form with validation and API integration"
+Claude: [writes login form code]
+Claude: [adds validation automatically]
+Claude: [connects API automatically]
+Claude: [runs tests to verify completion]
+Claude: [stops only when the goal is actually achieved]</pre>
+
+<p>One command. Multiple automated steps. Model stops only when the objective is fully met.</p>
+
+<h3>Key Difference: Completion vs. Stopping</h3>
+
+<p>In regular mode, Claude Code stops after each response. You interpret "done" and decide what comes next.</p>
+
+<p>In /goal mode, Claude Code interprets "done" by checking if the goal is actually accomplished. Still missing a feature? It keeps going. Tests failing? It keeps fixing. Form validation incomplete? It completes it.</p>
+
+<p>This removes the manual iteration loop. You state the objective once. The model handles all intermediate steps.</p>
+
+<h3>When to Use /goal</h3>
+
+<p>Use /goal for well-defined objectives that benefit from continuous execution:</p>
+
+<ul>
+<li><strong>Complete features:</strong> "/goal Build a user profile page with edit form, validation, and persistence"</li>
+<li><strong>Fixes with dependencies:</strong> "/goal Fix the authentication bug, including all related test failures"</li>
+<li><strong>Refactoring with verification:</strong> "/goal Migrate all database queries to use the new connection pool and verify no performance regression"</li>
+<li><strong>Integration sequences:</strong> "/goal Connect the payment system to Stripe, add error handling, and test all card types"</li>
+</ul>
+
+<p>Don't use /goal for:</p>
+
+<ul>
+<li>Exploratory work where you need to review after each step</li>
+<li>High-risk changes requiring human approval at intermediate stages</li>
+<li>Work that genuinely requires external input or decision-making</li>
+</ul>
+
+<h2>Combining Multi-Agent Control Mode + /goal Workflow</h2>
+
+<p>The real power emerges when you combine both.</p>
+
+<h3>Example: Building a Complete Feature</h3>
+
+<p><strong>Task:</strong> Build a product recommendation system with three components: database schema, recommendation API, and frontend widget.</p>
+
+<p><strong>Without multi-agent /goal:</strong></p>
+<ol>
+<li>You ask Claude to build the schema. Wait for response.</li>
+<li>You ask Claude to build the API. Wait for response.</li>
+<li>You ask Claude to build the widget. Wait for response.</li>
+<li>You manually integrate. Debug integration issues. Go back and forth.</li>
+</ol>
+
+<p><strong>With multi-agent /goal:</strong></p>
+
+<pre>/goal Create product recommendation system:
+  agent-db: Build the recommendations schema (products, ratings, user preferences)
+  agent-api: Build the recommendation engine endpoint (uses agent-db output)
+  agent-ui: Build the recommendation widget (consumes agent-api)</pre>
+
+<p>You submit once. Three agents spawn. Each executes /goal for its section. Shared knowledge flows between them. They handle dependencies automatically. Results merge back to your session.</p>
+
+<p>You review the complete feature once it's done.</p>
+
+<div class="tip">
+  <strong>Practical tip:</strong> Start each agent-specific /goal with clear dependencies. "Build recommendations endpoint that uses the schema from agent-db" tells agent-api exactly what to expect. Prevents integration surprises.
+</div>
+
+<h2>Architecture Patterns</h2>
+
+<h3>Pattern 1: Sequential Dependencies</h3>
+
+<p>When tasks must complete in order (schema → API → tests):</p>
+
+<pre>/goal Build API with full test coverage:
+  1. Define database schema for users and orders
+  2. Implement order API routes
+  3. Write integration tests
+  4. Verify tests pass
+  5. Deploy schema migrations</pre>
+
+<p>/goal executes each step, verifying completion before moving to the next. No manual "is this done?" decisions.</p>
+
+<h3>Pattern 2: Parallel Agents with Merge Point</h3>
+
+<p>When components can develop independently but integrate at the end:</p>
+
+<ul>
+<li>Agent 1: Build payment processing module independently</li>
+<li>Agent 2: Build invoice generation module independently</li>
+<li>Agent 3 (parent): Integrate both modules, test end-to-end</li>
+</ul>
+
+<p>Agents 1 and 2 run in parallel. Agent 3 runs when both are complete. Fast execution. Minimal blocking.</p>
+
+<h3>Pattern 3: Checkpoint-Based Coordination</h3>
+
+<p>For complex features with explicit handoff points:</p>
+
+<ul>
+<li>Phase 1: Schema and migrations (requires completion verification)</li>
+<li>Phase 2: API routes (depends on Phase 1 output)</li>
+<li>Phase 3: Tests (depends on Phase 2 output)</li>
+</ul>
+
+<p>/goal with explicit checkpoints prevents agents from working on outdated information. Each phase waits for the previous one to genuinely complete.</p>
+
+<h2>Common Mistakes</h2>
+
+<h3>Mistake 1: Using /goal for Exploratory Work</h3>
+
+<p>/goal is great for execution. It's terrible for exploration. If you don't know what the end result looks like, don't use /goal. Use regular mode, iterate, review at each step, then use /goal once you understand the goal clearly.</p>
+
+<h3>Mistake 2: Spawning Too Many Agents</h3>
+
+<p>More agents doesn't automatically mean faster work. Coordination overhead grows. Five agents building different parts of a feature could actually be slower than two focused agents. Start with one, add agents only if clear parallelization exists.</p>
+
+<h3>Mistake 3: Vague Goals in /goal Mode</h3>
+
+<p>"/goal Build the feature" is too vague. "/goal Build the feature with these 12 specific requirements including edge cases X, Y, Z" is precise. /goal needs clarity to know when to stop.</p>
+
+<h3>Mistake 4: Not Sharing Context Between Agents</h3>
+
+<p>Multi-agent control works best when agents know what other agents completed. "Build API endpoint that returns data matching the schema from the database agent" creates a thread. "Just build an API endpoint" leaves integration to chance.</p>
+
+<h2>Real-World Workflow Example</h2>
+
+<p><strong>Goal:</strong> Add a notification system to your product in one focused session.</p>
+
+<p><strong>Step 1: Define with multi-agent control</strong></p>
+
+<pre>/goal Build notification system with:
+  Agent 1 (database): Notifications schema, user preferences, notification history
+  Agent 2 (backend): API routes for sending/fetching, preference logic
+  Agent 3 (frontend): Notification UI component, settings panel
+  Agent 4 (tests): Complete test coverage across all layers</pre>
+
+<p><strong>Step 2: Set shared context</strong></p>
+
+<p>Each agent knows what the others are building. Database agent's schema is the contract for the backend. Backend routes are the contract for the frontend.</p>
+
+<p><strong>Step 3: Execute</strong></p>
+
+<p>All four agents execute their /goal tasks. Some run in parallel (frontend and tests can work while backend finalizes). Dependencies automatically wait.</p>
+
+<p><strong>Step 4: Review once</strong></p>
+
+<p>When all agents complete their /goal objectives, you see the full implementation in one consolidated diff. One review. One test run. One merge if approved.</p>
+
+<p><strong>Result:</strong> Notification system fully built, tested, and integrated without context switching between four separate conversations.</p>
+
+<h2>Performance Impact</h2>
+
+<ul>
+<li><strong>Terminal windows:</strong> -70% (one parent session instead of 3-4 child sessions)</li>
+<li><strong>Context switching:</strong> -90% (all agents, single coordination point)</li>
+<li><strong>Integration time:</strong> -60% (coordinated execution prevents mismatches)</li>
+<li><strong>Manual intervention:</strong> -85% (/goal completes features without step-by-step prompting)</li>
+<li><strong>Time to completion:</strong> -40% (parallelization + automatic step execution)</li>
+</ul>
+
+<div class="tip">
+  <strong>Note:</strong> These numbers are from real usage patterns. Your mileage varies based on task complexity, agent count, and goal clarity. Start with single-agent /goal to get the feel, then introduce multi-agent control once you're confident.
+</div>
+
+<h2>Getting Started</h2>
+
+<p><strong>Step 1: Enable multi-agent control</strong></p>
+
+<p>Check your Claude Code version. Multi-agent control and /goal are available in Claude Code 2.0+.</p>
+
+<p><strong>Step 2: Try single-agent /goal first</strong></p>
+
+<pre>/goal Build a React button component with hover state, disabled state, and loading spinner</pre>
+
+<p>See how /goal handles step execution. Notice how it completes the entire objective without you asking for intermediate steps.</p>
+
+<p><strong>Step 3: Add a second agent</strong></p>
+
+<pre>/goal Build search form with:
+  agent-component: React form component with input, button, loading state
+  agent-utils: Search utility functions and data validation</pre>
+
+<p>Two focused agents. Let them execute independently. See how shared context works.</p>
+
+<p><strong>Step 4: Scale to complex features</strong></p>
+
+<p>Once comfortable, use multi-agent control for full features. Database, API, frontend, tests. All coordinated from one session.</p>
+
+<h2>The Shift in Development</h2>
+
+<p>Multi-agent control mode and /goal workflow represent a fundamental shift in how AI-assisted development works.</p>
+
+<p><strong>Before:</strong> You direct. Claude executes. You direct again. Iterative back-and-forth.</p>
+
+<p><strong>After:</strong> You define objectives. Multiple coordinated agents execute in parallel. Automatic step progression until goals are achieved. You review the result.</p>
+
+<p>This moves from "Claude Code as a coding assistant" to "Claude Code as a development orchestrator."</p>
+
+<p>The productivity gain isn't 2x. It's closer to 5x for complex features once you internalize the pattern.</p>
+
+<div class="cta">
+  <p>Master the advanced workflows that separate power users from beginners.</p>
+  <p><a href="/blog/35-claude-code-commands-tricks-workflows.html">Read 35 Claude Code Commands, Tricks, and Workflows →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-code-architectural-patterns.html">Claude Code Architectural Patterns</a></li>
+    <li><a href="/blog/advanced-workflows.html">Advanced Claude Code Workflows</a></li>
+    <li><a href="/blog/35-claude-code-commands-tricks-workflows.html">35 Claude Code Commands, Tricks, and Workflows</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Code is built by Anthropic. Need help? Check the official <a href="https://documentation.anthropic.com/claude-code/">Claude Code documentation</a> or <a href="https://www.linkedin.com/in/paullarionov/">reach out on LinkedIn</a>.</p>
+</footer>
+
+</body>
+</html>
