@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "url": "/blog/multi-agent-control-goal-workflow.html",
+      "title": "Multi-Agent Control Mode & /goal Workflow: Complete Guide",
+      "excerpt": "One engineer now coordinates multiple agents simultaneously. Reduce open terminals by 70%. Complete complex objectives without manual intervention.",
+      "date": "2026-05-14",
+      "readTime": 12,
+      "category": "Workflow",
+      "tags": ["Claude Code", "Multi-Agent", "Workflow", "Automation"]
+    },
+    {
       "url": "/blog/context-optimization-guide.html",
       "title": "How to Manage Context When You Keep Hitting Token Limits",
       "excerpt": "Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering context measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting.",
