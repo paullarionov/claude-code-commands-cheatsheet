@@ -6,12 +6,21 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jul 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
+
+    <item>
+      <title>Claude Code Summer 2026 Update: New Models, Background Agents by Default</title>
+      <link>https://claude-guides.com/blog/claude-code-summer-2026-update.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-summer-2026-update.html</guid>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 GMT</pubDate>
+      <category>Release Notes</category>
+      <description>Sonnet 5 is the new default model, subagents now run in the background automatically, and Claude in Chrome is GA. What shipped this summer and what to actually change in your setup.</description>
+    </item>
 
     <item>
       <title>How to Manage Context When You Keep Hitting Token Limits</title>

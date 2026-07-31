@@ -1391,7 +1391,8 @@
     <div class="row"><span class="key">/compact [focus]</span><span class="desc" data-i18n="d-compact">Compress context</span></div>
     <div class="row"><span class="key">/resume</span><span class="desc" data-i18n="d-resume-sess">Resume / switch session</span></div>
     <div class="row"><span class="key">/rename [name]</span><span class="desc" data-i18n="d-rename">Name current session</span></div>
-    <div class="row"><span class="key">/branch [name]</span><span class="desc" data-i18n="d-branch">Fork conversation (alias /fork)</span></div>
+    <div class="row"><span class="key">/fork [name]</span><span class="desc" data-i18n="d-fork-copy">Copy to new background session (alias /branch)</span></div>
+    <div class="row"><span class="key">/subtask</span><span class="desc" data-i18n="d-subtask">Run in-session subagent</span></div>
     <div class="row"><span class="key">/cost</span><span class="desc" data-i18n="d-cost">Token usage stats</span></div>
     <div class="row"><span class="key">/context</span><span class="desc" data-i18n="d-context-viz">Context usage visualizer</span></div>
     <div class="row"><span class="key">/diff</span><span class="desc" data-i18n="d-diff">Interactive diff viewer</span></div>
@@ -1423,6 +1424,7 @@
     <div class="row"><span class="key">/memory</span><span class="desc" data-i18n="d-memory-edit">Edit CLAUDE.md</span></div>
     <div class="row"><span class="key">/mcp</span><span class="desc" data-i18n="d-manage-mcp">Manage MCP servers</span></div>
     <div class="row"><span class="key">/hooks</span><span class="desc" data-i18n="d-hooks">Manage hooks</span></div>
+    <div class="row"><span class="key">/code-review</span><span class="desc" data-i18n="d-code-review-bg">Review code (background subagent)</span></div>
     <div class="row"><span class="key">/skills</span><span class="desc" data-i18n="d-list-skills">List available skills</span></div>
     <div class="row"><span class="key">/agents</span><span class="desc" data-i18n="d-manage-agents">Manage agents</span></div>
     <div class="row"><span class="key">/add-dir &lt;path&gt;</span><span class="desc" data-i18n="d-add-dir">Add working directory</span></div>
@@ -1486,6 +1488,7 @@
     <div class="subsection" data-i18n="sub-plan-mode">Plan Mode</div>
     <div class="row"><span class="key">⇧Tab</span><span class="desc" data-i18n="d-tab-cycle">Normal → Auto-accept → Plan</span></div>
     <div class="row"><span class="key">--permission-mode plan</span><span class="desc" data-i18n="d-launch-plan">Launch in plan mode</span></div>
+    <div class="row"><span class="key">Auto mode</span><span class="desc" data-i18n="d-automode-default">Default on Bedrock/Vertex/Foundry</span></div>
 
     <div class="subsection" data-i18n="sub-worktrees">Git Worktrees</div>
     <div class="row"><span class="key">--worktree name</span><span class="desc" data-i18n="d-isolated">Isolated branch for feature</span></div>
@@ -1497,7 +1500,7 @@
     <div class="row"><span class="key">/context</span><span class="desc" data-i18n="d-ctx-tips">Usage + optimization tips</span></div>
     <div class="row"><span class="key">/compact [focus]</span><span class="desc" data-i18n="d-compact-focus">Compress with focus</span></div>
     <div class="row"><span class="key">Auto-compact</span><span class="desc" data-i18n="d-auto-compact">~95% capacity</span></div>
-    <div class="row"><span class="key">1M context</span><span class="desc" data-i18n="d-1m">Opus 4.6 (Max / Team / Ent)</span></div>
+    <div class="row"><span class="key">1M context</span><span class="desc" data-i18n="d-1m">Sonnet 5 &amp; Opus 5 (native)</span></div>
     <div class="row"><span class="key">CLAUDE.md</span><span class="desc" data-i18n="d-survives">Survives compaction</span></div>
 
     <div class="subsection" data-i18n="sub-sess-tips">Session Tips</div>
@@ -1532,6 +1535,7 @@
     <div class="row"><span class="key">modelOverrides</span><span class="desc" data-i18n="d-model-map">Map model selection → ID</span></div>
     <div class="row"><span class="key">autoMemoryDirectory</span><span class="desc" data-i18n="d-custom-mem">Custom memory directory</span></div>
     <div class="row"><span class="key">worktree.sparsePaths</span><span class="desc" data-i18n="d-sparse-cfg">Sparse checkout folders</span></div>
+    <div class="row"><span class="key">sandbox.network.strictAllowlist</span><span class="desc" data-i18n="d-sandbox-allowlist">Deny non-allowlisted network hosts</span></div>
 
     <div class="subsection" data-i18n="sub-env-vars">Environment Variables</div>
     <div class="row"><span class="key">ANTHROPIC_API_KEY</span><span class="desc"></span></div>
@@ -1540,6 +1544,7 @@
     <div class="row"><span class="key">MAX_THINKING_TOKENS</span><span class="desc" data-i18n="d-think-tokens">0 = off</span></div>
     <div class="row"><span class="key">CLAUDE_CODE_MAX_OUTPUT_TOKENS</span><span class="desc" data-i18n="d-output-tokens">default 32K</span></div>
     <div class="row"><span class="key">CLAUDE_CODE_DISABLE_CRON</span><span class="desc" data-i18n="d-disable-cron">Disable scheduled tasks</span></div>
+    <div class="row"><span class="key">CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</span><span class="desc" data-i18n="d-max-spawn-depth">Limit subagent nesting (default 3)</span></div>
   </section>
 
   <!-- Skills & Agents -->
@@ -1552,6 +1557,7 @@
     <div class="row"><span class="key">/debug [desc]</span><span class="desc" data-i18n="d-debug">Debug from log</span></div>
     <div class="row"><span class="key">/loop [interval]</span><span class="desc" data-i18n="d-recurring">Recurring scheduled task</span></div>
     <div class="row"><span class="key">/claude-api</span><span class="desc" data-i18n="d-api-ref">Load API + SDK reference</span></div>
+    <div class="row"><span class="key">/dataviz</span><span class="desc" data-i18n="d-dataviz">Chart &amp; dashboard design guidance</span></div>
 
     <div class="subsection" data-i18n="sub-skill-locs">Custom Skill Locations</div>
     <div class="row"><span class="key">.claude/skills/&lt;name&gt;/</span><span class="desc" data-i18n="d-proj-skills">Project skills</span></div>
@@ -1572,6 +1578,8 @@
     <div class="row"><span class="key">Plan</span><span class="desc" data-i18n="d-plan-agent">Research for plan mode</span></div>
     <div class="row"><span class="key">General</span><span class="desc" data-i18n="d-general">All tools, complex tasks</span></div>
     <div class="row"><span class="key">Bash</span><span class="desc" data-i18n="d-bash-agent">Terminal, separate context</span></div>
+    <div class="row"><span class="key">Subagents</span><span class="desc" data-i18n="d-bg-default">Run in background by default</span></div>
+    <div class="row"><span class="key">Nested spawn</span><span class="desc" data-i18n="d-nested-depth">Depth 3 by default (was 1)</span></div>
 
     <div class="subsection" data-i18n="sub-agent-fm">Agent Frontmatter</div>
     <div class="row"><span class="key">permissionMode</span><span class="desc" data-i18n="d-perm-mode">default/acceptEdits/plan/dontAsk/bypass</span></div>
@@ -1613,6 +1621,7 @@
     <div class="row"><span class="key">--effort</span><span class="desc" data-i18n="d-effort-flag">low / med / high / max</span></div>
     <div class="row"><span class="key">--permission-mode</span><span class="desc">plan / default / …</span></div>
     <div class="row"><span class="key">--dangerously-skip-permissions</span><span class="desc" data-i18n="d-skip-all">Skip all prompts ⚠</span></div>
+    <div class="row"><span class="key">--ax-screen-reader</span><span class="desc" data-i18n="d-screen-reader">Screen reader accessibility mode</span></div>
   </section>
 
 </main>
@@ -1991,7 +2000,8 @@ const T = {
   'd-compact':      { en:'Compress context', ru:'Сжать контекст', zh:'压缩上下文', ja:'コンテキストを圧縮', es:'Comprimir contexto' },
   'd-resume-sess':  { en:'Resume / switch session', ru:'Возобновить/переключить сессию', zh:'恢复/切换会话', ja:'セッションを再開/切り替え', es:'Reanudar / cambiar sesión' },
   'd-rename':       { en:'Name current session', ru:'Назвать текущую сессию', zh:'命名当前会话', ja:'現在のセッションに名前を付ける', es:'Nombrar sesión actual' },
-  'd-branch':       { en:'Fork conversation (alias /fork)', ru:'Ветвь разговора (алиас /fork)', zh:'分叉对话（别名 /fork）', ja:'会話を分岐（/forkのエイリアス）', es:'Bifurcar conversación (alias /fork)' },
+  'd-fork-copy':    { en:'Copy to new background session (alias /branch)', ru:'Копия в новую фоновую сессию (алиас /branch)', zh:'复制到新的后台会话（别名 /branch）', ja:'新しいバックグラウンドセッションにコピー（/branchのエイリアス）', es:'Copiar a nueva sesión en segundo plano (alias /branch)' },
+  'd-subtask':      { en:'Run in-session subagent', ru:'Запуск субагента в сессии', zh:'在当前会话中运行子智能体', ja:'セッション内サブエージェントを実行', es:'Ejecutar subagente en la sesión' },
   'd-cost':         { en:'Token usage stats', ru:'Статистика токенов', zh:'Token 使用统计', ja:'トークン使用統計', es:'Estadísticas de tokens' },
   'd-context-viz':  { en:'Context usage visualizer', ru:'Визуализация контекста', zh:'上下文使用可视化', ja:'コンテキスト使用状況の可視化', es:'Visualizador de contexto' },
   'd-diff':         { en:'Interactive diff viewer', ru:'Интерактивный просмотр diff', zh:'交互式差异查看器', ja:'インタラクティブdiffビューア', es:'Visor de diff interactivo' },
@@ -2050,6 +2060,7 @@ const T = {
   'd-usage':        { en:'Plan limits & status', ru:'Лимиты плана и статус', zh:'套餐限制与状态', ja:'プランの制限と状態', es:'Límites del plan y estado' },
   'd-schedule':     { en:'Cloud scheduled tasks', ru:'Облачные задачи по расписанию', zh:'云端定时任务', ja:'クラウドスケジュールタスク', es:'Tareas programadas en la nube' },
   'd-security':     { en:'Security analysis', ru:'Анализ безопасности', zh:'安全分析', ja:'セキュリティ分析', es:'Análisis de seguridad' },
+  'd-code-review-bg': { en:'Review code (background subagent)', ru:'Ревью кода (фоновый субагент)', zh:'代码审查（后台子智能体）', ja:'コードレビュー（バックグラウンドサブエージェント）', es:'Revisar código (subagente en segundo plano)' },
   'd-help':         { en:'Help + commands', ru:'Справка + команды', zh:'帮助 + 命令', ja:'ヘルプ + コマンド', es:'Ayuda + comandos' },
   'd-feedback':     { en:'Send feedback (alias: /bug)', ru:'Отправить отзыв (алиас: /bug)', zh:'发送反馈（别名：/bug）', ja:'フィードバックを送信（別名: /bug）', es:'Enviar feedback (alias: /bug)' },
 
@@ -2069,6 +2080,7 @@ const T = {
   'd-effort-levels':{ en:'○ low \u00a0·\u00a0 ◐ med \u00a0·\u00a0 ● high', ru:'○ низко \u00a0·\u00a0 ◐ средне \u00a0·\u00a0 ● высоко', zh:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', ja:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', es:'○ bajo \u00a0·\u00a0 ◐ medio \u00a0·\u00a0 ● alto' },
   'd-tab-cycle':    { en:'Normal → Auto-accept → Plan', ru:'Обычный → Авто-принятие → План', zh:'普通 → 自动接受 → 计划', ja:'通常 → 自動承認 → プラン', es:'Normal → Auto-aceptar → Plan' },
   'd-launch-plan':  { en:'Launch in plan mode', ru:'Запуск в режиме плана', zh:'以计划模式启动', ja:'プランモードで起動', es:'Iniciar en modo plan' },
+  'd-automode-default': { en:'Default on Bedrock/Vertex/Foundry', ru:'По умолчанию в Bedrock/Vertex/Foundry', zh:'在 Bedrock/Vertex/Foundry 上默认启用', ja:'Bedrock/Vertex/Foundryではデフォルト', es:'Por defecto en Bedrock/Vertex/Foundry' },
   'd-isolated':     { en:'Isolated branch for feature', ru:'Изолированная ветка для фичи', zh:'功能的隔离分支', ja:'機能の隔離ブランチ', es:'Rama aislada para feature' },
   'd-agent-wt':     { en:'Agent in own worktree', ru:'Агент в своём worktree', zh:'智能体在独立工作树', ja:'専用ワークツリーのエージェント', es:'Agente en su propio worktree' },
   'd-sparse':       { en:'Checkout only needed folders', ru:'Checkout только нужных папок', zh:'仅检出所需文件夹', ja:'必要なフォルダのみチェックアウト', es:'Checkout solo carpetas necesarias' },
@@ -2076,7 +2088,7 @@ const T = {
   'd-ctx-tips':     { en:'Usage + optimization tips', ru:'Использование + советы по оптимизации', zh:'使用量 + 优化建议', ja:'使用量 + 最適化のヒント', es:'Uso + consejos de optimización' },
   'd-compact-focus':{ en:'Compress with focus', ru:'Сжать с фокусом', zh:'聚焦压缩', ja:'フォーカス付きで圧縮', es:'Comprimir con enfoque' },
   'd-auto-compact': { en:'~95% capacity', ru:'~95% ёмкости', zh:'~95% 容量', ja:'~95% の容量', es:'~95% de capacidad' },
-  'd-1m':           { en:'Opus 4.6 (Max / Team / Ent)', ru:'Opus 4.6 (Max/Team/Ent)', zh:'Opus 4.6（Max/Team/Ent）', ja:'Opus 4.6（Max/Team/Ent）', es:'Opus 4.6 (Max / Team / Ent)' },
+  'd-1m':           { en:'Sonnet 5 &amp; Opus 5 (native)', ru:'Sonnet 5 и Opus 5 (нативно)', zh:'Sonnet 5 和 Opus 5（原生）', ja:'Sonnet 5 と Opus 5（ネイティブ）', es:'Sonnet 5 y Opus 5 (nativo)' },
   'd-survives':     { en:'Survives compaction', ru:'Выживает при сжатии', zh:'压缩后保留', ja:'圧縮後も保持', es:'Sobrevive la compresión' },
   'd-continue-last':{ en:'Continue last conversation', ru:'Продолжить последний разговор', zh:'继续上次对话', ja:'最後の会話を継続', es:'Continuar última conversación' },
   'd-resume-name':  { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre' },
@@ -2098,10 +2110,12 @@ const T = {
   'd-model-map':    { en:'Map model selection → ID', ru:'Привязка выбора модели → ID', zh:'模型选择映射 → ID', ja:'モデル選択をIDにマップ', es:'Mapear selección de modelo → ID' },
   'd-custom-mem':   { en:'Custom memory directory', ru:'Своя директория памяти', zh:'自定义记忆目录', ja:'カスタムメモリディレクトリ', es:'Directorio de memoria personalizado' },
   'd-sparse-cfg':   { en:'Sparse checkout folders', ru:'Sparse checkout папок', zh:'稀疏检出文件夹', ja:'スパースチェックアウトフォルダ', es:'Carpetas de sparse checkout' },
+  'd-sandbox-allowlist': { en:'Deny non-allowlisted network hosts', ru:'Блокировать хосты не из allowlist', zh:'拒绝不在允许列表中的网络主机', ja:'許可リスト外のネットワークホストを拒否', es:'Denegar hosts de red no permitidos' },
   'd-effort-env':   { en:'low / med / high', ru:'low/med/high', zh:'低/中/高', ja:'低/中/高', es:'bajo / medio / alto' },
   'd-think-tokens': { en:'0 = off', ru:'0 = выкл', zh:'0 = 关闭', ja:'0 = オフ', es:'0 = desactivado' },
   'd-output-tokens':{ en:'default 32K', ru:'по умолч. 32K', zh:'默认 32K', ja:'デフォルト32K', es:'por defecto 32K' },
   'd-disable-cron': { en:'Disable scheduled tasks', ru:'Отключить задачи по расписанию', zh:'禁用定时任务', ja:'スケジュールタスクを無効化', es:'Deshabilitar tareas programadas' },
+  'd-max-spawn-depth': { en:'Limit subagent nesting (default 3)', ru:'Лимит вложенности субагентов (по умолчанию 3)', zh:'限制子智能体嵌套深度（默认3）', ja:'サブエージェントのネスト深度を制限（デフォルト3）', es:'Limitar anidamiento de subagentes (por defecto 3)' },
 
   // Skills
   'd-simplify':     { en:'Code review (3 parallel agents)', ru:'Код-ревью (3 параллельных агента)', zh:'代码审查（3个并行智能体）', ja:'コードレビュー（3並列エージェント）', es:'Revisión de código (3 agentes paralelos)' },
@@ -2109,6 +2123,7 @@ const T = {
   'd-debug':        { en:'Debug from log', ru:'Отладка по логу', zh:'从日志调试', ja:'ログからデバッグ', es:'Depurar desde log' },
   'd-recurring':    { en:'Recurring scheduled task', ru:'Повторяющаяся задача по расписанию', zh:'定期计划任务', ja:'定期スケジュールタスク', es:'Tarea recurrente programada' },
   'd-api-ref':      { en:'Load API + SDK reference', ru:'Загрузить справочник API + SDK', zh:'加载 API + SDK 参考', ja:'API + SDKリファレンスを読み込む', es:'Cargar referencia API + SDK' },
+  'd-dataviz':      { en:'Chart &amp; dashboard design guidance', ru:'Гайд по дизайну графиков и дашбордов', zh:'图表与仪表盘设计指南', ja:'チャート＆ダッシュボードのデザインガイド', es:'Guía de diseño de gráficos y dashboards' },
   'd-proj-skills':  { en:'Project skills', ru:'Скиллы проекта', zh:'项目技能', ja:'プロジェクトスキル', es:'Skills del proyecto' },
   'd-personal-skills':{ en:'Personal skills', ru:'Личные скиллы', zh:'个人技能', ja:'個人スキル', es:'Skills personales' },
   'd-auto-invoke':  { en:'Auto-invoke trigger', ru:'Триггер автовызова', zh:'自动调用触发器', ja:'自動呼び出しトリガー', es:'Disparador de invocación automática' },
@@ -2127,6 +2142,8 @@ const T = {
   'd-iso-wt':       { en:'Run in git worktree', ru:'Запуск в git worktree', zh:'在 git 工作树中运行', ja:'gitワークツリーで実行', es:'Ejecutar en git worktree' },
   'd-persist-mem':  { en:'Persistent memory', ru:'Постоянная память', zh:'持久记忆', ja:'永続メモリ', es:'Memoria persistente' },
   'd-max-turns':    { en:'Limit agent turns', ru:'Лимит агентских ходов', zh:'限制智能体轮次', ja:'エージェントターンを制限', es:'Limitar turnos del agente' },
+  'd-bg-default':   { en:'Run in background by default', ru:'По умолчанию работают в фоне', zh:'默认在后台运行', ja:'デフォルトでバックグラウンド実行', es:'Se ejecutan en segundo plano por defecto' },
+  'd-nested-depth': { en:'Depth 3 by default (was 1)', ru:'Глубина 3 по умолчанию (было 1)', zh:'默认深度为3（此前为1）', ja:'デフォルトで深さ3（以前は1）', es:'Profundidad 3 por defecto (antes 1)' },
   'd-send-msg':     { en:'Resume stopped agents', ru:'Возобновление агентов', zh:'恢复已停止的智能体', ja:'停止したエージェントを再開', es:'Reanudar agentes detenidos' },
 
   // CLI
@@ -2147,6 +2164,7 @@ const T = {
   'd-channels':     { en:'Permission relay / MCP push', ru:'Ретрансляция разрешений / MCP push', zh:'权限中继 / MCP 推送', ja:'権限リレー / MCPプッシュ', es:'Retransmisión de permisos / MCP push' },
   'd-web-sess':     { en:'Web session', ru:'Веб-сессия', zh:'网页会话', ja:'ウェブセッション', es:'Sesión web' },
   'd-effort-flag':  { en:'low / med / high / max', ru:'low/med/high/max', zh:'低/中/高/最大', ja:'低/中/高/最大', es:'bajo / medio / alto / máx' },
+  'd-screen-reader': { en:'Screen reader accessibility mode', ru:'Режим доступности для скринридеров', zh:'屏幕阅读器无障碍模式', ja:'スクリーンリーダーアクセシビリティモード', es:'Modo de accesibilidad para lector de pantalla' },
   'd-skip-all':     { en:'Skip all prompts ⚠', ru:'Пропустить все запросы ⚠', zh:'跳过所有提示 ⚠', ja:'全プロンプトをスキップ ⚠', es:'Omitir todas las solicitudes ⚠' },
 
   // Limits Widget

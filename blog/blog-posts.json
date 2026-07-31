@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "url": "/blog/claude-code-summer-2026-update.html",
+      "title": "Claude Code Summer 2026 Update: New Models, Background Agents by Default",
+      "excerpt": "Sonnet 5 is the new default model, subagents now run in the background automatically, and Claude in Chrome is GA. What shipped this summer and what to actually change in your setup.",
+      "date": "2026-07-31",
+      "readTime": 11,
+      "category": "Release Notes",
+      "tags": ["Claude Code", "Sonnet 5", "Opus 5", "Subagents", "Release Notes"]
+    },
+    {
       "url": "/blog/multi-agent-control-goal-workflow.html",
       "title": "Multi-Agent Control Mode & /goal Workflow: Complete Guide",
       "excerpt": "One engineer now coordinates multiple agents simultaneously. Reduce open terminals by 70%. Complete complex objectives without manual intervention.",
