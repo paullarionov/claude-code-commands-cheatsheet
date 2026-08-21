@@ -273,6 +273,10 @@
 
   .mcp-card a:hover { text-decoration: underline; }
 
+  /* Repo URLs are used as link text and have no break opportunities,
+     so they push the page sideways on narrow screens without this. */
+  article a { overflow-wrap: anywhere; }
+
   .cta {
     margin-top: 32px;
     padding: 20px;

@@ -1,25 +1,28 @@
 /**
- * Navbar Loader - Injects shared navbar into all pages
- * Loads navbar.html and inserts it at the beginning of the body
+ * Navbar Loader - Injects the shared navbar into pages that don't have one.
+ *
+ * Every page currently ships an inline <nav class="navbar">, so this is a no-op
+ * for them: injecting a second navbar would duplicate the header. It only fetches
+ * navbar.html for pages that omit the inline markup.
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    // Fetch the navbar HTML
-    const response = await fetch('/navbar.html');
-    if (!response.ok) throw new Error('Failed to load navbar');
+    if (!document.querySelector('nav.navbar')) {
+      const response = await fetch('/navbar.html');
+      if (!response.ok) throw new Error('Failed to load navbar');
 
-    const navbarHTML = await response.text();
+      const temp = document.createElement('div');
+      temp.innerHTML = await response.text();
 
-    // Create a temporary container to parse the HTML
-    const temp = document.createElement('div');
-    temp.innerHTML = navbarHTML;
+      // Pick the <nav> explicitly: firstElementChild would grab whatever markup
+      // happens to lead the partial.
+      const navbar = temp.querySelector('nav.navbar');
+      if (!navbar) throw new Error('navbar.html has no nav.navbar element');
 
-    // Insert navbar at the beginning of body (before any other content)
-    const body = document.body;
-    body.insertBefore(temp.firstElementChild, body.firstChild);
+      document.body.insertBefore(navbar, document.body.firstChild);
+    }
 
-    // Initialize dropdown toggle functionality
     initializeDropdownToggle();
 
   } catch (error) {

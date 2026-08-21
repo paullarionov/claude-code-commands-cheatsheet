@@ -7,7 +7,13 @@
       "date": "2026-07-31",
       "readTime": 11,
       "category": "Release Notes",
-      "tags": ["Claude Code", "Sonnet 5", "Opus 5", "Subagents", "Release Notes"]
+      "tags": [
+        "Claude Code",
+        "Sonnet 5",
+        "Opus 5",
+        "Subagents",
+        "Release Notes"
+      ]
     },
     {
       "url": "/blog/multi-agent-control-goal-workflow.html",
@@ -16,7 +22,12 @@
       "date": "2026-05-14",
       "readTime": 12,
       "category": "Workflow",
-      "tags": ["Claude Code", "Multi-Agent", "Workflow", "Automation"]
+      "tags": [
+        "Claude Code",
+        "Multi-Agent",
+        "Workflow",
+        "Automation"
+      ]
     },
     {
       "url": "/blog/context-optimization-guide.html",
@@ -25,7 +36,12 @@
       "date": "2026-05-11",
       "readTime": 30,
       "category": "Cost Optimization",
-      "tags": ["Token Optimization", "Context Management", "Cost Reduction", "Claude Code"]
+      "tags": [
+        "Token Optimization",
+        "Context Management",
+        "Cost Reduction",
+        "Claude Code"
+      ]
     },
     {
       "url": "/blog/ai-engineer-roadmap-2026.html",
@@ -34,7 +50,11 @@
       "date": "2026-05-08",
       "readTime": 35,
       "category": "Engineering",
-      "tags": ["AI Engineering", "Agents", "Learning Path"]
+      "tags": [
+        "AI Engineering",
+        "Agents",
+        "Learning Path"
+      ]
     },
     {
       "url": "/blog/burning-through-claude-code-limit-3-days.html",
@@ -43,7 +63,12 @@
       "date": "2026-05-04",
       "readTime": 14,
       "category": "Cost Optimization",
-      "tags": ["Token Optimization", "Cost", "Kimi", "Automation"]
+      "tags": [
+        "Token Optimization",
+        "Cost",
+        "Kimi",
+        "Automation"
+      ]
     },
     {
       "url": "/blog/token-optimization-430-hour-analysis.html",
@@ -52,7 +77,12 @@
       "date": "2026-05-03",
       "readTime": 15,
       "category": "Performance",
-      "tags": ["Token Optimization", "Claude Code", "Cost", "Performance"]
+      "tags": [
+        "Token Optimization",
+        "Claude Code",
+        "Cost",
+        "Performance"
+      ]
     },
     {
       "url": "/blog/30-mcp-servers-claude-100x-more-powerful.html",
@@ -61,7 +91,12 @@
       "date": "2026-04-22",
       "readTime": 21,
       "category": "Integration",
-      "tags": ["MCP", "Claude", "Integrations", "Tools"]
+      "tags": [
+        "MCP",
+        "Claude",
+        "Integrations",
+        "Tools"
+      ]
     },
     {
       "url": "/blog/35-claude-code-commands-tricks-workflows.html",
@@ -70,7 +105,12 @@
       "date": "2026-04-22",
       "readTime": 18,
       "category": "Tips",
-      "tags": ["Claude Code", "Commands", "Productivity", "Workflows"]
+      "tags": [
+        "Claude Code",
+        "Commands",
+        "Productivity",
+        "Workflows"
+      ]
     },
     {
       "url": "/blog/save-claude-tokens-notebooklm.html",
@@ -79,7 +119,11 @@
       "date": "2026-04-16",
       "readTime": 7,
       "category": "Tips",
-      "tags": ["Claude", "Tokens", "NotebookLM"]
+      "tags": [
+        "Claude",
+        "Tokens",
+        "NotebookLM"
+      ]
     },
     {
       "url": "/blog/hermes-self-learning-agent.html",
@@ -88,7 +132,11 @@
       "date": "2026-04-15",
       "readTime": 7,
       "category": "Tutorial",
-      "tags": ["Agents", "Claude Code", "Automation"]
+      "tags": [
+        "Agents",
+        "Claude Code",
+        "Automation"
+      ]
     },
     {
       "url": "/blog/claude-managed-agents-playbook.html",
@@ -97,7 +145,11 @@
       "date": "2026-04-14",
       "readTime": 8,
       "category": "Guide",
-      "tags": ["Claude", "Agents", "Automation"]
+      "tags": [
+        "Claude",
+        "Agents",
+        "Automation"
+      ]
     },
     {
       "url": "/blog/claude-tools-complete-guide.html",
@@ -106,7 +158,11 @@
       "date": "2026-04-13",
       "readTime": 8,
       "category": "Guide",
-      "tags": ["Claude", "Tools", "MCP"]
+      "tags": [
+        "Claude",
+        "Tools",
+        "MCP"
+      ]
     },
     {
       "url": "/blog/prompt-engineering-complete-guide.html",
@@ -115,7 +171,24 @@
       "date": "2026-04-12",
       "readTime": 10,
       "category": "Guide",
-      "tags": ["Prompt Engineering", "Claude", "LLM"]
+      "tags": [
+        "Prompt Engineering",
+        "Claude",
+        "LLM"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-architectural-patterns.html",
+      "title": "Claude Code Architectural Patterns",
+      "excerpt": "Agent orchestration, multi-agent workflows, and the architectural patterns that scale beyond one-off scripts.",
+      "date": "2026-04-12",
+      "readTime": 10,
+      "category": "Guide",
+      "tags": [
+        "Architecture",
+        "Agents",
+        "Workflows"
+      ]
     },
     {
       "url": "/blog/5-non-code-pipelines-claude-code.html",
@@ -124,7 +197,11 @@
       "date": "2026-04-11",
       "readTime": 7,
       "category": "Business",
-      "tags": ["Claude Code", "Freelance", "Automation"]
+      "tags": [
+        "Claude Code",
+        "Freelance",
+        "Automation"
+      ]
     },
     {
       "url": "/blog/6-month-roadmap-ai-automation-builder.html",
@@ -133,7 +210,11 @@
       "date": "2026-04-10",
       "readTime": 9,
       "category": "Career",
-      "tags": ["AI Automation", "Career", "n8n"]
+      "tags": [
+        "AI Automation",
+        "Career",
+        "n8n"
+      ]
     },
     {
       "url": "/blog/boris-cherny-15-hidden-features.html",
@@ -142,7 +223,11 @@
       "date": "2026-04-09",
       "readTime": 7,
       "category": "Tips",
-      "tags": ["Claude Code", "Tips", "Productivity"]
+      "tags": [
+        "Claude Code",
+        "Tips",
+        "Productivity"
+      ]
     },
     {
       "url": "/blog/claude-code-2-months-review.html",
@@ -151,7 +236,24 @@
       "date": "2026-04-08",
       "readTime": 11,
       "category": "Review",
-      "tags": ["Claude Code", "Workflow", "Review"]
+      "tags": [
+        "Claude Code",
+        "Workflow",
+        "Review"
+      ]
+    },
+    {
+      "url": "/cheatsheet-landing-page.html",
+      "title": "Claude Code Features Overview",
+      "excerpt": "A visual tour of the Claude Code feature surface — everything the CLI can do, laid out on one page.",
+      "date": "2026-04-08",
+      "readTime": 3,
+      "category": "Reference",
+      "tags": [
+        "Claude Code",
+        "Features",
+        "Reference"
+      ]
     },
     {
       "url": "/blog/llm-knowledge-base-obsidian.html",
@@ -160,7 +262,11 @@
       "date": "2026-04-07",
       "readTime": 8,
       "category": "Tutorial",
-      "tags": ["Obsidian", "LLM", "Knowledge Base"]
+      "tags": [
+        "Obsidian",
+        "LLM",
+        "Knowledge Base"
+      ]
     },
     {
       "url": "/blog/ai-first-company-harness-engineering.html",
@@ -169,7 +275,11 @@
       "date": "2026-04-06",
       "readTime": 9,
       "category": "Strategy",
-      "tags": ["AI-First", "Engineering", "Strategy"]
+      "tags": [
+        "AI-First",
+        "Engineering",
+        "Strategy"
+      ]
     },
     {
       "url": "/blog/ai-perception-gap-research.html",
@@ -178,115 +288,139 @@
       "date": "2026-04-05",
       "readTime": 6,
       "category": "Research",
-      "tags": ["Research", "AI Adoption", "Audience"]
-    },
-    {
-      "url": "/blog/claude-code-architectural-patterns.html",
-      "title": "Claude Code Architectural Patterns",
-      "excerpt": "Agent orchestration, multi-agent workflows, and the architectural patterns that scale beyond one-off scripts.",
-      "date": "2026-04-12",
-      "readTime": 0,
-      "category": "Guide",
-      "tags": ["Architecture", "Agents", "Workflows"]
-    },
-    {
-      "url": "/cheatsheet-landing-page.html",
-      "title": "Claude Code Features Overview",
-      "excerpt": "A visual tour of the Claude Code feature surface — everything the CLI can do, laid out on one page.",
-      "date": "2026-04-08",
-      "readTime": 0,
-      "category": "Reference",
-      "tags": ["Claude Code", "Features", "Reference"]
+      "tags": [
+        "Research",
+        "AI Adoption",
+        "Audience"
+      ]
     },
     {
       "url": "/blog/advanced-workflows.html",
       "title": "Advanced Claude Code Workflows",
       "excerpt": "Push Claude Code past basics — plan mode, agents, subagents, custom commands, and the workflows that unlock serious output.",
       "date": "2026-04-03",
-      "readTime": 0,
+      "readTime": 7,
       "category": "Guide",
-      "tags": ["Claude Code", "Workflow", "Advanced"]
+      "tags": [
+        "Claude Code",
+        "Workflow",
+        "Advanced"
+      ]
     },
     {
       "url": "/blog/performance-optimization.html",
       "title": "Performance Optimization for Claude Code",
       "excerpt": "Practical techniques to make Claude Code faster, leaner, and cheaper — from context hygiene to response streaming.",
       "date": "2026-04-03",
-      "readTime": 0,
+      "readTime": 5,
       "category": "Guide",
-      "tags": ["Performance", "Optimization", "Claude Code"]
+      "tags": [
+        "Performance",
+        "Optimization",
+        "Claude Code"
+      ]
     },
     {
       "url": "/blog/memory-management.html",
       "title": "Claude Code Memory Management",
       "excerpt": "How Claude Code handles project memory, CLAUDE.md, and long sessions — and how to keep it useful instead of bloated.",
       "date": "2026-04-03",
-      "readTime": 0,
+      "readTime": 4,
       "category": "Guide",
-      "tags": ["Memory", "CLAUDE.md", "Claude Code"]
+      "tags": [
+        "Memory",
+        "CLAUDE.md",
+        "Claude Code"
+      ]
     },
     {
       "url": "/blog/debugging-guide.html",
       "title": "Claude Code Debugging Guide",
       "excerpt": "A no-nonsense debugging playbook for Claude Code — catch the common failure modes and fix them fast.",
       "date": "2026-04-03",
-      "readTime": 0,
+      "readTime": 4,
       "category": "Guide",
-      "tags": ["Debugging", "Claude Code", "Troubleshooting"]
+      "tags": [
+        "Debugging",
+        "Claude Code",
+        "Troubleshooting"
+      ]
     },
     {
       "url": "/blog/prompt-engineering.html",
       "title": "Prompt Engineering for Claude Code",
       "excerpt": "Clear, specific prompts make Claude Code dramatically better. A concise set of techniques that move quality fast.",
       "date": "2026-04-03",
-      "readTime": 0,
+      "readTime": 3,
       "category": "Guide",
-      "tags": ["Prompt Engineering", "Claude Code"]
+      "tags": [
+        "Prompt Engineering",
+        "Claude Code"
+      ]
     },
     {
       "url": "/blog/token-usage.html",
       "title": "Reduce Claude Token Usage",
       "excerpt": "Concrete patterns to cut Claude token consumption without losing output quality.",
       "date": "2026-04-03",
-      "readTime": 0,
+      "readTime": 8,
       "category": "Tips",
-      "tags": ["Tokens", "Cost", "Claude"]
+      "tags": [
+        "Tokens",
+        "Cost",
+        "Claude"
+      ]
     },
     {
       "url": "/blog/hidden-features.html",
       "title": "Hidden Claude Code Features",
       "excerpt": "The advanced Claude Code features most users never touch — and why the power users rely on them daily.",
       "date": "2026-04-01",
-      "readTime": 0,
+      "readTime": 6,
       "category": "Tips",
-      "tags": ["Claude Code", "Advanced", "Tips"]
+      "tags": [
+        "Claude Code",
+        "Advanced",
+        "Tips"
+      ]
     },
     {
       "url": "/blog/best-practices.html",
       "title": "Claude Code Best Practices",
       "excerpt": "The complete best-practices guide for Claude Code — patterns we've watched work across dozens of real projects.",
       "date": "2026-04-01",
-      "readTime": 0,
+      "readTime": 7,
       "category": "Guide",
-      "tags": ["Best Practices", "Claude Code"]
+      "tags": [
+        "Best Practices",
+        "Claude Code"
+      ]
     },
     {
       "url": "/blog/anthropic-product-suite.html",
       "title": "The Anthropic Product Suite",
       "excerpt": "A tour of the Anthropic product line — Claude, Claude Code, the API, and how the pieces fit together.",
       "date": "2026-04-01",
-      "readTime": 0,
+      "readTime": 5,
       "category": "Overview",
-      "tags": ["Anthropic", "Claude", "Products"]
+      "tags": [
+        "Anthropic",
+        "Claude",
+        "Products"
+      ]
     },
     {
       "url": "/blog/claude-certified-architect.html",
       "title": "Claude Certified Architect",
       "excerpt": "A structured path to architect-level Claude proficiency — the skills, the references, and how to prove you have them.",
       "date": "2026-04-01",
-      "readTime": 0,
+      "readTime": 10,
       "category": "Career",
-      "tags": ["Certification", "Claude", "Career"]
+      "tags": [
+        "Certification",
+        "Claude",
+        "Career"
+      ]
     }
   ]
 }

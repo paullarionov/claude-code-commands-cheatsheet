@@ -12,11 +12,16 @@
     "build": "npm run build:mac && npm run build:win",
     "build:mac": "electron-builder --mac --publish never",
     "build:win": "electron-builder --win --publish never",
-    "build:all": "electron-builder -mw --publish never"
+    "build:all": "electron-builder -mw --publish never",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "feeds": "node scripts/generate-feeds.mjs",
+    "og": "node scripts/generate-og-image.mjs"
   },
   "devDependencies": {
-    "electron": "^latest",
-    "electron-builder": "^latest"
+    "@playwright/test": "^1.62.1",
+    "electron": "latest",
+    "electron-builder": "latest"
   },
   "build": {
     "appId": "com.claude.limits-widget",

@@ -1,176 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://claude-guides.com/</loc>
-    <lastmod>2026-04-01</lastmod>
+    <lastmod>2026-07-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://claude-guides.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://claude-guides.com/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://claude-guides.com/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://claude-guides.com/"/>
   </url>
   <url>
-    <loc>https://claude-guides.com/hidden-features.html</loc>
-    <lastmod>2026-04-01</lastmod>
+    <loc>https://claude-guides.com/blog/</loc>
+    <lastmod>2026-07-31</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/hidden-features.html"/>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://claude-guides.com/best-practices.html</loc>
-    <lastmod>2026-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/best-practices.html"/>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/token-usage.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <priority>0.8</priority>
+    <loc>https://claude-guides.com/blog/claude-code-summer-2026-update.html</loc>
+    <lastmod>2026-07-31</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/multi-agent-control-goal-workflow.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/context-optimization-guide.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/ai-engineer-roadmap-2026.html</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/token-optimization-430-hour-analysis.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/save-claude-tokens-notebooklm.html</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/hermes-self-learning-agent.html</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/claude-managed-agents-playbook.html</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/claude-tools-complete-guide.html</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/prompt-engineering-complete-guide.html</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/claude-code-architectural-patterns.html</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/6-month-roadmap-ai-automation-builder.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/boris-cherny-15-hidden-features.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/claude-code-2-months-review.html</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://claude-guides.com/cheatsheet-landing-page.html</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/cheatsheet-landing-page.html"/>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/prompt-engineering.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/prompt-engineering.html"/>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/debugging-guide.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/debugging-guide.html"/>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/memory-management.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/memory-management.html"/>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/performance-optimization.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/performance-optimization.html"/>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/advanced-workflows.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/advanced-workflows.html"/>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/claude-code-architectural-patterns.html</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://claude-guides.com/claude-code-architectural-patterns.html"/>
-  </url>
-
-  <!-- Blog -->
-  <url>
-    <loc>https://claude-guides.com/blog/</loc>
-    <lastmod>2026-05-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/feed.xml</loc>
-    <lastmod>2026-05-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html</loc>
-    <lastmod>2026-05-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/save-claude-tokens-notebooklm.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/hermes-self-learning-agent.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/claude-managed-agents-playbook.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/claude-tools-complete-guide.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/prompt-engineering-complete-guide.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/6-month-roadmap-ai-automation-builder.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/boris-cherny-15-hidden-features.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://claude-guides.com/blog/claude-code-2-months-review.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://claude-guides.com/blog/llm-knowledge-base-obsidian.html</loc>
-    <lastmod>2026-04-19</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://claude-guides.com/blog/ai-first-company-harness-engineering.html</loc>
-    <lastmod>2026-04-19</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://claude-guides.com/blog/ai-perception-gap-research.html</loc>
-    <lastmod>2026-04-19</lastmod>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/advanced-workflows.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/performance-optimization.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/memory-management.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/debugging-guide.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/prompt-engineering.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/token-usage.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/hidden-features.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/best-practices.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/anthropic-product-suite.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://claude-guides.com/blog/claude-certified-architect.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

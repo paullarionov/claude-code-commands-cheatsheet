@@ -23,38 +23,68 @@
     </item>
 
     <item>
+      <title>Multi-Agent Control Mode &amp; /goal Workflow: Complete Guide</title>
+      <link>https://claude-guides.com/blog/multi-agent-control-goal-workflow.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/multi-agent-control-goal-workflow.html</guid>
+      <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
+      <category>Workflow</category>
+      <description>One engineer now coordinates multiple agents simultaneously. Reduce open terminals by 70%. Complete complex objectives without manual intervention.</description>
+    </item>
+
+    <item>
       <title>How to Manage Context When You Keep Hitting Token Limits</title>
       <link>https://claude-guides.com/blog/context-optimization-guide.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/context-optimization-guide.html</guid>
-      <pubDate>Sun, 11 May 2026 00:00:00 GMT</pubDate>
+      <pubDate>Mon, 11 May 2026 00:00:00 GMT</pubDate>
       <category>Cost Optimization</category>
-      <description>Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering context measurement, CLAUDE.md optimization, log filtering, prompt caching, and troubleshooting.</description>
+      <description>Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering context measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting.</description>
     </item>
 
     <item>
       <title>AI Engineer Roadmap 2026: Build Production Agents in 17 Weeks</title>
       <link>https://claude-guides.com/blog/ai-engineer-roadmap-2026.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/ai-engineer-roadmap-2026.html</guid>
-      <pubDate>Wed, 08 May 2026 00:00:00 GMT</pubDate>
+      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
       <category>Engineering</category>
       <description>Complete 6-phase learning path from agent fundamentals to production hardening. For AI/ML practitioners building agentic systems.</description>
     </item>
+
     <item>
       <title>Burning Through Claude Code's Weekly Limit in 3 Days? Here's How to Fix It</title>
       <link>https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/burning-through-claude-code-limit-3-days.html</guid>
-      <pubDate>Sun, 04 May 2026 00:00:00 GMT</pubDate>
+      <pubDate>Mon, 04 May 2026 00:00:00 GMT</pubDate>
       <category>Cost Optimization</category>
-      <description>Reduced weekly token limits from burnout in 3 days to sustainable usage. Learn how to delegate I/O operations to cheaper models and save 75% on API costs using three CLI-based tools and one strategic configuration.</description>
+      <description>Reduced weekly token limits from burnout in 3 days to sustainable usage. Learn how to delegate I/O operations to cheaper models and save 75% on API costs.</description>
     </item>
+
     <item>
       <title>Token Optimization in Claude Code: A 430-Hour Forensics Analysis</title>
       <link>https://claude-guides.com/blog/token-optimization-430-hour-analysis.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/token-optimization-430-hour-analysis.html</guid>
-      <pubDate>Sat, 03 May 2026 00:00:00 GMT</pubDate>
+      <pubDate>Sun, 03 May 2026 00:00:00 GMT</pubDate>
       <category>Performance</category>
-      <description>Discover the 9 invisible patterns wasting 73% of your Claude Code tokens. Analysis of 6M tokens and $1,340 API spend reveals actionable optimization strategies with ROI calculations.</description>
+      <description>Discover the 9 invisible patterns wasting 73% of your Claude Code tokens. Real analysis of 6M tokens and $1,340 API spend with actionable optimization strategies.</description>
     </item>
+
+    <item>
+      <title>30 MCP Servers That Make Claude 100x More Powerful</title>
+      <link>https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/30-mcp-servers-claude-100x-more-powerful.html</guid>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Integration</category>
+      <description>The complete list of MCP servers worth installing. GitHub, Slack, databases, AWS, Notion, Stripe, and more. With full links and setup instructions.</description>
+    </item>
+
+    <item>
+      <title>35 Claude Code Commands, Tricks, and Workflows Most Users Don't Know</title>
+      <link>https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/35-claude-code-commands-tricks-workflows.html</guid>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Tips</category>
+      <description>The complete list of techniques that transform Claude Code from 'useful assistant' into 'the most productive I have ever been'.</description>
+    </item>
+
     <item>
       <title>Save Claude Tokens by Integrating NotebookLM</title>
       <link>https://claude-guides.com/blog/save-claude-tokens-notebooklm.html</link>
@@ -63,38 +93,52 @@
       <category>Tips</category>
       <description>Cut Claude token spend by offloading research and retrieval to Google's NotebookLM — a practical integration pattern with real numbers.</description>
     </item>
+
     <item>
       <title>Hermes: Build a Self-Learning Agent with 7 Workflows</title>
       <link>https://claude-guides.com/blog/hermes-self-learning-agent.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/hermes-self-learning-agent.html</guid>
       <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
       <category>Tutorial</category>
-      <description>A Claude Code agent that learns from its own runs — seven composable workflows, full walkthrough.</description>
+      <description>A full walkthrough of Hermes — a Claude Code agent that learns from its own runs through seven composable workflows.</description>
     </item>
+
     <item>
       <title>Claude Managed Agents: A Practical Playbook</title>
       <link>https://claude-guides.com/blog/claude-managed-agents-playbook.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/claude-managed-agents-playbook.html</guid>
       <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
       <category>Guide</category>
-      <description>Patterns, traps, and the playbook we wish existed when we shipped managed agents to production.</description>
+      <description>Everything we learned shipping Claude managed agents into production — patterns, traps, and the playbook we wish existed earlier.</description>
     </item>
+
     <item>
-      <title>The Complete Claude Tools Guide</title>
+      <title>The Complete Claude Tools Guide: From Basics to Advanced</title>
       <link>https://claude-guides.com/blog/claude-tools-complete-guide.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/claude-tools-complete-guide.html</guid>
       <pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate>
       <category>Guide</category>
-      <description>The four levels of Claude tool design — from your first tool to MCP and multi-agent orchestration.</description>
+      <description>The four levels of Claude tool design, from your first tool definition up to MCP and multi-agent orchestration.</description>
     </item>
+
     <item>
       <title>The Complete Prompt Engineering Guide for Claude</title>
       <link>https://claude-guides.com/blog/prompt-engineering-complete-guide.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/prompt-engineering-complete-guide.html</guid>
       <pubDate>Sun, 12 Apr 2026 00:00:00 GMT</pubDate>
       <category>Guide</category>
-      <description>Every prompt engineering technique that moved quality, ranked by how much it actually helped.</description>
+      <description>Prompt engineering from the ground up — every technique that moved quality, ranked by how much it actually helped.</description>
     </item>
+
+    <item>
+      <title>Claude Code Architectural Patterns</title>
+      <link>https://claude-guides.com/blog/claude-code-architectural-patterns.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-architectural-patterns.html</guid>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Agent orchestration, multi-agent workflows, and the architectural patterns that scale beyond one-off scripts.</description>
+    </item>
+
     <item>
       <title>5 Non-Code Pipelines You Can Sell Using Claude Code</title>
       <link>https://claude-guides.com/blog/5-non-code-pipelines-claude-code.html</link>
@@ -103,53 +147,150 @@
       <category>Business</category>
       <description>Five productized Claude Code pipelines that don't involve writing a single line of application code — and how to price them.</description>
     </item>
+
     <item>
       <title>The 6-Month Roadmap to Becoming an AI Automation Builder</title>
       <link>https://claude-guides.com/blog/6-month-roadmap-ai-automation-builder.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/6-month-roadmap-ai-automation-builder.html</guid>
       <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
       <category>Career</category>
-      <description>A concrete month-by-month path from zero to your first paying clients as an AI automation builder.</description>
+      <description>A concrete month-by-month path from zero to your first paying clients as an AI automation builder. No fluff, no mountains-of-gold promises.</description>
     </item>
+
     <item>
       <title>15 Under-Used Claude Code Features (from Boris Cherny)</title>
       <link>https://claude-guides.com/blog/boris-cherny-15-hidden-features.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/boris-cherny-15-hidden-features.html</guid>
       <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
       <category>Tips</category>
-      <description>Fifteen Claude Code features most users still miss — condensed into a practical checklist.</description>
+      <description>Fifteen Claude Code features most users still miss — sourced from Boris Cherny, condensed into a practical checklist.</description>
     </item>
+
     <item>
       <title>2 Months with Claude Code: A Field Report</title>
       <link>https://claude-guides.com/blog/claude-code-2-months-review.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-2-months-review.html</guid>
       <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
       <category>Review</category>
-      <description>Honest field notes from two months of heavy Claude Code use — what worked, what wasted time, what surprised us.</description>
+      <description>Honest field notes from two months of heavy Claude Code use — what actually worked, what wasted time, and what surprised us.</description>
     </item>
+
     <item>
       <title>Build a Karpathy-Style LLM Knowledge Base in Obsidian</title>
       <link>https://claude-guides.com/blog/llm-knowledge-base-obsidian.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/llm-knowledge-base-obsidian.html</guid>
       <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
       <category>Tutorial</category>
-      <description>A step-by-step guide to building a Karpathy-inspired LLM knowledge base in Obsidian and feeding it to Claude.</description>
+      <description>A step-by-step guide to building a Karpathy-inspired LLM knowledge base in Obsidian — structure, automation, and feeding it to Claude.</description>
     </item>
+
     <item>
       <title>AI-First Companies: Restructuring Around Harness Engineering</title>
       <link>https://claude-guides.com/blog/ai-first-company-harness-engineering.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/ai-first-company-harness-engineering.html</guid>
       <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
       <category>Strategy</category>
-      <description>What CREAO-style AI-first restructuring means, and why harness engineering is replacing traditional application design.</description>
+      <description>What CREAO-style AI-first restructuring really means, and why harness engineering is quickly replacing traditional application design.</description>
     </item>
+
     <item>
       <title>The AI Perception Gap: What 632 Users Actually Believe</title>
       <link>https://claude-guides.com/blog/ai-perception-gap-research.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/ai-perception-gap-research.html</guid>
       <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
       <category>Research</category>
-      <description>A survey of 632 practitioners reveals the gap between what modern AI can do and what people think is possible.</description>
+      <description>A survey of 632 practitioners reveals a significant gap between what modern AI can do and what people think is possible.</description>
     </item>
+
+    <item>
+      <title>Advanced Claude Code Workflows</title>
+      <link>https://claude-guides.com/blog/advanced-workflows.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/advanced-workflows.html</guid>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Push Claude Code past basics — plan mode, agents, subagents, custom commands, and the workflows that unlock serious output.</description>
+    </item>
+
+    <item>
+      <title>Performance Optimization for Claude Code</title>
+      <link>https://claude-guides.com/blog/performance-optimization.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/performance-optimization.html</guid>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Practical techniques to make Claude Code faster, leaner, and cheaper — from context hygiene to response streaming.</description>
+    </item>
+
+    <item>
+      <title>Claude Code Memory Management</title>
+      <link>https://claude-guides.com/blog/memory-management.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/memory-management.html</guid>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>How Claude Code handles project memory, CLAUDE.md, and long sessions — and how to keep it useful instead of bloated.</description>
+    </item>
+
+    <item>
+      <title>Claude Code Debugging Guide</title>
+      <link>https://claude-guides.com/blog/debugging-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/debugging-guide.html</guid>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>A no-nonsense debugging playbook for Claude Code — catch the common failure modes and fix them fast.</description>
+    </item>
+
+    <item>
+      <title>Prompt Engineering for Claude Code</title>
+      <link>https://claude-guides.com/blog/prompt-engineering.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/prompt-engineering.html</guid>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Clear, specific prompts make Claude Code dramatically better. A concise set of techniques that move quality fast.</description>
+    </item>
+
+    <item>
+      <title>Reduce Claude Token Usage</title>
+      <link>https://claude-guides.com/blog/token-usage.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/token-usage.html</guid>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Tips</category>
+      <description>Concrete patterns to cut Claude token consumption without losing output quality.</description>
+    </item>
+
+    <item>
+      <title>Hidden Claude Code Features</title>
+      <link>https://claude-guides.com/blog/hidden-features.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/hidden-features.html</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Tips</category>
+      <description>The advanced Claude Code features most users never touch — and why the power users rely on them daily.</description>
+    </item>
+
+    <item>
+      <title>Claude Code Best Practices</title>
+      <link>https://claude-guides.com/blog/best-practices.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/best-practices.html</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>The complete best-practices guide for Claude Code — patterns we've watched work across dozens of real projects.</description>
+    </item>
+
+    <item>
+      <title>The Anthropic Product Suite</title>
+      <link>https://claude-guides.com/blog/anthropic-product-suite.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/anthropic-product-suite.html</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Overview</category>
+      <description>A tour of the Anthropic product line — Claude, Claude Code, the API, and how the pieces fit together.</description>
+    </item>
+
+    <item>
+      <title>Claude Certified Architect</title>
+      <link>https://claude-guides.com/blog/claude-certified-architect.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-certified-architect.html</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Career</category>
+      <description>A structured path to architect-level Claude proficiency — the skills, the references, and how to prove you have them.</description>
+    </item>
+
   </channel>
 </rss>
