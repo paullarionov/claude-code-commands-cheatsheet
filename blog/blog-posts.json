@@ -1,6 +1,20 @@
 {
   "posts": [
     {
+      "url": "/blog/claude-token-limits-22-rules.html",
+      "title": "22 Rules to Stop Hitting Claude Token Limits",
+      "excerpt": "12 must-do rules and 10 small habits to stop hitting Claude usage limits: effort level, model switching, chat hygiene, cropped screenshots, Projects and /clear.",
+      "date": "2026-10-23",
+      "readTime": 10,
+      "category": "Cost Optimization",
+      "tags": [
+        "Token Optimization",
+        "Claude Code",
+        "Usage Limits",
+        "Productivity"
+      ]
+    },
+    {
       "url": "/blog/claude-code-summer-2026-update.html",
       "title": "Claude Code Summer 2026 Update: New Models, Background Agents by Default",
       "excerpt": "Sonnet 5 is the new default model, subagents now run in the background automatically, and Claude in Chrome is GA. What shipped this summer and what to actually change in your setup.",

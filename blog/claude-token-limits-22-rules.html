@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="22 practical rules to stop hitting Claude usage limits: effort levels, model switching, cache-friendly chats, cropped screenshots, Projects, /clear and more. Spend your limits on work, not re-reading.">
+<meta name="keywords" content="Claude token limits, Claude usage limits, save Claude tokens, Claude effort level, Claude Code /clear, Claude Projects, prompt caching, reduce token usage">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-token-limits-22-rules.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-token-limits-22-rules.html">
+<meta property="og:title" content="22 Rules to Stop Hitting Claude Token Limits">
+<meta property="og:description" content="22 habits that cut Claude token usage: effort, model switching, chat hygiene, screenshots, Projects and Claude Code /clear.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-token-limits-22-rules.html">
+<meta name="twitter:title" content="22 Rules to Stop Hitting Claude Token Limits">
+<meta name="twitter:description" content="22 habits that cut Claude token usage: effort, model switching, chat hygiene, screenshots, Projects and Claude Code /clear.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="22 Rules to Stop Hitting Claude Token Limits">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-10-23T00:00:00Z">
+<meta property="article:modified_time" content="2026-10-23T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Token Optimization">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Usage Limits">
+<meta property="article:tag" content="Productivity">
+
+<title>22 Rules to Stop Hitting Claude Token Limits — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "22 Rules to Stop Hitting Claude Token Limits",
+  "description": "22 practical rules to stop hitting Claude usage limits: effort levels, model switching, cache-friendly chats, cropped screenshots, Projects, /clear and more. Spend your limits on work, not re-reading.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Person", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-10-23T00:00:00Z",
+  "dateModified": "2026-10-23T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/claude-token-limits-22-rules.html"},
+  "wordCount": 2200,
+  "keywords": ["Claude Token Limits", "Claude Usage Limits", "Token Optimization", "Claude Code", "Prompt Caching"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "22 Rules to Stop Hitting Claude Token Limits", "item": "https://claude-guides.com/blog/claude-token-limits-22-rules.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>22 Rules to Stop Hitting Claude Token Limits</h1>
+  <p class="lede">Most limit problems aren't about asking too much. They come from re-reading, model switching and oversized inputs. Twelve must-do rules and ten small habits that fix that.</p>
+  <div class="post-meta">
+    <span>October 23, 2026</span>
+    <span>10 min read</span>
+    <span>Cost Optimization</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Most people don't run out of Claude limits because they ask too much. They run out because every message makes Claude re-read the whole conversation, and a handful of habits quietly multiply that cost: the wrong effort level, switching models mid-chat, returning to stale chats, and attaching screenshots and PDFs raw. Below are 22 rules, split into 12 non-negotiables and 10 habits, that cut usage without making your prompts worse.</p>
+</div>
+
+<h2>Why Your Limits Disappear Faster Than You Expect</h2>
+
+<p>Two mechanics explain almost every rule in this guide.</p>
+
+<p><strong>1. Every message re-reads the conversation.</strong> Claude doesn't "remember" a chat the way you do. Each new message sends the full history back through the model. Prompt caching makes that cheaper, but the cache expires when you pause and is tied to the specific model. A long chat you return to after lunch is paid for at full price again.</p>
+
+<p><strong>2. Limits are shared and windowed.</strong> Usage counts against a rolling 5-hour window and a weekly cap. Tokens spent on clarifying back-and-forth, web searches you didn't need, or an oversized image come out of the same budget as the work you actually care about.</p>
+
+<p>Once you see those two, the rules stop looking like a random list of tips. They are all variations on: <em>send less, re-read less, and don't break the cache.</em></p>
+
+<div class="tip">
+  <strong>A note on numbers:</strong> Figures such as token counts per screenshot or dollar-value comparisons between models come from community measurements and will vary with your plan, model versions and content. Treat them as orders of magnitude, and check your own numbers with <code>/usage</code> (Claude Code) or the Usage page in Settings (Claude app).
+</div>
+
+<h2>Part I: The Non-Negotiables (Rules 1–12)</h2>
+
+<p>The principle for this part: don't overcomplicate it. These twelve changes cost nothing and save the most.</p>
+
+<h3>Rule 1: Use Medium effort. Never Max.</h3>
+<p>Higher effort means more thinking tokens on every reply, and for most tasks it doesn't change the result. Default to <strong>Medium</strong>. Drop to <strong>Low</strong> for grammar fixes, renames and other trivial edits. Reserve <strong>High</strong> for rare, genuinely hard problems, and treat the top tier (Max/Extra) as something you reach for almost never.</p>
+<pre><code># Claude Code
+/effort medium</code></pre>
+
+<h3>Rule 2: Save the free limit reset for a bad day</h3>
+<p>If your plan or promotions offer a one-off reset or bonus, don't burn it on Monday morning. Your normal limits renew on a schedule anyway, so the reset is most valuable on the day you're stuck mid-project and out of budget.</p>
+
+<h3>Rule 3: Use the workhorse model in every chat. Don't default to the premium one</h3>
+<p>The most expensive model burns through your allowance several times faster than the one below it. By the community's rough comparison, the same monthly budget that covers thousands of dollars of work on Opus 5.5 covers a fraction of that on the top-tier model. If you need a faster answer, lower the <em>effort</em>, not the model. Move up only when the cheaper model has demonstrably failed at the task.</p>
+
+<h3>Rule 4: Never switch models between messages</h3>
+<p>Each model keeps its own cache. Switch from one model to another mid-chat and the new model has to read the entire conversation from scratch at full price. If you want a different model, start a new chat (or finish the task first and switch at the boundary).</p>
+
+<h3>Rule 5: Don't return to an old chat</h3>
+<p>The cache is reset when you pause, so resuming a day-old thread means re-reading all of it. Instead, ask Claude to compress the chat into about ten lines, open a new one, paste the summary and continue.</p>
+<pre><code>Summarize this conversation in 10 lines: decisions made, current state, open questions, next step.</code></pre>
+
+<h3>Rule 6: For quick questions, write "No web search"</h3>
+<p>Web search pulls pages of results into the context. For a simple factual or conceptual question it's pure overhead. Keep research mode for questions that truly need 20+ sources, not for ones where the answer is one sentence.</p>
+
+<h3>Rule 7: Plan in text. Ask for the file at the end</h3>
+<p>Don't open with "Build a 12-slide deck." Agree on the outline and each section in plain text first, which is cheap to iterate on. Only then say: "Now assemble exactly this deck." Regenerating a finished file over and over is the expensive part.</p>
+
+<h3>Rule 8: Highlight. Never ask for a full rewrite</h3>
+<p>If you only want one part changed, say so explicitly: "Rewrite only this section. Leave everything else untouched." Claude then rewrites a few paragraphs instead of the entire document. In Claude Code the equivalent is pointing at a file and line range rather than saying "refactor the module".</p>
+
+<h3>Rule 9: Connect apps and tools on demand</h3>
+<p>Every connected app, connector or MCP server adds tool definitions to the context, and that cost is paid on every message whether or not you use the tool. Switch off everything you don't need for the current task.</p>
+<pre><code># Claude Code: see what's loaded and what it costs
+/context
+/mcp</code></pre>
+
+<h3>Rule 10: Trim prompt boilerplate</h3>
+<p>Anthropic's own prompting guidance has changed with newer models: they follow plain, direct instructions well and need less hand-holding. Strip legacy incantations like "think step by step" and "take a deep breath" from your saved prompts. They add tokens and, with reasoning models, often add nothing. Ask for the outcome and the constraints, then stop.</p>
+
+<h3>Rule 11: Crop every screenshot. Convert every PDF</h3>
+<p>A full-screen screenshot can cost thousands of tokens, while a tight crop of the relevant region costs a small fraction of that. PDFs are worse: layout, fonts and embedded images all get processed. Convert the PDF to Markdown or plain text first (for example, paste it into a Google Doc and download as Markdown) and attach that instead.</p>
+
+<h3>Rule 12: Stop scheduled tasks you don't read</h3>
+<p>A task that runs every hour is 24 runs a day, every day. If nobody reads the output, it's a silent drain on your limit. Audit your scheduled tasks and loops, and delete or slow down any whose results you never open.</p>
+
+<h2>Part II: The Basics (Rules 13–22)</h2>
+
+<p>The principle for this part: small habits, big savings. None of these is dramatic on its own, and together they're the difference between hitting the wall on Wednesday and making it to Sunday.</p>
+
+<h3>Rule 13: Start every task with "ask me questions"</h3>
+<p>You don't need a 500-word prompt. Write two sentences about the goal and add: <em>"Ask me any questions you need before you start."</em> Claude fills in the gaps by asking, you answer in a few words, and you skip the long prompt that tried to anticipate everything.</p>
+
+<h3>Rule 14: Put all your requests in one message</h3>
+<p>Three separate messages mean three full re-reads of the conversation. One message with all three requests means one. Batch related asks, numbered if they're distinct.</p>
+
+<h3>Rule 15: Speak, don't type</h3>
+<p>Typing makes people terse and lazy ("make it better"). Dictating is faster and naturally gives Claude more context in fewer attempts, which means fewer follow-up messages.</p>
+
+<h3>Rule 16: Don't correct Claude. Start over</h3>
+<p>Every "No, I meant..." stays in the chat permanently and is re-read on every later message. When the answer misses, don't patch it. <strong>Edit your original prompt</strong> (or restart) so the wrong turn is removed from the history instead of piling up.</p>
+
+<h3>Rule 17: One chat = one topic</h3>
+<p>A new subject deserves a new chat. Mixing topics bloats the context with material that's irrelevant to the current question, and you pay to re-read it every time.</p>
+
+<h3>Rule 18: Keep instructions under 2,000 words</h3>
+<p>Custom instructions, system prompts and style guides are re-read on every turn. A 6,000-word rulebook is a tax on every message. Keep the permanent part short and put task-specific detail in the message where it belongs.</p>
+
+<h3>Rule 19: Add every reused file to a Project</h3>
+<p>Upload the same file into five chats and Claude processes it five times. Put it in a Project once, and it's cached and shared across the chats in that project.</p>
+
+<h3>Rule 20: In Claude Code, one task, then /clear</h3>
+<p>Finish a task, then run <code>/clear</code> before starting the next. Leftover context from task A makes task B slower and more expensive for no benefit. Keep your <code>CLAUDE.md</code> under roughly 200 lines, since it loads at the start of every session.</p>
+<pre><code>/clear      # new task, clean context
+/compact    # same task, but the history got long
+/usage      # see where the budget is going</code></pre>
+
+<h3>Rule 21: Split your day into three sessions</h3>
+<p>The 5-hour window plus the weekly cap rewards pacing. Plan three working blocks: morning, afternoon, evening. Before each, check your usage so you know whether to run heavy work now or defer it to a block when the window has reset.</p>
+
+<h3>Rule 22: Ask Claude to make images, but rarely</h3>
+<p>Claude can generate graphics through code, such as SVGs, charts and diagrams, but iterating on visuals consumes a lot of tokens. Generate them deliberately, with a clear brief, not as a casual "try another version" loop.</p>
+
+<h2>The 5-Minute Setup: Do These Six Things First</h2>
+
+<p>If you only do a few things after reading this, do these. Together they cover the majority of avoidable spend.</p>
+
+<ol>
+<li><strong>Set effort to Medium</strong> and your default model to the workhorse tier (Rules 1, 3).</li>
+<li><strong>Stop switching models mid-chat</strong> (Rule 4).</li>
+<li><strong>Disable connectors and MCP servers</strong> you aren't using today (Rule 9).</li>
+<li><strong>Delete or slow down scheduled tasks</strong> nobody reads (Rule 12).</li>
+<li><strong>Move reused files into a Project</strong> and shorten your instructions below 2,000 words (Rules 18, 19).</li>
+<li><strong>Use <code>/clear</code> between tasks</strong> in Claude Code and trim <code>CLAUDE.md</code> (Rule 20).</li>
+</ol>
+
+<h2>Quick Reference</h2>
+
+<pre><code>Effort:   Medium by default, Low for trivial, High rarely
+Model:    workhorse tier, never switch mid-chat
+Chats:    one topic per chat; summarize (10 lines) instead of resuming
+Input:    crop screenshots, convert PDFs to Markdown, files in Projects
+Prompts:  ask me questions, one message not three, edit don't correct
+Tools:    connectors off unless needed, no web search for easy questions
+Claude Code: /clear between tasks, CLAUDE.md under ~200 lines
+Schedule: delete tasks you don't read; 3 sessions a day</code></pre>
+
+<div class="cta">
+  <p>Every Claude Code command, flag and shortcut mentioned here, in one place.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/context-optimization-guide.html">How to Manage Context When You Keep Hitting Token Limits</a></li>
+    <li><a href="/blog/burning-through-claude-code-limit-3-days.html">Burning Through Claude Code's Weekly Limit in 3 Days? Here's How to Fix It</a></li>
+    <li><a href="/blog/token-optimization-430-hour-analysis.html">Token Optimization in Claude Code: A 430-Hour Forensics Analysis</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Code is built by Anthropic. Need help? Check the official <a href="https://documentation.anthropic.com/claude-code/">Claude Code documentation</a> or <a href="https://www.linkedin.com/in/paullarionov/">reach out on LinkedIn</a>.</p>
+</footer>
+
+</body>
+</html>

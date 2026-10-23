@@ -6,12 +6,21 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 23 Oct 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
+
+    <item>
+      <title>22 Rules to Stop Hitting Claude Token Limits</title>
+      <link>https://claude-guides.com/blog/claude-token-limits-22-rules.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-token-limits-22-rules.html</guid>
+      <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+      <category>Cost Optimization</category>
+      <description>12 must-do rules and 10 small habits to stop hitting Claude usage limits: effort level, model switching, chat hygiene, cropped screenshots, Projects and /clear.</description>
+    </item>
 
     <item>
       <title>Claude Code Summer 2026 Update: New Models, Background Agents by Default</title>
