@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-const LANGS = ['en', 'ru', 'zh', 'ja', 'es'];
+const LANGS = ['en', 'ru', 'zh', 'ja', 'es', 'pt'];
 
 test.describe('cheatsheet translations', () => {
   test.beforeEach(async ({ page }) => {
@@ -25,7 +25,7 @@ test.describe('cheatsheet translations', () => {
     expect(orphans).toEqual([]);
   });
 
-  test('every entry covers all five languages', async ({ page }) => {
+  test('every entry covers all six languages', async ({ page }) => {
     const incomplete = await page.evaluate((langs) =>
       Object.entries(T)
         .map(([key, value]) => [key, langs.filter((l) => !value[l])])
