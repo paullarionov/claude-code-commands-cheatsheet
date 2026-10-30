@@ -72,7 +72,7 @@
   "name": "Claude Guides — AI Cheatsheets & Hands-On Guides for Claude Code",
   "description": "Claude and AI guides plus cheatsheets. A compact reference for every Claude Code command, shortcut, slash command, MCP server, memory setting, skill, and agent, with deeper guides on prompt engineering, agents, and AI automation.",
   "url": "https://claude-guides.com/",
-  "inLanguage": ["en", "ru", "zh", "ja", "es"],
+  "inLanguage": ["en", "ru", "zh", "ja", "es", "pt-BR"],
   "publisher": {
     "@type": "Organization",
     "name": "claude-guides.com",
@@ -109,7 +109,7 @@
   "name": "Claude Guides",
   "alternateName": "Claude Code Cheatsheet",
   "url": "https://claude-guides.com/",
-  "inLanguage": ["en", "ru", "zh", "ja", "es"],
+  "inLanguage": ["en", "ru", "zh", "ja", "es", "pt-BR"],
   "publisher": {"@type": "Organization", "name": "Claude Guides"},
   "potentialAction": {
     "@type": "SearchAction",
@@ -1272,6 +1272,7 @@
     <div class="ctrl-sep"></div>
     <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
     <button id="btn-es" onclick="setLang('es')">ES</button>
+    <button id="btn-pt" onclick="setLang('pt')">PT-BR</button>
     <button id="btn-ru" onclick="setLang('ru')">RU</button>
     <button id="btn-zh" onclick="setLang('zh')">中文</button>
     <button id="btn-ja" onclick="setLang('ja')">日本語</button>
@@ -1915,265 +1916,265 @@ document.addEventListener('DOMContentLoaded', initializeBlogPreview);
 <script>
 // ── Translations ────────────────────────────────────────────────────────────
 const T = {
-  'header-desc':    { en:'Claude and AI guides plus practical cheatsheets — every Claude Code command, shortcut, slash command, MCP server, memory setting, skill, and agent, alongside deeper guides on prompt engineering, agents, and AI automation.', ru:'Гиды по Claude и ИИ плюс практичные шпаргалки — все команды, горячие клавиши, слэш-команды, MCP-серверы, настройки памяти, скиллы и агенты Claude Code, а также подробные руководства по prompt-инжинирингу, агентам и AI-автоматизации.', zh:'Claude 与 AI 指南，搭配实用速查表——涵盖 Claude Code 的每条命令、快捷键、斜杠命令、MCP 服务器、记忆设置、技能与智能体，并附有关于提示工程、智能体与 AI 自动化的深入指南。', ja:'Claude と AI のガイド、そして実践的なチートシート — Claude Code のあらゆるコマンド、ショートカット、スラッシュコマンド、MCP サーバー、メモリ設定、スキル、エージェントに加え、プロンプトエンジニアリング、エージェント、AI 自動化の詳細ガイドを網羅。', es:'Guías de Claude e IA más cheatsheets prácticas — cada comando, atajo, slash command, servidor MCP, ajuste de memoria, skill y agente de Claude Code, junto con guías más profundas sobre prompt engineering, agentes y automatización con IA.' },
-  'h1-sub':         { en:'<em>: AI Cheatsheets & Hands-On Guides</em>', ru:'<em>: ИИ-шпаргалки и практические гиды</em>', zh:'<em>：AI 速查表与实战指南</em>', ja:'<em>：AI チートシート & 実践ガイド</em>', es:'<em>: Cheatsheets y guías prácticas de IA</em>' },
-  'btn-mac':        { en:'Mac', ru:'Mac', zh:'Mac', ja:'Mac', es:'Mac' },
-  'btn-win':        { en:'Windows', ru:'Windows', zh:'Windows', ja:'Windows', es:'Windows' },
+  'header-desc':    { en:'Claude and AI guides plus practical cheatsheets — every Claude Code command, shortcut, slash command, MCP server, memory setting, skill, and agent, alongside deeper guides on prompt engineering, agents, and AI automation.', ru:'Гиды по Claude и ИИ плюс практичные шпаргалки — все команды, горячие клавиши, слэш-команды, MCP-серверы, настройки памяти, скиллы и агенты Claude Code, а также подробные руководства по prompt-инжинирингу, агентам и AI-автоматизации.', zh:'Claude 与 AI 指南，搭配实用速查表——涵盖 Claude Code 的每条命令、快捷键、斜杠命令、MCP 服务器、记忆设置、技能与智能体，并附有关于提示工程、智能体与 AI 自动化的深入指南。', ja:'Claude と AI のガイド、そして実践的なチートシート — Claude Code のあらゆるコマンド、ショートカット、スラッシュコマンド、MCP サーバー、メモリ設定、スキル、エージェントに加え、プロンプトエンジニアリング、エージェント、AI 自動化の詳細ガイドを網羅。', es:'Guías de Claude e IA más cheatsheets prácticas — cada comando, atajo, slash command, servidor MCP, ajuste de memoria, skill y agente de Claude Code, junto con guías más profundas sobre prompt engineering, agentes y automatización con IA.', pt:'Guias de Claude e IA com cheatsheets práticos — todos os comandos, atalhos, slash commands, servidores MCP, configurações de memória, skills e agentes do Claude Code, além de guias mais aprofundados sobre engenharia de prompts, agentes e automação com IA.' },
+  'h1-sub':         { en:'<em>: AI Cheatsheets & Hands-On Guides</em>', ru:'<em>: ИИ-шпаргалки и практические гиды</em>', zh:'<em>：AI 速查表与实战指南</em>', ja:'<em>：AI チートシート & 実践ガイド</em>', es:'<em>: Cheatsheets y guías prácticas de IA</em>', pt:'<em>: Cheatsheets de IA e Guias Práticos</em>' },
+  'btn-mac':        { en:'Mac', ru:'Mac', zh:'Mac', ja:'Mac', es:'Mac', pt:'Mac' },
+  'btn-win':        { en:'Windows', ru:'Windows', zh:'Windows', ja:'Windows', es:'Windows', pt:'Windows' },
 
   // Section titles
-  'sec-keyboard':   { en:'Keyboard Shortcuts', ru:'Горячие клавиши', zh:'键盘快捷键', ja:'キーボードショートカット', es:'Atajos de Teclado' },
-  'sec-mcp':        { en:'MCP Servers', ru:'MCP-серверы', zh:'MCP 服务器', ja:'MCPサーバー', es:'Servidores MCP' },
-  'sec-slash':      { en:'Slash Commands', ru:'Слэш-команды', zh:'斜杠命令', ja:'スラッシュコマンド', es:'Comandos de Barra' },
-  'sec-memory':     { en:'Memory & Files', ru:'Память и файлы', zh:'记忆与文件', ja:'メモリとファイル', es:'Memoria y Archivos' },
-  'sec-workflows':  { en:'Workflows & Tips', ru:'Рабочие процессы', zh:'工作流与技巧', ja:'ワークフローとヒント', es:'Flujos y Consejos' },
-  'sec-config':     { en:'Config & Environment', ru:'Конфигурация', zh:'配置与环境', ja:'設定と環境', es:'Config. y Entorno' },
-  'sec-skills':     { en:'Skills & Agents', ru:'Скиллы и агенты', zh:'技能与智能体', ja:'スキルとエージェント', es:'Skills y Agentes' },
-  'sec-cli':        { en:'CLI & Flags', ru:'CLI и флаги', zh:'命令行与参数', ja:'CLIとフラグ', es:'CLI y Flags' },
+  'sec-keyboard':   { en:'Keyboard Shortcuts', ru:'Горячие клавиши', zh:'键盘快捷键', ja:'キーボードショートカット', es:'Atajos de Teclado', pt:'Atalhos de Teclado' },
+  'sec-mcp':        { en:'MCP Servers', ru:'MCP-серверы', zh:'MCP 服务器', ja:'MCPサーバー', es:'Servidores MCP', pt:'Servidores MCP' },
+  'sec-slash':      { en:'Slash Commands', ru:'Слэш-команды', zh:'斜杠命令', ja:'スラッシュコマンド', es:'Comandos de Barra', pt:'Slash Commands' },
+  'sec-memory':     { en:'Memory & Files', ru:'Память и файлы', zh:'记忆与文件', ja:'メモリとファイル', es:'Memoria y Archivos', pt:'Memória e Arquivos' },
+  'sec-workflows':  { en:'Workflows & Tips', ru:'Рабочие процессы', zh:'工作流与技巧', ja:'ワークフローとヒント', es:'Flujos y Consejos', pt:'Fluxos de Trabalho e Dicas' },
+  'sec-config':     { en:'Config & Environment', ru:'Конфигурация', zh:'配置与环境', ja:'設定と環境', es:'Config. y Entorno', pt:'Configuração e Ambiente' },
+  'sec-skills':     { en:'Skills & Agents', ru:'Скиллы и агенты', zh:'技能与智能体', ja:'スキルとエージェント', es:'Skills y Agentes', pt:'Skills e Agentes' },
+  'sec-cli':        { en:'CLI & Flags', ru:'CLI и флаги', zh:'命令行与参数', ja:'CLIとフラグ', es:'CLI y Flags', pt:'CLI e Flags' },
 
   // Subsections
-  'sub-core':       { en:'Core', ru:'Основное', zh:'核心', ja:'コア', es:'Principal' },
-  'sub-mode':       { en:'Mode Switching', ru:'Режимы', zh:'模式切换', ja:'モード切り替え', es:'Cambio de Modo' },
-  'sub-input':      { en:'Input', ru:'Ввод', zh:'输入', ja:'入力', es:'Entrada' },
-  'sub-prefixes':   { en:'Prefixes', ru:'Префиксы', zh:'前缀', ja:'プレフィックス', es:'Prefijos' },
-  'sub-transports': { en:'Transports', ru:'Транспорт', zh:'传输方式', ja:'トランスポート', es:'Transportes' },
-  'sub-scopes':     { en:'Scopes', ru:'Области', zh:'作用域', ja:'スコープ', es:'Alcances' },
-  'sub-mgmt':       { en:'Management', ru:'Управление', zh:'管理', ja:'管理', es:'Gestión' },
-  'sub-session':    { en:'Session', ru:'Сессия', zh:'会话', ja:'セッション', es:'Sesión' },
-  'sub-settings':   { en:'Settings', ru:'Настройки', zh:'设置', ja:'設定', es:'Ajustes' },
-  'sub-tools':      { en:'Tools', ru:'Инструменты', zh:'工具', ja:'ツール', es:'Herramientas' },
-  'sub-special':    { en:'Special', ru:'Специальные', zh:'特殊', ja:'特殊', es:'Especiales' },
-  'sub-claude-md':  { en:'CLAUDE.md Locations', ru:'Расположение CLAUDE.md', zh:'CLAUDE.md 位置', ja:'CLAUDE.mdの場所', es:'Ubicaciones CLAUDE.md' },
-  'sub-rules':      { en:'Rules & Imports', ru:'Правила и импорт', zh:'规则与导入', ja:'ルールとインポート', es:'Reglas e Importaciones' },
-  'sub-auto-mem':   { en:'Auto Memory', ru:'Авто-память', zh:'自动记忆', ja:'自動メモリ', es:'Memoria Automática' },
-  'sub-thinking':   { en:'Thinking & Effort', ru:'Мышление и усилие', zh:'思考与强度', ja:'思考と強度', es:'Razonamiento y Esfuerzo' },
-  'sub-plan-mode':  { en:'Plan Mode', ru:'Режим плана', zh:'计划模式', ja:'プランモード', es:'Modo Plan' },
-  'sub-worktrees':  { en:'Git Worktrees', ru:'Git Worktrees', zh:'Git 工作树', ja:'Gitワークツリー', es:'Git Worktrees' },
-  'sub-ctx-mgmt':   { en:'Context Management', ru:'Управление контекстом', zh:'上下文管理', ja:'コンテキスト管理', es:'Gestión de Contexto' },
-  'sub-sess-tips':  { en:'Session Tips', ru:'Приёмы для сессий', zh:'会话技巧', ja:'セッションのヒント', es:'Consejos de Sesión' },
-  'sub-sdk':        { en:'SDK / Headless', ru:'SDK / Headless', zh:'SDK / 无头模式', ja:'SDK / ヘッドレス', es:'SDK / Sin Interfaz' },
-  'sub-voice':      { en:'Voice Mode', ru:'Голосовой режим', zh:'语音模式', ja:'音声モード', es:'Modo Voz' },
-  'sub-cfg-files':  { en:'Config Files', ru:'Файлы конфигурации', zh:'配置文件', ja:'設定ファイル', es:'Archivos de Config.' },
-  'sub-key-settings':{ en:'Key Settings', ru:'Ключевые настройки', zh:'关键设置', ja:'主要設定', es:'Ajustes Clave' },
-  'sub-env-vars':   { en:'Environment Variables', ru:'Переменные окружения', zh:'环境变量', ja:'環境変数', es:'Variables de Entorno' },
-  'sub-builtin-skills':{ en:'Built-in Skills', ru:'Встроенные скиллы', zh:'内置技能', ja:'組み込みスキル', es:'Skills Integrados' },
-  'sub-skill-locs': { en:'Custom Skill Locations', ru:'Расположение скиллов', zh:'自定义技能位置', ja:'カスタムスキルの場所', es:'Ubicaciones de Skills' },
-  'sub-skill-fm':   { en:'Skill Frontmatter', ru:'Frontmatter скиллов', zh:'技能前置配置', ja:'スキルフロントマター', es:'Frontmatter de Skill' },
-  'sub-builtin-agents':{ en:'Built-in Agents', ru:'Встроенные агенты', zh:'内置智能体', ja:'組み込みエージェント', es:'Agentes Integrados' },
-  'sub-agent-fm':   { en:'Agent Frontmatter', ru:'Frontmatter агентов', zh:'智能体前置配置', ja:'エージェントフロントマター', es:'Frontmatter de Agente' },
-  'sub-core-cmds':  { en:'Core Commands', ru:'Основные команды', zh:'核心命令', ja:'コアコマンド', es:'Comandos Principales' },
-  'sub-key-flags':  { en:'Key Flags', ru:'Ключевые флаги', zh:'关键参数', ja:'主要フラグ', es:'Flags Principales' },
+  'sub-core':       { en:'Core', ru:'Основное', zh:'核心', ja:'コア', es:'Principal', pt:'Principal' },
+  'sub-mode':       { en:'Mode Switching', ru:'Режимы', zh:'模式切换', ja:'モード切り替え', es:'Cambio de Modo', pt:'Troca de Modo' },
+  'sub-input':      { en:'Input', ru:'Ввод', zh:'输入', ja:'入力', es:'Entrada', pt:'Entrada' },
+  'sub-prefixes':   { en:'Prefixes', ru:'Префиксы', zh:'前缀', ja:'プレフィックス', es:'Prefijos', pt:'Prefixos' },
+  'sub-transports': { en:'Transports', ru:'Транспорт', zh:'传输方式', ja:'トランスポート', es:'Transportes', pt:'Transportes' },
+  'sub-scopes':     { en:'Scopes', ru:'Области', zh:'作用域', ja:'スコープ', es:'Alcances', pt:'Escopos' },
+  'sub-mgmt':       { en:'Management', ru:'Управление', zh:'管理', ja:'管理', es:'Gestión', pt:'Gerenciamento' },
+  'sub-session':    { en:'Session', ru:'Сессия', zh:'会话', ja:'セッション', es:'Sesión', pt:'Sessão' },
+  'sub-settings':   { en:'Settings', ru:'Настройки', zh:'设置', ja:'設定', es:'Ajustes', pt:'Configurações' },
+  'sub-tools':      { en:'Tools', ru:'Инструменты', zh:'工具', ja:'ツール', es:'Herramientas', pt:'Ferramentas' },
+  'sub-special':    { en:'Special', ru:'Специальные', zh:'特殊', ja:'特殊', es:'Especiales', pt:'Especiais' },
+  'sub-claude-md':  { en:'CLAUDE.md Locations', ru:'Расположение CLAUDE.md', zh:'CLAUDE.md 位置', ja:'CLAUDE.mdの場所', es:'Ubicaciones CLAUDE.md', pt:'Locais do CLAUDE.md' },
+  'sub-rules':      { en:'Rules & Imports', ru:'Правила и импорт', zh:'规则与导入', ja:'ルールとインポート', es:'Reglas e Importaciones', pt:'Regras e Imports' },
+  'sub-auto-mem':   { en:'Auto Memory', ru:'Авто-память', zh:'自动记忆', ja:'自動メモリ', es:'Memoria Automática', pt:'Memória Automática' },
+  'sub-thinking':   { en:'Thinking & Effort', ru:'Мышление и усилие', zh:'思考与强度', ja:'思考と強度', es:'Razonamiento y Esfuerzo', pt:'Raciocínio e Esforço' },
+  'sub-plan-mode':  { en:'Plan Mode', ru:'Режим плана', zh:'计划模式', ja:'プランモード', es:'Modo Plan', pt:'Modo Plano' },
+  'sub-worktrees':  { en:'Git Worktrees', ru:'Git Worktrees', zh:'Git 工作树', ja:'Gitワークツリー', es:'Git Worktrees', pt:'Git Worktrees' },
+  'sub-ctx-mgmt':   { en:'Context Management', ru:'Управление контекстом', zh:'上下文管理', ja:'コンテキスト管理', es:'Gestión de Contexto', pt:'Gerenciamento de Contexto' },
+  'sub-sess-tips':  { en:'Session Tips', ru:'Приёмы для сессий', zh:'会话技巧', ja:'セッションのヒント', es:'Consejos de Sesión', pt:'Dicas de Sessão' },
+  'sub-sdk':        { en:'SDK / Headless', ru:'SDK / Headless', zh:'SDK / 无头模式', ja:'SDK / ヘッドレス', es:'SDK / Sin Interfaz', pt:'SDK / Headless' },
+  'sub-voice':      { en:'Voice Mode', ru:'Голосовой режим', zh:'语音模式', ja:'音声モード', es:'Modo Voz', pt:'Modo de Voz' },
+  'sub-cfg-files':  { en:'Config Files', ru:'Файлы конфигурации', zh:'配置文件', ja:'設定ファイル', es:'Archivos de Config.', pt:'Arquivos de Configuração' },
+  'sub-key-settings':{ en:'Key Settings', ru:'Ключевые настройки', zh:'关键设置', ja:'主要設定', es:'Ajustes Clave', pt:'Configurações-Chave' },
+  'sub-env-vars':   { en:'Environment Variables', ru:'Переменные окружения', zh:'环境变量', ja:'環境変数', es:'Variables de Entorno', pt:'Variáveis de Ambiente' },
+  'sub-builtin-skills':{ en:'Built-in Skills', ru:'Встроенные скиллы', zh:'内置技能', ja:'組み込みスキル', es:'Skills Integrados', pt:'Skills Nativas' },
+  'sub-skill-locs': { en:'Custom Skill Locations', ru:'Расположение скиллов', zh:'自定义技能位置', ja:'カスタムスキルの場所', es:'Ubicaciones de Skills', pt:'Locais de Skills Customizadas' },
+  'sub-skill-fm':   { en:'Skill Frontmatter', ru:'Frontmatter скиллов', zh:'技能前置配置', ja:'スキルフロントマター', es:'Frontmatter de Skill', pt:'Frontmatter de Skill' },
+  'sub-builtin-agents':{ en:'Built-in Agents', ru:'Встроенные агенты', zh:'内置智能体', ja:'組み込みエージェント', es:'Agentes Integrados', pt:'Agentes Nativos' },
+  'sub-agent-fm':   { en:'Agent Frontmatter', ru:'Frontmatter агентов', zh:'智能体前置配置', ja:'エージェントフロントマター', es:'Frontmatter de Agente', pt:'Frontmatter de Agente' },
+  'sub-core-cmds':  { en:'Core Commands', ru:'Основные команды', zh:'核心命令', ja:'コアコマンド', es:'Comandos Principales', pt:'Comandos Principais' },
+  'sub-key-flags':  { en:'Key Flags', ru:'Ключевые флаги', zh:'关键参数', ja:'主要フラグ', es:'Flags Principales', pt:'Flags-Chave' },
 
   // Descriptions — Keyboard
-  'd-cancel':       { en:'Cancel input / generation', ru:'Отменить ввод/генерацию', zh:'取消输入/生成', ja:'入力/生成をキャンセル', es:'Cancelar entrada / generación' },
-  'd-exit':         { en:'Exit session', ru:'Выйти из сессии', zh:'退出会话', ja:'セッションを終了', es:'Salir de sesión' },
-  'd-clear-screen': { en:'Clear screen', ru:'Очистить экран', zh:'清屏', ja:'画面をクリア', es:'Limpiar pantalla' },
-  'd-verbose':      { en:'Toggle verbose output', ru:'Подробный вывод вкл/выкл', zh:'切换详细输出', ja:'詳細出力の切り替え', es:'Alternar salida detallada' },
-  'd-history':      { en:'Reverse history search', ru:'Обратный поиск по истории', zh:'历史反向搜索', ja:'履歴の逆検索', es:'Búsqueda inversa en historial' },
-  'd-editor':       { en:'Open prompt in editor', ru:'Открыть промпт в редакторе', zh:'在编辑器中打开提示', ja:'エディタでプロンプトを開く', es:'Abrir prompt en editor' },
-  'd-bg-task':      { en:'Background task', ru:'Фоновая задача', zh:'后台任务', ja:'バックグラウンドタスク', es:'Tarea en segundo plano' },
-  'd-task-list':    { en:'Toggle task list', ru:'Список задач вкл/выкл', zh:'切换任务列表', ja:'タスクリストの切り替え', es:'Alternar lista de tareas' },
-  'd-paste-img':    { en:'Paste image', ru:'Вставить изображение', zh:'粘贴图像', ja:'画像を貼り付け', es:'Pegar imagen' },
-  'd-finish-agents':{ en:'Finish background agents', ru:'Завершить фоновых агентов', zh:'完成后台智能体', ja:'バックグラウンドエージェントを終了', es:'Finalizar agentes en segundo plano' },
-  'd-undo':         { en:'Undo / revert', ru:'Откатить / отменить', zh:'撤销/还原', ja:'元に戻す/リバート', es:'Deshacer / revertir' },
-  'd-cycle-perm':   { en:'Cycle permission modes', ru:'Цикл режимов разрешений', zh:'切换权限模式', ja:'権限モードを循環', es:'Ciclar modos de permiso' },
-  'd-switch-model': { en:'Switch model', ru:'Сменить модель', zh:'切换模型', ja:'モデルを切り替え', es:'Cambiar modelo' },
-  'd-toggle-think': { en:'Toggle thinking', ru:'Мышление вкл/выкл', zh:'切换思考模式', ja:'思考の切り替え', es:'Alternar razonamiento' },
-  'd-newline-q':    { en:'New line (quick)', ru:'Новая строка (быстро)', zh:'新行（快速）', ja:'改行（クイック）', es:'Nueva línea (rápida)' },
-  'd-newline-c':    { en:'New line (control seq)', ru:'Новая строка (упр. посл.)', zh:'新行（控制序列）', ja:'改行（制御シーケンス）', es:'Nueva línea (secuencia ctrl)' },
-  'd-slash':        { en:'Slash command', ru:'Слэш-команда', zh:'斜杠命令', ja:'スラッシュコマンド', es:'Comando de barra' },
-  'd-bash':         { en:'Direct bash command', ru:'Прямая bash-команда', zh:'直接执行bash命令', ja:'bashコマンドを直接実行', es:'Comando bash directo' },
-  'd-at':           { en:'File mention + autocomplete', ru:'Упоминание файла + автодополнение', zh:'文件提及 + 自动补全', ja:'ファイル参照 + 自動補完', es:'Mención de archivo + autocompletado' },
+  'd-cancel':       { en:'Cancel input / generation', ru:'Отменить ввод/генерацию', zh:'取消输入/生成', ja:'入力/生成をキャンセル', es:'Cancelar entrada / generación', pt:'Cancelar entrada / geração' },
+  'd-exit':         { en:'Exit session', ru:'Выйти из сессии', zh:'退出会话', ja:'セッションを終了', es:'Salir de sesión', pt:'Sair da sessão' },
+  'd-clear-screen': { en:'Clear screen', ru:'Очистить экран', zh:'清屏', ja:'画面をクリア', es:'Limpiar pantalla', pt:'Limpar a tela' },
+  'd-verbose':      { en:'Toggle verbose output', ru:'Подробный вывод вкл/выкл', zh:'切换详细输出', ja:'詳細出力の切り替え', es:'Alternar salida detallada', pt:'Alternar saída detalhada' },
+  'd-history':      { en:'Reverse history search', ru:'Обратный поиск по истории', zh:'历史反向搜索', ja:'履歴の逆検索', es:'Búsqueda inversa en historial', pt:'Busca reversa no histórico' },
+  'd-editor':       { en:'Open prompt in editor', ru:'Открыть промпт в редакторе', zh:'在编辑器中打开提示', ja:'エディタでプロンプトを開く', es:'Abrir prompt en editor', pt:'Abrir prompt no editor' },
+  'd-bg-task':      { en:'Background task', ru:'Фоновая задача', zh:'后台任务', ja:'バックグラウンドタスク', es:'Tarea en segundo plano', pt:'Tarefa em segundo plano' },
+  'd-task-list':    { en:'Toggle task list', ru:'Список задач вкл/выкл', zh:'切换任务列表', ja:'タスクリストの切り替え', es:'Alternar lista de tareas', pt:'Alternar lista de tarefas' },
+  'd-paste-img':    { en:'Paste image', ru:'Вставить изображение', zh:'粘贴图像', ja:'画像を貼り付け', es:'Pegar imagen', pt:'Colar imagem' },
+  'd-finish-agents':{ en:'Finish background agents', ru:'Завершить фоновых агентов', zh:'完成后台智能体', ja:'バックグラウンドエージェントを終了', es:'Finalizar agentes en segundo plano', pt:'Encerrar agentes em segundo plano' },
+  'd-undo':         { en:'Undo / revert', ru:'Откатить / отменить', zh:'撤销/还原', ja:'元に戻す/リバート', es:'Deshacer / revertir', pt:'Desfazer / reverter' },
+  'd-cycle-perm':   { en:'Cycle permission modes', ru:'Цикл режимов разрешений', zh:'切换权限模式', ja:'権限モードを循環', es:'Ciclar modos de permiso', pt:'Alternar modos de permissão' },
+  'd-switch-model': { en:'Switch model', ru:'Сменить модель', zh:'切换模型', ja:'モデルを切り替え', es:'Cambiar modelo', pt:'Trocar modelo' },
+  'd-toggle-think': { en:'Toggle thinking', ru:'Мышление вкл/выкл', zh:'切换思考模式', ja:'思考の切り替え', es:'Alternar razonamiento', pt:'Alternar raciocínio' },
+  'd-newline-q':    { en:'New line (quick)', ru:'Новая строка (быстро)', zh:'新行（快速）', ja:'改行（クイック）', es:'Nueva línea (rápida)', pt:'Nova linha (rápido)' },
+  'd-newline-c':    { en:'New line (control seq)', ru:'Новая строка (упр. посл.)', zh:'新行（控制序列）', ja:'改行（制御シーケンス）', es:'Nueva línea (secuencia ctrl)', pt:'Nova linha (sequência de controle)' },
+  'd-slash':        { en:'Slash command', ru:'Слэш-команда', zh:'斜杠命令', ja:'スラッシュコマンド', es:'Comando de barra', pt:'Slash command' },
+  'd-bash':         { en:'Direct bash command', ru:'Прямая bash-команда', zh:'直接执行bash命令', ja:'bashコマンドを直接実行', es:'Comando bash directo', pt:'Comando bash direto' },
+  'd-at':           { en:'File mention + autocomplete', ru:'Упоминание файла + автодополнение', zh:'文件提及 + 自动补全', ja:'ファイル参照 + 自動補完', es:'Mención de archivo + autocompletado', pt:'Menção de arquivo + autocompletar' },
 
   // Descriptions — MCP
-  'd-http':         { en:'Remote HTTP (recommended)', ru:'Удалённый HTTP (рекомендуется)', zh:'远程 HTTP（推荐）', ja:'リモートHTTP（推奨）', es:'HTTP remoto (recomendado)' },
-  'd-stdio':        { en:'Local process', ru:'Локальный процесс', zh:'本地进程', ja:'ローカルプロセス', es:'Proceso local' },
-  'd-sse':          { en:'Remote SSE', ru:'Удалённый SSE', zh:'远程 SSE', ja:'リモートSSE', es:'SSE remoto' },
-  'd-scope-local':  { en:'.claude.json (project)', ru:'.claude.json (для проекта)', zh:'.claude.json（项目）', ja:'.claude.json（プロジェクト）', es:'.claude.json (proyecto)' },
-  'd-scope-proj':   { en:'.mcp.json (shared / VCS)', ru:'.mcp.json (общий/VCS)', zh:'.mcp.json（共享/VCS）', ja:'.mcp.json（共有/VCS）', es:'.mcp.json (compartido/VCS)' },
-  'd-scope-user':   { en:'~/.claude.json (global)', ru:'~/.claude.json (глобальный)', zh:'~/.claude.json（全局）', ja:'~/.claude.json（グローバル）', es:'~/.claude.json (global)' },
-  'd-mcp-ui':       { en:'Interactive UI', ru:'Интерактивный интерфейс', zh:'交互界面', ja:'インタラクティブUI', es:'Interfaz interactiva' },
-  'd-mcp-list':     { en:'List all servers', ru:'Список всех серверов', zh:'列出所有服务器', ja:'全サーバーを一覧表示', es:'Listar todos los servidores' },
-  'd-mcp-serve':    { en:'Run CC as MCP server', ru:'CC как MCP-сервер', zh:'将 CC 作为 MCP 服务器运行', ja:'CCをMCPサーバーとして実行', es:'Ejecutar CC como servidor MCP' },
+  'd-http':         { en:'Remote HTTP (recommended)', ru:'Удалённый HTTP (рекомендуется)', zh:'远程 HTTP（推荐）', ja:'リモートHTTP（推奨）', es:'HTTP remoto (recomendado)', pt:'HTTP remoto (recomendado)' },
+  'd-stdio':        { en:'Local process', ru:'Локальный процесс', zh:'本地进程', ja:'ローカルプロセス', es:'Proceso local', pt:'Processo local' },
+  'd-sse':          { en:'Remote SSE', ru:'Удалённый SSE', zh:'远程 SSE', ja:'リモートSSE', es:'SSE remoto', pt:'SSE remoto' },
+  'd-scope-local':  { en:'.claude.json (project)', ru:'.claude.json (для проекта)', zh:'.claude.json（项目）', ja:'.claude.json（プロジェクト）', es:'.claude.json (proyecto)', pt:'.claude.json (projeto)' },
+  'd-scope-proj':   { en:'.mcp.json (shared / VCS)', ru:'.mcp.json (общий/VCS)', zh:'.mcp.json（共享/VCS）', ja:'.mcp.json（共有/VCS）', es:'.mcp.json (compartido/VCS)', pt:'.mcp.json (compartilhado / VCS)' },
+  'd-scope-user':   { en:'~/.claude.json (global)', ru:'~/.claude.json (глобальный)', zh:'~/.claude.json（全局）', ja:'~/.claude.json（グローバル）', es:'~/.claude.json (global)', pt:'~/.claude.json (global)' },
+  'd-mcp-ui':       { en:'Interactive UI', ru:'Интерактивный интерфейс', zh:'交互界面', ja:'インタラクティブUI', es:'Interfaz interactiva', pt:'Interface interativa' },
+  'd-mcp-list':     { en:'List all servers', ru:'Список всех серверов', zh:'列出所有服务器', ja:'全サーバーを一覧表示', es:'Listar todos los servidores', pt:'Listar todos os servidores' },
+  'd-mcp-serve':    { en:'Run CC as MCP server', ru:'CC как MCP-сервер', zh:'将 CC 作为 MCP 服务器运行', ja:'CCをMCPサーバーとして実行', es:'Ejecutar CC como servidor MCP', pt:'Executar o CC como servidor MCP' },
 
   // Descriptions — Slash/Session
-  'd-clear-conv':   { en:'Clear conversation', ru:'Очистить разговор', zh:'清除对话', ja:'会話をクリア', es:'Limpiar conversación' },
-  'd-compact':      { en:'Compress context', ru:'Сжать контекст', zh:'压缩上下文', ja:'コンテキストを圧縮', es:'Comprimir contexto' },
-  'd-resume-sess':  { en:'Resume / switch session', ru:'Возобновить/переключить сессию', zh:'恢复/切换会话', ja:'セッションを再開/切り替え', es:'Reanudar / cambiar sesión' },
-  'd-rename':       { en:'Name current session', ru:'Назвать текущую сессию', zh:'命名当前会话', ja:'現在のセッションに名前を付ける', es:'Nombrar sesión actual' },
-  'd-fork-copy':    { en:'Copy to new background session (alias /branch)', ru:'Копия в новую фоновую сессию (алиас /branch)', zh:'复制到新的后台会话（别名 /branch）', ja:'新しいバックグラウンドセッションにコピー（/branchのエイリアス）', es:'Copiar a nueva sesión en segundo plano (alias /branch)' },
-  'd-subtask':      { en:'Run in-session subagent', ru:'Запуск субагента в сессии', zh:'在当前会话中运行子智能体', ja:'セッション内サブエージェントを実行', es:'Ejecutar subagente en la sesión' },
-  'd-cost':         { en:'Token usage stats', ru:'Статистика токенов', zh:'Token 使用统计', ja:'トークン使用統計', es:'Estadísticas de tokens' },
-  'd-context-viz':  { en:'Context usage visualizer', ru:'Визуализация контекста', zh:'上下文使用可视化', ja:'コンテキスト使用状況の可視化', es:'Visualizador de contexto' },
-  'd-diff':         { en:'Interactive diff viewer', ru:'Интерактивный просмотр diff', zh:'交互式差异查看器', ja:'インタラクティブdiffビューア', es:'Visor de diff interactivo' },
-  'd-copy':         { en:'Copy last response', ru:'Скопировать последний ответ', zh:'复制最后回复', ja:'最後の返答をコピー', es:'Copiar última respuesta' },
-  'd-export':       { en:'Export conversation', ru:'Экспорт разговора', zh:'导出对话', ja:'会話をエクスポート', es:'Exportar conversación' },
+  'd-clear-conv':   { en:'Clear conversation', ru:'Очистить разговор', zh:'清除对话', ja:'会話をクリア', es:'Limpiar conversación', pt:'Limpar conversa' },
+  'd-compact':      { en:'Compress context', ru:'Сжать контекст', zh:'压缩上下文', ja:'コンテキストを圧縮', es:'Comprimir contexto', pt:'Comprimir contexto' },
+  'd-resume-sess':  { en:'Resume / switch session', ru:'Возобновить/переключить сессию', zh:'恢复/切换会话', ja:'セッションを再開/切り替え', es:'Reanudar / cambiar sesión', pt:'Retomar / trocar de sessão' },
+  'd-rename':       { en:'Name current session', ru:'Назвать текущую сессию', zh:'命名当前会话', ja:'現在のセッションに名前を付ける', es:'Nombrar sesión actual', pt:'Nomear a sessão atual' },
+  'd-fork-copy':    { en:'Copy to new background session (alias /branch)', ru:'Копия в новую фоновую сессию (алиас /branch)', zh:'复制到新的后台会话（别名 /branch）', ja:'新しいバックグラウンドセッションにコピー（/branchのエイリアス）', es:'Copiar a nueva sesión en segundo plano (alias /branch)', pt:'Copiar para nova sessão em segundo plano (alias /branch)' },
+  'd-subtask':      { en:'Run in-session subagent', ru:'Запуск субагента в сессии', zh:'在当前会话中运行子智能体', ja:'セッション内サブエージェントを実行', es:'Ejecutar subagente en la sesión', pt:'Executar subagente na sessão' },
+  'd-cost':         { en:'Token usage stats', ru:'Статистика токенов', zh:'Token 使用统计', ja:'トークン使用統計', es:'Estadísticas de tokens', pt:'Estatísticas de uso de tokens' },
+  'd-context-viz':  { en:'Context usage visualizer', ru:'Визуализация контекста', zh:'上下文使用可视化', ja:'コンテキスト使用状況の可視化', es:'Visualizador de contexto', pt:'Visualizador de uso de contexto' },
+  'd-diff':         { en:'Interactive diff viewer', ru:'Интерактивный просмотр diff', zh:'交互式差异查看器', ja:'インタラクティブdiffビューア', es:'Visor de diff interactivo', pt:'Visualizador de diff interativo' },
+  'd-copy':         { en:'Copy last response', ru:'Скопировать последний ответ', zh:'复制最后回复', ja:'最後の返答をコピー', es:'Copiar última respuesta', pt:'Copiar última resposta' },
+  'd-export':       { en:'Export conversation', ru:'Экспорт разговора', zh:'导出对话', ja:'会話をエクスポート', es:'Exportar conversación', pt:'Exportar conversa' },
 
   // Slash/Settings
-  'd-config':       { en:'Open settings', ru:'Открыть настройки', zh:'打开设置', ja:'設定を開く', es:'Abrir configuración' },
-  'd-model-arrow':  { en:'Switch model (←→ effort)', ru:'Сменить модель (←→ усилие)', zh:'切换模型（←→ 思考强度）', ja:'モデルを切り替え（←→ 思考強度）', es:'Cambiar modelo (←→ esfuerzo)' },
-  'd-fast':         { en:'Toggle fast mode', ru:'Быстрый режим вкл/выкл', zh:'切换快速模式', ja:'高速モードの切り替え', es:'Alternar modo rápido' },
-  'd-vim':          { en:'Toggle vim mode', ru:'Режим vim вкл/выкл', zh:'切换 vim 模式', ja:'vimモードの切り替え', es:'Alternar modo vim' },
-  'd-theme':        { en:'Change color theme', ru:'Сменить цветовую тему', zh:'更改颜色主题', ja:'カラーテーマを変更', es:'Cambiar tema de colores' },
-  'd-perms':        { en:'View / update permissions', ru:'Просмотр/обновление разрешений', zh:'查看/更新权限', ja:'権限を表示/更新', es:'Ver / actualizar permisos' },
-  'd-effort-set':   { en:'Set effort (low / med / high)', ru:'Усилие (low/med/high)', zh:'设置强度（低/中/高）', ja:'思考強度を設定（低/中/高）', es:'Establecer esfuerzo (bajo/medio/alto)' },
-  'd-color':        { en:'Prompt line color', ru:'Цвет строки промпта', zh:'提示行颜色', ja:'プロンプト行の色', es:'Color de línea de prompt' },
-  'd-keybindings':  { en:'Customize keybindings', ru:'Настроить горячие клавиши', zh:'自定义快捷键', ja:'キーバインドをカスタマイズ', es:'Personalizar atajos de teclado' },
-  'd-terminal-setup':{ en:'Configure terminal keys', ru:'Настроить клавиши терминала', zh:'配置终端按键', ja:'ターミナルキーを設定', es:'Configurar teclas del terminal' },
+  'd-config':       { en:'Open settings', ru:'Открыть настройки', zh:'打开设置', ja:'設定を開く', es:'Abrir configuración', pt:'Abrir configurações' },
+  'd-model-arrow':  { en:'Switch model (←→ effort)', ru:'Сменить модель (←→ усилие)', zh:'切换模型（←→ 思考强度）', ja:'モデルを切り替え（←→ 思考強度）', es:'Cambiar modelo (←→ esfuerzo)', pt:'Trocar modelo (←→ esforço)' },
+  'd-fast':         { en:'Toggle fast mode', ru:'Быстрый режим вкл/выкл', zh:'切换快速模式', ja:'高速モードの切り替え', es:'Alternar modo rápido', pt:'Alternar modo rápido' },
+  'd-vim':          { en:'Toggle vim mode', ru:'Режим vim вкл/выкл', zh:'切换 vim 模式', ja:'vimモードの切り替え', es:'Alternar modo vim', pt:'Alternar modo vim' },
+  'd-theme':        { en:'Change color theme', ru:'Сменить цветовую тему', zh:'更改颜色主题', ja:'カラーテーマを変更', es:'Cambiar tema de colores', pt:'Mudar tema de cores' },
+  'd-perms':        { en:'View / update permissions', ru:'Просмотр/обновление разрешений', zh:'查看/更新权限', ja:'権限を表示/更新', es:'Ver / actualizar permisos', pt:'Ver / atualizar permissões' },
+  'd-effort-set':   { en:'Set effort (low / med / high)', ru:'Усилие (low/med/high)', zh:'设置强度（低/中/高）', ja:'思考強度を設定（低/中/高）', es:'Establecer esfuerzo (bajo/medio/alto)', pt:'Definir esforço (low / med / high)' },
+  'd-color':        { en:'Prompt line color', ru:'Цвет строки промпта', zh:'提示行颜色', ja:'プロンプト行の色', es:'Color de línea de prompt', pt:'Cor da linha do prompt' },
+  'd-keybindings':  { en:'Customize keybindings', ru:'Настроить горячие клавиши', zh:'自定义快捷键', ja:'キーバインドをカスタマイズ', es:'Personalizar atajos de teclado', pt:'Personalizar atalhos de teclado' },
+  'd-terminal-setup':{ en:'Configure terminal keys', ru:'Настроить клавиши терминала', zh:'配置终端按键', ja:'ターミナルキーを設定', es:'Configurar teclas del terminal', pt:'Configurar teclas do terminal' },
 
   // Slash/Tools
-  'd-init':         { en:'Create CLAUDE.md', ru:'Создать CLAUDE.md', zh:'创建 CLAUDE.md', ja:'CLAUDE.mdを作成', es:'Crear CLAUDE.md' },
-  'd-memory-edit':  { en:'Edit CLAUDE.md', ru:'Редактировать CLAUDE.md', zh:'编辑 CLAUDE.md', ja:'CLAUDE.mdを編集', es:'Editar CLAUDE.md' },
-  'd-manage-mcp':   { en:'Manage MCP servers', ru:'Управление MCP серверами', zh:'管理 MCP 服务器', ja:'MCPサーバーを管理', es:'Gestionar servidores MCP' },
-  'd-hooks':        { en:'Manage hooks', ru:'Управление хуками', zh:'管理钩子', ja:'フックを管理', es:'Gestionar hooks' },
-  'd-list-skills':  { en:'List available skills', ru:'Список доступных скиллов', zh:'列出可用技能', ja:'利用可能なスキルを一覧表示', es:'Listar skills disponibles' },
-  'd-manage-agents':{ en:'Manage agents', ru:'Управление агентами', zh:'管理智能体', ja:'エージェントを管理', es:'Gestionar agentes' },
-  'd-add-dir':      { en:'Add working directory', ru:'Добавить рабочую директорию', zh:'添加工作目录', ja:'作業ディレクトリを追加', es:'Agregar directorio de trabajo' },
-  'd-reload':       { en:'Hot-reload plugins', ru:'Горячая перезагрузка плагинов', zh:'热重载插件', ja:'プラグインのホットリロード', es:'Recarga en caliente de plugins' },
+  'd-init':         { en:'Create CLAUDE.md', ru:'Создать CLAUDE.md', zh:'创建 CLAUDE.md', ja:'CLAUDE.mdを作成', es:'Crear CLAUDE.md', pt:'Criar CLAUDE.md' },
+  'd-memory-edit':  { en:'Edit CLAUDE.md', ru:'Редактировать CLAUDE.md', zh:'编辑 CLAUDE.md', ja:'CLAUDE.mdを編集', es:'Editar CLAUDE.md', pt:'Editar CLAUDE.md' },
+  'd-manage-mcp':   { en:'Manage MCP servers', ru:'Управление MCP серверами', zh:'管理 MCP 服务器', ja:'MCPサーバーを管理', es:'Gestionar servidores MCP', pt:'Gerenciar servidores MCP' },
+  'd-hooks':        { en:'Manage hooks', ru:'Управление хуками', zh:'管理钩子', ja:'フックを管理', es:'Gestionar hooks', pt:'Gerenciar hooks' },
+  'd-list-skills':  { en:'List available skills', ru:'Список доступных скиллов', zh:'列出可用技能', ja:'利用可能なスキルを一覧表示', es:'Listar skills disponibles', pt:'Listar skills disponíveis' },
+  'd-manage-agents':{ en:'Manage agents', ru:'Управление агентами', zh:'管理智能体', ja:'エージェントを管理', es:'Gestionar agentes', pt:'Gerenciar agentes' },
+  'd-add-dir':      { en:'Add working directory', ru:'Добавить рабочую директорию', zh:'添加工作目录', ja:'作業ディレクトリを追加', es:'Agregar directorio de trabajo', pt:'Adicionar diretório de trabalho' },
+  'd-reload':       { en:'Hot-reload plugins', ru:'Горячая перезагрузка плагинов', zh:'热重载插件', ja:'プラグインのホットリロード', es:'Recarga en caliente de plugins', pt:'Recarregar plugins a quente' },
 
   // Slash/Special
-  'd-btw':          { en:'Side question (no context cost)', ru:'Побочный вопрос (без контекста)', zh:'额外问题（不消耗上下文）', ja:'補足質問（コンテキスト消費なし）', es:'Pregunta lateral (sin costo de contexto)' },
-  'd-plan-cmd':     { en:'Plan mode (+ auto-start)', ru:'Режим планирования (+ автостарт)', zh:'计划模式（+ 自动启动）', ja:'プランモード（+ 自動開始）', es:'Modo plan (+ inicio automático)' },
-  'd-ultraplan':    { en:'Draft plan in browser, execute remotely', ru:'Создать план в браузере, выполнить удалённо', zh:'在浏览器中起草计划，远程执行', ja:'ブラウザでプランを作成し、リモートで実行', es:'Crear plan en navegador, ejecutar remotamente' },
-  'd-powerup':      { en:'Interactive lessons with animated demos', ru:'Интерактивные уроки с анимированными демо', zh:'带有动画演示的交互式课程', ja:'アニメーション付きのインタラクティブレッスン', es:'Lecciones interactivas con demos animados' },
-  'd-teleport':     { en:'Pull web session to terminal', ru:'Перенести веб-сессию в терминал', zh:'将网络会话拉到终端', ja:'Web セッションをターミナルに取り込む', es:'Traer sesión web a terminal' },
-  'd-autofix-pr':   { en:'Auto-fix PR on CI failures', ru:'Автоматически исправить PR при сбоях CI', zh:'在 CI 失败时自动修复 PR', ja:'CI 失敗時に自動で PR を修正', es:'Auto-reparar PR en fallas de CI' },
-  'd-loop':         { en:'Schedule recurring task', ru:'Запланировать повторяющуюся задачу', zh:'计划定期任务', ja:'定期タスクをスケジュール', es:'Programar tarea recurrente' },
-  'd-insights':     { en:'Analyze sessions &amp; patterns', ru:'Анализировать сессии и паттерны', zh:'分析会话和模式', ja:'セッションとパターンを分析', es:'Analizar sesiones y patrones' },
-  'd-sandbox':      { en:'Toggle sandbox mode', ru:'Переключить режим изоляции', zh:'切换沙箱模式', ja:'サンドボックスモードを切り替え', es:'Alternar modo sandbox' },
-  'd-extra-usage':  { en:'Configure extra usage quota', ru:'Настроить дополнительный лимит использования', zh:'配置额外使用配额', ja:'追加使用量クォータを設定', es:'Configurar cuota de uso adicional' },
-  'd-rewind':       { en:'Checkpoint / rewind to previous point', ru:'Контрольная точка / вернуться назад', zh:'检查点/回到之前的位置', ja:'チェックポイント/前の位置に戻る', es:'Punto de control / retroceder' },
-  'd-status':       { en:'Show version, model, account status', ru:'Показать версию, модель, статус аккаунта', zh:'显示版本、模型、账户状态', ja:'バージョン、モデル、アカウント状態を表示', es:'Mostrar versión, modelo, estado de cuenta' },
-  'd-stats':        { en:'Daily usage, streaks, preferences', ru:'Ежедневное использование, серии, предпочтения', zh:'每日使用、连续记录、偏好设置', ja:'日次使用量、連続記録、選好設定', es:'Uso diario, rachas, preferencias' },
-  'd-tasks':        { en:'List background tasks', ru:'Список фоновых задач', zh:'列出后台任务', ja:'バックグラウンドタスクを一覧表示', es:'Listar tareas en segundo plano' },
-  'd-ide':          { en:'Manage IDE integrations', ru:'Управление интеграциями IDE', zh:'管理 IDE 集成', ja:'IDE 統合を管理', es:'Gestionar integraciones de IDE' },
-  'd-privacy':      { en:'View / update privacy settings', ru:'Просмотр/обновление параметров конфиденциальности', zh:'查看/更新隐私设置', ja:'プライバシー設定を表示/更新', es:'Ver / actualizar configuración de privacidad' },
-  'd-remote-env':   { en:'Configure web session environment', ru:'Настроить окружение веб-сессии', zh:'配置网络会话环境', ja:'Web セッション環境を設定', es:'Configurar entorno de sesión web' },
-  'd-desktop':      { en:'Continue in Desktop app', ru:'Продолжить в приложении Desktop', zh:'在桌面应用中继续', ja:'Desktop アプリで続行', es:'Continuar en aplicación Desktop' },
-  'd-plugin':       { en:'Manage Claude Code plugins', ru:'Управление плагинами Claude Code', zh:'管理 Claude Code 插件', ja:'Claude Code プラグインを管理', es:'Gestionar plugins de Claude Code' },
-  'd-install-github':{ en:'Set up GitHub Actions app', ru:'Настроить приложение GitHub Actions', zh:'设置 GitHub Actions 应用', ja:'GitHub Actions アプリを設定', es:'Configurar aplicación GitHub Actions' },
-  'd-install-slack': { en:'Install Slack app', ru:'Установить приложение Slack', zh:'安装 Slack 应用', ja:'Slack アプリをインストール', es:'Instalar aplicación Slack' },
-  'd-web-setup':    { en:'Connect GitHub to web', ru:'Подключить GitHub к веб-интерфейсу', zh:'将 GitHub 连接到网络', ja:'GitHub をウェブに接続', es:'Conectar GitHub a web' },
-  'd-voice-input':  { en:'Voice input (20 languages)', ru:'Голосовой ввод (20 языков)', zh:'语音输入（20种语言）', ja:'音声入力（20言語）', es:'Entrada de voz (20 idiomas)' },
-  'd-doctor':       { en:'Diagnose installation', ru:'Диагностика установки', zh:'诊断安装', ja:'インストールを診断', es:'Diagnosticar instalación' },
-  'd-pr':           { en:'GitHub PR comments', ru:'Комментарии GitHub PR', zh:'GitHub PR 评论', ja:'GitHub PRコメント', es:'Comentarios de PR en GitHub' },
-  'd-remote':       { en:'Bridge to claude.ai/code', ru:'Мост к claude.ai/code', zh:'连接到 claude.ai/code', ja:'claude.ai/codeへのブリッジ', es:'Puente a claude.ai/code' },
-  'd-usage':        { en:'Plan limits & status', ru:'Лимиты плана и статус', zh:'套餐限制与状态', ja:'プランの制限と状態', es:'Límites del plan y estado' },
-  'd-schedule':     { en:'Cloud scheduled tasks', ru:'Облачные задачи по расписанию', zh:'云端定时任务', ja:'クラウドスケジュールタスク', es:'Tareas programadas en la nube' },
-  'd-security':     { en:'Security analysis', ru:'Анализ безопасности', zh:'安全分析', ja:'セキュリティ分析', es:'Análisis de seguridad' },
-  'd-code-review-bg': { en:'Review code (background subagent)', ru:'Ревью кода (фоновый субагент)', zh:'代码审查（后台子智能体）', ja:'コードレビュー（バックグラウンドサブエージェント）', es:'Revisar código (subagente en segundo plano)' },
-  'd-help':         { en:'Help + commands', ru:'Справка + команды', zh:'帮助 + 命令', ja:'ヘルプ + コマンド', es:'Ayuda + comandos' },
-  'd-feedback':     { en:'Send feedback (alias: /bug)', ru:'Отправить отзыв (алиас: /bug)', zh:'发送反馈（别名：/bug）', ja:'フィードバックを送信（別名: /bug）', es:'Enviar feedback (alias: /bug)' },
+  'd-btw':          { en:'Side question (no context cost)', ru:'Побочный вопрос (без контекста)', zh:'额外问题（不消耗上下文）', ja:'補足質問（コンテキスト消費なし）', es:'Pregunta lateral (sin costo de contexto)', pt:'Pergunta paralela (sem custo de contexto)' },
+  'd-plan-cmd':     { en:'Plan mode (+ auto-start)', ru:'Режим планирования (+ автостарт)', zh:'计划模式（+ 自动启动）', ja:'プランモード（+ 自動開始）', es:'Modo plan (+ inicio automático)', pt:'Modo plano (+ início automático)' },
+  'd-ultraplan':    { en:'Draft plan in browser, execute remotely', ru:'Создать план в браузере, выполнить удалённо', zh:'在浏览器中起草计划，远程执行', ja:'ブラウザでプランを作成し、リモートで実行', es:'Crear plan en navegador, ejecutar remotamente', pt:'Rascunhar plano no navegador, executar remotamente' },
+  'd-powerup':      { en:'Interactive lessons with animated demos', ru:'Интерактивные уроки с анимированными демо', zh:'带有动画演示的交互式课程', ja:'アニメーション付きのインタラクティブレッスン', es:'Lecciones interactivas con demos animados', pt:'Lições interativas com demos animadas' },
+  'd-teleport':     { en:'Pull web session to terminal', ru:'Перенести веб-сессию в терминал', zh:'将网络会话拉到终端', ja:'Web セッションをターミナルに取り込む', es:'Traer sesión web a terminal', pt:'Trazer sessão web para o terminal' },
+  'd-autofix-pr':   { en:'Auto-fix PR on CI failures', ru:'Автоматически исправить PR при сбоях CI', zh:'在 CI 失败时自动修复 PR', ja:'CI 失敗時に自動で PR を修正', es:'Auto-reparar PR en fallas de CI', pt:'Corrigir PR automaticamente em falhas de CI' },
+  'd-loop':         { en:'Schedule recurring task', ru:'Запланировать повторяющуюся задачу', zh:'计划定期任务', ja:'定期タスクをスケジュール', es:'Programar tarea recurrente', pt:'Agendar tarefa recorrente' },
+  'd-insights':     { en:'Analyze sessions &amp; patterns', ru:'Анализировать сессии и паттерны', zh:'分析会话和模式', ja:'セッションとパターンを分析', es:'Analizar sesiones y patrones', pt:'Analisar sessões e padrões' },
+  'd-sandbox':      { en:'Toggle sandbox mode', ru:'Переключить режим изоляции', zh:'切换沙箱模式', ja:'サンドボックスモードを切り替え', es:'Alternar modo sandbox', pt:'Alternar modo sandbox' },
+  'd-extra-usage':  { en:'Configure extra usage quota', ru:'Настроить дополнительный лимит использования', zh:'配置额外使用配额', ja:'追加使用量クォータを設定', es:'Configurar cuota de uso adicional', pt:'Configurar cota de uso extra' },
+  'd-rewind':       { en:'Checkpoint / rewind to previous point', ru:'Контрольная точка / вернуться назад', zh:'检查点/回到之前的位置', ja:'チェックポイント/前の位置に戻る', es:'Punto de control / retroceder', pt:'Checkpoint / voltar a um ponto anterior' },
+  'd-status':       { en:'Show version, model, account status', ru:'Показать версию, модель, статус аккаунта', zh:'显示版本、模型、账户状态', ja:'バージョン、モデル、アカウント状態を表示', es:'Mostrar versión, modelo, estado de cuenta', pt:'Mostrar versão, modelo e status da conta' },
+  'd-stats':        { en:'Daily usage, streaks, preferences', ru:'Ежедневное использование, серии, предпочтения', zh:'每日使用、连续记录、偏好设置', ja:'日次使用量、連続記録、選好設定', es:'Uso diario, rachas, preferencias', pt:'Uso diário, sequências e preferências' },
+  'd-tasks':        { en:'List background tasks', ru:'Список фоновых задач', zh:'列出后台任务', ja:'バックグラウンドタスクを一覧表示', es:'Listar tareas en segundo plano', pt:'Listar tarefas em segundo plano' },
+  'd-ide':          { en:'Manage IDE integrations', ru:'Управление интеграциями IDE', zh:'管理 IDE 集成', ja:'IDE 統合を管理', es:'Gestionar integraciones de IDE', pt:'Gerenciar integrações com IDE' },
+  'd-privacy':      { en:'View / update privacy settings', ru:'Просмотр/обновление параметров конфиденциальности', zh:'查看/更新隐私设置', ja:'プライバシー設定を表示/更新', es:'Ver / actualizar configuración de privacidad', pt:'Ver / atualizar configurações de privacidade' },
+  'd-remote-env':   { en:'Configure web session environment', ru:'Настроить окружение веб-сессии', zh:'配置网络会话环境', ja:'Web セッション環境を設定', es:'Configurar entorno de sesión web', pt:'Configurar ambiente da sessão web' },
+  'd-desktop':      { en:'Continue in Desktop app', ru:'Продолжить в приложении Desktop', zh:'在桌面应用中继续', ja:'Desktop アプリで続行', es:'Continuar en aplicación Desktop', pt:'Continuar no app Desktop' },
+  'd-plugin':       { en:'Manage Claude Code plugins', ru:'Управление плагинами Claude Code', zh:'管理 Claude Code 插件', ja:'Claude Code プラグインを管理', es:'Gestionar plugins de Claude Code', pt:'Gerenciar plugins do Claude Code' },
+  'd-install-github':{ en:'Set up GitHub Actions app', ru:'Настроить приложение GitHub Actions', zh:'设置 GitHub Actions 应用', ja:'GitHub Actions アプリを設定', es:'Configurar aplicación GitHub Actions', pt:'Configurar o app do GitHub Actions' },
+  'd-install-slack': { en:'Install Slack app', ru:'Установить приложение Slack', zh:'安装 Slack 应用', ja:'Slack アプリをインストール', es:'Instalar aplicación Slack', pt:'Instalar o app do Slack' },
+  'd-web-setup':    { en:'Connect GitHub to web', ru:'Подключить GitHub к веб-интерфейсу', zh:'将 GitHub 连接到网络', ja:'GitHub をウェブに接続', es:'Conectar GitHub a web', pt:'Conectar o GitHub à web' },
+  'd-voice-input':  { en:'Voice input (20 languages)', ru:'Голосовой ввод (20 языков)', zh:'语音输入（20种语言）', ja:'音声入力（20言語）', es:'Entrada de voz (20 idiomas)', pt:'Entrada de voz (20 idiomas)' },
+  'd-doctor':       { en:'Diagnose installation', ru:'Диагностика установки', zh:'诊断安装', ja:'インストールを診断', es:'Diagnosticar instalación', pt:'Diagnosticar instalação' },
+  'd-pr':           { en:'GitHub PR comments', ru:'Комментарии GitHub PR', zh:'GitHub PR 评论', ja:'GitHub PRコメント', es:'Comentarios de PR en GitHub', pt:'Comentários de PR do GitHub' },
+  'd-remote':       { en:'Bridge to claude.ai/code', ru:'Мост к claude.ai/code', zh:'连接到 claude.ai/code', ja:'claude.ai/codeへのブリッジ', es:'Puente a claude.ai/code', pt:'Ponte para claude.ai/code' },
+  'd-usage':        { en:'Plan limits & status', ru:'Лимиты плана и статус', zh:'套餐限制与状态', ja:'プランの制限と状態', es:'Límites del plan y estado', pt:'Limites e status do plano' },
+  'd-schedule':     { en:'Cloud scheduled tasks', ru:'Облачные задачи по расписанию', zh:'云端定时任务', ja:'クラウドスケジュールタスク', es:'Tareas programadas en la nube', pt:'Tarefas agendadas na nuvem' },
+  'd-security':     { en:'Security analysis', ru:'Анализ безопасности', zh:'安全分析', ja:'セキュリティ分析', es:'Análisis de seguridad', pt:'Análise de segurança' },
+  'd-code-review-bg': { en:'Review code (background subagent)', ru:'Ревью кода (фоновый субагент)', zh:'代码审查（后台子智能体）', ja:'コードレビュー（バックグラウンドサブエージェント）', es:'Revisar código (subagente en segundo plano)', pt:'Revisar código (subagente em segundo plano)' },
+  'd-help':         { en:'Help + commands', ru:'Справка + команды', zh:'帮助 + 命令', ja:'ヘルプ + コマンド', es:'Ayuda + comandos', pt:'Ajuda + comandos' },
+  'd-feedback':     { en:'Send feedback (alias: /bug)', ru:'Отправить отзыв (алиас: /bug)', zh:'发送反馈（别名：/bug）', ja:'フィードバックを送信（別名: /bug）', es:'Enviar feedback (alias: /bug)', pt:'Enviar feedback (alias: /bug)' },
 
   // Memory
-  'd-proj-shared':  { en:'Project (team-shared)', ru:'Проект (общий для команды)', zh:'项目（团队共享）', ja:'プロジェクト（チーム共有）', es:'Proyecto (compartido en equipo)' },
-  'd-personal':     { en:'Personal (all projects)', ru:'Личный (для всех проектов)', zh:'个人（所有项目）', ja:'個人（全プロジェクト）', es:'Personal (todos los proyectos)' },
-  'd-managed':      { en:'Managed (org-wide)', ru:'Управляемый (для организации)', zh:'托管（组织全局）', ja:'管理対象（組織全体）', es:'Gestionado (toda la organización)' },
-  'd-proj-rules':   { en:'Project rules', ru:'Правила проекта', zh:'项目规则', ja:'プロジェクトルール', es:'Reglas del proyecto' },
-  'd-user-rules':   { en:'User rules', ru:'Пользовательские правила', zh:'用户规则', ja:'ユーザールール', es:'Reglas del usuario' },
-  'd-path-rules':   { en:'Path-specific rules', ru:'Правила для конкретных путей', zh:'路径特定规则', ja:'パス固有のルール', es:'Reglas por ruta' },
-  'd-import':       { en:'Import in CLAUDE.md', ru:'Импорт в CLAUDE.md', zh:'在 CLAUDE.md 中导入', ja:'CLAUDE.mdにインポート', es:'Importar en CLAUDE.md' },
-  'd-auto-mem':     { en:'MEMORY.md + topic files, auto-loaded', ru:'MEMORY.md + файлы по темам, автозагрузка', zh:'MEMORY.md + 主题文件，自动加载', ja:'MEMORY.md + トピックファイル、自動読み込み', es:'MEMORY.md + archivos por tema, carga automática' },
+  'd-proj-shared':  { en:'Project (team-shared)', ru:'Проект (общий для команды)', zh:'项目（团队共享）', ja:'プロジェクト（チーム共有）', es:'Proyecto (compartido en equipo)', pt:'Projeto (compartilhado com o time)' },
+  'd-personal':     { en:'Personal (all projects)', ru:'Личный (для всех проектов)', zh:'个人（所有项目）', ja:'個人（全プロジェクト）', es:'Personal (todos los proyectos)', pt:'Pessoal (todos os projetos)' },
+  'd-managed':      { en:'Managed (org-wide)', ru:'Управляемый (для организации)', zh:'托管（组织全局）', ja:'管理対象（組織全体）', es:'Gestionado (toda la organización)', pt:'Gerenciado (toda a organização)' },
+  'd-proj-rules':   { en:'Project rules', ru:'Правила проекта', zh:'项目规则', ja:'プロジェクトルール', es:'Reglas del proyecto', pt:'Regras do projeto' },
+  'd-user-rules':   { en:'User rules', ru:'Пользовательские правила', zh:'用户规则', ja:'ユーザールール', es:'Reglas del usuario', pt:'Regras do usuário' },
+  'd-path-rules':   { en:'Path-specific rules', ru:'Правила для конкретных путей', zh:'路径特定规则', ja:'パス固有のルール', es:'Reglas por ruta', pt:'Regras por caminho' },
+  'd-import':       { en:'Import in CLAUDE.md', ru:'Импорт в CLAUDE.md', zh:'在 CLAUDE.md 中导入', ja:'CLAUDE.mdにインポート', es:'Importar en CLAUDE.md', pt:'Import no CLAUDE.md' },
+  'd-auto-mem':     { en:'MEMORY.md + topic files, auto-loaded', ru:'MEMORY.md + файлы по темам, автозагрузка', zh:'MEMORY.md + 主题文件，自动加载', ja:'MEMORY.md + トピックファイル、自動読み込み', es:'MEMORY.md + archivos por tema, carga automática', pt:'MEMORY.md + arquivos de tópicos, carregados automaticamente' },
 
   // Workflows
-  'd-ultrathink':   { en:'Max effort for one turn', ru:'Макс. усилие для хода', zh:'单次最大思考强度', ja:'1ターンの最大思考強度', es:'Máximo esfuerzo por turno' },
-  'd-view-think':   { en:'View thinking (verbose)', ru:'Просмотр мышления (подробно)', zh:'查看思考（详细）', ja:'思考を表示（詳細）', es:'Ver razonamiento (detallado)' },
-  'd-effort-levels':{ en:'○ low \u00a0·\u00a0 ◐ med \u00a0·\u00a0 ● high', ru:'○ низко \u00a0·\u00a0 ◐ средне \u00a0·\u00a0 ● высоко', zh:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', ja:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', es:'○ bajo \u00a0·\u00a0 ◐ medio \u00a0·\u00a0 ● alto' },
-  'd-tab-cycle':    { en:'Normal → Auto-accept → Plan', ru:'Обычный → Авто-принятие → План', zh:'普通 → 自动接受 → 计划', ja:'通常 → 自動承認 → プラン', es:'Normal → Auto-aceptar → Plan' },
-  'd-launch-plan':  { en:'Launch in plan mode', ru:'Запуск в режиме плана', zh:'以计划模式启动', ja:'プランモードで起動', es:'Iniciar en modo plan' },
-  'd-automode-default': { en:'Default on Bedrock/Vertex/Foundry', ru:'По умолчанию в Bedrock/Vertex/Foundry', zh:'在 Bedrock/Vertex/Foundry 上默认启用', ja:'Bedrock/Vertex/Foundryではデフォルト', es:'Por defecto en Bedrock/Vertex/Foundry' },
-  'd-isolated':     { en:'Isolated branch for feature', ru:'Изолированная ветка для фичи', zh:'功能的隔离分支', ja:'機能の隔離ブランチ', es:'Rama aislada para feature' },
-  'd-agent-wt':     { en:'Agent in own worktree', ru:'Агент в своём worktree', zh:'智能体在独立工作树', ja:'専用ワークツリーのエージェント', es:'Agente en su propio worktree' },
-  'd-sparse':       { en:'Checkout only needed folders', ru:'Checkout только нужных папок', zh:'仅检出所需文件夹', ja:'必要なフォルダのみチェックアウト', es:'Checkout solo carpetas necesarias' },
-  'd-batch':        { en:'Auto-create worktrees', ru:'Авто-создание worktrees', zh:'自动创建工作树', ja:'ワークツリーを自動作成', es:'Crear worktrees automáticamente' },
-  'd-ctx-tips':     { en:'Usage + optimization tips', ru:'Использование + советы по оптимизации', zh:'使用量 + 优化建议', ja:'使用量 + 最適化のヒント', es:'Uso + consejos de optimización' },
-  'd-compact-focus':{ en:'Compress with focus', ru:'Сжать с фокусом', zh:'聚焦压缩', ja:'フォーカス付きで圧縮', es:'Comprimir con enfoque' },
-  'd-auto-compact': { en:'~95% capacity', ru:'~95% ёмкости', zh:'~95% 容量', ja:'~95% の容量', es:'~95% de capacidad' },
-  'd-1m':           { en:'Sonnet 5 &amp; Opus 5 (native)', ru:'Sonnet 5 и Opus 5 (нативно)', zh:'Sonnet 5 和 Opus 5（原生）', ja:'Sonnet 5 と Opus 5（ネイティブ）', es:'Sonnet 5 y Opus 5 (nativo)' },
-  'd-survives':     { en:'Survives compaction', ru:'Выживает при сжатии', zh:'压缩后保留', ja:'圧縮後も保持', es:'Sobrevive la compresión' },
-  'd-continue-last':{ en:'Continue last conversation', ru:'Продолжить последний разговор', zh:'继续上次对话', ja:'最後の会話を継続', es:'Continuar última conversación' },
-  'd-resume-name':  { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre' },
-  'd-btw-tip':      { en:'Side question, no context cost', ru:'Побочный вопрос, без затрат контекста', zh:'额外问题，不消耗上下文', ja:'補足質問、コンテキスト消費なし', es:'Pregunta lateral, sin costo de contexto' },
-  'd-non-interactive':{ en:'Non-interactive mode', ru:'Неинтерактивный режим', zh:'非交互模式', ja:'非インタラクティブモード', es:'Modo no interactivo' },
-  'd-structured':   { en:'Structured output', ru:'Структурированный вывод', zh:'结构化输出', ja:'構造化出力', es:'Salida estructurada' },
-  'd-cost-limit':   { en:'Cost limit', ru:'Лимит затрат', zh:'费用限制', ja:'コスト制限', es:'Límite de costo' },
-  'd-pipe':         { en:'Pipe input', ru:'Передача через pipe', zh:'管道输入', ja:'パイプ入力', es:'Entrada por pipe' },
-  'd-push-to-talk': { en:'Enable push-to-talk', ru:'Включить push-to-talk', zh:'启用按键说话', ja:'プッシュトゥトークを有効化', es:'Activar push-to-talk' },
-  'd-record':       { en:'Record; release = send', ru:'Запись, отпустить = отправить', zh:'录音；松开 = 发送', ja:'録音；離すと送信', es:'Grabar; soltar = enviar' },
-  'd-20-langs':     { en:'EN, ES, FR, DE, CZ, PL…', ru:'EN, ES, FR, DE, CZ, PL…', zh:'EN, ES, FR, DE, CZ, PL…', ja:'EN, ES, FR, DE, CZ, PL…', es:'EN, ES, FR, DE, CZ, PL…' },
+  'd-ultrathink':   { en:'Max effort for one turn', ru:'Макс. усилие для хода', zh:'单次最大思考强度', ja:'1ターンの最大思考強度', es:'Máximo esfuerzo por turno', pt:'Esforço máximo por um turno' },
+  'd-view-think':   { en:'View thinking (verbose)', ru:'Просмотр мышления (подробно)', zh:'查看思考（详细）', ja:'思考を表示（詳細）', es:'Ver razonamiento (detallado)', pt:'Ver raciocínio (verbose)' },
+  'd-effort-levels':{ en:'○ low \u00a0·\u00a0 ◐ med \u00a0·\u00a0 ● high', ru:'○ низко \u00a0·\u00a0 ◐ средне \u00a0·\u00a0 ● высоко', zh:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', ja:'○ 低 \u00a0·\u00a0 ◐ 中 \u00a0·\u00a0 ● 高', es:'○ bajo \u00a0·\u00a0 ◐ medio \u00a0·\u00a0 ● alto', pt:'○ low  ·  ◐ med  ·  ● high' },
+  'd-tab-cycle':    { en:'Normal → Auto-accept → Plan', ru:'Обычный → Авто-принятие → План', zh:'普通 → 自动接受 → 计划', ja:'通常 → 自動承認 → プラン', es:'Normal → Auto-aceptar → Plan', pt:'Normal → Aceitar edições → Plano' },
+  'd-launch-plan':  { en:'Launch in plan mode', ru:'Запуск в режиме плана', zh:'以计划模式启动', ja:'プランモードで起動', es:'Iniciar en modo plan', pt:'Iniciar em modo plano' },
+  'd-automode-default': { en:'Default on Bedrock/Vertex/Foundry', ru:'По умолчанию в Bedrock/Vertex/Foundry', zh:'在 Bedrock/Vertex/Foundry 上默认启用', ja:'Bedrock/Vertex/Foundryではデフォルト', es:'Por defecto en Bedrock/Vertex/Foundry', pt:'Padrão no Bedrock/Vertex/Foundry' },
+  'd-isolated':     { en:'Isolated branch for feature', ru:'Изолированная ветка для фичи', zh:'功能的隔离分支', ja:'機能の隔離ブランチ', es:'Rama aislada para feature', pt:'Branch isolada para a feature' },
+  'd-agent-wt':     { en:'Agent in own worktree', ru:'Агент в своём worktree', zh:'智能体在独立工作树', ja:'専用ワークツリーのエージェント', es:'Agente en su propio worktree', pt:'Agente no próprio worktree' },
+  'd-sparse':       { en:'Checkout only needed folders', ru:'Checkout только нужных папок', zh:'仅检出所需文件夹', ja:'必要なフォルダのみチェックアウト', es:'Checkout solo carpetas necesarias', pt:'Checkout apenas das pastas necessárias' },
+  'd-batch':        { en:'Auto-create worktrees', ru:'Авто-создание worktrees', zh:'自动创建工作树', ja:'ワークツリーを自動作成', es:'Crear worktrees automáticamente', pt:'Criar worktrees automaticamente' },
+  'd-ctx-tips':     { en:'Usage + optimization tips', ru:'Использование + советы по оптимизации', zh:'使用量 + 优化建议', ja:'使用量 + 最適化のヒント', es:'Uso + consejos de optimización', pt:'Uso + dicas de otimização' },
+  'd-compact-focus':{ en:'Compress with focus', ru:'Сжать с фокусом', zh:'聚焦压缩', ja:'フォーカス付きで圧縮', es:'Comprimir con enfoque', pt:'Comprimir com foco' },
+  'd-auto-compact': { en:'~95% capacity', ru:'~95% ёмкости', zh:'~95% 容量', ja:'~95% の容量', es:'~95% de capacidad', pt:'~95% da capacidade' },
+  'd-1m':           { en:'Sonnet 5 &amp; Opus 5 (native)', ru:'Sonnet 5 и Opus 5 (нативно)', zh:'Sonnet 5 和 Opus 5（原生）', ja:'Sonnet 5 と Opus 5（ネイティブ）', es:'Sonnet 5 y Opus 5 (nativo)', pt:'Sonnet 5 &amp; Opus 5 (nativo)' },
+  'd-survives':     { en:'Survives compaction', ru:'Выживает при сжатии', zh:'压缩后保留', ja:'圧縮後も保持', es:'Sobrevive la compresión', pt:'Sobrevive à compactação' },
+  'd-continue-last':{ en:'Continue last conversation', ru:'Продолжить последний разговор', zh:'继续上次对话', ja:'最後の会話を継続', es:'Continuar última conversación', pt:'Continuar última conversa' },
+  'd-resume-name':  { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre', pt:'Retomar pelo nome' },
+  'd-btw-tip':      { en:'Side question, no context cost', ru:'Побочный вопрос, без затрат контекста', zh:'额外问题，不消耗上下文', ja:'補足質問、コンテキスト消費なし', es:'Pregunta lateral, sin costo de contexto', pt:'Pergunta paralela, sem custo de contexto' },
+  'd-non-interactive':{ en:'Non-interactive mode', ru:'Неинтерактивный режим', zh:'非交互模式', ja:'非インタラクティブモード', es:'Modo no interactivo', pt:'Modo não interativo' },
+  'd-structured':   { en:'Structured output', ru:'Структурированный вывод', zh:'结构化输出', ja:'構造化出力', es:'Salida estructurada', pt:'Saída estruturada' },
+  'd-cost-limit':   { en:'Cost limit', ru:'Лимит затрат', zh:'费用限制', ja:'コスト制限', es:'Límite de costo', pt:'Limite de custo' },
+  'd-pipe':         { en:'Pipe input', ru:'Передача через pipe', zh:'管道输入', ja:'パイプ入力', es:'Entrada por pipe', pt:'Entrada via pipe' },
+  'd-push-to-talk': { en:'Enable push-to-talk', ru:'Включить push-to-talk', zh:'启用按键说话', ja:'プッシュトゥトークを有効化', es:'Activar push-to-talk', pt:'Ativar push-to-talk' },
+  'd-record':       { en:'Record; release = send', ru:'Запись, отпустить = отправить', zh:'录音；松开 = 发送', ja:'録音；離すと送信', es:'Grabar; soltar = enviar', pt:'Gravar; soltar = enviar' },
+  'd-20-langs':     { en:'EN, ES, FR, DE, CZ, PL…', ru:'EN, ES, FR, DE, CZ, PL…', zh:'EN, ES, FR, DE, CZ, PL…', ja:'EN, ES, FR, DE, CZ, PL…', es:'EN, ES, FR, DE, CZ, PL…', pt:'EN, ES, FR, DE, CZ, PL…' },
 
   // Config
-  'd-user-cfg':     { en:'User settings', ru:'Настройки пользователя', zh:'用户设置', ja:'ユーザー設定', es:'Configuración del usuario' },
-  'd-proj-cfg':     { en:'Project (shared)', ru:'Проект (общий)', zh:'项目（共享）', ja:'プロジェクト（共有）', es:'Proyecto (compartido)' },
-  'd-local-cfg':    { en:'Local only', ru:'Только локально', zh:'仅本地', ja:'ローカルのみ', es:'Solo local' },
-  'd-oauth':        { en:'OAuth, MCP, state', ru:'OAuth, MCP, состояние', zh:'OAuth、MCP、状态', ja:'OAuth、MCP、状態', es:'OAuth, MCP, estado' },
-  'd-proj-mcp':     { en:'Project MCP servers', ru:'MCP-серверы проекта', zh:'项目 MCP 服务器', ja:'プロジェクトMCPサーバー', es:'Servidores MCP del proyecto' },
-  'd-model-map':    { en:'Map model selection → ID', ru:'Привязка выбора модели → ID', zh:'模型选择映射 → ID', ja:'モデル選択をIDにマップ', es:'Mapear selección de modelo → ID' },
-  'd-custom-mem':   { en:'Custom memory directory', ru:'Своя директория памяти', zh:'自定义记忆目录', ja:'カスタムメモリディレクトリ', es:'Directorio de memoria personalizado' },
-  'd-sparse-cfg':   { en:'Sparse checkout folders', ru:'Sparse checkout папок', zh:'稀疏检出文件夹', ja:'スパースチェックアウトフォルダ', es:'Carpetas de sparse checkout' },
-  'd-sandbox-allowlist': { en:'Deny non-allowlisted network hosts', ru:'Блокировать хосты не из allowlist', zh:'拒绝不在允许列表中的网络主机', ja:'許可リスト外のネットワークホストを拒否', es:'Denegar hosts de red no permitidos' },
-  'd-effort-env':   { en:'low / med / high', ru:'low/med/high', zh:'低/中/高', ja:'低/中/高', es:'bajo / medio / alto' },
-  'd-think-tokens': { en:'0 = off', ru:'0 = выкл', zh:'0 = 关闭', ja:'0 = オフ', es:'0 = desactivado' },
-  'd-output-tokens':{ en:'default 32K', ru:'по умолч. 32K', zh:'默认 32K', ja:'デフォルト32K', es:'por defecto 32K' },
-  'd-disable-cron': { en:'Disable scheduled tasks', ru:'Отключить задачи по расписанию', zh:'禁用定时任务', ja:'スケジュールタスクを無効化', es:'Deshabilitar tareas programadas' },
-  'd-max-spawn-depth': { en:'Limit subagent nesting (default 3)', ru:'Лимит вложенности субагентов (по умолчанию 3)', zh:'限制子智能体嵌套深度（默认3）', ja:'サブエージェントのネスト深度を制限（デフォルト3）', es:'Limitar anidamiento de subagentes (por defecto 3)' },
+  'd-user-cfg':     { en:'User settings', ru:'Настройки пользователя', zh:'用户设置', ja:'ユーザー設定', es:'Configuración del usuario', pt:'Configurações do usuário' },
+  'd-proj-cfg':     { en:'Project (shared)', ru:'Проект (общий)', zh:'项目（共享）', ja:'プロジェクト（共有）', es:'Proyecto (compartido)', pt:'Projeto (compartilhado)' },
+  'd-local-cfg':    { en:'Local only', ru:'Только локально', zh:'仅本地', ja:'ローカルのみ', es:'Solo local', pt:'Somente local' },
+  'd-oauth':        { en:'OAuth, MCP, state', ru:'OAuth, MCP, состояние', zh:'OAuth、MCP、状态', ja:'OAuth、MCP、状態', es:'OAuth, MCP, estado', pt:'OAuth, MCP, estado' },
+  'd-proj-mcp':     { en:'Project MCP servers', ru:'MCP-серверы проекта', zh:'项目 MCP 服务器', ja:'プロジェクトMCPサーバー', es:'Servidores MCP del proyecto', pt:'Servidores MCP do projeto' },
+  'd-model-map':    { en:'Map model selection → ID', ru:'Привязка выбора модели → ID', zh:'模型选择映射 → ID', ja:'モデル選択をIDにマップ', es:'Mapear selección de modelo → ID', pt:'Mapear seleção de modelo → ID' },
+  'd-custom-mem':   { en:'Custom memory directory', ru:'Своя директория памяти', zh:'自定义记忆目录', ja:'カスタムメモリディレクトリ', es:'Directorio de memoria personalizado', pt:'Diretório de memória customizado' },
+  'd-sparse-cfg':   { en:'Sparse checkout folders', ru:'Sparse checkout папок', zh:'稀疏检出文件夹', ja:'スパースチェックアウトフォルダ', es:'Carpetas de sparse checkout', pt:'Pastas do sparse checkout' },
+  'd-sandbox-allowlist': { en:'Deny non-allowlisted network hosts', ru:'Блокировать хосты не из allowlist', zh:'拒绝不在允许列表中的网络主机', ja:'許可リスト外のネットワークホストを拒否', es:'Denegar hosts de red no permitidos', pt:'Bloquear hosts de rede fora da allowlist' },
+  'd-effort-env':   { en:'low / med / high', ru:'low/med/high', zh:'低/中/高', ja:'低/中/高', es:'bajo / medio / alto', pt:'low / med / high' },
+  'd-think-tokens': { en:'0 = off', ru:'0 = выкл', zh:'0 = 关闭', ja:'0 = オフ', es:'0 = desactivado', pt:'0 = desligado' },
+  'd-output-tokens':{ en:'default 32K', ru:'по умолч. 32K', zh:'默认 32K', ja:'デフォルト32K', es:'por defecto 32K', pt:'padrão 32K' },
+  'd-disable-cron': { en:'Disable scheduled tasks', ru:'Отключить задачи по расписанию', zh:'禁用定时任务', ja:'スケジュールタスクを無効化', es:'Deshabilitar tareas programadas', pt:'Desativar tarefas agendadas' },
+  'd-max-spawn-depth': { en:'Limit subagent nesting (default 3)', ru:'Лимит вложенности субагентов (по умолчанию 3)', zh:'限制子智能体嵌套深度（默认3）', ja:'サブエージェントのネスト深度を制限（デフォルト3）', es:'Limitar anidamiento de subagentes (por defecto 3)', pt:'Limitar aninhamento de subagentes (padrão 3)' },
 
   // Skills
-  'd-simplify':     { en:'Code review (3 parallel agents)', ru:'Код-ревью (3 параллельных агента)', zh:'代码审查（3个并行智能体）', ja:'コードレビュー（3並列エージェント）', es:'Revisión de código (3 agentes paralelos)' },
-  'd-bulk':         { en:'Bulk changes (5–30 worktrees)', ru:'Массовые изменения (5–30 worktrees)', zh:'批量更改（5–30个工作树）', ja:'一括変更（5〜30ワークツリー）', es:'Cambios masivos (5–30 worktrees)' },
-  'd-debug':        { en:'Debug from log', ru:'Отладка по логу', zh:'从日志调试', ja:'ログからデバッグ', es:'Depurar desde log' },
-  'd-recurring':    { en:'Recurring scheduled task', ru:'Повторяющаяся задача по расписанию', zh:'定期计划任务', ja:'定期スケジュールタスク', es:'Tarea recurrente programada' },
-  'd-api-ref':      { en:'Load API + SDK reference', ru:'Загрузить справочник API + SDK', zh:'加载 API + SDK 参考', ja:'API + SDKリファレンスを読み込む', es:'Cargar referencia API + SDK' },
-  'd-dataviz':      { en:'Chart &amp; dashboard design guidance', ru:'Гайд по дизайну графиков и дашбордов', zh:'图表与仪表盘设计指南', ja:'チャート＆ダッシュボードのデザインガイド', es:'Guía de diseño de gráficos y dashboards' },
-  'd-proj-skills':  { en:'Project skills', ru:'Скиллы проекта', zh:'项目技能', ja:'プロジェクトスキル', es:'Skills del proyecto' },
-  'd-personal-skills':{ en:'Personal skills', ru:'Личные скиллы', zh:'个人技能', ja:'個人スキル', es:'Skills personales' },
-  'd-auto-invoke':  { en:'Auto-invoke trigger', ru:'Триггер автовызова', zh:'自动调用触发器', ja:'自動呼び出しトリガー', es:'Disparador de invocación automática' },
-  'd-skip-perms':   { en:'Skip permission prompts', ru:'Пропуск запросов разрешений', zh:'跳过权限提示', ja:'権限プロンプトをスキップ', es:'Omitir solicitudes de permiso' },
-  'd-override-model':{ en:'Override model for skill', ru:'Переопределение модели для скилла', zh:'覆盖技能模型', ja:'スキルのモデルを上書き', es:'Sobrescribir modelo para skill' },
-  'd-override-effort':{ en:'Override effort level', ru:'Переопределение уровня усилия', zh:'覆盖思考强度', ja:'思考強度を上書き', es:'Sobrescribir nivel de esfuerzo' },
-  'd-fork-sub':     { en:'Run in subagent', ru:'Запуск в субагенте', zh:'在子智能体中运行', ja:'サブエージェントで実行', es:'Ejecutar en subagente' },
-  'd-args':         { en:'User input placeholder', ru:'Плейсхолдер ввода пользователя', zh:'用户输入占位符', ja:'ユーザー入力プレースホルダー', es:'Placeholder de entrada del usuario' },
-  'd-skill-dir':    { en:'Skill directory', ru:'Директория скилла', zh:'技能目录', ja:'スキルディレクトリ', es:'Directorio del skill' },
-  'd-dyn-ctx':      { en:'Dynamic context injection', ru:'Динамическая инъекция контекста', zh:'动态上下文注入', ja:'動的コンテキスト注入', es:'Inyección dinámica de contexto' },
-  'd-explore':      { en:'Fast read-only (Haiku)', ru:'Быстрый read-only (Haiku)', zh:'快速只读（Haiku）', ja:'高速読み取り専用（Haiku）', es:'Solo lectura rápida (Haiku)' },
-  'd-plan-agent':   { en:'Research for plan mode', ru:'Исследование для режима плана', zh:'计划模式调研', ja:'プランモードのリサーチ', es:'Investigación para modo plan' },
-  'd-general':      { en:'All tools, complex tasks', ru:'Все инструменты, сложные задачи', zh:'所有工具，复杂任务', ja:'全ツール、複雑なタスク', es:'Todas las herramientas, tareas complejas' },
-  'd-bash-agent':   { en:'Terminal, separate context', ru:'Терминал, отдельный контекст', zh:'终端，独立上下文', ja:'ターミナル、独立コンテキスト', es:'Terminal, contexto separado' },
-  'd-perm-mode':    { en:'default/acceptEdits/plan/dontAsk/bypass', ru:'default/acceptEdits/plan/dontAsk/bypass', zh:'default/acceptEdits/plan/dontAsk/bypass', ja:'default/acceptEdits/plan/dontAsk/bypass', es:'default/acceptEdits/plan/dontAsk/bypass' },
-  'd-iso-wt':       { en:'Run in git worktree', ru:'Запуск в git worktree', zh:'在 git 工作树中运行', ja:'gitワークツリーで実行', es:'Ejecutar en git worktree' },
-  'd-persist-mem':  { en:'Persistent memory', ru:'Постоянная память', zh:'持久记忆', ja:'永続メモリ', es:'Memoria persistente' },
-  'd-max-turns':    { en:'Limit agent turns', ru:'Лимит агентских ходов', zh:'限制智能体轮次', ja:'エージェントターンを制限', es:'Limitar turnos del agente' },
-  'd-bg-default':   { en:'Run in background by default', ru:'По умолчанию работают в фоне', zh:'默认在后台运行', ja:'デフォルトでバックグラウンド実行', es:'Se ejecutan en segundo plano por defecto' },
-  'd-nested-depth': { en:'Depth 3 by default (was 1)', ru:'Глубина 3 по умолчанию (было 1)', zh:'默认深度为3（此前为1）', ja:'デフォルトで深さ3（以前は1）', es:'Profundidad 3 por defecto (antes 1)' },
-  'd-send-msg':     { en:'Resume stopped agents', ru:'Возобновление агентов', zh:'恢复已停止的智能体', ja:'停止したエージェントを再開', es:'Reanudar agentes detenidos' },
+  'd-simplify':     { en:'Code review (3 parallel agents)', ru:'Код-ревью (3 параллельных агента)', zh:'代码审查（3个并行智能体）', ja:'コードレビュー（3並列エージェント）', es:'Revisión de código (3 agentes paralelos)', pt:'Revisão de código (3 agentes em paralelo)' },
+  'd-bulk':         { en:'Bulk changes (5–30 worktrees)', ru:'Массовые изменения (5–30 worktrees)', zh:'批量更改（5–30个工作树）', ja:'一括変更（5〜30ワークツリー）', es:'Cambios masivos (5–30 worktrees)', pt:'Mudanças em massa (5–30 worktrees)' },
+  'd-debug':        { en:'Debug from log', ru:'Отладка по логу', zh:'从日志调试', ja:'ログからデバッグ', es:'Depurar desde log', pt:'Depurar a partir do log' },
+  'd-recurring':    { en:'Recurring scheduled task', ru:'Повторяющаяся задача по расписанию', zh:'定期计划任务', ja:'定期スケジュールタスク', es:'Tarea recurrente programada', pt:'Tarefa agendada recorrente' },
+  'd-api-ref':      { en:'Load API + SDK reference', ru:'Загрузить справочник API + SDK', zh:'加载 API + SDK 参考', ja:'API + SDKリファレンスを読み込む', es:'Cargar referencia API + SDK', pt:'Carregar referência de API + SDK' },
+  'd-dataviz':      { en:'Chart &amp; dashboard design guidance', ru:'Гайд по дизайну графиков и дашбордов', zh:'图表与仪表盘设计指南', ja:'チャート＆ダッシュボードのデザインガイド', es:'Guía de diseño de gráficos y dashboards', pt:'Orientações de design para gráficos e dashboards' },
+  'd-proj-skills':  { en:'Project skills', ru:'Скиллы проекта', zh:'项目技能', ja:'プロジェクトスキル', es:'Skills del proyecto', pt:'Skills do projeto' },
+  'd-personal-skills':{ en:'Personal skills', ru:'Личные скиллы', zh:'个人技能', ja:'個人スキル', es:'Skills personales', pt:'Skills pessoais' },
+  'd-auto-invoke':  { en:'Auto-invoke trigger', ru:'Триггер автовызова', zh:'自动调用触发器', ja:'自動呼び出しトリガー', es:'Disparador de invocación automática', pt:'Gatilho de invocação automática' },
+  'd-skip-perms':   { en:'Skip permission prompts', ru:'Пропуск запросов разрешений', zh:'跳过权限提示', ja:'権限プロンプトをスキップ', es:'Omitir solicitudes de permiso', pt:'Pular pedidos de permissão' },
+  'd-override-model':{ en:'Override model for skill', ru:'Переопределение модели для скилла', zh:'覆盖技能模型', ja:'スキルのモデルを上書き', es:'Sobrescribir modelo para skill', pt:'Sobrescrever modelo da skill' },
+  'd-override-effort':{ en:'Override effort level', ru:'Переопределение уровня усилия', zh:'覆盖思考强度', ja:'思考強度を上書き', es:'Sobrescribir nivel de esfuerzo', pt:'Sobrescrever nível de esforço' },
+  'd-fork-sub':     { en:'Run in subagent', ru:'Запуск в субагенте', zh:'在子智能体中运行', ja:'サブエージェントで実行', es:'Ejecutar en subagente', pt:'Executar em subagente' },
+  'd-args':         { en:'User input placeholder', ru:'Плейсхолдер ввода пользователя', zh:'用户输入占位符', ja:'ユーザー入力プレースホルダー', es:'Placeholder de entrada del usuario', pt:'Placeholder da entrada do usuário' },
+  'd-skill-dir':    { en:'Skill directory', ru:'Директория скилла', zh:'技能目录', ja:'スキルディレクトリ', es:'Directorio del skill', pt:'Diretório da skill' },
+  'd-dyn-ctx':      { en:'Dynamic context injection', ru:'Динамическая инъекция контекста', zh:'动态上下文注入', ja:'動的コンテキスト注入', es:'Inyección dinámica de contexto', pt:'Injeção dinâmica de contexto' },
+  'd-explore':      { en:'Fast read-only (Haiku)', ru:'Быстрый read-only (Haiku)', zh:'快速只读（Haiku）', ja:'高速読み取り専用（Haiku）', es:'Solo lectura rápida (Haiku)', pt:'Leitura rápida somente leitura (Haiku)' },
+  'd-plan-agent':   { en:'Research for plan mode', ru:'Исследование для режима плана', zh:'计划模式调研', ja:'プランモードのリサーチ', es:'Investigación para modo plan', pt:'Pesquisa para o modo plano' },
+  'd-general':      { en:'All tools, complex tasks', ru:'Все инструменты, сложные задачи', zh:'所有工具，复杂任务', ja:'全ツール、複雑なタスク', es:'Todas las herramientas, tareas complejas', pt:'Todas as ferramentas, tarefas complexas' },
+  'd-bash-agent':   { en:'Terminal, separate context', ru:'Терминал, отдельный контекст', zh:'终端，独立上下文', ja:'ターミナル、独立コンテキスト', es:'Terminal, contexto separado', pt:'Terminal, contexto separado' },
+  'd-perm-mode':    { en:'default/acceptEdits/plan/dontAsk/bypass', ru:'default/acceptEdits/plan/dontAsk/bypass', zh:'default/acceptEdits/plan/dontAsk/bypass', ja:'default/acceptEdits/plan/dontAsk/bypass', es:'default/acceptEdits/plan/dontAsk/bypass', pt:'default/acceptEdits/plan/dontAsk/bypass' },
+  'd-iso-wt':       { en:'Run in git worktree', ru:'Запуск в git worktree', zh:'在 git 工作树中运行', ja:'gitワークツリーで実行', es:'Ejecutar en git worktree', pt:'Executar em git worktree' },
+  'd-persist-mem':  { en:'Persistent memory', ru:'Постоянная память', zh:'持久记忆', ja:'永続メモリ', es:'Memoria persistente', pt:'Memória persistente' },
+  'd-max-turns':    { en:'Limit agent turns', ru:'Лимит агентских ходов', zh:'限制智能体轮次', ja:'エージェントターンを制限', es:'Limitar turnos del agente', pt:'Limitar turnos do agente' },
+  'd-bg-default':   { en:'Run in background by default', ru:'По умолчанию работают в фоне', zh:'默认在后台运行', ja:'デフォルトでバックグラウンド実行', es:'Se ejecutan en segundo plano por defecto', pt:'Executar em segundo plano por padrão' },
+  'd-nested-depth': { en:'Depth 3 by default (was 1)', ru:'Глубина 3 по умолчанию (было 1)', zh:'默认深度为3（此前为1）', ja:'デフォルトで深さ3（以前は1）', es:'Profundidad 3 por defecto (antes 1)', pt:'Profundidade 3 por padrão (antes 1)' },
+  'd-send-msg':     { en:'Resume stopped agents', ru:'Возобновление агентов', zh:'恢复已停止的智能体', ja:'停止したエージェントを再開', es:'Reanudar agentes detenidos', pt:'Retomar agentes parados' },
 
   // CLI
-  'd-interactive':  { en:'Interactive mode', ru:'Интерактивный режим', zh:'交互模式', ja:'インタラクティブモード', es:'Modo interactivo' },
-  'd-with-prompt':  { en:'With prompt', ru:'С промптом', zh:'带提示词', ja:'プロンプト付き', es:'Con prompt' },
-  'd-cont-last':    { en:'Continue last', ru:'Продолжить последний', zh:'继续上次', ja:'最後から継続', es:'Continuar último' },
-  'd-resume-short': { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre' },
-  'd-update':       { en:'Update', ru:'Обновить', zh:'更新', ja:'アップデート', es:'Actualizar' },
-  'd-set-model':    { en:'Set model', ru:'Задать модель', zh:'设置模型', ja:'モデルを設定', es:'Establecer modelo' },
-  'd-sess-name':    { en:'Session name', ru:'Имя сессии', zh:'会话名称', ja:'セッション名', es:'Nombre de sesión' },
-  'd-add-dir-flag': { en:'Add directory', ru:'Добавить директорию', zh:'添加目录', ja:'ディレクトリを追加', es:'Agregar directorio' },
-  'd-use-agent':    { en:'Use an agent', ru:'Использовать агента', zh:'使用智能体', ja:'エージェントを使用', es:'Usar un agente' },
-  'd-preapprove':   { en:'Pre-approve tools', ru:'Предварительно одобрить', zh:'预批准工具', ja:'ツールを事前承認', es:'Pre-aprobar herramientas' },
-  'd-limit-turns':  { en:'Limit turns', ru:'Лимит ходов', zh:'限制轮次', ja:'ターンを制限', es:'Limitar turnos' },
-  'd-console-auth': { en:'Auth via Anthropic Console', ru:'Авторизация через Anthropic Console', zh:'通过 Anthropic Console 认证', ja:'Anthropic Consoleで認証', es:'Autenticar vía Anthropic Console' },
-  'd-verbose-out':  { en:'Verbose output', ru:'Подробный вывод', zh:'详细输出', ja:'詳細出力', es:'Salida detallada' },
-  'd-bare':         { en:'Minimal headless (no hooks/LSP)', ru:'Минимальный headless (без хуков/LSP)', zh:'最小无头模式（无钩子/LSP）', ja:'最小ヘッドレス（フック/LSPなし）', es:'Headless mínimo (sin hooks/LSP)' },
-  'd-channels':     { en:'Permission relay / MCP push', ru:'Ретрансляция разрешений / MCP push', zh:'权限中继 / MCP 推送', ja:'権限リレー / MCPプッシュ', es:'Retransmisión de permisos / MCP push' },
-  'd-web-sess':     { en:'Web session', ru:'Веб-сессия', zh:'网页会话', ja:'ウェブセッション', es:'Sesión web' },
-  'd-effort-flag':  { en:'low / med / high / max', ru:'low/med/high/max', zh:'低/中/高/最大', ja:'低/中/高/最大', es:'bajo / medio / alto / máx' },
-  'd-screen-reader': { en:'Screen reader accessibility mode', ru:'Режим доступности для скринридеров', zh:'屏幕阅读器无障碍模式', ja:'スクリーンリーダーアクセシビリティモード', es:'Modo de accesibilidad para lector de pantalla' },
-  'd-skip-all':     { en:'Skip all prompts ⚠', ru:'Пропустить все запросы ⚠', zh:'跳过所有提示 ⚠', ja:'全プロンプトをスキップ ⚠', es:'Omitir todas las solicitudes ⚠' },
+  'd-interactive':  { en:'Interactive mode', ru:'Интерактивный режим', zh:'交互模式', ja:'インタラクティブモード', es:'Modo interactivo', pt:'Modo interativo' },
+  'd-with-prompt':  { en:'With prompt', ru:'С промптом', zh:'带提示词', ja:'プロンプト付き', es:'Con prompt', pt:'Com prompt' },
+  'd-cont-last':    { en:'Continue last', ru:'Продолжить последний', zh:'继续上次', ja:'最後から継続', es:'Continuar último', pt:'Continuar o último' },
+  'd-resume-short': { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre', pt:'Retomar pelo nome' },
+  'd-update':       { en:'Update', ru:'Обновить', zh:'更新', ja:'アップデート', es:'Actualizar', pt:'Atualizar' },
+  'd-set-model':    { en:'Set model', ru:'Задать модель', zh:'设置模型', ja:'モデルを設定', es:'Establecer modelo', pt:'Definir modelo' },
+  'd-sess-name':    { en:'Session name', ru:'Имя сессии', zh:'会话名称', ja:'セッション名', es:'Nombre de sesión', pt:'Nome da sessão' },
+  'd-add-dir-flag': { en:'Add directory', ru:'Добавить директорию', zh:'添加目录', ja:'ディレクトリを追加', es:'Agregar directorio', pt:'Adicionar diretório' },
+  'd-use-agent':    { en:'Use an agent', ru:'Использовать агента', zh:'使用智能体', ja:'エージェントを使用', es:'Usar un agente', pt:'Usar um agente' },
+  'd-preapprove':   { en:'Pre-approve tools', ru:'Предварительно одобрить', zh:'预批准工具', ja:'ツールを事前承認', es:'Pre-aprobar herramientas', pt:'Pré-aprovar ferramentas' },
+  'd-limit-turns':  { en:'Limit turns', ru:'Лимит ходов', zh:'限制轮次', ja:'ターンを制限', es:'Limitar turnos', pt:'Limitar turnos' },
+  'd-console-auth': { en:'Auth via Anthropic Console', ru:'Авторизация через Anthropic Console', zh:'通过 Anthropic Console 认证', ja:'Anthropic Consoleで認証', es:'Autenticar vía Anthropic Console', pt:'Autenticar pelo Anthropic Console' },
+  'd-verbose-out':  { en:'Verbose output', ru:'Подробный вывод', zh:'详细输出', ja:'詳細出力', es:'Salida detallada', pt:'Saída detalhada' },
+  'd-bare':         { en:'Minimal headless (no hooks/LSP)', ru:'Минимальный headless (без хуков/LSP)', zh:'最小无头模式（无钩子/LSP）', ja:'最小ヘッドレス（フック/LSPなし）', es:'Headless mínimo (sin hooks/LSP)', pt:'Headless mínimo (sem hooks/LSP)' },
+  'd-channels':     { en:'Permission relay / MCP push', ru:'Ретрансляция разрешений / MCP push', zh:'权限中继 / MCP 推送', ja:'権限リレー / MCPプッシュ', es:'Retransmisión de permisos / MCP push', pt:'Relay de permissões / push MCP' },
+  'd-web-sess':     { en:'Web session', ru:'Веб-сессия', zh:'网页会话', ja:'ウェブセッション', es:'Sesión web', pt:'Sessão web' },
+  'd-effort-flag':  { en:'low / med / high / max', ru:'low/med/high/max', zh:'低/中/高/最大', ja:'低/中/高/最大', es:'bajo / medio / alto / máx', pt:'low / med / high / max' },
+  'd-screen-reader': { en:'Screen reader accessibility mode', ru:'Режим доступности для скринридеров', zh:'屏幕阅读器无障碍模式', ja:'スクリーンリーダーアクセシビリティモード', es:'Modo de accesibilidad para lector de pantalla', pt:'Modo de acessibilidade para leitores de tela' },
+  'd-skip-all':     { en:'Skip all prompts ⚠', ru:'Пропустить все запросы ⚠', zh:'跳过所有提示 ⚠', ja:'全プロンプトをスキップ ⚠', es:'Omitir todas las solicitudes ⚠', pt:'Pular todos os prompts ⚠' },
 
   // Limits Widget
-  'limits-title':   { en:'Claude Limits Status', ru:'Статус лимитов Claude', zh:'Claude 限制状态', ja:'Claude制限ステータス', es:'Estado de Límites de Claude' },
-  'limits-current-period': { en:'Current Period', ru:'Текущий период', zh:'当前时段', ja:'現在の期間', es:'Período Actual' },
-  'limits-time-until': { en:'Time Until Change', ru:'Времени до изменения', zh:'剩余时间', ja:'変更までの時間', es:'Tiempo hasta Cambio' },
-  'limits-peak-label': { en:'Peak Hours (16:00–01:00 UTC)', ru:'Часы пик (16:00–01:00 UTC)', zh:'峰值时段（16:00–01:00 UTC）', ja:'ピーク時間（16:00–01:00 UTC）', es:'Horas Pico (16:00–01:00 UTC)' },
-  'limits-best-label': { en:'Best Time (01:00–16:00 UTC)', ru:'Лучшее время (01:00–16:00 UTC)', zh:'最佳时间（01:00–16:00 UTC）', ja:'最高時（01:00–16:00 UTC）', es:'Mejor Hora (01:00–16:00 UTC)' },
-  'limits-status-label': { en:'System Status', ru:'Статус системы', zh:'系统状态', ja:'システムステータス', es:'Estado del Sistema' }
+  'limits-title':   { en:'Claude Limits Status', ru:'Статус лимитов Claude', zh:'Claude 限制状态', ja:'Claude制限ステータス', es:'Estado de Límites de Claude', pt:'Status dos Limites do Claude' },
+  'limits-current-period': { en:'Current Period', ru:'Текущий период', zh:'当前时段', ja:'現在の期間', es:'Período Actual', pt:'Período Atual' },
+  'limits-time-until': { en:'Time Until Change', ru:'Времени до изменения', zh:'剩余时间', ja:'変更までの時間', es:'Tiempo hasta Cambio', pt:'Tempo até a Mudança' },
+  'limits-peak-label': { en:'Peak Hours (16:00–01:00 UTC)', ru:'Часы пик (16:00–01:00 UTC)', zh:'峰值时段（16:00–01:00 UTC）', ja:'ピーク時間（16:00–01:00 UTC）', es:'Horas Pico (16:00–01:00 UTC)', pt:'Horário de Pico (16:00–01:00 UTC)' },
+  'limits-best-label': { en:'Best Time (01:00–16:00 UTC)', ru:'Лучшее время (01:00–16:00 UTC)', zh:'最佳时间（01:00–16:00 UTC）', ja:'最高時（01:00–16:00 UTC）', es:'Mejor Hora (01:00–16:00 UTC)', pt:'Melhor Horário (01:00–16:00 UTC)' },
+  'limits-status-label': { en:'System Status', ru:'Статус системы', zh:'系统状态', ja:'システムステータス', es:'Estado del Sistema', pt:'Status do Sistema' }
 };
 
 // Footer HTML per language
@@ -2182,7 +2183,8 @@ const FOOTER = {
   ru: `<div class="footer-group"><span class="footer-label">Режимы разрешений:</span><code>default</code> запросы &middot; <code>acceptEdits</code> авто-принятие &middot; <code>plan</code> только чтение &middot; <code>dontAsk</code> запрет &middot; <code>bypassPermissions</code> пропуск всех &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Переменные окружения:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=выкл) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">Авторы:</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
   zh: `<div class="footer-group"><span class="footer-label">权限模式：</span><code>default</code> 提示 &middot; <code>acceptEdits</code> 自动接受 &middot; <code>plan</code> 只读 &middot; <code>dontAsk</code> 拒绝 &middot; <code>bypassPermissions</code> 全部跳过 &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">环境变量：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=关）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（默认32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">制作：</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
   ja: `<div class="footer-group"><span class="footer-label">権限モード：</span><code>default</code> 確認 &middot; <code>acceptEdits</code> 自動承認 &middot; <code>plan</code> 読取専用 &middot; <code>dontAsk</code> 拒否 &middot; <code>bypassPermissions</code> 全スキップ &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">環境変数：</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code>（低/中/高）<code>MAX_THINKING_TOKENS</code>（0=オフ）<code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code>（デフォルト32K）<code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">クレジット：</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
-  es: `<div class="footer-group"><span class="footer-label">Modos de Permiso:</span><code>default</code> solicitudes &middot; <code>acceptEdits</code> auto-aceptar &middot; <code>plan</code> solo lectura &middot; <code>dontAsk</code> denegar &middot; <code>bypassPermissions</code> omitir todo &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Variables de Entorno:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (bajo/medio/alto) <code>MAX_THINKING_TOKENS</code> (0=desact.) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K por defecto) <code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">Créditos:</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`
+  es: `<div class="footer-group"><span class="footer-label">Modos de Permiso:</span><code>default</code> solicitudes &middot; <code>acceptEdits</code> auto-aceptar &middot; <code>plan</code> solo lectura &middot; <code>dontAsk</code> denegar &middot; <code>bypassPermissions</code> omitir todo &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Variables de Entorno:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (bajo/medio/alto) <code>MAX_THINKING_TOKENS</code> (0=desact.) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (32K por defecto) <code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">Créditos:</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`,
+  pt: `<div class="footer-group"><span class="footer-label">Modos de Permissão:</span><code>default</code> pergunta &middot; <code>acceptEdits</code> aceita edições automaticamente &middot; <code>plan</code> somente leitura &middot; <code>dontAsk</code> nega se não permitido &middot; <code>bypassPermissions</code> ignora tudo &middot; CLI: <code>--dangerously-skip-permissions</code></div><div class="footer-group"><span class="footer-label">Variáveis de Ambiente:</span><code>ANTHROPIC_API_KEY</code> <code>ANTHROPIC_MODEL</code> <code>CLAUDE_CODE_EFFORT_LEVEL</code> (low/med/high) <code>MAX_THINKING_TOKENS</code> (0=desligado) <code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code> (padrão 32K) <code>CLAUDE_CODE_DISABLE_CRON</code></div><div class="footer-group"><span class="footer-label">Créditos:</span><a href="https://t.me/prompt_design" target="_blank" rel="noopener">Силиконовый Мешок</a> &middot; <a href="https://www.linkedin.com/in/paullarionov" target="_blank" rel="noopener">Paul Larionov</a></div>`
 };
 
 // ── State ───────────────────────────────────────────────────────────────────
@@ -2212,6 +2214,7 @@ function updateLimitsWidget() {
                   currentLang === 'ru' ? 'Ваше время:' :
                   currentLang === 'zh' ? '你的时间：' :
                   currentLang === 'ja' ? 'あなたの時間：' :
+                  currentLang === 'pt' ? 'Seu horário:' :
                   currentLang === 'es' ? 'Tu hora:' : 'Your time:';
     timeDisplay.textContent = `${label} ${timeStr} (${timezone})`;
   }
@@ -2260,11 +2263,13 @@ function updateLimitsWidget() {
        currentLang === 'ru' ? 'Низкие лимиты' :
        currentLang === 'zh' ? '低限制' :
        currentLang === 'ja' ? '低制限' :
+       currentLang === 'pt' ? 'Limites Baixos' :
        currentLang === 'es' ? 'Límites Bajos' : 'Low Limits') :
       (currentLang === 'en' ? 'High Limits' :
        currentLang === 'ru' ? 'Высокие лимиты' :
        currentLang === 'zh' ? '高限制' :
        currentLang === 'ja' ? '高制限' :
+       currentLang === 'pt' ? 'Limites Altos' :
        currentLang === 'es' ? 'Límites Altos' : 'High Limits');
 
     statusEl.textContent = statusText;
@@ -2288,11 +2293,13 @@ function updateLimitsWidget() {
                         currentLang === 'ru' ? 'Часы пик (низкие лимиты)' :
                         currentLang === 'zh' ? '峰值时段（低限制）' :
                         currentLang === 'ja' ? 'ピーク時間（低制限）' :
+                        currentLang === 'pt' ? 'Horário de Pico (Limites Baixos)' :
                         currentLang === 'es' ? 'Horas Pico (Límites Bajos)' : 'Peak Hours';
     nextPeriodText = currentLang === 'en' ? 'Best Time (High Limits)' :
                      currentLang === 'ru' ? 'Лучшее время (высокие лимиты)' :
                      currentLang === 'zh' ? '最佳时间（高限制）' :
                      currentLang === 'ja' ? '最高時（高制限）' :
+                     currentLang === 'pt' ? 'Melhor Horário (Limites Altos)' :
                      currentLang === 'es' ? 'Mejor Hora (Límites Altos)' : 'Best Time';
   } else {
     let nextHour = 16;
@@ -2307,11 +2314,13 @@ function updateLimitsWidget() {
                         currentLang === 'ru' ? 'Лучшее время (высокие лимиты)' :
                         currentLang === 'zh' ? '最佳时间（高限制）' :
                         currentLang === 'ja' ? '最高時（高制限）' :
+                        currentLang === 'pt' ? 'Melhor Horário (Limites Altos)' :
                         currentLang === 'es' ? 'Mejor Hora (Límites Altos)' : 'Best Time';
     nextPeriodText = currentLang === 'en' ? 'Peak Hours (Low Limits)' :
                      currentLang === 'ru' ? 'Часы пик (низкие лимиты)' :
                      currentLang === 'zh' ? '峰值时段（低限制）' :
                      currentLang === 'ja' ? 'ピーク時間（低制限）' :
+                     currentLang === 'pt' ? 'Horário de Pico (Limites Baixos)' :
                      currentLang === 'es' ? 'Horas Pico (Límites Bajos)' : 'Peak Hours';
   }
 
@@ -2404,13 +2413,13 @@ function setLang(lang) {
   document.getElementById('footer').innerHTML = FOOTER[lang] || FOOTER.en;
 
   // Update lang button states
-  ['en','ru','zh','ja','es'].forEach(l => {
+  ['en','ru','zh','ja','es','pt'].forEach(l => {
     const btn = document.getElementById('btn-' + l);
     if (btn) btn.className = (l === lang) ? 'active' : '';
   });
 
   // Update html lang attribute
-  const langMap = { en:'en', ru:'ru', zh:'zh-Hans', ja:'ja', es:'es' };
+  const langMap = { en:'en', ru:'ru', zh:'zh-Hans', ja:'ja', es:'es', pt:'pt-BR' };
   document.documentElement.lang = langMap[lang] || 'en';
 
   // Update limits widget
