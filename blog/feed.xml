@@ -6,12 +6,39 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
+
+    <item>
+      <title>Claude Code Hooks: Setup Guide With 5 Working Examples</title>
+      <link>https://claude-guides.com/blog/claude-code-hooks-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-hooks-guide.html</guid>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Run your own scripts at fixed points in a Claude Code session. Five working hook configs (auto-format, protect files, deny rm -rf, notifications, post-compaction context), exit codes, JSON output and debugging.</description>
+    </item>
+
+    <item>
+      <title>Claude Code Permissions: Allow, Deny and Ask Rules Guide</title>
+      <link>https://claude-guides.com/blog/claude-code-permissions-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-permissions-guide.html</guid>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Cut needless permission prompts without losing control. How allow, ask and deny rules are evaluated, the Bash and path syntax, where rules live, which permission mode to use, and what rules cannot stop.</description>
+    </item>
+
+    <item>
+      <title>Claude Code Headless Mode: claude -p in Scripts and CI</title>
+      <link>https://claude-guides.com/blog/claude-code-headless-mode-ci-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-headless-mode-ci-guide.html</guid>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Workflow</category>
+      <description>Run Claude Code non-interactively with claude -p. JSON and structured output, permissions that do not hang, --bare for CI, cost caps, and GitHub Actions workflows.</description>
+    </item>
 
     <item>
       <title>Claude Code Summer 2026 Update: New Models, Background Agents by Default</title>

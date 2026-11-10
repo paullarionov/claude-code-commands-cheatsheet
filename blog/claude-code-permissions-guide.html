@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cut needless Claude Code prompts without losing control. Write allow, ask and deny rules in settings.json, block .env reads and pick a permission mode.">
+<meta name="keywords" content="Claude Code permissions, settings.json permissions, allow deny ask rules, Claude Code permission modes, block .env Claude Code, acceptEdits, dontAsk, bypassPermissions">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-code-permissions-guide.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-code-permissions-guide.html">
+<meta property="og:title" content="Claude Code Permissions: Allow, Deny and Ask Rules Guide">
+<meta property="og:description" content="Cut needless Claude Code prompts without losing control. Write allow, ask and deny rules in settings.json, block .env reads and pick a permission mode.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-code-permissions-guide.html">
+<meta name="twitter:title" content="Claude Code Permissions: Allow, Deny and Ask Rules Guide">
+<meta name="twitter:description" content="Cut needless Claude Code prompts without losing control. Write allow, ask and deny rules in settings.json, block .env reads and pick a permission mode.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Claude Code Permissions: Allow, Deny and Ask Rules Guide">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-10T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-10T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Permissions">
+<meta property="article:tag" content="Settings">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="Guide">
+
+<title>Claude Code Permissions: Allow, Deny and Ask Rules Guide</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code Permissions: Allow, Deny and Ask Rules Guide",
+  "description": "Cut needless Claude Code prompts without losing control. Write allow, ask and deny rules in settings.json, block .env reads and pick a permission mode.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Person",
+    "name": "Claude Guides"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-10T00:00:00Z",
+  "dateModified": "2026-11-10T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/claude-code-permissions-guide.html"
+  },
+  "wordCount": 1465,
+  "keywords": [
+    "Claude Code",
+    "Permissions",
+    "Settings",
+    "Security",
+    "Guide"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Claude Code Permissions Guide",
+      "item": "https://claude-guides.com/blog/claude-code-permissions-guide.html"
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>Claude Code Permissions: Allow, Deny and Ask Rules Guide</h1>
+  <p class="lede">Claude Code asks before it runs shell commands or edits files. Rules in settings.json decide what it can do unprompted and what it can never touch. Syntax, pitfalls and a working config.</p>
+  <div class="post-meta">
+    <span>November 10, 2026</span>
+    <span>8 min read</span>
+    <span>Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Add a <code>permissions</code> block to <code>.claude/settings.json</code> with <code>allow</code>, <code>ask</code> and <code>deny</code> lists. Rules look like <code>Bash(npm run *)</code> or <code>Read(./.env)</code>. Claude Code checks deny first, then ask, then allow, and the first match wins, so an allow rule can never cut an exception out of a deny rule. Run <code>/permissions</code> to see every active rule and the file it came from. Rules are enforced by Claude Code, not by the model, so a line in <code>CLAUDE.md</code> cannot grant or revoke access.</p>
+</div>
+
+<h2>Why does Claude Code keep asking for permission?</h2>
+
+<p>Out of the box, Claude Code in Manual mode asks before any action that could change something. The <a href="https://code.claude.com/docs/en/permissions" target="_blank" rel="noopener">permissions docs</a> sort tools like this:</p>
+
+<table>
+<tr><th>Tool type</th><th>Asks first?</th><th>"Yes, and don't ask again" lasts</th></tr>
+<tr><td>File reads, Grep</td><td>No, inside the working directory</td><td>n/a</td></tr>
+<tr><td>Bash commands</td><td>Yes, except a built-in read-only set</td><td>Permanently, per repository and command</td></tr>
+<tr><td>File edits and writes</td><td>Yes</td><td>Until the session ends</td></tr>
+<tr><td>WebFetch</td><td>Yes, except preapproved documentation domains</td><td>Permanently, per repository and domain</td></tr>
+<tr><td>WebSearch</td><td>Yes</td><td>Permanently, per repository</td></tr>
+</table>
+
+<p>Each time you pick "Yes, and don't ask again" for a Bash command, Claude Code writes an allow rule into <code>.claude/settings.local.json</code>. Writing rules yourself is faster and gives you the deny side too.</p>
+
+<h2>How do allow, ask and deny rules work together?</h2>
+
+<ul>
+<li><strong>Allow</strong> lets Claude Code use the tool without asking.</li>
+<li><strong>Ask</strong> prompts every time.</li>
+<li><strong>Deny</strong> blocks the tool call.</li>
+</ul>
+
+<p>Evaluation order is deny, then ask, then allow. The first match decides, and specificity does not change that. If you deny <code>Bash(aws *)</code>, then <code>Bash(aws s3 ls)</code> in the allow list never runs, because the deny matched first. The same holds between ask and allow: a matching ask rule prompts even when a narrower allow rule exists.</p>
+
+<p>Deny rules also behave differently depending on shape. A bare <code>Bash</code> deny removes the tool from Claude's context entirely. A scoped one such as <code>Bash(rm *)</code> keeps the tool and blocks matching calls.</p>
+
+<h2>What is the rule syntax?</h2>
+
+<p>A rule is <code>Tool</code> or <code>Tool(specifier)</code>. With no parentheses it covers every use of the tool. With a specifier it narrows down: <code>Bash(npm run build)</code> matches that exact command, <code>Read(./.env)</code> matches the <code>.env</code> in the current directory, and <code>WebFetch(domain:example.com)</code> matches requests to that domain.</p>
+
+<p>In Bash rules, <code>*</code> matches any text, including spaces. Put it after the subcommand, because everything before the first <code>*</code> is matched as written:</p>
+
+<pre><code>{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(git commit *)"
+    ],
+    "deny": [
+      "Bash(git push *)"
+    ]
+  }
+}</code></pre>
+
+<p>With this file Claude runs npm scripts and commits without asking, and refuses commands that begin with <code>git push</code>. Three matching details cause most confusion:</p>
+
+<table>
+<tr><th>You write</th><th>Matches</th><th>Does not match</th></tr>
+<tr><td><code>Bash(npm run build)</code></td><td><code>npm run build</code></td><td><code>npm run build --watch</code></td></tr>
+<tr><td><code>Bash(ls *)</code></td><td><code>ls -la</code>, <code>ls</code></td><td><code>lsof</code></td></tr>
+<tr><td><code>Bash(ls*)</code></td><td><code>ls -la</code>, <code>lsof</code></td><td></td></tr>
+</table>
+
+<p>The space before a trailing <code>*</code> is part of the rule, so <code>ls *</code> does not match <code>lsof</code>. A trailing <code>*</code> also matches the bare command. The <code>Bash(ls:*)</code> form means the same as <code>Bash(ls *)</code>, but only at the end of a pattern.</p>
+
+<p>Claude Code understands shell operators. <code>Bash(safe-cmd *)</code> does not approve <code>safe-cmd &amp;&amp; other-cmd</code>, because every subcommand must be allowed. It also strips a fixed set of wrappers (<code>timeout</code>, <code>time</code>, <code>nice</code>, <code>nohup</code>, <code>stdbuf</code>) before matching, so <code>Bash(npm test *)</code> covers <code>timeout 30 npm test</code>. Runners like <code>npx</code> and <code>docker exec</code> are not stripped, so write rules that name both the runner and the inner command.</p>
+
+<h2>How do I stop Claude from reading my .env file?</h2>
+
+<p>Add Read deny rules. This is the example from the settings docs, and it also shows an allow list:</p>
+
+<pre><code>{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint)",
+      "Bash(npm run test *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  }
+}</code></pre>
+
+<p>Read and Edit rules use gitignore-style patterns with four anchors:</p>
+
+<table>
+<tr><th>Pattern</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><code>//path</code></td><td>Absolute path from the filesystem root</td><td><code>Read(//Users/alice/secrets/**)</code></td></tr>
+<tr><td><code>~/path</code></td><td>From your home directory</td><td><code>Read(~/Documents/*.pdf)</code></td></tr>
+<tr><td><code>/path</code></td><td>Relative to the settings source</td><td><code>Edit(/src/**/*.ts)</code></td></tr>
+<tr><td><code>path</code> or <code>./path</code></td><td>Relative to the current directory</td><td><code>Read(*.env)</code></td></tr>
+</table>
+
+<p>The one that trips people up: <code>/Users/alice/file</code> is not an absolute path. A single leading slash anchors at the settings source, so use <code>//Users/alice/file</code>. In user settings, <code>/path</code> resolves under <code>~/.claude</code>, not in your project, so use <code>//</code> or <code>~/</code> there.</p>
+
+<p>Other facts worth knowing:</p>
+
+<ul>
+<li>A <code>Read</code> deny rule also blocks Edit and Write on that path, including creating a new file there.</li>
+<li>Rules written as <code>Write(path)</code>, <code>Grep(path)</code> or <code>Glob(path)</code> are accepted but do not match. Use <code>Edit(path)</code> and <code>Read(path)</code> instead.</li>
+<li>A <code>.claudeignore</code> file has no effect. Move its entries into Read deny rules.</li>
+<li>Read and Edit deny rules cover Claude's file tools and file commands Claude Code recognizes in Bash, such as <code>cat</code> and <code>sed</code>. They do not cover a Python or Node script that opens files itself. For OS-level blocking, enable the <a href="https://code.claude.com/docs/en/sandboxing" target="_blank" rel="noopener">sandbox</a>.</li>
+</ul>
+
+<h2>Where do I put the rules?</h2>
+
+<table>
+<tr><th>File</th><th>Who it affects</th></tr>
+<tr><td><code>~/.claude/settings.json</code></td><td>You, in every project</td></tr>
+<tr><td><code>.claude/settings.json</code></td><td>Everyone in the repo, if committed</td></tr>
+<tr><td><code>.claude/settings.local.json</code></td><td>You, in this project only</td></tr>
+<tr><td>Managed settings</td><td>Everyone your organization deploys to</td></tr>
+</table>
+
+<p>Precedence, highest first: managed, command line (<code>--settings</code>), project local, shared project, user. List keys such as <code>permissions.allow</code> merge across files instead of overriding, so each file adds entries. Two catches: <code>allow</code> rules in a committed <code>.claude/settings.json</code> only apply after each teammate trusts the folder, while <code>deny</code> and <code>ask</code> rules apply immediately. Edits to permissions reload without a restart, so you can tune rules mid-session.</p>
+
+<h2>Which permission mode should I use?</h2>
+
+<table>
+<tr><th>Mode</th><th>What runs without asking</th></tr>
+<tr><td><code>default</code> (shown as Manual)</td><td>Reads only</td></tr>
+<tr><td><code>acceptEdits</code></td><td>File edits and common filesystem commands such as <code>mkdir</code>, <code>touch</code>, <code>mv</code>, <code>cp</code> in the working directory</td></tr>
+<tr><td><code>plan</code></td><td>Reads and read-only exploration; no source edits</td></tr>
+<tr><td><code>auto</code></td><td>Actions run after a background classifier checks them</td></tr>
+<tr><td><code>dontAsk</code></td><td>Only pre-approved tools; everything else is denied</td></tr>
+<tr><td><code>bypassPermissions</code></td><td>Everything except a short list no mode approves</td></tr>
+</table>
+
+<p>Switch with <code>Shift+Tab</code>, start with a flag, or set a default:</p>
+
+<pre><code>claude --permission-mode plan
+claude --permission-mode acceptEdits
+
+# settings.json
+{ "permissions": { "defaultMode": "acceptEdits" } }</code></pre>
+
+<p><code>dontAsk</code> suits locked-down CI runs, because the session never waits for input. <code>bypassPermissions</code> is for containers and VMs only: allow rules have no effect there, deny rules still block, and the docs warn it offers no protection against prompt injection. Setting <code>defaultMode</code> to <code>auto</code> or <code>bypassPermissions</code> in a project file is ignored. Put it in user settings or pass the flag. To forbid these modes for a whole team, set <code>permissions.disableBypassPermissionsMode</code> or <code>permissions.disableAutoMode</code> to <code>"disable"</code> in managed settings.</p>
+
+<h2>What can permission rules not stop?</h2>
+
+<p>A Bash rule matches the command text Claude writes. It is not a wall around the program. The docs give these examples of what a deny rule misses:</p>
+
+<table>
+<tr><th>Deny rule</th><th>Stops</th><th>Does not stop</th></tr>
+<tr><td><code>Bash(curl *)</code></td><td><code>curl https://example.com</code></td><td><code>/usr/bin/curl ...</code>, <code>sh -c 'curl ...'</code></td></tr>
+<tr><td><code>Bash(git push *)</code></td><td><code>git push origin main</code></td><td><code>git -C . push origin main</code></td></tr>
+</table>
+
+<p>Treat rules as guardrails for normal behavior. For hard limits use the sandbox, which enforces filesystem and network access at the OS level, or a <a href="/blog/claude-code-hooks-guide.html">PreToolUse hook</a> that inspects the full command. A hook's deny holds even in <code>bypassPermissions</code>.</p>
+
+<h2>How do I check which rules are active?</h2>
+
+<ol>
+<li><code>/permissions</code> lists every rule and the settings file behind it. You can add or remove rules there, and changes apply from Claude's next tool call.</li>
+<li><code>/status</code> shows which settings files loaded (the <code>Setting sources</code> line).</li>
+<li><code>claude doctor</code> lists entries Claude Code rejected, such as a malformed rule. It is the first place to look when a rule seems ignored.</li>
+</ol>
+
+<p>Settings files are strict JSON. A comment or trailing comma makes Claude Code skip the file, so validate after every edit.</p>
+
+<h2>FAQ</h2>
+
+<h3>Does "Yes, and don't ask again" carry over to other projects?</h3>
+<p>No. For Bash commands it is saved per repository and command, in that project's local settings file.</p>
+
+<h3>Can an allow rule override a deny rule?</h3>
+<p>No. Deny is checked first and an allow rule cannot carve out an exception.</p>
+
+<h3>Can I put permission instructions in CLAUDE.md instead?</h3>
+<p>Instructions there shape what Claude tries to do, but they do not change what Claude Code allows. Use rules, a mode, or a hook.</p>
+
+<h3>How do I set up permissions for unattended runs?</h3>
+<p>Combine <code>--allowedTools</code> with <code>--permission-mode dontAsk</code>. See <a href="/blog/claude-code-headless-mode-ci-guide.html">headless mode and CI</a>.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked against the official docs on November 10, 2026:
+<a href="https://code.claude.com/docs/en/permissions" target="_blank" rel="noopener">Configure permissions</a>,
+<a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener">Permission modes</a>,
+<a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">Settings files and precedence</a> and
+<a href="https://code.claude.com/docs/en/headless" target="_blank" rel="noopener">Run Claude Code programmatically</a>.</p>
+
+<div class="cta">
+  <p>See every current command, flag, and setting in one reference.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-code-hooks-guide.html">Claude Code Hooks: Setup Guide With 5 Working Examples</a></li>
+    <li><a href="/blog/claude-code-headless-mode-ci-guide.html">Claude Code Headless Mode: claude -p in Scripts and CI</a></li>
+    <li><a href="/blog/best-practices.html">Claude Code Best Practices</a></li>
+  </ul>
+</div>
+
+
+</article>
+</main>
+
+<footer>
+<p>Claude Code is built by Anthropic. Need help? Check the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> or <a href="https://www.linkedin.com/in/paullarionov/">reach out on LinkedIn</a>.</p>
+</footer>
+
+</body>
+</html>

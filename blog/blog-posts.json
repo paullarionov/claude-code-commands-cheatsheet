@@ -1,6 +1,49 @@
 {
   "posts": [
     {
+      "url": "/blog/claude-code-hooks-guide.html",
+      "title": "Claude Code Hooks: Setup Guide With 5 Working Examples",
+      "excerpt": "Run your own scripts at fixed points in a Claude Code session. Five working hook configs (auto-format, protect files, deny rm -rf, notifications, post-compaction context), exit codes, JSON output and debugging.",
+      "date": "2026-11-10",
+      "readTime": 8,
+      "category": "Guide",
+      "tags": [
+        "Claude Code",
+        "Hooks",
+        "Automation",
+        "Settings"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-permissions-guide.html",
+      "title": "Claude Code Permissions: Allow, Deny and Ask Rules Guide",
+      "excerpt": "Cut needless permission prompts without losing control. How allow, ask and deny rules are evaluated, the Bash and path syntax, where rules live, which permission mode to use, and what rules cannot stop.",
+      "date": "2026-11-10",
+      "readTime": 8,
+      "category": "Guide",
+      "tags": [
+        "Claude Code",
+        "Permissions",
+        "Settings",
+        "Security"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-headless-mode-ci-guide.html",
+      "title": "Claude Code Headless Mode: claude -p in Scripts and CI",
+      "excerpt": "Run Claude Code non-interactively with claude -p. JSON and structured output, permissions that do not hang, --bare for CI, cost caps, and GitHub Actions workflows.",
+      "date": "2026-11-10",
+      "readTime": 9,
+      "category": "Workflow",
+      "tags": [
+        "Claude Code",
+        "Headless",
+        "CI/CD",
+        "GitHub Actions",
+        "Automation"
+      ]
+    },
+    {
       "url": "/blog/claude-code-summer-2026-update.html",
       "title": "Claude Code Summer 2026 Update: New Models, Background Agents by Default",
       "excerpt": "Sonnet 5 is the new default model, subagents now run in the background automatically, and Claude in Chrome is GA. What shipped this summer and what to actually change in your setup.",
