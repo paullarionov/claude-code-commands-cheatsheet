@@ -15,7 +15,8 @@ module.exports = defineConfig({
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'] }, testIgnore: /responsive\.spec\.js/ },
-    { name: 'mobile', use: { ...devices['iPhone 13'] }, testMatch: /responsive\.spec\.js/ },
+    // iPhone 13 defaults to WebKit, but CI only installs Chromium: keep the viewport/UA, swap the engine.
+    { name: 'mobile', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' }, testMatch: /responsive\.spec\.js/ },
   ],
   webServer: {
     // The site is plain static files served from the repo root, same as GitHub Pages.
