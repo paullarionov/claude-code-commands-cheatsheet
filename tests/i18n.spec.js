@@ -61,4 +61,15 @@ test.describe('cheatsheet translations', () => {
     await page.evaluate(() => setLang('ru'));
     await expect(page.locator('[data-i18n="d-subtask"]')).toHaveText('Запуск субагента в сессии');
   });
+
+  test('rows added for the Save Limits subsection render and translate', async ({ page }) => {
+    const keys = ['sub-save-limits', 'd-lim-clear', 'd-lim-edit', 'd-lim-model', 'd-lim-mcp', 'd-lim-md', 'd-lim-ask'];
+
+    for (const key of keys) {
+      await expect(page.locator(`[data-i18n="${key}"]`)).toHaveCount(1);
+    }
+
+    await page.evaluate(() => setLang('ru'));
+    await expect(page.locator('[data-i18n="sub-save-limits"]')).toHaveText('Экономия лимитов');
+  });
 });

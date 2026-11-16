@@ -1503,6 +1503,14 @@
     <div class="row"><span class="key">1M context</span><span class="desc" data-i18n="d-1m">Sonnet 5 &amp; Opus 5 (native)</span></div>
     <div class="row"><span class="key">CLAUDE.md</span><span class="desc" data-i18n="d-survives">Survives compaction</span></div>
 
+    <div class="subsection" data-i18n="sub-save-limits">Save Limits</div>
+    <div class="row"><span class="key">/clear</span><span class="desc" data-i18n="d-lim-clear">One task, then /clear</span></div>
+    <div class="row"><span class="key">Esc Esc</span><span class="desc" data-i18n="d-lim-edit">Rewind &amp; edit prompt, don't argue</span></div>
+    <div class="row"><span class="key">/model</span><span class="desc" data-i18n="d-lim-model">Never switch model mid-chat (cache reset)</span></div>
+    <div class="row"><span class="key">/mcp</span><span class="desc" data-i18n="d-lim-mcp">Disable unused servers: tokens on every message</span></div>
+    <div class="row"><span class="key">CLAUDE.md</span><span class="desc" data-i18n="d-lim-md">Keep under ~200 lines</span></div>
+    <div class="row"><span class="key">&quot;ask me questions&quot;</span><span class="desc" data-i18n="d-lim-ask">End prompts with it, skip the long prompt</span></div>
+
     <div class="subsection" data-i18n="sub-sess-tips">Session Tips</div>
     <div class="row"><span class="key">claude -c</span><span class="desc" data-i18n="d-continue-last">Continue last conversation</span></div>
     <div class="row"><span class="key">claude -r "name"</span><span class="desc" data-i18n="d-resume-name">Resume by name</span></div>
@@ -2090,6 +2098,13 @@ const T = {
   'd-auto-compact': { en:'~95% capacity', ru:'~95% ёмкости', zh:'~95% 容量', ja:'~95% の容量', es:'~95% de capacidad' },
   'd-1m':           { en:'Sonnet 5 &amp; Opus 5 (native)', ru:'Sonnet 5 и Opus 5 (нативно)', zh:'Sonnet 5 和 Opus 5（原生）', ja:'Sonnet 5 と Opus 5（ネイティブ）', es:'Sonnet 5 y Opus 5 (nativo)' },
   'd-survives':     { en:'Survives compaction', ru:'Выживает при сжатии', zh:'压缩后保留', ja:'圧縮後も保持', es:'Sobrevive la compresión' },
+  'sub-save-limits': { en:'Save Limits', ru:'Экономия лимитов', zh:'节省额度', ja:'上限を節約', es:'Ahorrar Límites' },
+  'd-lim-clear': { en:'One task, then /clear', ru:'Одна задача, затем /clear', zh:'一个任务后执行 /clear', ja:'1タスクごとに /clear', es:'Una tarea, luego /clear' },
+  'd-lim-edit': { en:'Rewind &amp; edit prompt, don\'t argue', ru:'Откатиться и поправить промпт, а не спорить', zh:'回退并修改提示词，不要争辩', ja:'巻き戻してプロンプトを修正（議論しない）', es:'Retroceder y editar el prompt, sin discutir' },
+  'd-lim-model': { en:'Never switch model mid-chat (cache reset)', ru:'Не менять модель посреди чата (сброс кеша)', zh:'不要在对话中途切换模型（缓存失效）', ja:'チャット途中でモデルを変えない（キャッシュ破棄）', es:'No cambiar de modelo a mitad del chat (caché)' },
+  'd-lim-mcp': { en:'Disable unused servers: tokens on every message', ru:'Отключить лишние серверы: токены на каждое сообщение', zh:'禁用未使用的服务器：每条消息都消耗 token', ja:'未使用サーバーを無効化：毎メッセージでトークン消費', es:'Desactivar servidores sin uso: tokens en cada mensaje' },
+  'd-lim-md': { en:'Keep under ~200 lines', ru:'Держать до ~200 строк', zh:'保持在约 200 行以内', ja:'200行程度までに抑える', es:'Mantener bajo ~200 líneas' },
+  'd-lim-ask': { en:'End prompts with it, skip the long prompt', ru:'Завершать промпт этой фразой, без длинных промптов', zh:'在提示词末尾加上，避免冗长提示词', ja:'プロンプトの末尾に付ける（長文プロンプト不要）', es:'Termina el prompt con esto, sin prompts largos' },
   'd-continue-last':{ en:'Continue last conversation', ru:'Продолжить последний разговор', zh:'继续上次对话', ja:'最後の会話を継続', es:'Continuar última conversación' },
   'd-resume-name':  { en:'Resume by name', ru:'Возобновить по имени', zh:'按名称恢复', ja:'名前で再開', es:'Reanudar por nombre' },
   'd-btw-tip':      { en:'Side question, no context cost', ru:'Побочный вопрос, без затрат контекста', zh:'额外问题，不消耗上下文', ja:'補足質問、コンテキスト消費なし', es:'Pregunta lateral, sin costo de contexto' },
