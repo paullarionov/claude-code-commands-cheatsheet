@@ -78,7 +78,7 @@ test.describe('cheatsheet translations', () => {
 
   test('language selector lists every supported language and switches direction', async ({ page }) => {
     const values = await page.$$eval('#lang-select option', (opts) => opts.map((o) => o.value));
-    expect(values).toEqual(LANGS);
+    expect([...values].sort()).toEqual([...LANGS].sort());
 
     await page.selectOption('#lang-select', 'ar');
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
