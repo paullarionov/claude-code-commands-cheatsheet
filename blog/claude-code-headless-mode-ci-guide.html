@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Run Claude Code non-interactively with claude -p: JSON output, allowedTools, --bare, cost caps and GitHub Actions. Flags checked against the docs.">
+<meta name="keywords" content="Claude Code headless mode, claude -p, Claude Code CI, Claude Code GitHub Actions, --output-format json, --allowedTools, --bare, claude-code-action, non-interactive">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-code-headless-mode-ci-guide.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-code-headless-mode-ci-guide.html">
+<meta property="og:title" content="Claude Code Headless Mode: claude -p in Scripts and CI">
+<meta property="og:description" content="Run Claude Code non-interactively with claude -p: JSON output, allowedTools, --bare, cost caps and GitHub Actions. Flags checked against the docs.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-code-headless-mode-ci-guide.html">
+<meta name="twitter:title" content="Claude Code Headless Mode: claude -p in Scripts and CI">
+<meta name="twitter:description" content="Run Claude Code non-interactively with claude -p: JSON output, allowedTools, --bare, cost caps and GitHub Actions. Flags checked against the docs.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Claude Code Headless Mode: claude -p in Scripts and CI">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-10T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-10T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Headless">
+<meta property="article:tag" content="CI/CD">
+<meta property="article:tag" content="GitHub Actions">
+<meta property="article:tag" content="Automation">
+
+<title>Claude Code Headless Mode: claude -p in Scripts and CI</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code Headless Mode: claude -p in Scripts and CI",
+  "description": "Run Claude Code non-interactively with claude -p: JSON output, allowedTools, --bare, cost caps and GitHub Actions. Flags checked against the docs.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Person",
+    "name": "Claude Guides"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-10T00:00:00Z",
+  "dateModified": "2026-11-10T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/claude-code-headless-mode-ci-guide.html"
+  },
+  "wordCount": 1555,
+  "keywords": [
+    "Claude Code",
+    "Headless",
+    "CI/CD",
+    "GitHub Actions",
+    "Automation"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Claude Code Headless Mode and CI",
+      "item": "https://claude-guides.com/blog/claude-code-headless-mode-ci-guide.html"
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>Claude Code Headless Mode: claude -p in Scripts and CI</h1>
+  <p class="lede">The -p flag turns Claude Code into a command you can pipe, script and run in CI. Output formats, permissions that do not hang, cost limits, and a GitHub Actions setup.</p>
+  <div class="post-meta">
+    <span>November 10, 2026</span>
+    <span>9 min read</span>
+    <span>Workflow</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Run <code>claude -p "your prompt"</code> to execute one task and print the result. It exits with 0 on success and non-zero on failure. Add <code>--output-format json</code> to get <code>result</code>, <code>session_id</code> and <code>total_cost_usd</code>, <code>--allowedTools "Read,Edit,Bash"</code> so nothing waits for approval, and <code>--bare</code> in CI so the run ignores the host's hooks, plugins and <code>CLAUDE.md</code>. For GitHub, run <code>/install-github-app</code> or use <code>anthropics/claude-code-action@v1</code>.</p>
+</div>
+
+<h2>What is Claude Code headless mode?</h2>
+
+<p>"Headless" means running Claude Code without the interactive interface. You pass <code>-p</code> (or <code>--print</code>) and a prompt. Claude does the work, prints the answer and exits. The <a href="https://code.claude.com/docs/en/headless" target="_blank" rel="noopener">official docs</a> now describe this as the Agent SDK used through the CLI, with the same tools and agent loop as the interactive app.</p>
+
+<pre><code>claude -p "What does the auth module do?"
+
+# stdin works too, so Claude fits into pipes
+cat build-error.txt | claude -p 'concisely explain the root cause of this build error' &gt; output.txt</code></pre>
+
+<p>Piped input is capped at 10MB. For larger inputs, write a file and name its path in the prompt. A failure inside the run, such as missing authentication, is printed as the result on stdout, so check the exit code in scripts. If you stop a run with SIGTERM, it exits with code 143 and records no result for the unfinished turn.</p>
+
+<p>You can wrap it in a build script. This one reviews the diff against <code>main</code> for typos. Piping the diff means Claude needs no Bash permission to read it:</p>
+
+<pre><code>{
+  "scripts": {
+    "lint:claude": "git diff main | claude -p \"you are a typo linter. for each typo in this diff, report filename:line on one line and the issue on the next. return nothing else.\""
+  }
+}</code></pre>
+
+<h2>How do I get JSON or structured output?</h2>
+
+<p><code>--output-format</code> takes three values: <code>text</code> (default), <code>json</code> and <code>stream-json</code>. The JSON form carries the text in <code>result</code> plus session metadata. With <code>--output-format json</code>, the payload also includes <code>total_cost_usd</code>, which is a client-side estimate and can differ from your bill.</p>
+
+<pre><code>claude -p "Summarize this project" --output-format json | jq -r '.result'
+
+# Force a shape with a JSON Schema
+claude -p "Extract the main function names from auth.py" \
+  --output-format json \
+  --json-schema '{"type":"object","properties":{"functions":{"type":"array","items":{"type":"string"}}},"required":["functions"]}' \
+  | jq '.structured_output'</code></pre>
+
+<p>The schema-checked data lands in <code>structured_output</code>. If a run ends without valid structured output, for example because Claude declined, that field is missing, so test for it before your script uses it. For token streaming, use <code>--output-format stream-json --verbose --include-partial-messages</code> and filter text deltas with <code>jq</code>. The last line of the stream is a <code>result</code> message with the final text and cost.</p>
+
+<h2>How do I stop a headless run from hanging on permission prompts?</h2>
+
+<p>Nobody is there to click "Yes". In a Manual-mode <code>-p</code> run, a call that needs approval is denied unless a <code>PermissionRequest</code> hook or a permission prompt tool approves it. So decide up front what Claude may do. The first tool is <code>--allowedTools</code>, which uses the same rule syntax as <code>settings.json</code>:</p>
+
+<pre><code>claude -p "Look at my staged changes and create an appropriate commit" \
+  --allowedTools "Bash(git diff *),Bash(git log *),Bash(git status *),Bash(git commit *)"</code></pre>
+
+<p>The trailing space before <code>*</code> matters. <code>Bash(git diff *)</code> allows any command starting with <code>git diff</code>, while <code>Bash(git diff*)</code> would also match <code>git diff-index</code>. For the full rule syntax, see our <a href="/blog/claude-code-permissions-guide.html">permissions guide</a>.</p>
+
+<p>The second tool is a permission mode for the whole run:</p>
+
+<table>
+<tr><th>Flag</th><th>Use it for</th></tr>
+<tr><td><code>--permission-mode acceptEdits</code></td><td>File edits and common filesystem commands. Other shell commands still need an allow rule.</td></tr>
+<tr><td><code>--permission-mode dontAsk</code></td><td>Locked-down CI. Anything that would prompt is denied, so the run never waits.</td></tr>
+<tr><td><code>--permission-mode auto</code></td><td>A classifier reviews most actions instead of you.</td></tr>
+<tr><td><code>--permission-prompts none</code></td><td>Unattended jobs with a permission host. Denies whatever would prompt and tells Claude not to retry. Needs v2.1.259 or later.</td></tr>
+</table>
+
+<p>A combination that works for a scheduled job: <code>claude -p "Update the dependency pins and run the tests" --permission-mode auto --permission-prompts none</code>. With <code>stream-json</code>, denials show up as <code>permission_denied</code> messages, and the final result lists them in <code>permission_denials</code>.</p>
+
+<h2>Should I use --bare in CI?</h2>
+
+<p>Yes. Without it, <code>claude -p</code> discovers and loads hooks, skills, plugins, MCP servers, auto memory and <code>CLAUDE.md</code> from the working directory and <code>~/.claude</code>, just like an interactive session. That includes the project's <code>.claude/settings.json</code> hooks and <code>.mcp.json</code> servers, with no trust dialog, even in a folder you never opened before. Hooks and MCP servers committed to the repo run in CI too, which can change results.</p>
+
+<pre><code>export ANTHROPIC_API_KEY=...
+claude --bare -p "Summarize README.md" --allowedTools "Read"</code></pre>
+
+<p><code>--bare</code> skips all of that, so every machine behaves the same. It never reads OAuth credentials or the keychain, so it needs <code>ANTHROPIC_API_KEY</code> (or an <code>apiKeyHelper</code> passed through <code>--settings</code>). Bedrock, Vertex and Foundry keep using their own credentials. To pass context back in, use <code>--append-system-prompt</code>, <code>--settings</code>, <code>--mcp-config</code> or <code>--agents</code>. Hooks passed through <code>--settings</code> still do not run in bare mode, so skip bare mode if the run needs hooks. The docs call <code>--bare</code> the recommended mode for scripted calls and say it will become the default for <code>-p</code> in a future release.</p>
+
+<h2>How do I cap cost and turns?</h2>
+
+<ul>
+<li><code>--max-turns 3</code> limits agentic turns in print mode. There is no limit by default.</li>
+<li><code>--max-budget-usd 2.00</code> stops the run once estimated spend reaches the amount. It uses the same client-side estimate as <code>total_cost_usd</code>, and spend can pass the cap, so leave headroom.</li>
+<li>Subagent spend counts toward the budget cap.</li>
+</ul>
+
+<p>To continue earlier work, use <code>--continue</code> for the most recent conversation, or capture the session ID:</p>
+
+<pre><code>session_id=$(claude -p "Start a review" --output-format json | jq -r '.session_id')
+claude -p "Continue that review" --resume "$session_id"</code></pre>
+
+<h2>How do I run Claude Code in GitHub Actions?</h2>
+
+<p>The fast path: open <code>claude</code> in the repository and run <code>/install-github-app</code>. It installs the Claude GitHub App, stores a secret and opens a pull request with the workflow files. It works only for github.com repositories, needs the GitHub CLI (<code>gh auth login</code>) and requires admin access to the repo.</p>
+
+<p>For manual setup, install the app, add a repository secret, and copy a workflow. The secret is either <code>ANTHROPIC_API_KEY</code> (a Console API key) or <code>CLAUDE_CODE_OAUTH_TOKEN</code> (a subscription token, generated with <code>claude setup-token</code>). This workflow, from the docs, answers <code>@claude</code> mentions in issues and pull requests:</p>
+
+<pre><code>name: Claude Code
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+jobs:
+  claude:
+    if: contains(github.event.comment.body, '@claude')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}</code></pre>
+
+<p>When you add a <code>prompt</code> input, the action switches to automation mode and runs on any event without waiting for a mention. Pass CLI flags through <code>claude_args</code>. This schedule runs a report every morning and caps the run at five turns:</p>
+
+<pre><code>name: Daily Report
+on:
+  schedule:
+    - cron: "0 9 * * *"
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      id-token: write
+    steps:
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: "Generate a summary of yesterday's commits and open issues"
+          claude_args: |
+            --max-turns 5
+            --allowedTools "mcp__github__list_commits,mcp__github__list_issues"</code></pre>
+
+<p>For a plain-text prompt, Claude has no shell or GitHub API access until you grant tools with <code>--allowedTools</code>, as above. Runs also use GitHub Actions minutes, so add workflow timeouts and concurrency limits next to <code>--max-turns</code>. Keep <code>CLAUDE.md</code> short, since Claude reads it on every run.</p>
+
+<h3>Problems you will hit</h3>
+
+<ul>
+<li><strong>CI does not run on Claude's commits.</strong> Commits made with the default <code>GITHUB_TOKEN</code> do not trigger workflows. Do not pass <code>github_token</code> to the action, so it authenticates as the Claude GitHub App.</li>
+<li><strong>Fork pull requests fail.</strong> On public repositories GitHub withholds secrets from fork PR runs, so a review workflow works only for branches in the same repository.</li>
+<li><strong>Nothing happens on a mention.</strong> The comment must contain <code>@claude</code> as a whole word, and the commenter needs write access.</li>
+<li><strong>Old workflows.</strong> If yours still says <code>@beta</code>, switch to <code>@v1</code>, replace <code>direct_prompt</code> with <code>prompt</code> and move options like <code>max_turns</code> into <code>claude_args</code>.</li>
+</ul>
+
+<h2>FAQ</h2>
+
+<h3>Do slash commands work with claude -p?</h3>
+<p>User-invoked skills and custom commands do: put <code>/skill-name</code> in the prompt and Claude Code expands it. Terminal-only built-ins such as <code>/login</code> are not available.</p>
+
+<h3>Does claude -p use my subscription or the API?</h3>
+<p>A normal <code>-p</code> run uses whatever login the machine has. <code>--bare</code> never reads OAuth credentials and needs <code>ANTHROPIC_API_KEY</code>. The GitHub Action accepts either an API key or a subscription OAuth token.</p>
+
+<h3>Can I turn off session saving?</h3>
+<p>Yes. <code>--no-session-persistence</code> works with <code>--print</code>, but those sessions cannot be resumed.</p>
+
+<h3>Where do I find the full list of flags?</h3>
+<p>Run <code>claude --help</code> or open the <a href="https://code.claude.com/docs/en/cli-reference" target="_blank" rel="noopener">CLI reference</a>. Not every flag combines with <code>-p</code>: <code>--bg</code> is rejected.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked against the official docs and the local CLI (<code>claude --help</code>) on November 10, 2026:
+<a href="https://code.claude.com/docs/en/headless" target="_blank" rel="noopener">Run Claude Code programmatically</a>,
+<a href="https://code.claude.com/docs/en/cli-reference" target="_blank" rel="noopener">CLI reference</a> and
+<a href="https://code.claude.com/docs/en/github-actions" target="_blank" rel="noopener">Claude Code GitHub Actions</a>. The <code>--max-turns</code> flag is documented in the CLI reference but does not appear in the local <code>--help</code> output of v2.1.304.</p>
+
+<div class="cta">
+  <p>See every current command, flag, and setting in one reference.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-code-permissions-guide.html">Claude Code Permissions: Allow, Deny and Ask Rules</a></li>
+    <li><a href="/blog/claude-code-hooks-guide.html">Claude Code Hooks: Setup Guide With 5 Working Examples</a></li>
+    <li><a href="/blog/burning-through-claude-code-limit-3-days.html">Burning Through Claude Code's Weekly Limit in 3 Days?</a></li>
+  </ul>
+</div>
+
+
+</article>
+</main>
+
+<footer>
+<p>Claude Code is built by Anthropic. Need help? Check the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> or <a href="https://www.linkedin.com/in/paullarionov/">reach out on LinkedIn</a>.</p>
+</footer>
+
+</body>
+</html>
