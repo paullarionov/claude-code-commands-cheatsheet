@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="25 practical Claude habits: pick Opus 5.5 at High effort, keep memory short, edit prompts instead of arguing, ask for finished decks, HTML pages and dashboards, and protect your data.">
+<meta name="keywords" content="Claude tips, Claude habits, Claude memory, Opus 5.5, Claude effort level, Claude prompts, Claude projects, Claude dashboard">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-25-habits-top-1-percent.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-25-habits-top-1-percent.html">
+<meta property="og:title" content="25 Claude Habits That Separate the Top 1% From Everyone Else">
+<meta property="og:description" content="25 Claude habits: model and effort defaults, memory hygiene, one clear goal, finished deliverables and privacy.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthropic">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-25-habits-top-1-percent.html">
+<meta name="twitter:title" content="25 Claude Habits That Separate the Top 1% From Everyone Else">
+<meta name="twitter:description" content="25 Claude habits: model and effort defaults, memory hygiene, one clear goal, finished deliverables and privacy.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="25 Claude Habits That Separate the Top 1% From Everyone Else">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-16T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-16T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude">
+<meta property="article:tag" content="Memory">
+<meta property="article:tag" content="Prompting">
+<meta property="article:tag" content="Productivity">
+
+<title>25 Claude Habits That Separate the Top 1% From Everyone Else — Claude Guides</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "25 Claude Habits That Separate the Top 1% From Everyone Else",
+  "description": "25 practical Claude habits: pick Opus 5.5 at High effort, keep memory short, edit prompts instead of arguing, ask for finished decks, HTML pages and dashboards, and protect your data.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {"@type": "Person", "name": "Claude Guides"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {"@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg"}
+  },
+  "datePublished": "2026-11-16T00:00:00Z",
+  "dateModified": "2026-11-16T00:00:00Z",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claude-guides.com/blog/claude-25-habits-top-1-percent.html"},
+  "wordCount": 2300,
+  "keywords": ["Claude Tips", "Claude Memory", "Opus 5.5", "Prompting", "Claude Projects"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://claude-guides.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://claude-guides.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "25 Claude Habits That Separate the Top 1% From Everyone Else", "item": "https://claude-guides.com/blog/claude-25-habits-top-1-percent.html"}
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>25 Claude Habits That Separate the Top 1% From Everyone Else</h1>
+  <p class="lede">Memory, models, prompts, deliverables and privacy: 25 small changes that make Claude noticeably more useful and keep your limit intact.</p>
+  <div class="post-meta">
+    <span>November 16, 2026</span>
+    <span>11 min read</span>
+    <span>Cost Optimization</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <p>Work in the desktop app, default to Opus 5.5 at High effort, keep memory on but short, and clear out instructions written for older models. Give Claude one goal with a clear finish line, edit your prompt instead of arguing, and ask for the finished thing (a deck, an HTML page, a dashboard), not a draft. Below are all 25 habits in five groups.</p>
+</div>
+
+<h2>Where This List Comes From</h2>
+
+<p>This guide is an English adaptation of a Russian-language playbook, "25 привычек в Claude" by the Telegram channel <a href="https://t.me/prompt_design">Силиконовый мешок</a>, itself based on a November 2026 discussion on r/ThinkingDeeplyAI. The playbook's author checked the numbers and setting names against Claude's help center and an Anthropic post on memory as of November 2026, and corrected the original where it was wrong. Menus and toggles move often, so if a setting below has a different label in your app, search settings for the keyword.</p>
+
+<h2>Part 1: Set Claude Up for Yourself (Habits 1–8)</h2>
+
+<h3>1. Claude Cowork is gone. There is just Claude now</h3>
+<p>Cowork was merged into Claude in September, so there is no separate mode any more. Use the desktop app and forget about Claude in the browser. The desktop app is the one that works directly with folders on your disk, so you don't have to upload files into a chat. You'll also open Claude Code more often, because it lives there too.</p>
+
+<h3>2. Default to Opus 5.5 at High effort</h3>
+<p>For everyday work pick Opus 5.5, not Fable 5.2. Fable 5.2 is extremely capable, but it eats your limit noticeably faster: on Max only half of the weekly limit is allotted to it, and on Pro it is billed separately. Opus 5.5 at <strong>High</strong> (the Effort setting next to the model name) handles the work and lasts the whole day. Whatever you choose, don't change the model in the middle of a chat: the new model reads the whole history from scratch, which is a needless drain on your limit.</p>
+
+<h3>3. Keep memory on. Claude works noticeably better with it</h3>
+<p>Anthropic compared models with and without memory. In CL-Bench, a test where the model keeps notes from session to session, Opus 5.5 with memory scored 28% higher. Memory is on by default in chat. Check the toggle in Settings, under <em>Your Claude</em>.</p>
+
+<h3>4. But keep memory short</h3>
+<p>Before one cleanup, Claude remembered 105 facts about the author. After a single prompt, 26 remained; the rest were outdated or wrong. Ask Claude to clean up its memory of you and keep only what is still useful. What it remembers is visible in <em>Your Claude</em> under <strong>Manage</strong>.</p>
+<pre><code>Review everything you remember about me. Remove anything outdated,
+duplicated or no longer true, and keep only what is still useful.
+Show me what you removed.</code></pre>
+
+<h3>5. Delete the "about me" file. Don't turn it into a skill</h3>
+<p>Many people turned their biography into a skill, an instruction Claude loads by itself so it "knows" them. It doesn't help. Memory already handles this, and handles it better, while a skill just slips the same stale paragraph into every task.</p>
+
+<h3>6. Clean up the instructions field</h3>
+<p>Open "Instructions for Claude" in settings and delete everything written for older models. The same goes for old skills. Long rule lists and ALL-CAPS commands only get in the way of newer models. Keep it short and specific, and let one clear goal per prompt do the rest.</p>
+
+<h3>7. Don't dump every file into the chat</h3>
+<p>Stop dropping a "context" folder into every chat. When Claude has 40 files at hand, it retells them instead of thinking. Give it the one file the task really needs and let it work out the rest.</p>
+
+<h3>8. One project per client or task. Turn off shared memory inside it</h3>
+<p>On the project page, switch off <strong>Use account memory</strong>. Then what Claude knows about client A won't surface in work for client B.</p>
+
+<h2>Part 2: Protect Your Chat and Your Limit (Habits 9–12)</h2>
+
+<h3>9. One bad answer ruins a long chat</h3>
+<p>Once a wrong answer is in the chat, Claude builds on it, and every following answer comes out a little worse. Patching on top is pointless. Go back and remove it, as habit 10 explains.</p>
+
+<h3>10. Don't argue with Claude. Edit your prompt</h3>
+<p>Arguing burns tokens and you still won't finish the task. Click <strong>Edit</strong> on the message that preceded the bad answer, rewrite it and press <strong>Save</strong>. The bad answer stays in the old version of the chat and no longer affects the new one.</p>
+
+<h3>11. Long chats burn tokens. Summarize and move</h3>
+<p>With every new message Claude re-reads everything above it. When a chat has grown huge, ask:</p>
+<pre><code>Collect everything we decided and everything that is still open,
+so I can paste it into a new chat.</code></pre>
+<p>Open a new chat with that text.</p>
+
+<h3>12. Check automatic model switching</h3>
+<p>In Settings, under <em>Capabilities</em>, there is a toggle called <strong>"Switch models when a message is flagged"</strong>. If the safety filter considers a request to Fable risky, Opus will answer instead and the chat stays on Opus for good. Claude warns you, but in long work that is easy to miss. With the toggle off, the chat simply pauses, and you decide whether to rewrite the request or change the model.</p>
+
+<h2>Part 3: Frame the Task So It Gets Understood (Habits 13–20)</h2>
+
+<h3>13. Don't give Claude steps. Give one concrete goal</h3>
+<p>Step-by-step instructions were for older models. New ones plan better than you will spell out. Say what the result should be and stay out of the way.</p>
+
+<h3>14. Tell Claude what "done" means</h3>
+<p>Define the finish line: "Done when you have a one-page document my manager can forward without edits." Now Claude knows what a good result looks like and when to stop.</p>
+
+<h3>15. Ask Claude to restate the goal before it starts</h3>
+<p>End your prompt with "Before you begin, restate my goal in your own words." If it understood wrongly, you find out immediately instead of after a whole wasted answer.</p>
+
+<h3>16. End every prompt with "ask me questions". Especially the first one</h3>
+<p>When Claude doesn't know something, it fills in the blanks. Let it ask instead: add "Ask me all the questions you need before you start." The questions themselves show what you forgot to say.</p>
+
+<h3>17. Don't hint at the answer. Ask for criticism</h3>
+<p>Ask "why is this a good idea?" and you get a list of reasons it's good. Ask differently: "What's the strongest argument against? Where does this break?" That is where the useful part is.</p>
+
+<h3>18. Ask for 20 very different options. Not five</h3>
+<p>Claude gives the most typical answer first; that's how it works. To reach the strange and non-obvious ones, use this prompt:</p>
+<pre><code>Give me 20 very different options. For each one, say how likely
+another AI would be to produce it. The last two should be below 10%.</code></pre>
+
+<h3>19. Talk, don't type. Then send a screenshot</h3>
+<p>Dictate by voice. You'll say three times more than you would type, and those details are exactly what makes an answer good. For what you see on screen, don't describe it in words; send a screenshot.</p>
+
+<h3>20. A GitHub link works almost like a skill</h3>
+<p>Found a repository that does what you need? Paste the link. Claude reads the public repository and builds in its image. Nothing to configure.</p>
+
+<h2>Part 4: Ask for the Finished Thing (Habits 21–23)</h2>
+
+<h3>21. Don't ask for an outline. Ask for the presentation</h3>
+<p>Outline first, then edits, then slides: three rounds, and each one spends limit. Ask for the finished deck right away. Fixing finished slides is faster than negotiating a plan.</p>
+
+<h3>22. Ask for HTML, not a Word file</h3>
+<p>Add "make an HTML page" to the prompt and say who it is for. Claude will lay out a page with graphics and diagrams itself. It looks better and there is almost nothing to break.</p>
+
+<h3>23. Paste the numbers. Ask for a dashboard</h3>
+<p>Ask Claude to "analyze" a table and you get a paragraph of text. Paste the numbers, say "turn this into a dashboard", and add who will be looking at it. You get the point in 10 seconds.</p>
+
+<h2>Part 5: Don't Give Away More Than You Need To (Habits 24–25)</h2>
+
+<h3>24. Don't press thumbs up or thumbs down in work chats</h3>
+<p>When you rate an answer, the whole conversation is kept by Anthropic for up to five years and may be used to train models. If the chat contains client work or anything personal, you don't want that. Skip the rating there.</p>
+
+<h3>25. Don't connect your bank. Export a spreadsheet</h3>
+<p>There is no need to give Claude direct access to your bank account. Export a CSV with the transactions you need from the bank, remove the account numbers and paste it into the chat. The analysis is the same and the risk is far smaller.</p>
+
+<div class="tip">
+  <strong>Where this overlaps with Claude Code:</strong> several habits map directly onto it: one clear goal and a definition of done (13, 14), asking questions first (16), summarizing and starting fresh instead of arguing (10, 11), and keeping always-loaded instructions such as <code>CLAUDE.md</code> short (6). See also our guide to <a href="/blog/claude-token-limits-22-rules.html">22 rules to stop hitting Claude token limits</a>.
+</div>
+
+<h2>The One-Page Checklist</h2>
+
+<ol>
+<li>Cowork is gone; use the desktop app</li>
+<li>Opus 5.5 at High by default; never switch models mid-chat</li>
+<li>Keep memory on</li>
+<li>Keep memory short</li>
+<li>Delete the "about me" skill</li>
+<li>Clean up the instructions field</li>
+<li>Give one file, not forty</li>
+<li>One project per client; turn off account memory inside it</li>
+<li>One bad answer spoils a long chat</li>
+<li>Edit your prompt instead of arguing</li>
+<li>Summarize long chats and move to a new one</li>
+<li>Check automatic model switching</li>
+<li>One concrete goal, not steps</li>
+<li>Define "done"</li>
+<li>Have Claude restate the goal first</li>
+<li>End with "ask me questions"</li>
+<li>Ask for criticism, not agreement</li>
+<li>Ask for 20 very different options</li>
+<li>Talk, then send a screenshot</li>
+<li>Paste a GitHub link</li>
+<li>Ask for the presentation, not the outline</li>
+<li>Ask for HTML, not Word</li>
+<li>Paste numbers, ask for a dashboard</li>
+<li>No thumbs up/down in work chats</li>
+<li>Export a CSV instead of connecting your bank</li>
+</ol>
+
+<p>Each one takes a minute at most. Pick one to try first.</p>
+
+<div class="cta">
+  <p>Every Claude Code command, flag and shortcut in one place.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-token-limits-22-rules.html">22 Rules to Stop Hitting Claude Token Limits</a></li>
+    <li><a href="/blog/memory-management.html">Memory Management</a></li>
+    <li><a href="/blog/context-optimization-guide.html">How to Manage Context When You Keep Hitting Token Limits</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Code is built by Anthropic. Need help? Check the official <a href="https://documentation.anthropic.com/claude-code/">Claude Code documentation</a> or <a href="https://www.linkedin.com/in/paullarionov/">reach out on LinkedIn</a>.</p>
+</footer>
+
+</body>
+</html>

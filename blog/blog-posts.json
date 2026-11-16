@@ -1,6 +1,20 @@
 {
   "posts": [
     {
+      "url": "/blog/claude-25-habits-top-1-percent.html",
+      "title": "25 Claude Habits That Separate the Top 1% From Everyone Else",
+      "excerpt": "25 habits in five groups: set Claude up, protect your chat and limit, frame the task, ask for finished work, and don't give away more than you need to.",
+      "date": "2026-11-16",
+      "readTime": 11,
+      "category": "Guide",
+      "tags": [
+        "Claude",
+        "Memory",
+        "Prompting",
+        "Productivity"
+      ]
+    },
+    {
       "url": "/blog/claude-token-limits-22-rules.html",
       "title": "22 Rules to Stop Hitting Claude Token Limits",
       "excerpt": "12 must-do rules and 10 small habits to stop hitting Claude usage limits: effort level, model switching, chat hygiene, cropped screenshots, Projects and /clear.",

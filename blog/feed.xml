@@ -6,12 +6,21 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
+
+    <item>
+      <title>25 Claude Habits That Separate the Top 1% From Everyone Else</title>
+      <link>https://claude-guides.com/blog/claude-25-habits-top-1-percent.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-25-habits-top-1-percent.html</guid>
+      <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>25 habits in five groups: set Claude up, protect your chat and limit, frame the task, ask for finished work, and don't give away more than you need to.</description>
+    </item>
 
     <item>
       <title>22 Rules to Stop Hitting Claude Token Limits</title>
