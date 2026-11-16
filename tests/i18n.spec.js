@@ -1,6 +1,9 @@
 const { test, expect } = require('@playwright/test');
 
-const LANGS = ['en', 'ru', 'zh', 'ja', 'es'];
+const LANGS = [
+  'en', 'ru', 'zh', 'ja', 'es', 'fr', 'de', 'pt', 'it', 'nl', 'ko', 'ar', 'hi', 'tr', 'pl',
+  'uk', 'vi', 'id', 'th', 'cs', 'sv', 'he', 'ro', 'hu', 'el', 'bn', 'fa', 'da', 'fi', 'no',
+];
 
 test.describe('cheatsheet translations', () => {
   test.beforeEach(async ({ page }) => {
@@ -25,7 +28,7 @@ test.describe('cheatsheet translations', () => {
     expect(orphans).toEqual([]);
   });
 
-  test('every entry covers all five languages', async ({ page }) => {
+  test('every entry covers all 30 languages', async ({ page }) => {
     const incomplete = await page.evaluate((langs) =>
       Object.entries(T)
         .map(([key, value]) => [key, langs.filter((l) => !value[l])])
@@ -71,5 +74,17 @@ test.describe('cheatsheet translations', () => {
 
     await page.evaluate(() => setLang('ru'));
     await expect(page.locator('[data-i18n="sub-save-limits"]')).toHaveText('Экономия лимитов');
+  });
+
+  test('language selector lists every supported language and switches direction', async ({ page }) => {
+    const values = await page.$$eval('#lang-select option', (opts) => opts.map((o) => o.value));
+    expect(values).toEqual(LANGS);
+
+    await page.selectOption('#lang-select', 'ar');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+
+    await page.selectOption('#lang-select', 'fr');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
   });
 });
