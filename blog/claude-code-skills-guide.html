@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a Claude Code skill: folder layout, SKILL.md frontmatter, how skills load, running one with /name, arguments, and migrating .claude/commands.">
+<meta name="keywords" content="Claude Code skills, create Claude Code skill, SKILL.md, .claude/skills, custom slash command Claude Code, disable-model-invocation, allowed-tools">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-code-skills-guide.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-code-skills-guide.html">
+<meta property="og:title" content="How to Create a Claude Code Skill With SKILL.md">
+<meta property="og:description" content="Create a Claude Code skill: folder layout, SKILL.md frontmatter, how skills load, running one with /name, arguments, and migrating .claude/commands.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-code-skills-guide.html">
+<meta name="twitter:title" content="How to Create a Claude Code Skill With SKILL.md">
+<meta name="twitter:description" content="Create a Claude Code skill: folder layout, SKILL.md frontmatter, how skills load, running one with /name, arguments, and migrating .claude/commands.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="How to Create a Claude Code Skill With SKILL.md">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-17T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-17T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Skills">
+<meta property="article:tag" content="Slash Commands">
+<meta property="article:tag" content="Automation">
+<meta property="article:tag" content="Guide">
+
+<title>How to Create a Claude Code Skill With SKILL.md</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Create a Claude Code Skill With SKILL.md",
+  "description": "Create a Claude Code skill: folder layout, SKILL.md frontmatter, how skills load, running one with /name, arguments, and migrating .claude/commands.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "url": "https://claude-guides.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-17T00:00:00Z",
+  "dateModified": "2026-11-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/claude-code-skills-guide.html"
+  },
+  "wordCount": 913,
+  "keywords": [
+    "Claude Code",
+    "Skills",
+    "Slash Commands",
+    "Automation",
+    "Guide"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Claude Code Skills Guide",
+      "item": "https://claude-guides.com/blog/claude-code-skills-guide.html"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does Claude not use my skill on its own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude decides from the description. Lead with the words a request would contain, say when to use it, and check that disable-model-invocation is not set."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to restart after editing a skill?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Edits inside existing skill folders apply in the current session. Creating a brand new top-level skills folder needs /reload-skills."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should a workflow be a skill or a subagent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use a skill for instructions you want in the current conversation. Use a subagent, or a skill with context: fork, when the work produces lots of output you do not need to keep."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a skill run without permission prompts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "List the tools in allowed-tools. They run without prompting only during the turn that invokes the skill; your deny rules still apply."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>How Do I Create a Skill in Claude Code?</h1>
+  <p class="lede">A skill is a folder with a SKILL.md file that teaches Claude a procedure. It costs almost nothing until it is used, and it doubles as your own slash command.</p>
+  <div class="post-meta">
+    <span>November 17, 2026</span>
+    <span>7 min read</span>
+    <span>Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Make a folder <code>.claude/skills/&lt;skill-name&gt;/</code> in your project (or <code>~/.claude/skills/&lt;skill-name&gt;/</code> for every project) and put a <code>SKILL.md</code> file in it. Start the file with YAML frontmatter that has at least a <code>description</code>, then write the instructions in Markdown. At startup Claude only sees the description; the full file loads when you type <code>/skill-name</code> or when Claude decides the skill fits your request. Add <code>disable-model-invocation: true</code> if only you should trigger it, as with a deploy.</p>
+</div>
+
+<h2>What does a minimal skill look like?</h2>
+
+<pre><code>.claude/skills/release-notes/SKILL.md</code></pre>
+
+<pre><code>---
+name: release-notes
+description: Drafts release notes from merged pull requests. Use when asked for release notes or a changelog entry.
+disable-model-invocation: true
+allowed-tools: Bash(git log *) Read
+---
+
+1. Run git log from the last tag to HEAD.
+2. Group changes into Added, Changed and Fixed.
+3. One line per change, in plain language, no commit hashes.
+4. Write the result to CHANGELOG.md under a new heading.</code></pre>
+
+<p>Type <code>/release-notes</code> and Claude follows the steps. The <code>name</code> defaults to the folder name, so you can leave it out.</p>
+
+<h2>Where do skills live?</h2>
+
+<table>
+<tr><th>Scope</th><th>Path</th></tr>
+<tr><td>Personal</td><td><code>~/.claude/skills/&lt;name&gt;/SKILL.md</code></td></tr>
+<tr><td>Project (commit to share)</td><td><code>.claude/skills/&lt;name&gt;/SKILL.md</code></td></tr>
+<tr><td>Nested in a subfolder</td><td><code>&lt;subdir&gt;/.claude/skills/&lt;name&gt;/SKILL.md</code>, loaded when Claude works in that folder</td></tr>
+<tr><td>Plugin</td><td><code>&lt;plugin&gt;/skills/&lt;name&gt;/SKILL.md</code>, called as <code>/plugin-name:skill-name</code></td></tr>
+<tr><td>Enterprise</td><td>The managed settings directory, for everyone your organization deploys to</td></tr>
+</table>
+
+<h2>Which frontmatter fields should I know?</h2>
+
+<table>
+<tr><th>Field</th><th>What it does</th></tr>
+<tr><td><code>description</code></td><td>What the skill does and when to use it. Claude decides from this text</td></tr>
+<tr><td><code>disable-model-invocation</code></td><td><code>true</code> means only you can run it; the description is not loaded at startup</td></tr>
+<tr><td><code>user-invocable</code></td><td><code>false</code> hides it from the <code>/</code> menu so only Claude uses it</td></tr>
+<tr><td><code>allowed-tools</code></td><td>Tools Claude may use without asking during the turn that runs the skill</td></tr>
+<tr><td><code>argument-hint</code>, <code>arguments</code></td><td>Autocomplete hint and named arguments</td></tr>
+<tr><td><code>model</code>, <code>effort</code></td><td>Override the model or effort level for that turn</td></tr>
+<tr><td><code>context: fork</code></td><td>Run the skill in a forked subagent instead of the main conversation</td></tr>
+<tr><td><code>paths</code></td><td>Glob patterns; Claude loads the skill on its own only for matching files</td></tr>
+</table>
+
+<p>Unknown fields are ignored without an error. One portability note from the <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">skills docs</a>: fields beyond <code>name</code>, <code>description</code>, <code>license</code>, <code>compatibility</code>, <code>metadata</code> and <code>allowed-tools</code> are Claude Code extensions, and skill uploads to claude.ai or the Skills API reject them.</p>
+
+<h2>How does a skill load, and what does it cost?</h2>
+
+<ul>
+<li><strong>At startup</strong> only the description is in context, so many skills cost little. The description plus <code>when_to_use</code> is cut at 1,536 characters in the listing.</li>
+<li><strong>When used</strong> the whole <code>SKILL.md</code> body loads and stays for the rest of the session.</li>
+<li><strong>After compaction</strong> the latest use of each skill is re-attached, keeping its first 5,000 tokens, within a 25,000-token total.</li>
+</ul>
+
+<p>The docs recommend keeping <code>SKILL.md</code> under 500 lines and putting the important steps first. This is also why moving rarely used instructions out of <code>CLAUDE.md</code> into skills shrinks every request: <code>CLAUDE.md</code> loads every session, a skill body only when needed.</p>
+
+<h2>How do I pass arguments?</h2>
+
+<p>Text after the command becomes the arguments. Inside <code>SKILL.md</code>:</p>
+
+<ul>
+<li><code>$ARGUMENTS</code> is everything you typed after the name.</li>
+<li><code>$0</code>, <code>$1</code> (or <code>$ARGUMENTS[0]</code>) are positional, counted from 0.</li>
+<li><code>$name</code> works for arguments you declared in <code>arguments</code>.</li>
+<li><code>${CLAUDE_SKILL_DIR}</code> points to the skill's folder, handy for bundled scripts.</li>
+</ul>
+
+<p>If no placeholder takes the input, Claude Code appends it as <code>ARGUMENTS: &lt;value&gt;</code>.</p>
+
+<h2>Can a skill include scripts and reference files?</h2>
+
+<p>Yes. Anything in the skill folder is available. Mention each file in <code>SKILL.md</code> so Claude knows when to open it:</p>
+
+<pre><code>my-skill/
+├── SKILL.md        (required)
+├── reference.md    (read when needed)
+├── examples.md     (read when needed)
+└── scripts/
+    └── helper.py   (run, not loaded)</code></pre>
+
+<p>Scripts are executed rather than read into context, which keeps long logic out of the token count.</p>
+
+<h2>What about my old .claude/commands files?</h2>
+
+<p>They still work: <code>.claude/commands/deploy.md</code> still gives you <code>/deploy</code>. Commands have been merged into skills, which means Claude may now run a command on its own unless you set <code>disable-model-invocation: true</code>. To add supporting files, move it to <code>.claude/skills/deploy/SKILL.md</code>; you still type <code>/deploy</code>. If both exist with one name, the skill wins.</p>
+
+<h2>Does Claude Code ship with skills?</h2>
+
+<p>Yes. Bundled skills such as <code>/doctor</code>, <code>/code-review</code>, <code>/batch</code>, <code>/debug</code> and <code>/loop</code> are available in every session. Run <code>/skills</code> to list everything available, filter by name, and press <code>t</code> to sort by token count.</p>
+
+<h2>FAQ</h2>
+
+<h3>Why does Claude not use my skill on its own?</h3>
+<p>Claude decides from the description. Lead with the words a request would contain, say when to use it, and check that disable-model-invocation is not set.</p>
+
+<h3>Do I need to restart after editing a skill?</h3>
+<p>No. Edits inside existing skill folders apply in the current session. Creating a brand new top-level skills folder needs /reload-skills.</p>
+
+<h3>Should a workflow be a skill or a subagent?</h3>
+<p>Use a skill for instructions you want in the current conversation. Use a subagent, or a skill with context: fork, when the work produces lots of output you do not need to keep.</p>
+
+<h3>Can a skill run without permission prompts?</h3>
+<p>List the tools in allowed-tools. They run without prompting only during the turn that invokes the skill; your deny rules still apply.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked against the official docs on November 17, 2026:
+<a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Extend Claude with skills</a>,
+<a href="https://code.claude.com/docs/en/commands" target="_blank" rel="noopener">Commands</a> and
+<a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Manage costs effectively</a>.</p>
+
+<div class="cta">
+  <p>See every current command and shortcut in one reference.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-code-subagents-guide.html">Claude Code Subagents: Create Agents in .claude/agents</a></li>
+    <li><a href="/blog/claude-code-hooks-guide.html">Claude Code Hooks: Setup Guide With 5 Working Examples</a></li>
+    <li><a href="/blog/memory-management.html">Claude Code Memory Management</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Guides is an independent guide site and is not affiliated with Anthropic. Claude and Claude Code are products of Anthropic. For the source of truth, see the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> and the <a href="https://support.claude.com/">Claude Help Center</a>.</p>
+</footer>
+
+</body>
+</html>

@@ -1,6 +1,146 @@
 {
   "posts": [
     {
+      "url": "/blog/claude-certified-architect-practice-questions.html",
+      "title": "Claude Certified Architect Practice Questions, Explained",
+      "excerpt": "Ten original scenario questions for Claude Certified Architect: Foundations prep, covering the tool use loop, strict schemas, prompt caching, batches, Claude Code rules, hooks, subagents, compaction and grounding, each answered from the official docs.",
+      "date": "2026-11-17",
+      "readTime": 10,
+      "category": "Career",
+      "tags": [
+        "Certification",
+        "Claude API",
+        "Claude Code",
+        "Exam Prep"
+      ]
+    },
+    {
+      "url": "/blog/claude-limitations-enterprise-tasks.html",
+      "title": "Claude's Limits in Complex Enterprise Work",
+      "excerpt": "The real limits of Claude in complex enterprise work: confident errors, a knowledge cutoff, finite context, long-task drift, seat usage caps and access boundaries. What each means in practice and the control that handles it.",
+      "date": "2026-11-17",
+      "readTime": 8,
+      "category": "Guide",
+      "tags": [
+        "Claude",
+        "Enterprise",
+        "Limitations",
+        "Governance"
+      ]
+    },
+    {
+      "url": "/blog/claude-for-architecture-engineering-firms.html",
+      "title": "Claude for Architecture and Engineering Firms",
+      "excerpt": "Practical uses of Claude in architecture and engineering offices: specification review, code research, RFI and submittal drafting, drawings as PDF, spreadsheet checks and reports. File limits, project setup and the sign-off line.",
+      "date": "2026-11-17",
+      "readTime": 8,
+      "category": "Guide",
+      "tags": [
+        "Claude",
+        "Architecture",
+        "Engineering",
+        "Use Cases"
+      ]
+    },
+    {
+      "url": "/blog/migrate-large-codebase-claude-code.html",
+      "title": "How to Migrate a Large Codebase With Claude Code",
+      "excerpt": "The order of work for large migrations with Claude Code: a test judge first, a rulebook and dependency map, a throwaway trial, translate in loops, then compile, run and match behavior. Plus the repo setup that keeps context small.",
+      "date": "2026-11-17",
+      "readTime": 8,
+      "category": "Workflow",
+      "tags": [
+        "Claude Code",
+        "Migration",
+        "Large Codebases",
+        "Refactoring"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-cloud-sessions-parallel-agents.html",
+      "title": "Run Claude Code Agents in Parallel in Cloud Sessions",
+      "excerpt": "Run several Claude Code tasks at once, each in its own isolated cloud VM. Start with claude --cloud or claude.ai/code, control network access, pull results back with --teleport, and when local worktrees are the better fit.",
+      "date": "2026-11-17",
+      "readTime": 8,
+      "category": "Workflow",
+      "tags": [
+        "Claude Code",
+        "Cloud Sessions",
+        "Parallel Agents",
+        "Worktrees"
+      ]
+    },
+    {
+      "url": "/blog/claude-project-knowledge-limit.html",
+      "title": "Claude Project Knowledge Limit: What Happens When It's Full",
+      "excerpt": "When project knowledge nears the context window, paid plans switch to retrieval (RAG) and search the files instead of loading them all. What changes, the file limits, and how to fix 'project knowledge exceeds maximum'.",
+      "date": "2026-11-17",
+      "readTime": 6,
+      "category": "Guide",
+      "tags": [
+        "Claude",
+        "Projects",
+        "Context",
+        "RAG"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-context-window-full.html",
+      "title": "Claude Code Context Window Full: What Auto-Compact Keeps",
+      "excerpt": "Claude Code compacts automatically when the context window fills. What survives compaction (CLAUDE.md, plan, recent files, skills), what gets summarized away, and when to use /compact, /clear, /rewind or a subagent.",
+      "date": "2026-11-17",
+      "readTime": 7,
+      "category": "Guide",
+      "tags": [
+        "Claude Code",
+        "Context",
+        "Compaction",
+        "Tokens"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-subagents-guide.html",
+      "title": "Claude Code Subagents: Create Agents in .claude/agents",
+      "excerpt": "Create a Claude Code subagent with one Markdown file in .claude/agents. File format, frontmatter fields, how delegation works, built-in Explore and Plan agents, nesting, and when a subagent saves context.",
+      "date": "2026-11-17",
+      "readTime": 7,
+      "category": "Guide",
+      "tags": [
+        "Claude Code",
+        "Subagents",
+        "Agents",
+        "Context"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-skills-guide.html",
+      "title": "How to Create a Claude Code Skill With SKILL.md",
+      "excerpt": "Create a Claude Code skill with a SKILL.md file. Where skills live, frontmatter fields, how they load, /skill-name with arguments, supporting files, and migrating old .claude/commands.",
+      "date": "2026-11-17",
+      "readTime": 7,
+      "category": "Guide",
+      "tags": [
+        "Claude Code",
+        "Skills",
+        "Slash Commands",
+        "Automation"
+      ]
+    },
+    {
+      "url": "/blog/claude-code-rewind-checkpoints.html",
+      "title": "How to Undo Claude Code Changes With /rewind",
+      "excerpt": "Undo Claude Code edits with /rewind or a double Esc. The five rewind options, summarizing part of a conversation, how long checkpoints last, and the changes checkpoints never capture.",
+      "date": "2026-11-17",
+      "readTime": 6,
+      "category": "Guide",
+      "tags": [
+        "Claude Code",
+        "Checkpoints",
+        "Rewind",
+        "Git"
+      ]
+    },
+    {
       "url": "/blog/claude-25-habits-top-1-percent.html",
       "title": "25 Claude Habits That Separate the Top 1% From Everyone Else",
       "excerpt": "25 habits in five groups: set Claude up, protect your chat and limit, frame the task, ask for finished work, and don't give away more than you need to.",
@@ -102,8 +242,8 @@
     },
     {
       "url": "/blog/context-optimization-guide.html",
-      "title": "How to Manage Context When You Keep Hitting Token Limits",
-      "excerpt": "Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering context measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting.",
+      "title": "Claude Context Limits: What Happens and How to Reduce It",
+      "excerpt": "What happens when Claude project knowledge or a Claude Code session nears the context limit (RAG, auto-compaction), the \"project knowledge exceeds maximum\" fix, and a 10-part guide to reducing context and token spend.",
       "date": "2026-05-11",
       "readTime": 30,
       "category": "Cost Optimization",
@@ -315,8 +455,8 @@
     },
     {
       "url": "/cheatsheet-landing-page.html",
-      "title": "Claude Code Features Overview",
-      "excerpt": "A visual tour of the Claude Code feature surface — everything the CLI can do, laid out on one page.",
+      "title": "Claude Code Cheat Sheet: Commands, Shortcuts and Flags",
+      "excerpt": "The Claude Code cheat sheet on one page: slash commands, keyboard shortcuts, input prefixes and CLI flags, checked against the official docs.",
       "date": "2026-04-08",
       "readTime": 3,
       "category": "Reference",
@@ -380,8 +520,8 @@
     },
     {
       "url": "/blog/performance-optimization.html",
-      "title": "Performance Optimization for Claude Code",
-      "excerpt": "Practical techniques to make Claude Code faster, leaner, and cheaper — from context hygiene to response streaming.",
+      "title": "Claude Code Performance: How to Make It Faster and Cheaper",
+      "excerpt": "How to make Claude Code faster and cheaper: model and effort choice, when fast mode pays off, keeping context small with /clear and /compact, subagents for verbose work, and reading /usage.",
       "date": "2026-04-03",
       "readTime": 5,
       "category": "Guide",

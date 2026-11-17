@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Undo Claude Code edits with /rewind or Esc Esc. Restore code, conversation or both, summarize part of a chat, and know what checkpoints do not track.">
+<meta name="keywords" content="undo Claude Code changes, Claude Code /rewind, Claude Code checkpoints, Esc Esc rewind, /undo Claude Code, restore code Claude Code">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-code-rewind-checkpoints.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-code-rewind-checkpoints.html">
+<meta property="og:title" content="How to Undo Claude Code Changes With /rewind">
+<meta property="og:description" content="Undo Claude Code edits with /rewind or Esc Esc. Restore code, conversation or both, summarize part of a chat, and know what checkpoints do not track.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-code-rewind-checkpoints.html">
+<meta name="twitter:title" content="How to Undo Claude Code Changes With /rewind">
+<meta name="twitter:description" content="Undo Claude Code edits with /rewind or Esc Esc. Restore code, conversation or both, summarize part of a chat, and know what checkpoints do not track.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="How to Undo Claude Code Changes With /rewind">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-17T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-17T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Checkpoints">
+<meta property="article:tag" content="Rewind">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Guide">
+
+<title>How to Undo Claude Code Changes With /rewind</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Undo Claude Code Changes With /rewind",
+  "description": "Undo Claude Code edits with /rewind or Esc Esc. Restore code, conversation or both, summarize part of a chat, and know what checkpoints do not track.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "url": "https://claude-guides.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-17T00:00:00Z",
+  "dateModified": "2026-11-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/claude-code-rewind-checkpoints.html"
+  },
+  "wordCount": 821,
+  "keywords": [
+    "Claude Code",
+    "Checkpoints",
+    "Rewind",
+    "Git",
+    "Guide"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Undo Claude Code Changes",
+      "item": "https://claude-guides.com/blog/claude-code-rewind-checkpoints.html"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is /undo different from /rewind?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. /undo and /checkpoint are aliases of /rewind and open the same menu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does double Esc clear my text instead of opening rewind?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "With text in the prompt, double Esc clears it and saves it to history. Press it again on an empty prompt to open the rewind menu, then press Up afterwards to recall your draft."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why did a rewind say no files were restored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The snapshots for that checkpoint were probably removed by the retention cleanup. Raise cleanupPeriodDays if you need them longer, and use git for older history."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does rewinding undo a git commit Claude made?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A commit is a shell command and lives in git. Undo it with git, for example by resetting or reverting the commit."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>How Do I Undo Changes Claude Code Made?</h1>
+  <p class="lede">Claude Code saves a checkpoint before every prompt you send. Rewinding is one command, but it has blind spots worth knowing before you rely on it.</p>
+  <div class="post-meta">
+    <span>November 17, 2026</span>
+    <span>6 min read</span>
+    <span>Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Run <code>/rewind</code> (alias <code>/undo</code>), or press <code>Esc</code> twice with an empty prompt. Pick the prompt you want to go back to, then choose Restore code and conversation, Restore conversation, or Restore code. Claude Code takes a checkpoint before every prompt that starts a turn, so you can step back one prompt or many. It only tracks edits made through Claude's file editing tools: files changed only by shell commands, by you outside Claude Code, or by most subagents are not restored, so keep using git for anything that matters.</p>
+</div>
+
+<h2>How do checkpoints work?</h2>
+
+<p>According to the <a href="https://code.claude.com/docs/en/checkpointing" target="_blank" rel="noopener">checkpointing docs</a>:</p>
+
+<ul>
+<li>Every prompt you send that starts a turn creates a checkpoint of the code as it was.</li>
+<li>File snapshots are kept for the 100 most recent checkpoints in a session.</li>
+<li>Checkpoints are saved with the conversation, so <code>/rewind</code> works after you resume a session.</li>
+<li>Snapshots are cleaned up with the rest of your session data, by default about 30 days after the session last saved one. The <code>cleanupPeriodDays</code> setting changes that.</li>
+</ul>
+
+<h2>What are the rewind options?</h2>
+
+<table>
+<tr><th>Option</th><th>Code</th><th>Conversation</th><th>Use when</th></tr>
+<tr><td>Restore code and conversation</td><td>Reverted</td><td>Reverted</td><td>The last attempt went wrong; start that step over</td></tr>
+<tr><td>Restore conversation</td><td>Kept</td><td>Reverted</td><td>The code is fine but the chat went off track</td></tr>
+<tr><td>Restore code</td><td>Reverted</td><td>Kept</td><td>Undo the edits but keep what Claude learned</td></tr>
+<tr><td>Summarize from here</td><td>Kept</td><td>Compressed from this point on</td><td>A long debugging detour is filling the context</td></tr>
+<tr><td>Summarize up to here</td><td>Kept</td><td>Compressed before this point</td><td>Keep recent messages word for word, shrink the old ones</td></tr>
+</table>
+
+<p>The two code options only appear when there are tracked file changes after the chosen point. After Restore conversation or Summarize from here, your original prompt comes back into the input box so you can edit and resend it.</p>
+
+<h2>How do I guide a summary?</h2>
+
+<p>Highlight a Summarize option with the arrow keys and type instructions in the "add context (optional)" row before pressing <code>Enter</code>. Pressing the option's number key summarizes at once without instructions. Summarizing does not touch files on disk, and the original messages stay in the session transcript.</p>
+
+<h2>What do checkpoints not capture?</h2>
+
+<table>
+<tr><th>Change</th><th>Restored by /rewind?</th></tr>
+<tr><td>Edits through Claude's file tools</td><td>Yes</td></tr>
+<tr><td>Shell commands on a file Claude had already edited</td><td>Yes</td></tr>
+<tr><td>A file changed only by shell commands (for example <code>rm</code>, a formatter, a migration script)</td><td>No</td></tr>
+<tr><td>Your own edits outside Claude Code, or another session's edits</td><td>No, unless they touched the same files</td></tr>
+<tr><td>Edits by most subagents, including background ones</td><td>Only for files Claude had already edited in your conversation</td></tr>
+<tr><td>Symlinked or hard-linked files</td><td>No; Claude Code skips them and warns</td></tr>
+<tr><td>Database rows, deployed code, sent messages</td><td>No; checkpoints cover local files only</td></tr>
+</table>
+
+<p>The docs put it plainly: checkpoints are for quick, session-level recovery and do not replace version control.</p>
+
+<h2>A safe routine for risky changes</h2>
+
+<ol>
+<li><strong>Commit or stash first.</strong> A clean git state means <code>git diff</code> shows everything that changed, whatever made the change.</li>
+<li><strong>Plan before editing.</strong> Press <code>Shift+Tab</code> to plan mode, or run <code>/plan</code>, so Claude proposes the approach before touching files.</li>
+<li><strong>Work in small prompts.</strong> One checkpoint per step makes it easy to step back exactly one step.</li>
+<li><strong>Isolate experiments.</strong> <code>claude --worktree try-new-parser</code> runs the session in a separate git worktree, so a failed idea never reaches your main checkout.</li>
+<li><strong>Branch the conversation.</strong> To try another approach while keeping the original session intact, use <code>/branch</code> or <code>claude --continue --fork-session</code>.</li>
+</ol>
+
+<h2>Can I get back a conversation I cleared?</h2>
+
+<p>Within the same Claude Code process, yes. After <code>/clear</code>, the rewind menu shows an entry at the top labeled <code>/resume &lt;session-id&gt; (previous session)</code>. Select it to resume the conversation from before the clear. It disappears when you exit or resume another session. Later, <code>/resume</code> still lists the old conversation.</p>
+
+<h2>FAQ</h2>
+
+<h3>Is /undo different from /rewind?</h3>
+<p>No. /undo and /checkpoint are aliases of /rewind and open the same menu.</p>
+
+<h3>Why does double Esc clear my text instead of opening rewind?</h3>
+<p>With text in the prompt, double Esc clears it and saves it to history. Press it again on an empty prompt to open the rewind menu, then press Up afterwards to recall your draft.</p>
+
+<h3>Why did a rewind say no files were restored?</h3>
+<p>The snapshots for that checkpoint were probably removed by the retention cleanup. Raise cleanupPeriodDays if you need them longer, and use git for older history.</p>
+
+<h3>Does rewinding undo a git commit Claude made?</h3>
+<p>No. A commit is a shell command and lives in git. Undo it with git, for example by resetting or reverting the commit.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked against the official docs on November 17, 2026:
+<a href="https://code.claude.com/docs/en/checkpointing" target="_blank" rel="noopener">Checkpointing</a>,
+<a href="https://code.claude.com/docs/en/interactive-mode" target="_blank" rel="noopener">Interactive mode</a> and
+<a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Common workflows</a>.</p>
+
+<div class="cta">
+  <p>See every current command and shortcut in one reference.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-code-context-window-full.html">Claude Code Context Window Full: What Auto-Compact Keeps</a></li>
+    <li><a href="/blog/claude-code-cloud-sessions-parallel-agents.html">Run Claude Code Agents in Parallel in Cloud Sessions</a></li>
+    <li><a href="/blog/claude-code-permissions-guide.html">Claude Code Permissions: Allow, Deny and Ask Rules Guide</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Guides is an independent guide site and is not affiliated with Anthropic. Claude and Claude Code are products of Anthropic. For the source of truth, see the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> and the <a href="https://support.claude.com/">Claude Help Center</a>.</p>
+</footer>
+
+</body>
+</html>

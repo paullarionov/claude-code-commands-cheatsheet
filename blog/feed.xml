@@ -6,12 +6,102 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
+
+    <item>
+      <title>Claude Certified Architect Practice Questions, Explained</title>
+      <link>https://claude-guides.com/blog/claude-certified-architect-practice-questions.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-certified-architect-practice-questions.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Career</category>
+      <description>Ten original scenario questions for Claude Certified Architect: Foundations prep, covering the tool use loop, strict schemas, prompt caching, batches, Claude Code rules, hooks, subagents, compaction and grounding, each answered from the official docs.</description>
+    </item>
+
+    <item>
+      <title>Claude's Limits in Complex Enterprise Work</title>
+      <link>https://claude-guides.com/blog/claude-limitations-enterprise-tasks.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-limitations-enterprise-tasks.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>The real limits of Claude in complex enterprise work: confident errors, a knowledge cutoff, finite context, long-task drift, seat usage caps and access boundaries. What each means in practice and the control that handles it.</description>
+    </item>
+
+    <item>
+      <title>Claude for Architecture and Engineering Firms</title>
+      <link>https://claude-guides.com/blog/claude-for-architecture-engineering-firms.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-for-architecture-engineering-firms.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Practical uses of Claude in architecture and engineering offices: specification review, code research, RFI and submittal drafting, drawings as PDF, spreadsheet checks and reports. File limits, project setup and the sign-off line.</description>
+    </item>
+
+    <item>
+      <title>How to Migrate a Large Codebase With Claude Code</title>
+      <link>https://claude-guides.com/blog/migrate-large-codebase-claude-code.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/migrate-large-codebase-claude-code.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Workflow</category>
+      <description>The order of work for large migrations with Claude Code: a test judge first, a rulebook and dependency map, a throwaway trial, translate in loops, then compile, run and match behavior. Plus the repo setup that keeps context small.</description>
+    </item>
+
+    <item>
+      <title>Run Claude Code Agents in Parallel in Cloud Sessions</title>
+      <link>https://claude-guides.com/blog/claude-code-cloud-sessions-parallel-agents.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-cloud-sessions-parallel-agents.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Workflow</category>
+      <description>Run several Claude Code tasks at once, each in its own isolated cloud VM. Start with claude --cloud or claude.ai/code, control network access, pull results back with --teleport, and when local worktrees are the better fit.</description>
+    </item>
+
+    <item>
+      <title>Claude Project Knowledge Limit: What Happens When It's Full</title>
+      <link>https://claude-guides.com/blog/claude-project-knowledge-limit.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-project-knowledge-limit.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>When project knowledge nears the context window, paid plans switch to retrieval (RAG) and search the files instead of loading them all. What changes, the file limits, and how to fix 'project knowledge exceeds maximum'.</description>
+    </item>
+
+    <item>
+      <title>Claude Code Context Window Full: What Auto-Compact Keeps</title>
+      <link>https://claude-guides.com/blog/claude-code-context-window-full.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-context-window-full.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Claude Code compacts automatically when the context window fills. What survives compaction (CLAUDE.md, plan, recent files, skills), what gets summarized away, and when to use /compact, /clear, /rewind or a subagent.</description>
+    </item>
+
+    <item>
+      <title>Claude Code Subagents: Create Agents in .claude/agents</title>
+      <link>https://claude-guides.com/blog/claude-code-subagents-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-subagents-guide.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Create a Claude Code subagent with one Markdown file in .claude/agents. File format, frontmatter fields, how delegation works, built-in Explore and Plan agents, nesting, and when a subagent saves context.</description>
+    </item>
+
+    <item>
+      <title>How to Create a Claude Code Skill With SKILL.md</title>
+      <link>https://claude-guides.com/blog/claude-code-skills-guide.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-skills-guide.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Create a Claude Code skill with a SKILL.md file. Where skills live, frontmatter fields, how they load, /skill-name with arguments, supporting files, and migrating old .claude/commands.</description>
+    </item>
+
+    <item>
+      <title>How to Undo Claude Code Changes With /rewind</title>
+      <link>https://claude-guides.com/blog/claude-code-rewind-checkpoints.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/claude-code-rewind-checkpoints.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Guide</category>
+      <description>Undo Claude Code edits with /rewind or a double Esc. The five rewind options, summarizing part of a conversation, how long checkpoints last, and the changes checkpoints never capture.</description>
+    </item>
 
     <item>
       <title>25 Claude Habits That Separate the Top 1% From Everyone Else</title>
@@ -77,12 +167,12 @@
     </item>
 
     <item>
-      <title>How to Manage Context When You Keep Hitting Token Limits</title>
+      <title>Claude Context Limits: What Happens and How to Reduce It</title>
       <link>https://claude-guides.com/blog/context-optimization-guide.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/context-optimization-guide.html</guid>
       <pubDate>Mon, 11 May 2026 00:00:00 GMT</pubDate>
       <category>Cost Optimization</category>
-      <description>Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering context measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting.</description>
+      <description>What happens when Claude project knowledge or a Claude Code session nears the context limit (RAG, auto-compaction), the &quot;project knowledge exceeds maximum&quot; fix, and a 10-part guide to reducing context and token spend.</description>
     </item>
 
     <item>
@@ -257,12 +347,12 @@
     </item>
 
     <item>
-      <title>Performance Optimization for Claude Code</title>
+      <title>Claude Code Performance: How to Make It Faster and Cheaper</title>
       <link>https://claude-guides.com/blog/performance-optimization.html</link>
       <guid isPermaLink="true">https://claude-guides.com/blog/performance-optimization.html</guid>
       <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
       <category>Guide</category>
-      <description>Practical techniques to make Claude Code faster, leaner, and cheaper — from context hygiene to response streaming.</description>
+      <description>How to make Claude Code faster and cheaper: model and effort choice, when fast mode pays off, keeping context small with /clear and /compact, subagents for verbose work, and reading /usage.</description>
     </item>
 
     <item>

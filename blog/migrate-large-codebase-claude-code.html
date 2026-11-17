@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A step-by-step order for large code migrations with Claude Code: build a judge first, write a rulebook, trial it, translate in loops, then match behavior.">
+<meta name="keywords" content="migrate large codebase Claude Code, code migration Claude Code, large-scale refactor Claude, port codebase to new language, Claude Code monorepo migration">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/migrate-large-codebase-claude-code.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/migrate-large-codebase-claude-code.html">
+<meta property="og:title" content="How to Migrate a Large Codebase With Claude Code">
+<meta property="og:description" content="A step-by-step order for large code migrations with Claude Code: build a judge first, write a rulebook, trial it, translate in loops, then match behavior.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://claude-guides.com/blog/migrate-large-codebase-claude-code.html">
+<meta name="twitter:title" content="How to Migrate a Large Codebase With Claude Code">
+<meta name="twitter:description" content="A step-by-step order for large code migrations with Claude Code: build a judge first, write a rulebook, trial it, translate in loops, then match behavior.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="How to Migrate a Large Codebase With Claude Code">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-17T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-17T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Migration">
+<meta property="article:tag" content="Large Codebases">
+<meta property="article:tag" content="Refactoring">
+<meta property="article:tag" content="Workflow">
+
+<title>How to Migrate a Large Codebase With Claude Code</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Migrate a Large Codebase With Claude Code",
+  "description": "A step-by-step order for large code migrations with Claude Code: build a judge first, write a rulebook, trial it, translate in loops, then match behavior.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "url": "https://claude-guides.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-17T00:00:00Z",
+  "dateModified": "2026-11-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/migrate-large-codebase-claude-code.html"
+  },
+  "wordCount": 1028,
+  "keywords": [
+    "Claude Code",
+    "Migration",
+    "Large Codebases",
+    "Refactoring",
+    "Workflow"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Migrate a Large Codebase With Claude Code",
+      "item": "https://claude-guides.com/blog/migrate-large-codebase-claude-code.html"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can Claude Code migrate a whole codebase in one prompt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not reliably at scale. Large migrations work as a process: judge, rules, trial, loops and verification, with Claude doing the volume work inside it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my project has no tests?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Build the judge first. Have Claude write tests against the original code and confirm they fail when you break that code on purpose."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should every file be reviewed by a person?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Put human effort into the rulebook, the trial run and the judge. With mechanical verification in place, people review patterns and exceptions rather than every file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do I keep the migration plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In a file in the repository. Plan files are re-injected after compaction, and cloud sessions can only see what you have pushed."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>How Do I Migrate a Large Codebase With Claude Code?</h1>
+  <p class="lede">Large migrations fail when you fix output by hand, file after file. They work when you build a process that produces correct output and then let Claude run it. The order of work below follows Anthropic's own write-up and docs.</p>
+  <div class="post-meta">
+    <span>November 17, 2026</span>
+    <span>8 min read</span>
+    <span>Workflow</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Work in this order. 1) Build a judge: tests or a parity check that runs against both the old and the new code. 2) Write a rulebook of translation rules, a dependency map that sets the order, and a list of gaps that need redesign. 3) Run a small trial, throw the output away, and fix the rules. 4) Translate everything in an implement, review, fix loop driven by a queue. 5) Use compiler errors and crashes as the next work items, grouped by cause. 6) Run the judge until behavior matches. When output is wrong, fix the rules and loop, not the individual files.</p>
+</div>
+
+<h2>Why start with a judge?</h2>
+
+<p>Anthropic's post on <a href="https://claude.com/blog/ai-code-migration" target="_blank" rel="noopener">how it runs large-scale code migrations with Claude Code</a> calls a strong judge the prerequisite. Without an objective check, every file needs human review and the migration stalls. A judge can be the existing test suite, a parity harness that feeds the same inputs to the old and new code and compares the outputs, or both.</p>
+
+<p>Two checks on the judge itself:</p>
+
+<ul>
+<li><strong>Prove it fails.</strong> Break the code on purpose and confirm the judge catches it. The post's line is that a judge that does not catch breakage is not a judge.</li>
+<li><strong>Guard the tests.</strong> If tests are rewritten too, check adversarially that no assertion was weakened along the way.</li>
+</ul>
+
+<p>No test suite? The post suggests having Claude build one first, using the original code as the source of truth.</p>
+
+<h2>Step 2: rulebook, dependency map and gap list</h2>
+
+<ul>
+<li><strong>Rulebook.</strong> How each construct in the old code maps to the new one: naming, error handling, logging, async patterns, library replacements. Keep it in the repository so every session and subagent reads the same rules.</li>
+<li><strong>Dependency map.</strong> Which files depend on which. It decides the order and shows cycles early; cyclic imports can cause large waves of errors later.</li>
+<li><strong>Gap list.</strong> Places where the new language or framework needs a redesign rather than a translation, such as manual memory management or implicit interfaces.</li>
+</ul>
+
+<h2>Step 3: trial, discard, refine</h2>
+
+<p>Translate a small, representative slice. Read the result critically, then throw it away. The output is not the deliverable; the corrections to the rulebook are. Repeat until a fresh trial comes out right without hand edits. The post recommends putting most human effort here, before the large run.</p>
+
+<h2>Step 4: translate in a loop</h2>
+
+<p>Run an implement, review, fix loop over a queue of files still to do. Practical points from the post:</p>
+
+<ul>
+<li><strong>Parallelize independent units.</strong> Files that do not depend on each other can be processed at the same time.</li>
+<li><strong>Make it resumable.</strong> Rebuild each batch from what is on disk, so an interrupted run picks up where it stopped.</li>
+<li><strong>Match the model to the job.</strong> Smaller models for high-volume translation, larger ones for review and rule-writing. The post's advice is not to use the largest model for everything.</li>
+<li><strong>Make review adversarial and verification mechanical.</strong> A reviewer that tries to find problems, and checks that do not depend on anyone's judgment.</li>
+</ul>
+
+<p>In Claude Code, the pieces map to features you already have. Parallel work can run in <a href="/blog/claude-code-cloud-sessions-parallel-agents.html">cloud sessions</a> or local worktrees with <code>claude --worktree</code>. Reviewers fit well as <a href="/blog/claude-code-subagents-guide.html">subagents</a> with read-only tools. Scripted loops can call <a href="/blog/claude-code-headless-mode-ci-guide.html">claude -p</a>.</p>
+
+<h2>Step 5: compile, run, fix by root cause</h2>
+
+<p>Once everything is translated, compiler errors and smoke-test crashes become the work queue. Group them by root cause before fixing. Fifty errors from one wrong rule are one fix in the rulebook and one more loop, not fifty manual edits. Watch for patterns rather than chasing single failures.</p>
+
+<h2>Step 6: match behavior</h2>
+
+<p>Run the judge against both versions and fix until behavior matches. Only then switch traffic or delete the old code.</p>
+
+<h2>How should I set up the repository for this?</h2>
+
+<p>The <a href="https://code.claude.com/docs/en/large-codebases" target="_blank" rel="noopener">large codebase docs</a> list settings that keep Claude focused:</p>
+
+<table>
+<tr><th>Need</th><th>Setting</th></tr>
+<tr><td>Conventions per area, not one giant file</td><td>A root <code>CLAUDE.md</code> plus one per package or subsystem</td></tr>
+<tr><td>Skip packages you never touch</td><td><code>claudeMdExcludes</code></td></tr>
+<tr><td>Keep Claude out of build output and vendored code</td><td><code>Read</code> deny rules in <code>permissions.deny</code></td></tr>
+<tr><td>Find definitions without reading many files</td><td>A code intelligence plugin for your language</td></tr>
+<tr><td>Light worktrees in a huge repo</td><td><code>worktree.sparsePaths</code></td></tr>
+<tr><td>Touch a sibling package from one session</td><td><code>--add-dir</code> or <code>additionalDirectories</code></td></tr>
+</table>
+
+<p>For changes that span packages, the docs give two tips. Hand Claude the shared change and its call sites in one session, so the decisions stay consistent. And plan first in plan mode: the plan is written to a file and re-injected after every compaction, so it survives a long session where chat history may not.</p>
+
+<h2>What usually goes wrong?</h2>
+
+<ul>
+<li><strong>Hand-patching output.</strong> The fix disappears on the next loop. Fix the rule.</li>
+<li><strong>Agents that are too cautious.</strong> The post notes blunt instructions can help when Claude hedges instead of making the change.</li>
+<li><strong>Unplanned token spend.</strong> Cost concentrates in loops, so design them deliberately and cap them.</li>
+<li><strong>Huge sessions.</strong> Long sessions compact. Keep the rulebook and plan in files, not in chat.</li>
+</ul>
+
+<h2>FAQ</h2>
+
+<h3>Can Claude Code migrate a whole codebase in one prompt?</h3>
+<p>Not reliably at scale. Large migrations work as a process: judge, rules, trial, loops and verification, with Claude doing the volume work inside it.</p>
+
+<h3>What if my project has no tests?</h3>
+<p>Build the judge first. Have Claude write tests against the original code and confirm they fail when you break that code on purpose.</p>
+
+<h3>Should every file be reviewed by a person?</h3>
+<p>Put human effort into the rulebook, the trial run and the judge. With mechanical verification in place, people review patterns and exceptions rather than every file.</p>
+
+<h3>Where do I keep the migration plan?</h3>
+<p>In a file in the repository. Plan files are re-injected after compaction, and cloud sessions can only see what you have pushed.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked on November 17, 2026 against
+<a href="https://claude.com/blog/ai-code-migration" target="_blank" rel="noopener">How Anthropic runs large-scale code migrations with Claude Code</a> (July 16, 2026),
+<a href="https://code.claude.com/docs/en/large-codebases" target="_blank" rel="noopener">Set up Claude Code in a monorepo or large codebase</a> and
+<a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Common workflows</a>.</p>
+
+<div class="cta">
+  <p>See every current command and flag in one reference.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-code-cloud-sessions-parallel-agents.html">Run Claude Code Agents in Parallel in Cloud Sessions</a></li>
+    <li><a href="/blog/claude-code-architectural-patterns.html">Claude Code Architectural Patterns</a></li>
+    <li><a href="/blog/claude-limitations-enterprise-tasks.html">Claude's Limits in Complex Enterprise Work</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Guides is an independent guide site and is not affiliated with Anthropic. Claude and Claude Code are products of Anthropic. For the source of truth, see the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> and the <a href="https://support.claude.com/">Claude Help Center</a>.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ten original practice questions for Claude Certified Architect prep: tool use, caching, batches, Claude Code and grounding, each with a sourced answer.">
+<meta name="keywords" content="Claude Certified Architect practice questions, Claude Certified Architect exam prep, CCA Foundations practice, Claude architect exam questions, Claude certification study">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-certified-architect-practice-questions.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-certified-architect-practice-questions.html">
+<meta property="og:title" content="Claude Certified Architect Practice Questions, Explained">
+<meta property="og:description" content="Ten original practice questions for Claude Certified Architect prep: tool use, caching, batches, Claude Code and grounding, each with a sourced answer.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-certified-architect-practice-questions.html">
+<meta name="twitter:title" content="Claude Certified Architect Practice Questions, Explained">
+<meta name="twitter:description" content="Ten original practice questions for Claude Certified Architect prep: tool use, caching, batches, Claude Code and grounding, each with a sourced answer.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Claude Certified Architect Practice Questions, Explained">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-17T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-17T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Certification">
+<meta property="article:tag" content="Claude API">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Exam Prep">
+<meta property="article:tag" content="Career">
+
+<title>Claude Certified Architect Practice Questions, Explained</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Certified Architect Practice Questions, Explained",
+  "description": "Ten original practice questions for Claude Certified Architect prep: tool use, caching, batches, Claude Code and grounding, each with a sourced answer.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "url": "https://claude-guides.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-17T00:00:00Z",
+  "dateModified": "2026-11-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/claude-certified-architect-practice-questions.html"
+  },
+  "wordCount": 1465,
+  "keywords": [
+    "Certification",
+    "Claude API",
+    "Claude Code",
+    "Exam Prep",
+    "Career"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Claude Certified Architect Practice Questions",
+      "item": "https://claude-guides.com/blog/claude-certified-architect-practice-questions.html"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are these real exam questions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. They were written for this page to practice the same kind of reasoning. The exam content is confidential to Anthropic and the official preparation courses are in the Anthropic Partner Academy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who can take the Claude Certified Architect exam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Members of the Claude Partner Network. Firms join for free and register their practitioners through claude.com/partners."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is the exam delivered?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anthropic says every exam is proctored through Pearson, test takers verify their identity first, and passing earns a digital badge through Credly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What comes after Foundations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anthropic's role-based path starts at Foundations level and moves to Professional level. Claude Certified Architect: Professional is the next step for architects."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>Claude Certified Architect: Practice Questions With Explanations</h1>
+  <p class="lede">Ten scenario questions written for this page to rehearse the kind of judgment an architect certification tests: picking the right Claude feature for a situation and knowing why. Every answer links to the official docs.</p>
+  <div class="post-meta">
+    <span>November 17, 2026</span>
+    <span>10 min read</span>
+    <span>Career</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Claude Certified Architect: Foundations is Anthropic's proctored certification for solution architects who design and build agent systems with Claude. It is open to members of the Claude Partner Network, and the official preparation courses are in the Anthropic Partner Academy. The ten questions below are not taken from the exam. They are original practice scenarios on topics an architect works with daily (tool use, prompt caching, batch processing, Claude Code configuration, context management and grounding), with explanations based on Anthropic's public documentation.</p>
+</div>
+
+<h2>What is the certification, in short?</h2>
+
+<p>Anthropic introduced Claude Certified Architect, Foundations on March 12, 2026, together with the <a href="https://www.anthropic.com/news/claude-partner-network" target="_blank" rel="noopener">Claude Partner Network</a>, as its first technical certification. A <a href="https://claude.com/resources/articles/four-role-based-claude-certifications" target="_blank" rel="noopener">July 2026 article</a> describes four role-based credentials (Associate, Developer and Architect at Foundations level, and Architect at Professional level). Exams are proctored through Pearson, require identity verification, and award a Credly badge. Partner Network membership is free for firms. For the program background, see our <a href="/blog/claude-certified-architect.html">Claude Certified Architect overview</a>.</p>
+
+<p>Anthropic's public pages do not publish question counts, timing or domain weights, so treat third-party numbers with care and check the Partner Academy for the current exam guide.</p>
+
+<h2>How to use these questions</h2>
+
+<p>Answer each one before reading the explanation. If you miss one, read the linked doc section rather than memorizing the letter; real scenarios will be worded differently.</p>
+
+<h2>Question 1: the tool use loop</h2>
+
+<p>Your application sends a request with a <code>get_inventory</code> tool. The response comes back with <code>stop_reason</code> set to <code>"tool_use"</code>. What should your code do next?</p>
+
+<ol type="A">
+<li>Send the same request again with <code>tool_choice</code> set to <code>none</code></li>
+<li>Run the tool, then send a new request that includes Claude's response and a user message with a <code>tool_result</code> block carrying the matching <code>tool_use_id</code></li>
+<li>Show the <code>tool_use</code> block to the end user as the answer</li>
+<li>Wait; Anthropic runs client tools automatically</li>
+</ol>
+
+<p><strong>Answer: B.</strong> Client tools run in your application. Claude returns a <code>tool_use</code> block; you execute it and return a <code>tool_result</code> with the same id so Claude can finish the answer. Only server tools such as web search run on Anthropic's side. Source: <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview" target="_blank" rel="noopener">Tool use with Claude</a>.</p>
+
+<h2>Question 2: guaranteed schema</h2>
+
+<p>A downstream service crashes when a tool call is missing a required field. You want tool inputs to always match your JSON schema. What is the most direct fix?</p>
+
+<ol type="A">
+<li>Add "always follow the schema" to the system prompt</li>
+<li>Lower the temperature</li>
+<li>Add <code>strict: true</code> to the tool definition</li>
+<li>Retry until the output parses</li>
+</ol>
+
+<p><strong>Answer: C.</strong> Strict tool use makes Claude's tool calls match the schema exactly. Prompting helps but does not guarantee it, and retry loops waste tokens. Keep validation in your service anyway. Source: <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview" target="_blank" rel="noopener">Tool use with Claude</a>.</p>
+
+<h2>Question 3: what breaks the cache</h2>
+
+<p>A support agent caches a long system prompt and tool list. Cache hit rates collapse after a release in which the team appended today's date to one tool's description. Why?</p>
+
+<ol type="A">
+<li>Dates cannot be cached</li>
+<li>The cache prefix runs tools, then system, then messages, and changing a tool definition invalidates every level after it</li>
+<li>The cache only covers messages</li>
+<li>Caching needs a 1-hour TTL to work at all</li>
+</ol>
+
+<p><strong>Answer: B.</strong> Changing tool names, descriptions or parameters invalidates the tools, system and messages caches. Keep stable content first and move changing values to the end of the prompt. The default cache lifetime is 5 minutes, with a 1-hour option at a higher write price. Source: <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching" target="_blank" rel="noopener">Prompt caching</a>.</p>
+
+<h2>Question 4: a large job with no deadline</h2>
+
+<p>You need to classify a few hundred thousand archived documents. Nobody needs results before tomorrow, and cost matters most. Which approach fits?</p>
+
+<ol type="A">
+<li>Thousands of parallel synchronous requests</li>
+<li>The Message Batches API</li>
+<li>One request with every document in it</li>
+<li>Streaming responses</li>
+</ol>
+
+<p><strong>Answer: B.</strong> Batches cost 50 percent less, most finish within an hour, and anything not done in 24 hours expires. One batch holds up to 100,000 requests or 256 MB, so split the job across several batches. Source: <a href="https://platform.claude.com/docs/en/build-with-claude/batch-processing" target="_blank" rel="noopener">Batch processing</a>.</p>
+
+<h2>Question 5: a rule that must hold</h2>
+
+<p>Security requires that Claude Code never reads <code>.env</code> files in a repository. A teammate proposes adding "never read .env files" to <code>CLAUDE.md</code>. What should you use instead?</p>
+
+<ol type="A">
+<li>Nothing; CLAUDE.md is enforced</li>
+<li>A <code>Read</code> deny rule in the project's <code>.claude/settings.json</code></li>
+<li>A skill that reminds Claude about secrets</li>
+<li>Plan mode for every session</li>
+</ol>
+
+<p><strong>Answer: B.</strong> CLAUDE.md shapes what Claude tries to do; permission rules are enforced by Claude Code itself. Deny rules are checked first and an allow rule cannot override them. For hard OS-level limits, add the sandbox. Source: <a href="https://code.claude.com/docs/en/permissions" target="_blank" rel="noopener">Configure permissions</a>.</p>
+
+<h2>Question 6: deterministic automation</h2>
+
+<p>Every time Claude edits a TypeScript file, the formatter must run. Instructions in CLAUDE.md work most of the time but not always. What makes it happen every time?</p>
+
+<ol type="A">
+<li>A PostToolUse hook matching the edit tools</li>
+<li>Repeating the instruction in every prompt</li>
+<li>A subagent that formats files</li>
+<li>Raising the effort level</li>
+</ol>
+
+<p><strong>Answer: A.</strong> Hooks are commands Claude Code runs at fixed lifecycle points, so they do not depend on the model remembering. Source: <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">Hooks reference</a>.</p>
+
+<h2>Question 7: keeping the main context clean</h2>
+
+<p>An agent must investigate a large codebase before proposing a change. The file reads fill the main conversation and later answers get worse. Which design helps most?</p>
+
+<ol type="A">
+<li>Ask the user to paste only relevant files</li>
+<li>Delegate the investigation to a subagent, which reads in its own context window and returns a summary</li>
+<li>Turn off auto-compaction</li>
+<li>Put the whole codebase in CLAUDE.md</li>
+</ol>
+
+<p><strong>Answer: B.</strong> Subagents run in a separate context window; only the summary returns. Note that their requests still count toward usage limits. Source: <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Create custom subagents</a>.</p>
+
+<h2>Question 8: surviving compaction</h2>
+
+<p>During a long refactor, Claude forgets a constraint you gave in the second message once the session compacts. Where should the constraint have gone?</p>
+
+<ol type="A">
+<li>In a longer, more emphatic chat message</li>
+<li>In the project-root CLAUDE.md or the plan file, which are re-injected from disk after compaction</li>
+<li>In a path-scoped rule, which is always kept</li>
+<li>Nowhere; compaction keeps every message</li>
+</ol>
+
+<p><strong>Answer: B.</strong> The root CLAUDE.md, unscoped rules, auto memory and the plan are re-injected after compaction. Path-scoped rules are summarized away and reload only when a matching file is touched. Source: <a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Explore the context window</a>.</p>
+
+<h2>Question 9: shared know-how, loaded on demand</h2>
+
+<p>Your team has a 300-line database migration procedure. Putting it in CLAUDE.md costs tokens in every session, even unrelated ones. What is the better home?</p>
+
+<ol type="A">
+<li>A project skill in <code>.claude/skills/</code>, committed to the repository</li>
+<li>A personal note in each developer's home folder</li>
+<li>A longer system prompt</li>
+<li>An MCP server</li>
+</ol>
+
+<p><strong>Answer: A.</strong> Only a skill's description loads at startup; the body loads when the skill is used. Committing it shares it with the team. Sources: <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Skills</a> and <a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Manage costs</a>.</p>
+
+<h2>Question 10: grounding a long-document answer</h2>
+
+<p>A compliance assistant answers questions about a 200-page policy and sometimes cites clauses that do not exist. Which change addresses this most directly?</p>
+
+<ol type="A">
+<li>Ask Claude to extract word-for-word quotes first, answer only from them, and say it does not know when no quote supports an answer</li>
+<li>Shorten the system prompt</li>
+<li>Switch to streaming</li>
+<li>Remove the document and rely on general knowledge</li>
+</ol>
+
+<p><strong>Answer: A.</strong> Anthropic's guidance for long documents is to extract quotes first, allow "I don't know", and drop claims without a supporting quote. It also notes these techniques reduce errors without eliminating them. Source: <a href="https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations" target="_blank" rel="noopener">Reduce hallucinations</a>.</p>
+
+<h2>What pattern runs through these answers?</h2>
+
+<ul>
+<li><strong>Enforce in the system, not in the prompt,</strong> when something must always happen: permissions, hooks, strict schemas.</li>
+<li><strong>Keep context lean and durable:</strong> subagents for volume, skills for on-demand know-how, files for anything that must survive compaction.</li>
+<li><strong>Match the API feature to the workload:</strong> caching for repeated prefixes, batches for large jobs without a deadline.</li>
+<li><strong>Ground and verify</strong> anything a business will act on.</li>
+</ul>
+
+<h2>FAQ</h2>
+
+<h3>Are these real exam questions?</h3>
+<p>No. They were written for this page to practice the same kind of reasoning. The exam content is confidential to Anthropic and the official preparation courses are in the Anthropic Partner Academy.</p>
+
+<h3>Who can take the Claude Certified Architect exam?</h3>
+<p>Members of the Claude Partner Network. Firms join for free and register their practitioners through claude.com/partners.</p>
+
+<h3>How is the exam delivered?</h3>
+<p>Anthropic says every exam is proctored through Pearson, test takers verify their identity first, and passing earns a digital badge through Credly.</p>
+
+<h3>What comes after Foundations?</h3>
+<p>Anthropic's role-based path starts at Foundations level and moves to Professional level. Claude Certified Architect: Professional is the next step for architects.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked against official sources on November 17, 2026:
+<a href="https://www.anthropic.com/news/claude-partner-network" target="_blank" rel="noopener">Claude Partner Network announcement</a>,
+<a href="https://claude.com/resources/articles/four-role-based-claude-certifications" target="_blank" rel="noopener">Four role-based Claude certifications</a>,
+<a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview" target="_blank" rel="noopener">Tool use</a>,
+<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching" target="_blank" rel="noopener">Prompt caching</a>,
+<a href="https://platform.claude.com/docs/en/build-with-claude/batch-processing" target="_blank" rel="noopener">Batch processing</a>,
+<a href="https://code.claude.com/docs/en/permissions" target="_blank" rel="noopener">Permissions</a>,
+<a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Subagents</a>,
+<a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Context window</a>,
+<a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Skills</a> and
+<a href="https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations" target="_blank" rel="noopener">Reduce hallucinations</a>.</p>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-certified-architect.html">Claude Certified Architect</a></li>
+    <li><a href="/blog/claude-code-subagents-guide.html">Claude Code Subagents: Create Agents in .claude/agents</a></li>
+    <li><a href="/blog/claude-code-hooks-guide.html">Claude Code Hooks: Setup Guide With 5 Working Examples</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Guides is an independent guide site and is not affiliated with Anthropic. Claude and Claude Code are products of Anthropic. For the source of truth, see the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> and the <a href="https://support.claude.com/">Claude Help Center</a>.</p>
+</footer>
+
+</body>
+</html>

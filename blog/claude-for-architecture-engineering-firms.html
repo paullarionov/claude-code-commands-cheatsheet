@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How architecture and engineering firms use Claude for specs, codes, RFIs, drawings and reports, with file limits, setup and where a professional signs off.">
+<meta name="keywords" content="Claude for architects, Claude for engineering firms, AI for architecture firms, Claude specifications RFI, Claude construction documents, Claude AEC">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-for-architecture-engineering-firms.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-for-architecture-engineering-firms.html">
+<meta property="og:title" content="Claude for Architecture and Engineering Firms">
+<meta property="og:description" content="How architecture and engineering firms use Claude for specs, codes, RFIs, drawings and reports, with file limits, setup and where a professional signs off.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-for-architecture-engineering-firms.html">
+<meta name="twitter:title" content="Claude for Architecture and Engineering Firms">
+<meta name="twitter:description" content="How architecture and engineering firms use Claude for specs, codes, RFIs, drawings and reports, with file limits, setup and where a professional signs off.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Claude for Architecture and Engineering Firms">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-17T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-17T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="Engineering">
+<meta property="article:tag" content="Use Cases">
+<meta property="article:tag" content="Guide">
+
+<title>Claude for Architecture and Engineering Firms</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude for Architecture and Engineering Firms",
+  "description": "How architecture and engineering firms use Claude for specs, codes, RFIs, drawings and reports, with file limits, setup and where a professional signs off.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "url": "https://claude-guides.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-17T00:00:00Z",
+  "dateModified": "2026-11-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/claude-for-architecture-engineering-firms.html"
+  },
+  "wordCount": 1039,
+  "keywords": [
+    "Claude",
+    "Architecture",
+    "Engineering",
+    "Use Cases",
+    "Guide"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Claude for Architecture and Engineering Firms",
+      "item": "https://claude-guides.com/blog/claude-for-architecture-engineering-firms.html"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can Claude open DWG or Revit files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Those formats are not on the supported upload list. Export sheets to PDF or images, and schedules to Excel or CSV."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Claude check a design against the building code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It can compare documents against code text you provide and flag likely issues. A qualified professional must make the compliance determination, using the edition and local amendments that apply."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a Team plan enough for a small practice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Team adds shared projects and admin controls over capabilities and data settings. Whether you need Enterprise depends on your security, retention and sign-on requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will Claude keep our project details confidential?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By default, Anthropic does not train models on inputs or outputs from commercial plans. Retention and connector settings are for your administrators to configure, and client contracts still govern what you upload."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>How Can Architecture and Engineering Firms Use Claude?</h1>
+  <p class="lede">Most hours in an architecture or engineering office go to documents: specifications, codes, RFIs, submittals, meeting notes, reports. That is where Claude helps most. Here is what works, how to set it up, and where it must stop.</p>
+  <div class="post-meta">
+    <span>November 17, 2026</span>
+    <span>8 min read</span>
+    <span>Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Architecture and engineering firms get the most from Claude on document work: comparing specifications against the brief, summarizing code sections you provide, drafting RFIs, submittal reviews, meeting minutes and reports, checking schedules and quantity spreadsheets, and reading drawings exported to PDF or images. Put each job's documents in a Claude project so every chat uses them, ask for quotes with sheet or section references, and turn on file creation to get Word, Excel, PowerPoint or PDF output. Claude does not replace a licensed professional: it holds no license, does not stamp drawings, and its calculations and code interpretations need review by a qualified person.</p>
+</div>
+
+<h2>Which tasks fit Claude best?</h2>
+
+<table>
+<tr><th>Task</th><th>What Claude does</th><th>What a person still does</th></tr>
+<tr><td>Specification review</td><td>Compares sections against the owner's requirements and flags gaps, conflicts and outdated references</td><td>Decides which conflicts matter and how to resolve them</td></tr>
+<tr><td>Code and standards research</td><td>Summarizes and cross-references code text you upload, with section numbers</td><td>Confirms the edition and local amendments that apply</td></tr>
+<tr><td>RFIs and responses</td><td>Drafts clear questions from markups and notes; drafts responses from the record</td><td>Checks facts and sends</td></tr>
+<tr><td>Submittal review</td><td>Lists where a product data sheet deviates from the spec section</td><td>Takes the approval decision</td></tr>
+<tr><td>Meeting minutes and reports</td><td>Turns transcripts and notes into minutes, action lists and progress reports</td><td>Edits for tone and accuracy</td></tr>
+<tr><td>Schedules and spreadsheets</td><td>Checks door, finish or equipment schedules for missing or inconsistent entries; builds summary tables</td><td>Spot-checks against the model</td></tr>
+<tr><td>Proposals</td><td>Drafts scope narratives and qualifications from past proposals</td><td>Sets fees and commitments</td></tr>
+</table>
+
+<h2>Can Claude read drawings?</h2>
+
+<p>It can read drawings you export to PDF or image files, with limits. The <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">upload article</a> lists the formats: PDF, DOCX, CSV, TXT, HTML, ODT, RTF, EPUB, JSON and XLSX, plus JPEG, PNG, GIF and WebP images. Native CAD and BIM model files are not on that list, so export sheets to PDF or images first.</p>
+
+<ul>
+<li><strong>Keep drawing sets short.</strong> Claude analyzes the visual content of PDFs of 100 pages or fewer. From 101 to 1,000 pages it reads the text only, which misses linework.</li>
+<li><strong>Send the sheets that matter.</strong> A focused set of plans, sections and details gets a better read than a full set.</li>
+<li><strong>Images are capped</strong> at 8000 by 8000 pixels. Crop to the area in question for small text and dimensions.</li>
+<li><strong>Verify every dimension it reports.</strong> Reading a scanned sheet is not measuring a model.</li>
+</ul>
+
+<p>Text in Word files is extracted without embedded images. If the figures in a report matter, upload it as PDF.</p>
+
+<h2>How should a firm set this up?</h2>
+
+<ol>
+<li><strong>One project per job.</strong> A project holds the brief, specifications, standards you are licensed to use, meeting notes and correspondence, and its instructions can set your house style. Project files are limited to 30MB each. When a project grows past the context window, paid plans switch it to retrieval automatically (<a href="/blog/claude-project-knowledge-limit.html">how that works</a>).</li>
+<li><strong>Write project instructions.</strong> For example: "Cite spec section and sheet number for every statement. If the documents do not answer the question, say so."</li>
+<li><strong>Turn on file creation.</strong> Under Settings, Capabilities, enable code execution and file creation so Claude can produce Excel, Word, PowerPoint and PDF files. On Team and Enterprise, an Owner controls this for the organization.</li>
+<li><strong>Connect where documents live.</strong> Connectors for Microsoft 365 and Google Workspace let Claude search files you already keep there.</li>
+<li><strong>Agree on review rules.</strong> Decide which outputs may go out after a quick check and which always need a senior review.</li>
+</ol>
+
+<h2>Prompts that work in practice</h2>
+
+<pre><code>Compare section 08 71 00 (Door Hardware) with the owner's
+security requirements in the brief. List every conflict as a table:
+requirement, spec clause, conflict, suggested fix. Quote both sources.</code></pre>
+
+<pre><code>From these site meeting notes, write minutes in our template:
+attendees, decisions, actions with owner and due date.
+Mark anything ambiguous with [CHECK].</code></pre>
+
+<pre><code>Check the door schedule spreadsheet against the plan PDF sheets A-201 to
+A-204. List doors that appear on plans but not in the schedule, and the
+reverse. Do not guess door numbers you cannot read; list them separately.</code></pre>
+
+<h2>Where must Claude stop?</h2>
+
+<ul>
+<li><strong>Licensed work stays licensed.</strong> Claude does not hold a professional license, cannot seal drawings and does not carry professional liability. Structural, fire, life-safety and code compliance decisions need a qualified person. Check your local rules on what must be reviewed by whom.</li>
+<li><strong>Calculations need checking.</strong> Ask Claude to show every step and formula, then verify the result in your own tools.</li>
+<li><strong>Codes change and vary by place.</strong> Claude's built-in knowledge stops at a cutoff date and may not know local amendments. Give it the exact edition you are designing to.</li>
+<li><strong>Confidentiality.</strong> Client documents often carry confidentiality terms. Anthropic says it does not train on inputs or outputs from commercial products such as Team and Enterprise by default, but your contracts may still limit what can be uploaded.</li>
+<li><strong>Files from outside can carry instructions.</strong> The file creation article warns that hidden instructions in external files or websites can try to manipulate Claude. Review output before it goes to a client.</li>
+</ul>
+
+<h2>FAQ</h2>
+
+<h3>Can Claude open DWG or Revit files?</h3>
+<p>Those formats are not on the supported upload list. Export sheets to PDF or images, and schedules to Excel or CSV.</p>
+
+<h3>Can Claude check a design against the building code?</h3>
+<p>It can compare documents against code text you provide and flag likely issues. A qualified professional must make the compliance determination, using the edition and local amendments that apply.</p>
+
+<h3>Is a Team plan enough for a small practice?</h3>
+<p>Team adds shared projects and admin controls over capabilities and data settings. Whether you need Enterprise depends on your security, retention and sign-on requirements.</p>
+
+<h3>Will Claude keep our project details confidential?</h3>
+<p>By default, Anthropic does not train models on inputs or outputs from commercial plans. Retention and connector settings are for your administrators to configure, and client contracts still govern what you upload.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked against the official Help Center on November 17, 2026:
+<a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Upload files to Claude</a>,
+<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Create and edit files with Claude</a>,
+<a href="https://support.claude.com/en/articles/9517075-what-are-projects" target="_blank" rel="noopener">What are projects?</a>,
+<a href="https://support.claude.com/en/articles/11473015-retrieval-augmented-generation-rag-for-projects" target="_blank" rel="noopener">RAG for projects</a> and
+<a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener">Is my data used for model training?</a></p>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-limitations-enterprise-tasks.html">Claude's Limits in Complex Enterprise Work</a></li>
+    <li><a href="/blog/claude-project-knowledge-limit.html">Claude Project Knowledge Limit: What Happens When It's Full</a></li>
+    <li><a href="/blog/prompt-engineering-complete-guide.html">The Complete Prompt Engineering Guide for Claude</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Guides is an independent guide site and is not affiliated with Anthropic. Claude and Claude Code are products of Anthropic. For the source of truth, see the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> and the <a href="https://support.claude.com/">Claude Help Center</a>.</p>
+</footer>
+
+</body>
+</html>

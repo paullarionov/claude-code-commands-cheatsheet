@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a Claude Code subagent: file format, where it lives, frontmatter fields, how Claude delegates to it, and the built-in Explore and Plan agents.">
+<meta name="keywords" content="Claude Code subagents, create subagent Claude Code, .claude/agents, custom agent Claude Code, subagent frontmatter, Explore subagent, Plan subagent">
+<meta name="author" content="Claude Guides">
+<meta name="robots" content="index, follow">
+<link rel="alternate" type="application/rss+xml" title="Claude Guides Blog RSS" href="https://claude-guides.com/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://claude-guides.com/blog/claude-code-subagents-guide.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-guides.com/blog/claude-code-subagents-guide.html">
+<meta property="og:title" content="Claude Code Subagents: Create Agents in .claude/agents">
+<meta property="og:description" content="Create a Claude Code subagent: file format, where it lives, frontmatter fields, how Claude delegates to it, and the built-in Explore and Plan agents.">
+<meta property="og:image" content="https://claude-guides.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="Claude Code Cheatsheet">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://claude-guides.com/blog/claude-code-subagents-guide.html">
+<meta name="twitter:title" content="Claude Code Subagents: Create Agents in .claude/agents">
+<meta name="twitter:description" content="Create a Claude Code subagent: file format, where it lives, frontmatter fields, how Claude delegates to it, and the built-in Explore and Plan agents.">
+<meta name="twitter:image" content="https://claude-guides.com/og-image.png">
+<meta name="twitter:image:alt" content="Claude Code Subagents: Create Agents in .claude/agents">
+
+<!-- Article Meta -->
+<meta property="article:published_time" content="2026-11-17T00:00:00Z">
+<meta property="article:modified_time" content="2026-11-17T00:00:00Z">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Subagents">
+<meta property="article:tag" content="Agents">
+<meta property="article:tag" content="Context">
+<meta property="article:tag" content="Guide">
+
+<title>Claude Code Subagents: Create Agents in .claude/agents</title>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code Subagents: Create Agents in .claude/agents",
+  "description": "Create a Claude Code subagent: file format, where it lives, frontmatter fields, how Claude delegates to it, and the built-in Explore and Plan agents.",
+  "image": "https://claude-guides.com/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "url": "https://claude-guides.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claude-guides.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-11-17T00:00:00Z",
+  "dateModified": "2026-11-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claude-guides.com/blog/claude-code-subagents-guide.html"
+  },
+  "wordCount": 1004,
+  "keywords": [
+    "Claude Code",
+    "Subagents",
+    "Agents",
+    "Context",
+    "Guide"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://claude-guides.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://claude-guides.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Claude Code Subagents Guide",
+      "item": "https://claude-guides.com/blog/claude-code-subagents-guide.html"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between a subagent and a skill?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A skill adds instructions to the current conversation when it is used. A subagent runs separately in its own context window and returns a summary. Use a skill for know-how, a subagent for work whose output you do not want in your main context."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the /agents command still create subagents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In current versions /agents prints a reminder to ask Claude or edit the agents folders directly. Asking Claude to write the file is the quickest route."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a subagent edit files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, unless you limit its tools. Note that /rewind usually does not restore edits a subagent made, so use git for those."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do subagents load my CLAUDE.md?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom subagents do by default. The built-in Explore and Plan agents, and any subagent with omitClaudeMd set, do not."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:           #FAF8F5;
+    --surface:      #FFFFFF;
+    --border:       #EDE6DC;
+    --border-faint: #F4EFE8;
+    --text:         #1C1917;
+    --text-2:       #7C6F65;
+    --text-3:       #B0A499;
+    --accent:       #C96442;
+    --key-bg:       #F2EBE1;
+    --key-border:   #E3D6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Inter, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header p.lede {
+    font-size: 13px;
+    color: var(--text-2);
+    max-width: 640px;
+    margin: 0 auto 10px;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  .post-meta span + span::before { content: " · "; }
+
+  .back-link {
+    display: inline-block;
+    margin: 16px 0 0 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+    transition: color 0.18s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .tldr {
+    background: rgba(201, 100, 66, 0.06);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+  }
+
+  .tldr strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tldr p { margin: 0; font-size: 12px; color: var(--text); }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-faint);
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  code {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .tip {
+    background: rgba(201, 100, 66, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  .cta {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--key-bg);
+    border: 1px solid var(--key-border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  .related {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .related h3 { margin-top: 0; }
+  .related ul { margin-left: 18px; }
+  .related a { color: var(--accent); text-decoration: none; }
+  .related a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    article { padding: 20px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 14px; }
+    header h1 { font-size: 20px; line-height: 1.3; }
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--accent);
+    z-index: 1000;
+    padding: 0;
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .logo {
+    font-weight: 600; color: var(--text); text-decoration: none;
+    margin-right: 40px; display: flex; align-items: center; gap: 8px;
+  }
+  .logo-img { height: 24px; width: 24px; }
+  .nav-menu {
+    list-style: none; display: flex; gap: 30px;
+    margin: 0; padding: 0; align-items: center;
+  }
+  .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-menu a:hover { color: var(--accent); }
+  .dropdown { position: relative; }
+  .dropdown-toggle { cursor: pointer; }
+  .dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 4px; list-style: none; margin: 8px 0 0 0;
+    padding: 8px 0; min-width: 200px;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a { display: block; padding: 8px 16px; color: var(--text); }
+  .dropdown-menu li a:hover { background: rgba(201, 100, 66, 0.1); color: var(--accent); }
+
+  main, [role="main"] { padding-top: 50px; }
+  body > header, body > section { padding-top: 50px; }
+
+  @media (max-width: 768px) {
+    .nav-menu { gap: 15px; }
+    .logo { margin-right: 20px; font-size: 14px; }
+    .nav-container { padding: 10px 16px; }
+    .dropdown-menu { min-width: 150px; }
+    .dropdown-menu li a { padding: 6px 12px; font-size: 14px; }
+  }
+
+  .nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dropdown-menu li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 11px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--key-bg); font-weight: 600; }
+  .sources { font-size: 11px; color: var(--text-2); }
+  .sources a { color: var(--accent); }
+  article a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"><img src="/favicon.svg" alt="Claude Code logo" class="logo-img">Claude Guides</a>
+    <ul class="nav-menu">
+      <li><a href="/cheatsheet-landing-page.html">Features</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/paullarionov/" target="_blank" aria-label="Contact on LinkedIn (opens in new window)">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<a href="/blog/" class="back-link">← All posts</a>
+
+<header>
+  <h1>How Do I Create a Custom Subagent in Claude Code?</h1>
+  <p class="lede">A subagent is a helper Claude can hand a task to. It works in its own context window and reports back a summary. One Markdown file defines it.</p>
+  <div class="post-meta">
+    <span>November 17, 2026</span>
+    <span>7 min read</span>
+    <span>Guide</span>
+  </div>
+</header>
+
+<main>
+<article>
+
+<div class="tldr">
+  <strong>Quick answer</strong>
+  <p>Create a Markdown file in <code>.claude/agents/</code> (this project) or <code>~/.claude/agents/</code> (all your projects). The YAML frontmatter needs a <code>name</code> and a <code>description</code>; optional fields such as <code>tools</code> and <code>model</code> restrict what it can use and which model it runs on. The body becomes the subagent's system prompt. Claude delegates on its own when a task matches the description, or you can call it by name ("use the code-reviewer subagent") or with an @-mention. Each subagent runs in its own context window, so only its final summary lands in your main conversation.</p>
+</div>
+
+<h2>What does a subagent file look like?</h2>
+
+<p>This is the minimal example from the <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">subagents docs</a>:</p>
+
+<pre><code>---
+name: code-reviewer
+description: Reviews code for quality and best practices
+tools: Read, Glob, Grep
+model: sonnet
+---
+
+You are a code reviewer. When invoked, analyze the code and provide
+specific, actionable feedback on quality, security, and best practices.</code></pre>
+
+<p>Save it as <code>.claude/agents/code-reviewer.md</code>. Claude Code watches these folders, so a new file usually works within seconds. A folder you create in the middle of a session needs a restart.</p>
+
+<h2>Where can subagent files live?</h2>
+
+<table>
+<tr><th>Location</th><th>Scope</th><th>Priority</th></tr>
+<tr><td>Managed settings</td><td>Organization</td><td>1 (highest)</td></tr>
+<tr><td><code>--agents</code> flag (JSON)</td><td>Current session</td><td>2</td></tr>
+<tr><td><code>.claude/agents/</code></td><td>Current project</td><td>3</td></tr>
+<tr><td><code>~/.claude/agents/</code></td><td>All your projects</td><td>4</td></tr>
+<tr><td>A plugin's <code>agents/</code> folder</td><td>Where the plugin is enabled</td><td>5</td></tr>
+</table>
+
+<p>When two definitions share a name, the higher priority wins. The identity comes from the <code>name</code> field, not the file path, so moving a file into a subfolder does not rename it. Commit project subagents so the whole team gets them.</p>
+
+<h2>Which frontmatter fields matter most?</h2>
+
+<table>
+<tr><th>Field</th><th>Use it to</th></tr>
+<tr><td><code>name</code></td><td>Identify the subagent (required, no <code>:</code>)</td></tr>
+<tr><td><code>description</code></td><td>Tell Claude when to delegate (required)</td></tr>
+<tr><td><code>tools</code> / <code>disallowedTools</code></td><td>Allow or deny specific tools, for example a read-only reviewer</td></tr>
+<tr><td><code>model</code></td><td>Pick <code>sonnet</code>, <code>opus</code>, <code>haiku</code>, <code>fable</code>, a full model ID or <code>inherit</code></td></tr>
+<tr><td><code>permissionMode</code></td><td>Run in a mode such as <code>plan</code> or <code>acceptEdits</code></td></tr>
+<tr><td><code>maxTurns</code>, <code>skills</code>, <code>mcpServers</code>, <code>hooks</code>, <code>isolation</code></td><td>Cap turns, preload skills, scope MCP servers, add hooks, or run in a worktree</td></tr>
+</table>
+
+<p>Field names are camelCase. Claude Code ignores fields it does not recognize without an error, so a typo such as <code>maxturns</code> fails silently. Check spelling when a setting seems to do nothing.</p>
+
+<h2>How does Claude decide to use a subagent?</h2>
+
+<p>Claude reads every subagent's description and delegates when a task matches. The docs suggest phrases such as "use proactively" in the description to encourage this. Keep descriptions short: Claude Code warns at startup if the combined descriptions of your custom subagents pass 15,000 tokens.</p>
+
+<p>You can also call one directly:</p>
+
+<ul>
+<li><strong>In plain words:</strong> "Use the test-runner subagent to fix failing tests."</li>
+<li><strong>With an @-mention:</strong> type <code>@agent-code-reviewer</code> or pick it from the @ menu.</li>
+<li><strong>For a whole session:</strong> <code>claude --agent code-reviewer</code>, or set <code>"agent"</code> in <code>.claude/settings.json</code>.</li>
+</ul>
+
+<h2>What built-in subagents come with Claude Code?</h2>
+
+<ul>
+<li><strong>Explore:</strong> fast and read-only, for searching and analyzing a codebase. Claude picks a thoroughness level: quick, medium or very thorough.</li>
+<li><strong>Plan:</strong> read-only research used in plan mode before Claude presents a plan.</li>
+<li><strong>general-purpose:</strong> all subagent tools, for multi-step tasks that both explore and change things.</li>
+</ul>
+
+<p>To switch one off, add <code>Agent(Explore)</code> (or another name) to <code>permissions.deny</code>.</p>
+
+<h2>What does a subagent see, and what comes back?</h2>
+
+<p>A subagent does not see your conversation. It starts with its own system prompt, the delegation message Claude writes, your <code>CLAUDE.md</code> files (except for Explore, Plan and agents with <code>omitClaudeMd</code>), a git status snapshot and any preloaded skills. Only its final summary returns to the main conversation.</p>
+
+<p>That isolation is the point. A test run with 3,000 lines of output, or a search across a large repository, stays in the subagent's window. Your main session gets the five lines that matter. Two caveats:</p>
+
+<ul>
+<li><strong>It still uses your plan.</strong> Subagent requests count toward the same usage limits as the main conversation. A cheaper <code>model</code> on read-heavy agents helps.</li>
+<li><strong>Write a full brief.</strong> Because the subagent cannot see your chat, the delegation message has to carry the context it needs.</li>
+</ul>
+
+<h2>Can subagents run in the background or spawn other subagents?</h2>
+
+<p>Yes to both. Foreground subagents block until they finish and pass permission prompts to you. Background subagents run while you keep working, and their prompts appear in your session labeled with the subagent's name. Up to 20 can run at once by default.</p>
+
+<p>Subagents can spawn their own subagents up to three levels below the main conversation. Set <code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1</code> to turn nesting off.</p>
+
+<h2>Three subagents worth writing first</h2>
+
+<ol>
+<li><strong>A read-only reviewer</strong> with <code>tools: Read, Glob, Grep</code> that checks a diff against your conventions.</li>
+<li><strong>A test runner</strong> that runs the suite, fixes failures and reports only what changed.</li>
+<li><strong>A researcher</strong> on a smaller model that answers "where is X handled?" without filling your main context with file reads.</li>
+</ol>
+
+<h2>FAQ</h2>
+
+<h3>What is the difference between a subagent and a skill?</h3>
+<p>A skill adds instructions to the current conversation when it is used. A subagent runs separately in its own context window and returns a summary. Use a skill for know-how, a subagent for work whose output you do not want in your main context.</p>
+
+<h3>Does the /agents command still create subagents?</h3>
+<p>In current versions /agents prints a reminder to ask Claude or edit the agents folders directly. Asking Claude to write the file is the quickest route.</p>
+
+<h3>Can a subagent edit files?</h3>
+<p>Yes, unless you limit its tools. Note that /rewind usually does not restore edits a subagent made, so use git for those.</p>
+
+<h3>Do subagents load my CLAUDE.md?</h3>
+<p>Custom subagents do by default. The built-in Explore and Plan agents, and any subagent with omitClaudeMd set, do not.</p>
+
+<h2>Sources</h2>
+
+<p class="sources">Checked against the official docs on November 17, 2026:
+<a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Create custom subagents</a>,
+<a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Manage costs effectively</a> and
+<a href="https://code.claude.com/docs/en/checkpointing" target="_blank" rel="noopener">Checkpointing</a>.</p>
+
+<div class="cta">
+  <p>See every current command and shortcut in one reference.</p>
+  <p><a href="/">Open the Claude Code Cheatsheet →</a></p>
+</div>
+
+<div class="related">
+  <h3>Related reading</h3>
+  <ul>
+    <li><a href="/blog/claude-code-skills-guide.html">How to Create a Claude Code Skill With SKILL.md</a></li>
+    <li><a href="/blog/claude-code-context-window-full.html">Claude Code Context Window Full: What Auto-Compact Keeps</a></li>
+    <li><a href="/blog/claude-code-permissions-guide.html">Claude Code Permissions: Allow, Deny and Ask Rules Guide</a></li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<footer>
+<p>Claude Guides is an independent guide site and is not affiliated with Anthropic. Claude and Claude Code are products of Anthropic. For the source of truth, see the official <a href="https://code.claude.com/docs/en/overview">Claude Code documentation</a> and the <a href="https://support.claude.com/">Claude Help Center</a>.</p>
+</footer>
+
+</body>
+</html>

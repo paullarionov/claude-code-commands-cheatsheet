@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Claude Code Cheatsheet features overview. Keyboard shortcuts, slash commands, MCP servers, memory management, and more.">
-<meta name="keywords" content="Claude Code, cheatsheet, features, commands, shortcuts, guides">
+<meta name="description" content="Claude Code cheat sheet on one page: slash commands, keyboard shortcuts, input prefixes and CLI flags, checked against the official docs in November 2026.">
+<meta name="keywords" content="Claude Code cheat sheet, Claude Code commands, slash commands cheat sheet, Claude Code keyboard shortcuts, Claude Code CLI flags">
 <meta name="author" content="Claude Guides">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://claude-guides.com/cheatsheet-landing-page.html">
@@ -12,19 +12,19 @@
 <!-- Open Graph / Social -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://claude-guides.com/cheatsheet-landing-page.html">
-<meta property="og:title" content="Claude Code Cheatsheet — Complete Features Overview">
-<meta property="og:description" content="Explore all features of the Claude Code cheatsheet: keyboard shortcuts, commands, MCP servers, workflows, and more.">
+<meta property="og:title" content="Claude Code Cheat Sheet: Commands, Shortcuts and Flags">
+<meta property="og:description" content="Claude Code cheat sheet on one page: slash commands, keyboard shortcuts, input prefixes and CLI flags, checked against the official docs in November 2026.">
 <meta property="og:image" content="https://claude-guides.com/og-image.png">
 <meta property="og:site_name" content="Claude Code Cheatsheet">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@anthropic">
-<meta name="twitter:title" content="Claude Code Cheatsheet — Complete Features Overview">
-<meta name="twitter:description" content="Explore all features of the Claude Code cheatsheet.">
+<meta name="twitter:title" content="Claude Code Cheat Sheet: Commands, Shortcuts and Flags">
+<meta name="twitter:description" content="Claude Code cheat sheet on one page: slash commands, keyboard shortcuts, input prefixes and CLI flags, checked against the official docs in November 2026.">
 <meta name="twitter:image" content="https://claude-guides.com/og-image.png">
 
-<title>Claude Code Cheatsheet — Features & Guide</title>
+<title>Claude Code Cheat Sheet: Commands, Shortcuts and Flags</title>
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -220,8 +220,8 @@
     text-align: center;
     padding: 28px 24px 40px;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 48px;
-    margin-top: 100px;
+    margin-bottom: 32px;
+    margin-top: 60px;
   }
 
   header h1 {
@@ -427,6 +427,21 @@
     text-decoration: underline;
   }
 
+  /* ── Cheat sheet ─────────────────────────────── */
+  .cheatsheet { margin-bottom: 56px; }
+  .cs-title { text-align: center; font-size: 28px; margin-bottom: 12px; color: var(--text); }
+  .cs-note { text-align: center; font-size: 12px; color: var(--text-2); max-width: 720px; margin: 0 auto 28px; }
+  .cs-note a, header p a { color: var(--accent); }
+  .cs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .cs-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; }
+  .cs-wide { grid-column: 1 / -1; }
+  .cs-card h3 { font-size: 16px; margin-bottom: 12px; color: var(--text); }
+  .cs-card h3.cs-sub { margin-top: 24px; }
+  .cs-card th, .cs-card td { padding: 8px 10px; }
+  .cs-card td:first-child { white-space: nowrap; color: var(--text); }
+  .cheatsheet code, header code { background: var(--key-bg); border: 1px solid var(--key-border); border-radius: 3px; padding: 1px 5px; font-family: 'SF Mono', ui-monospace, monospace; font-size: 11px; }
+  .cs-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 24px; }
+
   /* ── Responsive ──────────────────────────────– */
   @media (max-width: 768px) {
     header h1 { font-size: 28px; }
@@ -498,11 +513,103 @@
   </div>
 
 <header>
-  <h1>Claude Code Cheatsheet</h1>
-  <p>Master Claude Code with comprehensive guides covering keyboard shortcuts, commands, MCP servers, memory management, workflows, and best practices.</p>
+  <h1>Claude Code Cheat Sheet</h1>
+  <p>The commands, shortcuts and flags you use every day, on one page. Type <code>/</code> in Claude Code for the full command list, or open the <a href="index.html">complete interactive cheatsheet</a> in five languages.</p>
 </header>
 
 <main>
+  <!-- Cheat sheet -->
+  <section class="cheatsheet" aria-label="Claude Code cheat sheet">
+    <p class="cs-note">Checked against the official <a href="https://code.claude.com/docs/en/commands" target="_blank" rel="noopener">commands</a>, <a href="https://code.claude.com/docs/en/interactive-mode" target="_blank" rel="noopener">interactive mode</a> and <a href="https://code.claude.com/docs/en/cli-reference" target="_blank" rel="noopener">CLI reference</a> docs on November 17, 2026. Shortcuts can vary by terminal; on macOS, Option shortcuts need Option set as Meta.</p>
+    <div class="cs-grid">
+      <div class="cs-card cs-wide">
+        <h3>Slash commands</h3>
+        <div class="cs-split">
+        <table>
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+          <tr><td><code>/clear</code></td><td>Start a new conversation with empty context</td></tr>
+          <tr><td><code>/compact [focus]</code></td><td>Summarize the conversation to free context</td></tr>
+          <tr><td><code>/context</code></td><td>Show what fills the context window</td></tr>
+          <tr><td><code>/usage</code></td><td>Session cost, plan limits and usage breakdown (alias /cost)</td></tr>
+          <tr><td><code>/model [name]</code></td><td>Switch model</td></tr>
+          <tr><td><code>/effort [level]</code></td><td>Set effort level (low to max, or auto)</td></tr>
+          <tr><td><code>/fast</code></td><td>Toggle fast mode</td></tr>
+          <tr><td><code>/init</code></td><td>Create a CLAUDE.md for the project</td></tr>
+          <tr><td><code>/memory</code></td><td>Edit CLAUDE.md files and auto memory</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+          <tr><td><code>/permissions</code></td><td>Manage allow, ask and deny rules</td></tr>
+          <tr><td><code>/resume</code></td><td>Resume an earlier conversation</td></tr>
+          <tr><td><code>/rewind</code></td><td>Undo code and/or conversation to a checkpoint (alias /undo)</td></tr>
+          <tr><td><code>/plan [task]</code></td><td>Enter plan mode</td></tr>
+          <tr><td><code>/mcp</code></td><td>Manage MCP servers</td></tr>
+          <tr><td><code>/skills</code></td><td>List available skills</td></tr>
+          <tr><td><code>/hooks</code></td><td>View hook configuration</td></tr>
+          <tr><td><code>/doctor</code></td><td>Diagnose installation and settings</td></tr>
+          <tr><td><code>/btw [question]</code></td><td>Side question that does not enter the conversation</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div class="cs-card">
+        <h3>Keyboard shortcuts</h3>
+        <table>
+          <thead><tr><th>Keys</th><th>What it does</th></tr></thead>
+          <tbody>
+          <tr><td><code>Esc</code></td><td>Stop Claude mid-turn; work so far is kept</td></tr>
+          <tr><td><code>Esc Esc</code></td><td>Clear the draft, or open rewind on an empty prompt</td></tr>
+          <tr><td><code>Shift+Tab</code></td><td>Cycle permission modes (Manual, acceptEdits, plan)</td></tr>
+          <tr><td><code>Ctrl+C</code></td><td>Interrupt, or clear input; press again to exit</td></tr>
+          <tr><td><code>Ctrl+O</code></td><td>Toggle the transcript viewer</td></tr>
+          <tr><td><code>Ctrl+R</code></td><td>Search prompt history</td></tr>
+          <tr><td><code>Ctrl+B</code></td><td>Send running commands and agents to the background</td></tr>
+          <tr><td><code>Ctrl+T</code></td><td>Show or hide Claude's task checklist</td></tr>
+          <tr><td><code>Ctrl+G</code></td><td>Edit the prompt in your text editor</td></tr>
+          <tr><td><code>Ctrl+V</code></td><td>Paste an image (Alt+V on Windows and WSL)</td></tr>
+          <tr><td><code>Ctrl+S</code></td><td>Stash the prompt, press again to restore</td></tr>
+          <tr><td><code>Option+P / Alt+P</code></td><td>Switch model</td></tr>
+          <tr><td><code>Option+O / Alt+O</code></td><td>Toggle fast mode</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cs-card">
+        <h3>Input prefixes</h3>
+        <table>
+          <thead><tr><th>Type</th><th>What it does</th></tr></thead>
+          <tbody>
+          <tr><td><code>/</code></td><td>Command or skill</td></tr>
+          <tr><td><code>!</code></td><td>Shell mode: run a command and add its output</td></tr>
+          <tr><td><code>@</code></td><td>Mention a file or directory</td></tr>
+          <tr><td><code>?</code></td><td>Show the shortcut help panel (on empty input)</td></tr>
+          </tbody>
+        </table>
+        <h3 class="cs-sub">CLI commands and flags</h3>
+        <table>
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+          <tr><td><code>claude</code></td><td>Start an interactive session</td></tr>
+          <tr><td><code>claude "query"</code></td><td>Start with a first prompt</td></tr>
+          <tr><td><code>claude -p "query"</code></td><td>Run once and print the result (scripts, CI)</td></tr>
+          <tr><td><code>claude -c</code></td><td>Continue the most recent conversation here</td></tr>
+          <tr><td><code>claude -r "name"</code></td><td>Resume a session by ID or name</td></tr>
+          <tr><td><code>--model sonnet</code></td><td>Pick the model for the session</td></tr>
+          <tr><td><code>--permission-mode plan</code></td><td>Start in a permission mode</td></tr>
+          <tr><td><code>--worktree name</code></td><td>Run in an isolated git worktree</td></tr>
+          <tr><td><code>--add-dir ../lib</code></td><td>Give access to another directory</td></tr>
+          <tr><td><code>--cloud "task"</code></td><td>Start a cloud session for this repo</td></tr>
+          <tr><td><code>--teleport</code></td><td>Pull a cloud session into the terminal</td></tr>
+          <tr><td><code>claude update</code></td><td>Update to the latest version</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="cs-title">Guides by topic</h2>
   <!-- Feature Cards -->
   <section class="features-grid">
     <div class="feature-card">
@@ -533,10 +640,10 @@
       </div>
       <p>Execute powerful operations with slash commands. Manage tasks, files, configuration, and more directly from your terminal.</p>
       <ul class="feature-list">
-        <li>Task management (/clear, /todo)</li>
-        <li>File operations (/ls, /cat, /git)</li>
-        <li>Configuration & tools (/settings, /help)</li>
-        <li>AI operations (/ask, /improve, /test)</li>
+        <li>Context (/clear, /compact, /context)</li>
+        <li>Sessions (/resume, /rewind, /export)</li>
+        <li>Setup (/init, /config, /permissions, /mcp)</li>
+        <li>Models (/model, /effort, /fast)</li>
       </ul>
       <a href="index.html#slash-commands" class="cta-button">Explore Commands</a>
     </div>

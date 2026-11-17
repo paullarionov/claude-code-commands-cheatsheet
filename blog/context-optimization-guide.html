@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Complete guide to managing AI assistant context. Reduce token spending by 60-80% without losing quality. 10-part guide covering optimization strategies, cost reduction, and practical techniques.">
+<meta name="description" content="Near the limit, Claude projects switch to RAG and Claude Code auto-compacts. The &quot;project knowledge exceeds maximum&quot; fix and how to reduce context.">
 <meta name="keywords" content="Claude Code, context optimization, token management, cost reduction, prompt caching, CLAUDE.md, token efficiency, AI development, API costs, context management">
 <meta name="author" content="Claude Guides">
 <meta name="robots" content="index, follow">
@@ -15,8 +15,8 @@
 <!-- Open Graph / Social -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://claude-guides.com/blog/context-optimization-guide.html">
-<meta property="og:title" content="How to Manage Context When You Keep Hitting Token Limits">
-<meta property="og:description" content="Practical guide to reduce token spending by 60-80% without losing quality. 10-part guide covering measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting.">
+<meta property="og:title" content="Claude Context Limits: What Happens and How to Reduce It">
+<meta property="og:description" content="Near the limit, Claude projects switch to RAG and Claude Code auto-compacts. The &quot;project knowledge exceeds maximum&quot; fix and how to reduce context.">
 <meta property="og:image" content="https://claude-guides.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -28,8 +28,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@anthropic">
 <meta name="twitter:url" content="https://claude-guides.com/blog/context-optimization-guide.html">
-<meta name="twitter:title" content="How to Manage Context and Reduce Token Spending">
-<meta name="twitter:description" content="Complete 10-part guide to optimize Claude Code context. Cut token spending 60-80% with practical strategies for CLAUDE.md, log filtering, and prompt caching.">
+<meta name="twitter:title" content="Claude Context Limits: What Happens and How to Reduce It">
+<meta name="twitter:description" content="Near the limit, Claude projects switch to RAG and Claude Code auto-compacts. The &quot;project knowledge exceeds maximum&quot; fix and how to reduce context.">
 <meta name="twitter:image" content="https://claude-guides.com/og-image.png">
 
 <!-- Article Meta -->
@@ -41,7 +41,7 @@
 <meta property="article:tag" content="Claude Code">
 <meta property="article:tag" content="Performance">
 
-<title>How to Manage Context When You Keep Hitting Token Limits — Claude Guides</title>
+<title>Claude Context Limits: What Happens and How to Reduce It</title>
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
@@ -53,13 +53,54 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "How to Manage Context When You Keep Hitting Token Limits: A Practical Guide to Reduce Token Spending by 60-80%",
+  "headline": "Claude Context Limits: What Happens and How to Reduce It",
   "image": "https://claude-guides.com/og-image.png",
   "datePublished": "2026-05-11",
-  "dateModified": "2026-05-11",
+  "dateModified": "2026-11-17",
   "author": { "@type": "Organization", "name": "Claude Guides" },
   "publisher": { "@type": "Organization", "name": "Claude Guides", "logo": { "@type": "ImageObject", "url": "https://claude-guides.com/favicon.svg" } },
-  "description": "A comprehensive practical guide to managing context in Claude Code and reducing token spending by 60-80% without losing quality. Covers measurement, CLAUDE.md optimization, log filtering, caching, and troubleshooting."
+  "description": "Near the limit, Claude projects switch to RAG and Claude Code auto-compacts. The \"project knowledge exceeds maximum\" fix and how to reduce context."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What happens when a Claude project's knowledge base approaches the context limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On paid plans Claude enables RAG mode automatically and searches the project files for relevant passages instead of loading them all. If the knowledge later drops below the threshold, it can switch back to loading everything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does \"project knowledge exceeds maximum. remove files to continue\" mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The project holds more than Claude can use as it stands. On the Free plan, where RAG is not available, project files must fit in the context window, so remove or shorten files. Single project files are also capped at 30MB."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is Claude Code running out of context so fast?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every request carries the whole conversation plus everything Claude has read, including long command output. Large CLAUDE.md files, many MCP servers and verbose test runs fill the window quickest. Run /context to see the breakdown."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I reduce context in Claude Code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clear between unrelated tasks, compact with focus instructions, keep CLAUDE.md under about 200 lines, move specialized instructions into skills, and send verbose work to subagents."
+      }
+    }
+  ]
 }
 </script>
 
@@ -174,6 +215,12 @@
     .nav-menu { gap: 16px; }
     .logo { font-size: 13px; }
   }
+  .answer-first { max-width: 800px; margin: 0 auto 28px; background: rgba(201, 100, 66, 0.06); border: 1px solid var(--key-border); border-radius: 6px; padding: 16px 18px; }
+  .answer-first h2 { font-size: 15px; margin: 14px 0 6px; }
+  .answer-first h2:first-child { margin-top: 0; }
+  .answer-first p { margin: 0 0 8px; }
+  .faq h3 { font-size: 15px; margin: 18px 0 6px; }
+  .sources { font-size: 12px; color: var(--text-2); }
 </style>
 </head>
 <body>
@@ -198,6 +245,15 @@
 </header>
 
 <main>
+
+<div class="answer-first" id="quick-answer">
+<h2>What happens when your project knowledge approaches context limits?</h2>
+<p>On claude.ai, when a project's knowledge base nears the context window, Claude switches the project to RAG mode automatically on paid plans (Pro, Max, Ultra, Team, Enterprise). It then searches the files for relevant passages instead of loading all of them, which the Help Center says expands capacity by up to 10x. On the Free plan RAG is not available, so if you see "project knowledge exceeds maximum. remove files to continue", remove or shorten files until the project fits. Details: <a href="/blog/claude-project-knowledge-limit.html">Claude project knowledge limit</a>.</p>
+<h2>What happens when Claude Code runs out of context?</h2>
+<p>The session does not stop. Claude Code compacts automatically: it replaces older history with a summary, then re-injects the root CLAUDE.md, auto memory, the plan file and a few recent files. Run <code>/context</code> to see what fills the window, <code>/compact</code> with focus instructions before a new task, and <code>/clear</code> when you switch to unrelated work. Details: <a href="/blog/claude-code-context-window-full.html">what auto-compact keeps</a>.</p>
+<h2>How do I reduce context?</h2>
+<p>Keep CLAUDE.md short and move workflow instructions into skills, clear between tasks, delegate test runs and log reading to subagents, filter tool output with hooks, and disable MCP servers you are not using. The ten parts below go through each in detail.</p>
+</div>
 
 <section>
 <p>You open Claude Code to fix a small bug. The first 15 minutes are perfect—the model quickly reads code, offers precise solutions, writes tests. But an hour in, something breaks. The model starts responding in 30 seconds. Instead of fixing one line, it rewrites the entire file. It forgets the project rules you explained at the start.</p>
@@ -425,6 +481,19 @@
 <p><strong>How it looks:</strong> You press Enter, the model starts generating, then you realize "Wait, I didn't mention the new API!"</p>
 <p><strong>Why dangerous:</strong> If you wait for the answer, wrong code gets logged plus your correction. Context doubles for nothing.</p>
 <p><strong>Treatment:</strong> Stop the model immediately with Esc. Better—use `/rewind` to roll back one step, as if the bad request never happened. For quick questions that shouldn't be in history, use `/btw`.</p>
+
+<section class="faq">
+<h2>FAQ</h2>
+<h3>What happens when a Claude project's knowledge base approaches the context limit?</h3>
+<p>On paid plans Claude enables RAG mode automatically and searches the project files for relevant passages instead of loading them all. If the knowledge later drops below the threshold, it can switch back to loading everything.</p>
+<h3>What does "project knowledge exceeds maximum. remove files to continue" mean?</h3>
+<p>The project holds more than Claude can use as it stands. On the Free plan, where RAG is not available, project files must fit in the context window, so remove or shorten files. Single project files are also capped at 30MB.</p>
+<h3>Why is Claude Code running out of context so fast?</h3>
+<p>Every request carries the whole conversation plus everything Claude has read, including long command output. Large CLAUDE.md files, many MCP servers and verbose test runs fill the window quickest. Run /context to see the breakdown.</p>
+<h3>How do I reduce context in Claude Code?</h3>
+<p>Clear between unrelated tasks, compact with focus instructions, keep CLAUDE.md under about 200 lines, move specialized instructions into skills, and send verbose work to subagents.</p>
+<p class="sources">Sources, checked November 17, 2026: <a href="https://support.claude.com/en/articles/11473015-retrieval-augmented-generation-rag-for-projects" target="_blank" rel="noopener">RAG for projects</a>, <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Upload files to Claude</a>, <a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Explore the context window</a>, <a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Manage costs effectively</a>.</p>
+</section>
 
 <h2>Conclusion</h2>
 
