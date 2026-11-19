@@ -20,3 +20,4 @@ yarn-error.log*
 /playwright-report/
 /blob-report/
 .DS_Store
+.DS_Store
