@@ -1,6 +1,20 @@
 {
   "posts": [
     {
+      "url": "/blog/best-claude-skills-october-2026.html",
+      "title": "The 10 Fastest-Growing Claude Skills of 2026",
+      "excerpt": "The 10 Claude skill repos that gained the most GitHub stars in October 2026: Matt Pocock Skills, Ponytail, Cloudflare Security Audit, Impeccable, Anatomy, Diagram Design, Graphify, Superpowers, Taste Skill and Hallmark. What each does, who it is for, and the repo link.",
+      "date": "2026-11-22",
+      "readTime": 9,
+      "category": "Rankings",
+      "tags": [
+        "Claude Code",
+        "Skills",
+        "GitHub",
+        "Rankings"
+      ]
+    },
+    {
       "url": "/blog/claude-certified-architect-practice-questions.html",
       "title": "Claude Certified Architect Practice Questions, Explained",
       "excerpt": "Ten original scenario questions for Claude Certified Architect: Foundations prep, covering the tool use loop, strict schemas, prompt caching, batches, Claude Code rules, hooks, subagents, compaction and grounding, each answered from the official docs.",

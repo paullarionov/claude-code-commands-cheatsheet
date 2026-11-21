@@ -6,12 +6,21 @@
     <atom:link href="https://claude-guides.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Practical guides, field reports, and research on Claude Code, AI agents, prompt engineering, and automation.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 00:00:00 GMT</lastBuildDate>
     <image>
       <url>https://claude-guides.com/og-image.png</url>
       <title>Claude Guides Blog</title>
       <link>https://claude-guides.com/blog/</link>
     </image>
+
+    <item>
+      <title>The 10 Fastest-Growing Claude Skills of 2026</title>
+      <link>https://claude-guides.com/blog/best-claude-skills-october-2026.html</link>
+      <guid isPermaLink="true">https://claude-guides.com/blog/best-claude-skills-october-2026.html</guid>
+      <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Rankings</category>
+      <description>The 10 Claude skill repos that gained the most GitHub stars in October 2026: Matt Pocock Skills, Ponytail, Cloudflare Security Audit, Impeccable, Anatomy, Diagram Design, Graphify, Superpowers, Taste Skill and Hallmark. What each does, who it is for, and the repo link.</description>
+    </item>
 
     <item>
       <title>Claude Certified Architect Practice Questions, Explained</title>
